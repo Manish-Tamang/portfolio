@@ -16,65 +16,58 @@ import { FaGit } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <main>
-      <section className="mb-16">
-        <div className="flex items-center justify-between">
-          {/* <h2 className="text-4xl font-medium">
-            <span className="mr-2"></span> Hi, I&apos;m Manish!
-          </h2> */}
-          <h1 className="font-mediumbold text-3xl md:text-5xl tracking-tight mb-2 text-black dark:text-white">
-            <span className="relative inline-block group overflow-hidden">
-              <span
-                className=
-                'block transform transition-transform duration-500 group-hover:translate-y-full'
-              >
-                Hi, I&apos;m Manish!
-              </span>
-              <span
-                className='absolute inset-0 block transform translate-y-full transition-transform duration-500 group-hover:translate-y-0'
-              >
-                Gole Tamang
-              </span>
-            </span>
-          </h1>
-          <div className="mr-10">
-            <div className="flip-container flex basis-1/3 justify-end w-[160px] mb-8 sm:mb-0">
-              <div className="flip-card">
-                <div className="flip-card-front">
-                  <Image
-                    alt="Profile Image"
-                    src='/profile.png'
-                    width={120}
-                    height={120}
-
-                    priority
-                    className="rounded-full"
-                  />
+    <main className="max-w-4xl mx-auto px-4">
+      <section className="mb-16 pt-20">
+        <div className="flex flex-col items-start justify-between">
+          <div className="flex-1">
+            <h1 className="text-4xl md:text-6xl lg:text-5xl font-serif mb-6">
+              Hi, I'm{" "}
+              <span className="inline-block align-middle mx-2">
+                <div className="flip-container w-[40px] h-[40px] inline-block">
+                  <div className="flip-card">
+                    <div className="flip-card-front">
+                      <Image
+                        alt="Profile Image"
+                        src="/profile.png"
+                        width={40}
+                        height={40}
+                        priority
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="flip-card-back">
+                      <Image
+                        alt="Back Image"
+                        src="/chill-guy.png"
+                        width={40}
+                        height={40}
+                        priority
+                        className="rounded-full"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="flip-card-back">
-                  <Image
-                    alt="Back Image"
-                    src="/chill-guy.png"
-                    width={120}
-                    height={120}
-
-                    priority
-                    className="rounded-full"
-                  />
-                </div>
-              </div>
-            </div>
+              </span>
+              <span className="font-medium">
+                Manish Tamang
+              </span>
+              ,{" "}
+              <span className="block mt-2">
+                developer & creator
+              </span>
+              <span className="block mt-2">
+                at Swikar Codes.
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-8 max-w-2xl">
+              A wizard who loves development and code. I tell stories through my projects
+              and applications. I spend most of my time crafting web experiences
+              and creating useful tools.
+            </p>
           </div>
         </div>
 
-        <p className="text-lg mt-6 leading-relaxed">
-          a 16-year-old from Itahari, Nepal, with a fervent passion for web development.
-        </p>
-        <p className="text-lg leading-relaxed">
-          This is my personal space, where I share my work, projects, and some notes I write here and there.
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-12 flex flex-wrap gap-3">
           {[
             { icon: <SiReact color="#61DBFB" />, label: "React" },
             { icon: <SiTypescript color="#007acc" />, label: "TypeScript" },
@@ -98,10 +91,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-
+      <section className="mb-16">
         <h2 className="text-2xl font-medium mb-4">Work</h2>
-        <p className="text-lg mb-12 leading-relaxed">
+        <p className="text-lg mb-12 leading-relaxed max-w-3xl">
           I focus on building fast, future-proof solutions that thrive at the intersection of speed and precision.
           Every line of code I write balances rapid execution with meticulous structure, ensuring scalability and
           maintainability. To me, great development means shipping efficiently and leaving a foundation that lasts.
