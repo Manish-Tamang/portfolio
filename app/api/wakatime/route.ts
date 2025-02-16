@@ -1,12 +1,11 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
-export default async function handler(req: NextRequest) {
+export async function GET() {
   const accessToken = process.env.WAKATIME_ACCESS_TOKEN;
   const refreshToken = process.env.WAKATIME_REFRESH_TOKEN;
+
   if (!refreshToken) {
     return NextResponse.json(
       { error: "No WakaTime refresh token found. Please authenticate." },
@@ -32,6 +31,7 @@ export default async function handler(req: NextRequest) {
         },
       }
     );
+
     if (response.status === 401) {
       console.log("Access token expired. Refreshing token...");
 
@@ -56,7 +56,7 @@ export default async function handler(req: NextRequest) {
       const refreshData = await refreshResponse.json();
       const newAccessToken = refreshData.access_token;
 
-      console.log("New access token obtained:", newAccessToken);
+      console.log("New access token obtained");
 
       response = await fetch(
         "https://wakatime.com/api/v1/users/current/stats/all_time",
