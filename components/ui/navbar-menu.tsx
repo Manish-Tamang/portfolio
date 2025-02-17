@@ -42,8 +42,8 @@ export const MenuItem = ({
                         <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
                             <motion.div
                                 transition={transition}
-                                layoutId="active" 
-                                className="bg-gray-100 dark:bg-gray-900 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-900 dark:border-gray-500 shadow-xl"
+                                layoutId="active"
+                                className="bg-gray-100 dark:bg-gray-800 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-600"
                             >
                                 <motion.div
                                     layout
@@ -95,7 +95,7 @@ export const ProductItem = ({
                 width={140}
                 height={70}
                 alt={title}
-                className="flex-shrink-0 rounded-md shadow-2xl"
+                className="flex-shrink-0 rounded-md"
             />
             <div>
                 <h4 className="text-xl font-bold mb-1 text-black dark:text-white">

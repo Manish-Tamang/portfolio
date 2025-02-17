@@ -30,13 +30,13 @@ export default function Navbar() {
                   <ProductItem
                     title="Dashboard"
                     href="/dashboard"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="Overview of your activity and metrics"
                   />
                   <ProductItem
                     title="Analytics"
                     href="/analytics"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="Detailed insights and statistics"
                   />
                 </div>
@@ -47,13 +47,13 @@ export default function Navbar() {
                   <ProductItem
                     title="Latest Posts"
                     href="/blogs/latest"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="Recently published articles and updates"
                   />
                   <ProductItem
                     title="Categories"
                     href="/blogs/categories"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="Browse articles by topic"
                   />
                 </div>
@@ -64,13 +64,13 @@ export default function Navbar() {
                   <ProductItem
                     title="About Me"
                     href="/about"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="Learn more about who I am"
                   />
                   <ProductItem
                     title="My Journey"
                     href="/journey"
-                    src="/api/placeholder/400/320"
+                    src="/IMG-20250217-WA0011.jpg"
                     description="My development journey"
                   />
                 </div>
