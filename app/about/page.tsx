@@ -127,7 +127,6 @@ const About = () => {
                                 height={600}
                             />
                         </div>
-
                         <BlurFadeContent
                             delay={0.2}
                             content="Group Photo of Me and My Classmates (2023/2024 SEE Batch)"

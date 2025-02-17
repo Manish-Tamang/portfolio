@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { BlurFadeImage } from "../BlurFade";
 
 const transition = {
     type: "spring",
@@ -90,8 +91,9 @@ export const ProductItem = ({
 }) => {
     return (
         <Link href={href} className="flex space-x-2">
-            <Image
+            <BlurFadeImage
                 src={src}
+                delay={0}
                 width={140}
                 height={70}
                 alt={title}

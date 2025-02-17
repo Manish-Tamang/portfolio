@@ -25,21 +25,8 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
             <Menu setActive={setActive}>
-              <MenuItem setActive={setActive} active={active} item="Home">
-                <div className="text-sm grid grid-cols-2 gap-10 p-4">
-                  <ProductItem
-                    title="Dashboard"
-                    href="/dashboard"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="Overview of your activity and metrics"
-                  />
-                  <ProductItem
-                    title="Analytics"
-                    href="/analytics"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="Detailed insights and statistics"
-                  />
-                </div>
+              <MenuItem setActive={setActive} active={null} item="Guestbook">
+                
               </MenuItem>
 
               <MenuItem setActive={setActive} active={active} item="Blog">
