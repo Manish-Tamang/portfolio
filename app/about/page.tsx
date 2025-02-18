@@ -46,7 +46,7 @@ const About = () => {
                         <div className="relative rounded-md w-48 h-full">
                             <div className="relative group duration-500 cursor-pointer overflow-hidden text-gray-50 h-72 w-56 rounded-2xl hover:duration-700 duration-700">
                                 <div className="w-56 h-72 text-gray-800">
-                                    <div className="flex flex-row justify-between">
+                                    <div className="flex flex-row justify-between opacity-90">
                                         <BlurFadeImage
                                             src="/img/manish.png"
                                             alt="Manish Tamang"
