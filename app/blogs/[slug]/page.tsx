@@ -1,58 +1,49 @@
-import { MDXRemote } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxToHtml } from '@/lib/mdx';
 import { client } from '@/sanity/lib/client';
-import { postQuery, postSlugsQuery } from '@/lib/queries';
+import { postQuery } from '@/lib/queries';
 import components from '@/components/MDXComponents';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 interface Props {
     params: { slug: string };
-    searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export async function generateStaticParams() {
-    const slugs = await client.fetch(postSlugsQuery);
-    return slugs.map((slug: { slug: string }) => ({ slug: slug.slug }));
 }
 
 async function getData(slug: string) {
-    const post = await client.fetch(postQuery, {
-        slug: slug
-    });
-
-    return post
+    return await client.fetch(postQuery, { slug });
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = params;
-    const post = await getData(slug)
+    const resolvedParams = await Promise.resolve(params);
+    const post = await getData(resolvedParams.slug);
 
     if (!post) {
-        return {
-            title: 'Blog Post Not Found',
-        };
+        return { title: 'Blog Post Not Found' };
     }
 
     return {
         title: `Blog | ${post.title}`,
+        description: post.excerpt || 'A blog post from our site',
+        openGraph: {
+            title: `Blog | ${post.title}`,
+            description: post.excerpt || 'A blog post from our site',
+            url: `/blogs/${resolvedParams.slug}`,
+            type: 'article',
+        },
     };
 }
 
-export default async function BlogPage({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+export default async function BlogPage({ params }: Props) {
+    const resolvedParams = await Promise.resolve(params);
+    const post = await getData(resolvedParams.slug);
+    if (!post) return notFound();
 
-    const post = await getData(slug)
-
-    if (!post) {
-        return <div>Post not found</div>;
-    }
-
-    const { html, readingTime } = await mdxToHtml(post.content);
 
     return (
-        <div>
-            <h1>{post.title}</h1>
-            <MDXRemote {...html} components={components} />
-        </div>
+        <article className="prose dark:prose-invert mx-auto max-w-3xl p-4">
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <MDXRemote source={post.content} components={components} />
+        </article>
     );
 }

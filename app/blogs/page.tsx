@@ -13,9 +13,9 @@ const query = `*[_type == "post"] {
     content
   } | order(date desc)`;
 
-// Function to estimate reading time
+
 const estimateReadingTime = (content: string): number => {
-    const wordsPerMinute = 200; // Average reading speed
+    const wordsPerMinute = 200;
     const wordCount = content.split(/\s+/).length;
     return Math.ceil(wordCount / wordsPerMinute);
 };

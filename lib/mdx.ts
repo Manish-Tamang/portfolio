@@ -1,4 +1,3 @@
-// lib/mdx.ts
 import { serialize } from "next-mdx-remote/serialize";
 import { remarkCodeHike } from "@code-hike/mdx";
 import readingTime from "reading-time";
