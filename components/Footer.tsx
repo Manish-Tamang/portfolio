@@ -1,12 +1,14 @@
 'use client';
 
 import { useTheme } from 'next-themes';
+import NowPlaying from './NowPlaying';
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
 
   return (
     <footer className="mt-32 pb-12">
+      <NowPlaying />
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Copyright © {new Date().getFullYear()} Manish Tamang.
@@ -14,9 +16,8 @@ export default function Footer() {
         <div className="bg-muted flex h-8 items-center rounded-md border p-1 transition-all duration-300">
           <button
             onClick={() => setTheme('light')}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/10 hover:text-primary size-6 transition-all duration-300 ${
-              theme === 'light' ? 'bg-primary text-primary-foreground' : ''
-            }`}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/10 hover:text-primary size-6 transition-all duration-300 ${theme === 'light' ? 'bg-primary text-primary-foreground' : ''
+              }`}
             aria-label="Toggle light theme"
           >
             <svg
@@ -44,9 +45,8 @@ export default function Footer() {
           </button>
           <button
             onClick={() => setTheme('dark')}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/10 hover:text-primary size-6 transition-all duration-300 ${
-              theme === 'dark' ? 'bg-primary text-primary-foreground' : ''
-            }`}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/10 hover:text-primary size-6 transition-all duration-300 ${theme === 'dark' ? 'bg-primary text-primary-foreground' : ''
+              }`}
             aria-label="Toggle dark theme"
           >
             <svg
