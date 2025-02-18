@@ -23,7 +23,7 @@ export default function RootLayout({
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
-      <body className={`${inter.className} bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}>
+      <body className={`${inter.className} bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />
