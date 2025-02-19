@@ -50,7 +50,7 @@ export type Artist = {
 export type Post = {
   _id: string;
   slug: string;
-  content: MDXRemoteSerializeResult;
+  content: string;
   title: string;
   date: string;
   excerpt: string;
