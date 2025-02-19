@@ -1,26 +1,23 @@
-import config from "@/sanity/config/client-config";
-import { Blog } from "@/types/blog";
+import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
-import urlBuilder from "@sanity/image-url";
+import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { projectId, dataset } from "@/sanity/env"; 
 
-// lazy-loaded image component
+const urlBuilder = imageUrlBuilder({ projectId, dataset });
+
 const ImageComponent = ({ value, isInline }: any) => {
     const { width, height } = getImageDimensions(value);
+    const imageUrl = urlBuilder.image(value).fit("max").auto("format").url();
+
     return (
         <div className="my-10 overflow-hidden rounded-[15px]">
             <Image
-                src={
-                    urlBuilder(config)
-                        .image(value)
-                        .fit("max")
-                        .auto("format")
-                        .url() as string
-                }
+                src={imageUrl}
                 width={width}
                 height={height}
                 alt={value.alt || "blog image"}
@@ -28,6 +25,8 @@ const ImageComponent = ({ value, isInline }: any) => {
                 style={{
                     display: isInline ? "inline-block" : "block",
                     aspectRatio: width / height,
+                    width: '100%', // Make image responsive
+                    height: 'auto',
                 }}
             />
         </div>
@@ -46,15 +45,15 @@ const Code = ({ value }: any) => {
 
 const Table = ({ value }: any) => {
     return (
-        <div className="my-10">
-            <table>
+        <div className="my-10 overflow-x-auto"> {/* Added overflow-x-auto for responsiveness */}
+            <table className="min-w-full"> {/* Added min-w-full for responsiveness */}
                 <tbody>
                     {value.rows.map((row: any) => (
                         <tr key={row._key}>
                             {row.cells.map((cell: any, key: any) => (
                                 <td
                                     key={key}
-                                    className="first-of-type:bg-gray-100 max-w-[100px]"
+                                    className="first-of-type:bg-gray-100 dark:first-of-type:bg-gray-800 p-2 border dark:border-gray-700"
                                 >
                                     <span className="px-4">{cell}</span>
                                 </td>
@@ -75,10 +74,14 @@ const components = {
     },
 };
 
-const RenderBodyContent = ({ post }: { post: Blog }) => {
+interface RenderBodyContentProps {
+    content: any[]; // Changed from Blog to any[] to support dynamic content
+}
+
+const RenderBodyContent = ({ content }: RenderBodyContentProps) => {
     return (
         <>
-            <PortableText value={post?.body as any} components={components} />
+            <PortableText value={content} components={components} />
         </>
     );
 };
