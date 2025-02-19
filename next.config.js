@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
-const withMDX = require("@next/mdx")();
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+  },
+});
 
 const nextConfig = {
   eslint: {
