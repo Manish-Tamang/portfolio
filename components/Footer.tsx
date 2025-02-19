@@ -9,7 +9,7 @@ export default function Footer() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <footer className="mt-32 pb-12">
+    <footer className="mt-10 pb-12">
       <NowPlaying />
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-600 dark:text-gray-400">
