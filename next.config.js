@@ -1,11 +1,18 @@
-/** @type {import('next').NextConfig} */
+// next.config.js
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [],
+    remarkPlugins: async () => {
+      const remarkGfm = (await import("remark-gfm")).default;
+      const remarkHtml = (await import("remark-html")).default;
+      const remarkSugarHigh = (await import("remark-sugar-high")).default;
+
+      return [remarkGfm, remarkHtml, remarkSugarHigh];
+    },
   },
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,

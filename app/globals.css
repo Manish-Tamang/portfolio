@@ -23,6 +23,33 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+
+:root {
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-property: #0550ae;
+  --sh-entity: #249a97;
+  --sh-jsxliterals: #6266d1;
+  --sh-string: #00a99a;
+  --sh-keyword: #f47067;
+  --sh-comment: #a19595;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sh-class: #3b82f6;
+    --sh-identifier: #b0bec5;
+    --sh-sign: #607d8b;
+    --sh-property: #0288d1;
+    --sh-entity: #1de9b6;
+    --sh-jsxliterals: #8c9eff;
+    --sh-string: #4caf50;
+    --sh-keyword: #ff4081;
+    --sh-comment: #607d8b;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -34,7 +61,9 @@
 html {
   min-width: 360px;
   scroll-behavior: smooth;
-  cursor: url("/tab-cursor.png") 10 10, pointer;
+  cursor:
+    url("/tab-cursor.png") 10 10,
+    pointer;
 }
 
 /* Custom cursor for clickable elements */
@@ -44,7 +73,9 @@ button,
 input[type="submit"],
 input[type="button"],
 .clickable {
-  cursor: url("/mac-cursor.png") 10 10, pointer;
+  cursor:
+    url("/mac-cursor.png") 10 10,
+    pointer;
 }
 .nav-underline {
   position: relative;

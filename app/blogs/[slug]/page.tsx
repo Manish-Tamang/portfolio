@@ -2,46 +2,44 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { format } from 'date-fns';
 import Container from '@/components/Container';
-import { postQuery, postSlugsQuery } from '@/lib/queries';
-import { serialize } from 'next-mdx-remote/serialize';
-import { remarkCodeHike } from '@code-hike/mdx';
-import '@code-hike/mdx/styles.css';
-import { MDXRemote } from 'next-mdx-remote';
+import { postQuery } from '@/lib/queries';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import components from '@/components/MDXComponent';
 import { Post } from '@/lib/types';
+import { notFound } from 'next/navigation';
+import { compile } from '@mdx-js/mdx'
 
 interface Props {
-    params: { slug: string };
+    params: Promise<{ slug: string }> | { slug: string };
 }
 
 async function getMdxSource(content: string) {
-    return await serialize(content || '', {
-        mdxOptions: {
-            remarkPlugins: [[remarkCodeHike, { theme: "github-dark-dimmed", showCopyButton: true }]],
-            useDynamicImport: true,
-        },
-    });
+    try {
+        
+        const compiledMdx = await compile(content, {
+            outputFormat: 'function-body',
+            development: process.env.NODE_ENV === 'development',
+        });
+
+
+        return content; 
+    } catch (error) {
+
+        return ''; 
+    }
 }
 
-interface BlogPostProps {
-    title: string;
-    content: string;
-    date: string;
-    coverImage: any;
-}
+export default async function BlogPostPage({ params }: Props) {
+    const resolvedParams = await Promise.resolve(params);
+    const { slug } = resolvedParams;
 
-export default function BlogPostPage({ post }: { post: Post }) {
-    const { slug } = params;
-    const post: BlogPostProps = await client.fetch(postQuery, { slug });
+    const post: Post = await client.fetch(postQuery, { slug });
 
     if (!post) {
-        return (
-            <Container>
-                <div>Post not found</div>
-            </Container>
-        );
+        notFound()
     }
 
+    const mdxContent = await getMdxSource(post.content);
 
     return (
         <Container>
@@ -59,43 +57,18 @@ export default function BlogPostPage({ post }: { post: Post }) {
                         className="w-full h-auto rounded-lg mb-6"
                     />
                 )}
-                <MDXRemote
-                    compiledSource={post.content}
-                    components={{
-                        ...components
-                    } as any} scope={undefined} frontmatter={undefined} />
+                <div className="prose dark:prose-dark max-w-none">
+                    {}
+                    <div style={{ display: 'none' }}>
+                        Raw content: {JSON.stringify(post.content).slice(0, 100)}...
+                    </div>
+
+                    <MDXRemote
+                        source={mdxContent}
+                        components={components}
+                    />
+                </div>
             </article>
         </Container>
     );
-}
-
-export async function getStaticPaths() {
-    const paths = await client.fetch(postSlugsQuery);
-    return {
-        paths: paths.map((slug) => ({ params: { slug } })),
-        fallback: 'blocking'
-    };
-}
-
-export async function getStaticProps({ params, preview = false }) {
-    const { post } = await getClient(preview).fetch(postQuery, {
-        slug: params.slug
-    });
-
-    if (!post) {
-        return { notFound: true };
-    }
-
-    const { html, readingTime } = await mdxToHtml(post.content);
-
-    return {
-        props: {
-            post: {
-                ...post,
-                content: html,
-                readingTime
-            }
-        },
-        revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60
-    };
 }
