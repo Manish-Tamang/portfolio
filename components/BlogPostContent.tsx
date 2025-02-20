@@ -1,39 +1,52 @@
-"use client"
+// components/BlogPostContent.tsx
+'use client';
+
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
-import { remarkCodeHike } from '@code-hike/mdx';
-import '@code-hike/mdx/styles.css';
+import { HighlightedCode, Inline, Pre } from "codehike/code";
 
 interface Props {
     mdxSource: any;
 }
 
-export async function mdxToHtml(source: string) {
-    return await serialize(source, {
-        mdxOptions: {
-            remarkPlugins: [
-                [
-                    remarkCodeHike,
-                    {
-                        theme: 'github-dark-dimmed',
-                        lineNumbers: true, // Enables line numbers
-                        showCopyButton: true, // Adds a copy button
-                        autoImport: false, // Ensure it's false for Next.js
-                        skipLanguages: ['mermaid'], // Exclude unsupported languages
-                    }
-                ]
-            ],
-            useDynamicImport: true,
-        },
-    });
+interface CodeProps {
+    codeblock: HighlightedCode;
+}
+
+interface InlineCodeProps {
+    codeblock: HighlightedCode;
 }
 
 
+function Code({ codeblock }: CodeProps) {
+    return <Pre code={codeblock} />;
+}
+
+function InlineCode({ codeblock }: InlineCodeProps) {
+    return <Inline code={codeblock} />;
+}
+
+const components = {
+    h1: (props: any) => <h1 className="text-3xl font-bold mb-4">{props.children}</h1>,
+    h2: (props: any) => <h2 className="text-2xl font-semibold mb-3">{props.children}</h2>,
+    p: (props: any) => <p className="mb-2">{props.children}</p>,
+    ul: (props: any) => <ul className="list-disc pl-5 mb-2">{props.children}</ul>,
+    li: (props: any) => <li className="mb-1">{props.children}</li>,
+    a: (props: any) => (
+        <a href={props.href} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
+            {props.children}
+        </a>
+    ),
+    code: Code,
+    inlineCode: InlineCode,
+};
+
+
 const BlogPostContent = ({ mdxSource }: Props) => {
+
     return (
         <article className="max-w-none prose prose-lg dark:prose-invert">
-            <MDXRemote {...mdxSource} />
+            {mdxSource && <MDXRemote {...mdxSource} components={components} />}
         </article>
     );
 };

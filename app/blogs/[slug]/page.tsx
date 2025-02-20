@@ -1,20 +1,38 @@
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { format } from 'date-fns';
-import React from 'react';
-import { postQuery } from '@/lib/queries';
 import Container from '@/components/Container';
-import BlogPostContent from '@/components/BlogPostContent';
-import { serialize } from 'next-mdx-remote/serialize'
+import { postQuery, postSlugsQuery } from '@/lib/queries';
+import { serialize } from 'next-mdx-remote/serialize';
+import { remarkCodeHike } from '@code-hike/mdx';
+import '@code-hike/mdx/styles.css';
+import { MDXRemote } from 'next-mdx-remote';
+import components from '@/components/MDXComponent';
+import { Post } from '@/lib/types';
 
 interface Props {
     params: { slug: string };
 }
 
-export default async function BlogPostPage({ params }: Props) {
-    const { slug } = params;
+async function getMdxSource(content: string) {
+    return await serialize(content || '', {
+        mdxOptions: {
+            remarkPlugins: [[remarkCodeHike, { theme: "github-dark-dimmed", showCopyButton: true }]],
+            useDynamicImport: true,
+        },
+    });
+}
 
-    const post = await client.fetch(postQuery, { slug });
+interface BlogPostProps {
+    title: string;
+    content: string;
+    date: string;
+    coverImage: any;
+}
+
+export default function BlogPostPage({ post }: { post: Post }) {
+    const { slug } = params;
+    const post: BlogPostProps = await client.fetch(postQuery, { slug });
 
     if (!post) {
         return (
@@ -24,7 +42,6 @@ export default async function BlogPostPage({ params }: Props) {
         );
     }
 
-    const mdxSource = await serialize(post.content || '')
 
     return (
         <Container>
@@ -35,7 +52,6 @@ export default async function BlogPostPage({ params }: Props) {
                         Published on {format(new Date(post.date), 'MMMM d, yyyy')}
                     </div>
                 </header>
-
                 {post.coverImage && (
                     <img
                         src={urlFor(post.coverImage).url()}
@@ -43,9 +59,43 @@ export default async function BlogPostPage({ params }: Props) {
                         className="w-full h-auto rounded-lg mb-6"
                     />
                 )}
-
-                <BlogPostContent mdxSource={mdxSource} />
+                <MDXRemote
+                    compiledSource={post.content}
+                    components={{
+                        ...components
+                    } as any} scope={undefined} frontmatter={undefined} />
             </article>
         </Container>
     );
+}
+
+export async function getStaticPaths() {
+    const paths = await client.fetch(postSlugsQuery);
+    return {
+        paths: paths.map((slug) => ({ params: { slug } })),
+        fallback: 'blocking'
+    };
+}
+
+export async function getStaticProps({ params, preview = false }) {
+    const { post } = await getClient(preview).fetch(postQuery, {
+        slug: params.slug
+    });
+
+    if (!post) {
+        return { notFound: true };
+    }
+
+    const { html, readingTime } = await mdxToHtml(post.content);
+
+    return {
+        props: {
+            post: {
+                ...post,
+                content: html,
+                readingTime
+            }
+        },
+        revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60
+    };
 }

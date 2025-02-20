@@ -82,7 +82,7 @@ export default function Home() {
               className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-xl shadow-sm transition-transform duration-300 hover:scale-105"
             >
               {tech.icon}
-              <p className="font-medium">{tech.label}</p>
+              <p className="font-small">{tech.label}</p>
             </div>
           ))}
         </div>
