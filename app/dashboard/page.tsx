@@ -1,8 +1,7 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { format, parseISO } from 'date-fns';
 import {
     Card,
     CardContent,
@@ -11,21 +10,24 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
-import {
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-    ChartLegend,
-    ChartLegendContent,
-} from '@/components/ui/chart';
-import { PieChart, Pie, Cell, Legend, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { PieChart, Pie, Cell, Legend, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
+import { useTheme } from 'next-themes';
 
+// Chart configurations
+const CHART_COLORS = {
+    language1: '#0088FE',
+    language2: '#00C49F',
+    language3: '#FFBB28',
+    language4: '#FF8042',
+    language5: '#8884d8',
+    project: '#2563eb',
+};
 
 interface WakaTimeData {
     data: {
         human_readable_total: string;
         human_readable_daily_average: string;
+        human_readable_daily_average_including_other_language: string;
         human_readable_range: string;
         best_day: {
             date: string;
@@ -35,15 +37,13 @@ interface WakaTimeData {
         languages: {
             name: string;
             percent: number;
-        }[];
-        dependencies?: {
-            name: string;
-            total_seconds: number;
+            text: string;
         }[];
         projects: {
             name: string;
             text: string;
             percent: number;
+            total_seconds: number;
         }[];
         categories?: {
             name: string;
@@ -66,22 +66,11 @@ interface WakaTimeSummary {
     languages: {
         name: string;
         value: number;
-        name2?: string;
-    }[];
-    dependencies?: {
-        name: string;
-        total_seconds: number;
+        color: string;
     }[];
     projects: {
         name: string;
-        text: string;
-        percent: number;
-    }[];
-    categories?: {
-        name: string;
-        total_seconds: number;
-        percent: number;
-        text: string;
+        hours: number;
     }[];
 }
 
@@ -96,18 +85,23 @@ const fetcher = async (url: string) => {
 const DashboardPage = () => {
     const { data: wakaTimeData, error, isLoading } = useSWR<WakaTimeData>('/api/wakatime', fetcher);
     const [wakaTimeSummary, setWakaTimeSummary] = useState<WakaTimeSummary | null>(null);
+    const { theme } = useTheme();
 
+    // Process WakaTime data
     useEffect(() => {
-        if (wakaTimeData?.data) {
-            const totalSeconds =
-                wakaTimeData.data.categories?.reduce(
-                    (acc, category) => acc + category.total_seconds,
-                    0
-                ) || 0;
+        if (!wakaTimeData?.data) return;
+
+        const processData = () => {
+            // Calculate total time
+            const totalSeconds = wakaTimeData.data.categories?.reduce(
+                (acc, category) => acc + category.total_seconds,
+                0
+            ) || 0;
             const totalHours = Math.floor(totalSeconds / 3600);
             const totalMinutes = Math.floor((totalSeconds % 3600) / 60);
             const formattedTotal = `${totalHours} hrs ${totalMinutes} mins`;
 
+            // Format best day
             const bestDayDate = new Date(wakaTimeData.data.best_day.date);
             const formattedBestDayDate = bestDayDate.toLocaleDateString('en-US', {
                 month: 'long',
@@ -115,11 +109,30 @@ const DashboardPage = () => {
                 year: 'numeric',
             });
 
-            const otherLanguage = wakaTimeData.data.languages.find(
-                (lang) => lang.name === 'Other'
-            );
+            // Process languages
+            const filteredLanguages = wakaTimeData.data.languages
+                ? wakaTimeData.data.languages.filter(lang => lang.name !== "Other")
+                : [];
 
-            setWakaSummary({
+            const totalPercentage = filteredLanguages.reduce((acc, lang) => acc + lang.percent, 0);
+
+            const languageData = filteredLanguages
+                .slice(0, 5)
+                .map((language, index) => ({
+                    name: language.name,
+                    value: Number(((language.percent / totalPercentage) * 100).toFixed(1)),
+                    color: CHART_COLORS[`language${index + 1}` as keyof typeof CHART_COLORS] || CHART_COLORS.language5
+                }));
+
+            // Process projects
+            const projectsData = wakaTimeData.data.projects
+                ? wakaTimeData.data.projects.slice(0, 6).map(project => ({
+                    name: project.name.split('-').pop() || project.name,
+                    hours: Number((project.total_seconds / 3600).toFixed(1))
+                }))
+                : [];
+
+            return {
                 total: formattedTotal,
                 dailyAverage: wakaTimeData.data.human_readable_daily_average_including_other_language,
                 range: wakaTimeData.data.human_readable_range,
@@ -128,58 +141,30 @@ const DashboardPage = () => {
                     timeSpent: wakaTimeData.data.best_day.text,
                     formattedDate: formattedBestDayDate,
                 },
-                languages: wakaTimeData.data.languages.slice(0, 12).map((language) => ({ name: language.name, value: language.percent })),
-                dependencies: wakaTimeData.data.dependencies,
-                projects: wakaTimeData.data.projects,
-                categories: wakaTimeData.data.categories
-            });
-            setIsLoading(false);
+                languages: languageData,
+                projects: projectsData
+            };
+        };
+
+        if (wakaTimeData?.data) {
+            setWakaTimeSummary(processData());
         }
     }, [wakaTimeData]);
 
-    const [wakaSummary, setWakaSummary] = useState<WakaTimeSummary | null>(null);
-    const [isLoading2, setIsLoading] = useState(true);
-
-    const projectChartData = useMemo(() => {
-        return wakaSummary?.projects?.slice(0, 6).map(project => ({
-            name: project.name,
-            hours: Number(project.text.split(" ")[0]) //Extracting the numerical Value (Hours)
+    const chartData =
+    wakaTimeSummary?.projects?.slice(0, 6)?.map((project) => ({
+          name: project.name,
+          hours: Number((project.hours).toFixed(1))
         })) || [];
-    }, [wakaSummary?.projects]);
 
-    const languageData = useMemo(() => {
-        return wakaTimeSummary?.languages?.map(lang => ({
-            name: lang.name,
-            value: lang.value,
-        })) || [];
-    }, [wakaTimeSummary?.languages]);
-    //const languageData = []
+  const maxYValue = Math.max(
+    Math.ceil(Math.max(...chartData.map((item) => item.hours), 60) / 10) * 10,
+    100
+  );
 
-    // Define color palette and theme for the Chart
-    const chartConfig = {
-        language1: { color: '#0088FE' },
-        language2: { color: '#00C49F' },
-        language3: { color: '#FFBB28' },
-        language4: { color: '#FF8042' },
-        language5: { color: '#8884d8' }, // Add more colors if needed
-    };
-    const totalTimeLoading = isLoading ? <Skeleton className="h-8 w-32" /> : (
-      <div className="text-2xl font-bold">{wakaTimeSummary?.total || 'N/A'}</div>
-    )
-    // Find Max to draw Bar Line Chart
-    const maxYValue = Math.max(
-        Math.ceil(Math.max(...projectChartData.map((item) => item.hours), 60) / 10) * 10,
-        100
-    );
+  const Color = theme === 'dark' ? 'white' : 'black';
 
-    const projectChartConfig = {
-        project1: { color: "#2563eb", label: "Project 1" },
-        project2: { color: "#60a5fa", label: "Project 2" },
-        project3: { color: "#93c5fd", label: "Project 3" },
-        project4: { color: "#bfdbfe", label: "Project 4" },
-        project5: { color: "#dbeafe", label: "Project 5" },
-        project6: { color: "#eff6ff", label: "Project 6" },
-    }
+    if (error) return <div>Failed to load dashboard data</div>;
 
     return (
         <div className="container mx-auto py-10">
@@ -193,7 +178,11 @@ const DashboardPage = () => {
                         <CardDescription>All time coding duration</CardDescription>
                     </CardHeader>
                     <CardContent>
-                            {totalTimeLoading}
+                        {isLoading ? (
+                            <Skeleton className="h-8 w-32" />
+                        ) : (
+                            <div className="text-2xl font-bold">{wakaTimeSummary?.total || 'N/A'}</div>
+                        )}
                     </CardContent>
                 </Card>
 
@@ -204,7 +193,9 @@ const DashboardPage = () => {
                         <CardDescription>Average coding time per day</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        {isLoading ? <Skeleton className="h-8 w-32" /> : (
+                        {isLoading ? (
+                            <Skeleton className="h-8 w-32" />
+                        ) : (
                             <div className="text-2xl font-bold">{wakaTimeSummary?.dailyAverage || 'N/A'}</div>
                         )}
                     </CardContent>
@@ -217,7 +208,9 @@ const DashboardPage = () => {
                         <CardDescription>Most productive day</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        {isLoading ? <Skeleton className="h-8 w-48" /> : (
+                        {isLoading ? (
+                            <Skeleton className="h-16 w-48" />
+                        ) : (
                             <>
                                 <div className="font-bold">{wakaTimeSummary?.bestDay.formattedDate || 'N/A'}</div>
                                 <div>{wakaTimeSummary?.bestDay.timeSpent || 'N/A'}</div>
@@ -226,39 +219,38 @@ const DashboardPage = () => {
                     </CardContent>
                 </Card>
 
-
                 {/* Languages Chart */}
                 <Card className="col-span-1 md:col-span-2 lg:col-span-3">
                     <CardHeader>
                         <CardTitle>Languages</CardTitle>
                         <CardDescription>Percentage of time spent in each language</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        {isLoading ? <Skeleton className="h-64" /> : (
-                            wakaTimeSummary?.languages && wakaTimeSummary.languages.length > 0 ? (
-                                <ChartContainer id="languages" config={chartConfig} >
-                                    <PieChart width={400} height={300}>
-                                        <Pie
-                                            data={languageData}
-                                            dataKey="value"
-                                            nameKey="name"
-                                            cx="50%"
-                                            cy="50%"
-                                            outerRadius={80}
-                                            fill="#8884d8"
-                                            label
-                                        >
-                                            {languageData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={chartConfig[`language${index + 1}`]?.color || "#8884d8"} />
-                                            ))}
-                                        </Pie>
-                                        <ChartTooltip />
-                                        <Legend/>
-                                    </PieChart>
-                                </ChartContainer>
-                            ) : (
-                                <div>No language data available.</div>
-                            )
+                    <CardContent className="h-[400px] w-full">
+                        {isLoading ? (
+                            <Skeleton className="h-full w-full" />
+                        ) : wakaTimeSummary?.languages && wakaTimeSummary.languages.length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={wakaTimeSummary.languages}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        cx="50%"
+                                        cy="50%"
+                                        outerRadius={120}
+                                        label={(entry) => `${entry.name} (${entry.value}%)`}
+                                        labelLine={false}
+                                    >
+                                        {wakaTimeSummary.languages.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={CHART_COLORS[`language${index + 1}` as keyof typeof CHART_COLORS] || CHART_COLORS.language5} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip formatter={(value) => `${value}%`} />
+                                    <Legend layout="vertical" align="right" verticalAlign="middle" />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        ) : (
+                            <div>No language data available.</div>
                         )}
                     </CardContent>
                 </Card>
@@ -269,26 +261,48 @@ const DashboardPage = () => {
                         <CardTitle>Top 6 Projects Coded On Recently</CardTitle>
                         <CardDescription>Hours spent per project</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        {isLoading ? <Skeleton className="h-32" /> : (
-                            <ChartContainer id="projects" config={projectChartConfig} className="min-h-[200px] w-full">
-                                <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={projectChartData}>
-                                    <CartesianGrid vertical={false} />
-                                    <XAxis
-                                        dataKey="name"
-                                        tickLine={false}
-                                        tickMargin={10}
-                                        axisLine={false}
-                                        tickFormatter={(value) => value.slice(0, 3)}
-                                    />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Bar dataKey="hours" fill="var(--color-project1)" radius={[4, 4, 0, 0]} />
-                                </BarChart>
-                                </ResponsiveContainer>
-                             </ChartContainer>
-                        )}
+                    <CardContent className="h-[400px] w-full">
+                    {isLoading ? (
+                        <Skeleton className="h-full w-full" />
+                    ) : wakaTimeSummary?.projects && wakaTimeSummary.projects.length > 0 ? (
+                        <div className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={chartData}>
+                            <CartesianGrid
+                                strokeDasharray="3 3"
+                                stroke="hsl(var(--border))"
+                            />
+                            <XAxis
+                                dataKey="name"
+                                angle={-45}
+                                textAnchor="end"
+                                interval={0}
+                                height={80}
+                                tick={{ fontSize: 12 }}
+                                stroke={Color}
+                            />
+                            <YAxis
+                                stroke={Color}
+                                domain={[0, maxYValue]}
+                                tickCount={Math.min(maxYValue + 1, 7)}
+                            />
+                            <Tooltip
+                                formatter={(value: number) => [`${value} hours`, 'Time']}
+                                contentStyle={{
+                                backgroundColor: 'hsl(var(--background))',
+                                border: '1px solid hsl(var(--border))',
+                                color: 'hsl(var(--text-color))'
+                                }}
+                            />
+                            <Bar dataKey="hours" fill={CHART_COLORS.project} radius={[4, 4, 0, 0]}>
+                                <LabelList dataKey="hours" position="top" />
+                            </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                        </div>
+                    ) : (
+                        <div>No project data available.</div>
+                    )}
                     </CardContent>
                 </Card>
             </div>
