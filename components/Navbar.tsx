@@ -5,7 +5,76 @@ import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import { Menu as MenuIcon, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
 import Link from "next/link";
+
+const components = [
+  {
+    title: "Latest Posts",
+    href: "/blogs/latest",
+    description: "Recently published articles and updates",
+  },
+  {
+    title: "Categories",
+    href: "/blogs/categories",
+    description: "Browse articles by topic",
+  },
+  {
+    title: "About Me",
+    href: "/about",
+    description: "Learn more about who I am",
+  },
+  {
+    title: "My Journey",
+    href: "/journey",
+    description: "My development journey",
+  },
+  {
+    title: "Uses",
+    href: "/uses",
+    description: "Tools and technologies I use",
+  },
+  {
+    title: "Statistics",
+    href: "/stats",
+    description: "Insights and analytics",
+  },
+]
+
+const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              "block select-none space-y-1 rounded-[4px] p-3 leading-none no-underline outline-none transition-colors duration-300",
+              "hover:bg-gray-100 dark:hover:bg-gray-800",
+              "focus:bg-gray-100 dark:focus:bg-gray-800",
+              className
+            )}
+            {...props}
+          >
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
+              {children}
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    )
+  }
+)
+ListItem.displayName = "ListItem"
 
 export default function Navbar() {
   const [active, setActive] = useState<string | null>(null);
@@ -24,63 +93,106 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            <Menu setActive={setActive}>
-              <Link href="/guestbook" className="flex-shrink-0">
-                <h1 className=" text-gray-900 dark:text-white">
-                  Guestbook
-                </h1>
-              </Link>
-
-              <MenuItem setActive={setActive} active={active} item="Blog">
-                <div className="text-sm grid grid-cols-2 gap-10 p-4">
-                  <ProductItem
-                    title="Latest Posts"
-                    href="/blogs/latest"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="Recently published articles and updates"
-                  />
-                  <ProductItem
-                    title="Categories"
-                    href="/blogs/categories"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="Browse articles by topic"
-                  />
-                </div>
-              </MenuItem>
-
-              <MenuItem setActive={setActive} active={active} item="About">
-                <div className="text-sm grid grid-cols-2 gap-10 p-4">
-                  <ProductItem
-                    title="About Me"
-                    href="/about"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="Learn more about who I am"
-                  />
-                  <ProductItem
-                    title="My Journey"
-                    href="/journey"
-                    src="/IMG-20250217-WA0011.jpg"
-                    description="My development journey"
-                  />
-                </div>
-              </MenuItem>
-
-              <MenuItem setActive={setActive} active={active} item="Dashboard">
-                <div className="flex flex-col space-y-4 text-sm p-6">
-                  <HoveredLink href="/uses">Uses</HoveredLink>
-                  <HoveredLink href="/stats">Statistics</HoveredLink>
-                  <HoveredLink href="/activity">Activity</HoveredLink>
-                  <HoveredLink href="/settings">Settings</HoveredLink>
-                </div>
-              </MenuItem>
-
-              <MenuItem setActive={setActive} active={active} item="Contact">
-                <div className="flex flex-col space-y-4 text-sm p-6">
-                  <HoveredLink href="/contact">Get in Touch</HoveredLink>
-                  <HoveredLink href="/social">Social Media</HoveredLink>
-                </div>
-              </MenuItem>
-            </Menu>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger
+                    className="bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                  >
+                    Blog
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
+                      <li className="row-span-3">
+                        <NavigationMenuLink asChild>
+                          <a
+                            className="flex h-full w-full select-none flex-col justify-end rounded-[4px] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6 no-underline outline-none focus:shadow-md transition-all duration-300"
+                            href="/"
+                          >
+                            <div className="mb-2 mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
+                              Developer Blog
+                            </div>
+                            <p className="text-sm leading-tight text-gray-600 dark:text-gray-400">
+                              Explore the latest in web development, coding tips, and tech insights.
+                            </p>
+                          </a>
+                        </NavigationMenuLink>
+                      </li>
+                      <ListItem href="/blogs/latest" title="Latest Posts">
+                        Recently published articles and updates
+                      </ListItem>
+                      <ListItem href="/blogs/categories" title="Categories">
+                        Browse articles by topic
+                      </ListItem>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger
+                    className="bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                  >
+                    About
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 bg-white dark:bg-gray-950 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {components.slice(2, 4).map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                        >
+                          {component.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger
+                    className="bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                  >
+                    Dashboard
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 bg-white dark:bg-gray-950 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {components.slice(4).map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                        >
+                          {component.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/guestbook" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                      )}
+                    >
+                      Guestbook
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/contact" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
+                      )}
+                    >
+                      Contact
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
 
           {/* Mobile Menu Button */}

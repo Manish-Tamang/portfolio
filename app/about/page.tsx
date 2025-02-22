@@ -11,48 +11,43 @@ const About = () => {
             <section className="py-12 md:py-24">
                 <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-12">
                     <div className="w-full">
-                        <BlurFade delay={0.2}>
-                            <h1 className="text-4xl font-bold mb-6 leading-tight">
-                                I'm Manish Tamang, I live in{" "}
-                                <span className="group relative inline-block">
-                                    <span>Itahari</span>
-                                    <div className="hidden group-hover:block">
-                                        <div className="absolute -top-8 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center rounded-sm text-center text-sm text-slate-300">
-                                            <div className="rounded-sm bg-black py-1 px-2">
-                                                <p className="whitespace-nowrap">A beautiful city in eastern Nepal</p>
-                                            </div>
-                                            <div className="h-0 w-fit border-l-8 border-r-8 border-t-8 border-transparent border-t-black"></div>
+                        <h1 className="text-4xl font-bold mb-6 leading-tight">
+                            I'm Manish Tamang, I live in
+                            <span className="group relative inline-block">
+                                <span>Itahari</span>
+                                <div className="hidden group-hover:block">
+                                    <div className="absolute -top-8 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center rounded-sm text-center text-sm text-slate-300">
+                                        <div className="rounded-sm bg-black py-1 px-2">
+                                            <p className="whitespace-nowrap">A beautiful city in eastern Nepal</p>
                                         </div>
+                                        <div className="h-0 w-fit border-l-8 border-r-8 border-t-8 border-transparent border-t-black"></div>
                                     </div>
-                                </span>
-                                , where I build the future.
-                            </h1>
-                        </BlurFade>
-                        <BlurFade delay={0.2}>
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6"> I'm a 16-year-old from Itahari,
-                                Nepal, driven by a fervent passion for web development. My coding journey began at a young age, and
-                                since then, I've immersed myself in building captivating websites, integrating and customizing various
-                                technologies like React, Next.js, Tailwind CSS, Postgresql, and more.
-                            </p>
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6"> I strongly believe in continuous
-                                learning and improving myself, so I try my best to learn in any situation possible,
-                                unfavorable or not.
-                            </p>
-                        </BlurFade>
+                                </div>
+                            </span>
+                            , where I build the future.
+                        </h1>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6"> I'm a 16-year-old from Itahari,
+                            Nepal, driven by a fervent passion for web development. My coding journey began at a young age, and
+                            since then, I've immersed myself in building captivating websites, integrating and customizing various
+                            technologies like React, Next.js, Tailwind CSS, Postgresql, and more.
+                        </p>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6"> I strongly believe in continuous
+                            learning and improving myself, so I try my best to learn in any situation possible,
+                            unfavorable or not.
+                        </p>
                     </div>
 
                     {/* Right Column - Profile Section - No BlurFade */}
                     <div className="flex flex-col items-center top-40 self-start">
                         <div className="relative rounded-md w-48 h-full">
-                            <div className="relative group duration-500 cursor-pointer overflow-hidden text-gray-50 h-72 w-56 rounded-2xl hover:duration-700 duration-700">
+                            <div className="relative group duration-500 cursor-pointer overflow-hidden text-gray-50 h-72 w-56 rounded-2xl hover:duration-700">
                                 <div className="w-56 h-72 text-gray-800">
                                     <div className="flex flex-row justify-between opacity-90">
-                                        <BlurFadeImage
+                                        <Image
                                             src="/img/manish.png"
                                             alt="Manish Tamang"
                                             width={200}
                                             height={200}
-                                            delay={0.1}
                                             className="w-full h-full"
                                         />
                                     </div>
@@ -66,23 +61,21 @@ const About = () => {
                         </div>
                     </div>
                     <div className="md:col-span-2">
-                        <BlurFade delay={0.5}>
-                            <h2 className="text-2xl font-semibold mb-4">What is My Ambition?</h2>
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                                My ambition is to grow into a proficient full-stack developer, mastering both
-                                front-end and back-end development to craft powerful, versatile web applications.
-                                Each <a href="#" className="text-blue-500 hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt
-                                to the ever-evolving world of technology. I’m dedicated to making a meaningful impact
-                                through innovation and creativity, one project at a time. A passionate and amateur computer
-                                science enthusiast, I have a deep love for technology and innovation. 🚀
-                            </p>
-                        </BlurFade>
+                        <h2 className="text-2xl font-semibold mb-4">What is My Ambition?</h2>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            My ambition is to grow into a proficient full-stack developer, mastering both
+                            front-end and back-end development to craft powerful, versatile web applications.
+                            Each <a href="#" className="text-blue-500 hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt
+                            to the ever-evolving world of technology. I’m dedicated to making a meaningful impact
+                            through innovation and creativity, one project at a time. A passionate and amateur computer
+                            science enthusiast, I have a deep love for technology and innovation. 🚀
+                        </p>
 
                         <div className="relative rounded-lg overflow-hidden mb-6">
                             <BlurFadeImage
                                 src="/IMG-20250217-WA0011.jpg"
-                                alt="Hackathon team"
-                                delay={0.6}
+                                alt="Manish Tamang in Sushma Godawari Collage"
+                                delay={0.3}
                                 className="object-cover w-full h-full"
                                 width={800}
                                 height={600}
@@ -95,33 +88,29 @@ const About = () => {
                             textClassName="text-sm text-gray-500"
                         />
 
-                        <BlurFade delay={0.2}>
-                            <h2 className="text-2xl font-semibold mt-10 mb-4">Soft Skills</h2>
-                            <ul className="list-disc pl-5 space-y-2">
-                                <li>
-                                    <span className="font-semibold">Attention to detail:</span> I take pleasure in creating designs and UIs with careful precision, emphasizing quality over quantity.
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Open-source/Collaboration:</span> I founded a community on GitHub called Communitypro that helps newbie developers learn how to contribute to open-source projects and collaborate in building together.
-                                </li>
-                                <li>
-                                    <span className="font-semibold">Ability to work with little supervision:</span> I understand people are busy and strive to deliver assignments and projects efficiently.
-                                </li>
-                            </ul>
-                        </BlurFade>
+                        <h2 className="text-2xl font-semibold mt-10 mb-4">Soft Skills</h2>
+                        <ul className="list-disc pl-5 space-y-2">
+                            <li>
+                                <span className="font-semibold">Attention to detail:</span> I take pleasure in creating designs and UIs with careful precision, emphasizing quality over quantity.
+                            </li>
+                            <li>
+                                <span className="font-semibold">Open-source/Collaboration:</span> I founded a community on GitHub called Communitypro that helps newbie developers learn how to contribute to open-source projects and collaborate in building together.
+                            </li>
+                            <li>
+                                <span className="font-semibold">Ability to work with little supervision:</span> I understand people are busy and strive to deliver assignments and projects efficiently.
+                            </li>
+                        </ul>
 
-                        <BlurFade delay={0.2}>
-                            <h2 className="text-2xl font-semibold mt-10 mb-4">Education</h2>
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                                Here's little <a href="/photos" className="text-blue-500 hover:underline">photo </a>snippet and timeline of my education
-                            </p>
-                            <Education />
-                        </BlurFade>
+                        <h2 className="text-2xl font-semibold mt-10 mb-4">Education</h2>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            Here's little <a href="/photos" className="text-blue-500 hover:underline">photo </a>snippet and timeline of my education
+                        </p>
+                        <Education />
                         <div className="relative rounded-lg overflow-hidden mb-6">
                             <BlurFadeImage
                                 src="/img/classx.jpeg"
-                                alt="Setup"
-                                delay={1.0}
+                                alt="Class 10"
+                                delay={0.3}
                                 className="w-full h-full"
                                 width={800}
                                 height={600}
