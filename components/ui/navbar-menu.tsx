@@ -44,7 +44,7 @@ export const MenuItem = ({
                             <motion.div
                                 transition={transition}
                                 layoutId="active"
-                                className="bg-gray-100 dark:bg-gray-800 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-600"
+                                className="bg-gray-100 dark:bg-gray-800 backdrop-blur-sm rounded-[4px] overflow-hidden border border-gray-300 dark:border-gray-600"
                             >
                                 <motion.div
                                     layout

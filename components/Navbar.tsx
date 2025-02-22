@@ -25,9 +25,11 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
             <Menu setActive={setActive}>
-              <MenuItem setActive={setActive} active={null} item="Guestbook">
-                
-              </MenuItem>
+              <Link href="/guestbook" className="flex-shrink-0">
+                <h1 className=" text-gray-900 dark:text-white">
+                  Guestbook
+                </h1>
+              </Link>
 
               <MenuItem setActive={setActive} active={active} item="Blog">
                 <div className="text-sm grid grid-cols-2 gap-10 p-4">
@@ -104,7 +106,7 @@ export default function Navbar() {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="md:hidden overflow-hidden"
             >
-              <motion.nav 
+              <motion.nav
                 initial={{ y: -10 }}
                 animate={{ y: 0 }}
                 exit={{ y: -10 }}

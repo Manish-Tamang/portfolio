@@ -65,7 +65,7 @@ export const BlurFadeImage = ({
                 alt={alt}
                 width={width}
                 height={height}
-                className={`rounded-xl ${imageClassName}`}
+                className={`rounded-[4px] ${imageClassName}`}
                 priority
             />
         </BlurFade>
