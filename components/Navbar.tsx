@@ -19,7 +19,7 @@ import Link from "next/link";
 const components = [
   {
     title: "Latest Posts",
-    href: "/blogs/latest",
+    href: "/blogs",
     description: "Recently published articles and updates",
   },
   {
@@ -44,7 +44,7 @@ const components = [
   },
   {
     title: "Statistics",
-    href: "/stats",
+    href: "/dashboard",
     description: "Insights and analytics",
   },
 ]

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { motion } from 'framer-motion';
 import {
     Card,
     CardContent,
@@ -10,21 +11,20 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from '@/components/ui/skeleton';
-import { PieChart, Pie, Cell, Legend, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 import { useTheme } from 'next-themes';
+import { Clock, Activity, Trophy, FolderGit2 } from 'lucide-react';
 
-// Chart configurations
-const CHART_COLORS = {
-    language1: '#0088FE',
-    language2: '#00C49F',
-    language3: '#FFBB28',
-    language4: '#FF8042',
-    language5: '#8884d8',
-    project: '#2563eb',
+const fetcher = async (url: string) => {
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`Failed to fetch data from ${url}: ${res.status} ${res.statusText}`);
+    }
+    return res.json();
 };
 
 interface WakaTimeData {
     data: {
+        range: any;
         human_readable_total: string;
         human_readable_daily_average: string;
         human_readable_daily_average_including_other_language: string;
@@ -38,12 +38,21 @@ interface WakaTimeData {
             name: string;
             percent: number;
             text: string;
+            total_seconds: number;
+        }[];
+        dependencies?: {
+            name: string;
+            total_seconds: number;
         }[];
         projects: {
             name: string;
-            text: string;
-            percent: number;
             total_seconds: number;
+            percent: number;
+            digital: string;
+            decimal: string;
+            text: string;
+            hours: number;
+            minutes: number;
         }[];
         categories?: {
             name: string;
@@ -51,6 +60,8 @@ interface WakaTimeData {
             percent: number;
             text: string;
         }[];
+        is_coding_activity_visible: boolean
+        total_seconds_including_other_language: number
     };
 }
 
@@ -65,43 +76,80 @@ interface WakaTimeSummary {
     };
     languages: {
         name: string;
+        percent: number;
+        total_seconds: number
+    }[];
+    dependencies?: {
+        name: string;
         value: number;
-        color: string;
     }[];
     projects: {
         name: string;
-        hours: number;
+        text: string;
     }[];
 }
 
-const fetcher = async (url: string) => {
-    const res = await fetch(url);
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
+const formatDailyAverage = (dailyAverage: string): string => {
+    const parts = dailyAverage.split(' ');
+    const hours = parseInt(parts[0]);
+    const minutes = parseInt(parts[2]);
+
+    if (!isNaN(hours) && !isNaN(minutes)) {
+        return `${hours} hrs ${minutes} mins`;
+    } else if (!isNaN(hours)) {
+        return `${hours} hrs 0 mins`;
     }
-    return res.json();
+
+    return 'N/A';
 };
 
-const DashboardPage = () => {
+export default function DashboardPage() {
     const { data: wakaTimeData, error, isLoading } = useSWR<WakaTimeData>('/api/wakatime', fetcher);
     const [wakaTimeSummary, setWakaTimeSummary] = useState<WakaTimeSummary | null>(null);
     const { theme } = useTheme();
+    const [totalCodingTime, setTotalCodingTime] = useState<string>('N/A');
+    const [formattedDailyAverage, setFormattedDailyAverage] = useState<string>('N/A');
 
-    // Process WakaTime data
     useEffect(() => {
-        if (!wakaTimeData?.data) return;
-
-        const processData = () => {
-            // Calculate total time
-            const totalSeconds = wakaTimeData.data.categories?.reduce(
-                (acc, category) => acc + category.total_seconds,
-                0
-            ) || 0;
+        if (wakaTimeData?.data) {
+            const totalSeconds = wakaTimeData.data.total_seconds_including_other_language;
             const totalHours = Math.floor(totalSeconds / 3600);
             const totalMinutes = Math.floor((totalSeconds % 3600) / 60);
             const formattedTotal = `${totalHours} hrs ${totalMinutes} mins`;
 
-            // Format best day
+            setTotalCodingTime(formattedTotal);
+        }
+    }, [wakaTimeData]);
+
+    useEffect(() => {
+        if (wakaTimeData?.data) {
+            const dailyAverage = wakaTimeData.data.human_readable_daily_average_including_other_language;
+            setFormattedDailyAverage(formatDailyAverage(dailyAverage));
+        }
+    }, [wakaTimeData]);
+
+    useEffect(() => {
+        if (!wakaTimeData?.data) return;
+
+        const processData = () => {
+            const { data } = wakaTimeData;
+
+            const languagesData = data.languages?.map(lang => ({
+                name: lang.name,
+                percent: lang.percent,
+                total_seconds: lang.total_seconds,
+            })) || [];
+
+            const projectsData = data.projects.slice(0, 6).map(project => ({
+                name: project.name,
+                text: project.text,
+            }));
+
+            const dependenciesData = data.dependencies?.slice(0, 10).map(dep => ({
+                name: dep.name,
+                value: Math.round(dep.total_seconds / 3600)
+            })) || [];
+
             const bestDayDate = new Date(wakaTimeData.data.best_day.date);
             const formattedBestDayDate = bestDayDate.toLocaleDateString('en-US', {
                 month: 'long',
@@ -109,40 +157,18 @@ const DashboardPage = () => {
                 year: 'numeric',
             });
 
-            // Process languages
-            const filteredLanguages = wakaTimeData.data.languages
-                ? wakaTimeData.data.languages.filter(lang => lang.name !== "Other")
-                : [];
-
-            const totalPercentage = filteredLanguages.reduce((acc, lang) => acc + lang.percent, 0);
-
-            const languageData = filteredLanguages
-                .slice(0, 5)
-                .map((language, index) => ({
-                    name: language.name,
-                    value: Number(((language.percent / totalPercentage) * 100).toFixed(1)),
-                    color: CHART_COLORS[`language${index + 1}` as keyof typeof CHART_COLORS] || CHART_COLORS.language5
-                }));
-
-            // Process projects
-            const projectsData = wakaTimeData.data.projects
-                ? wakaTimeData.data.projects.slice(0, 6).map(project => ({
-                    name: project.name.split('-').pop() || project.name,
-                    hours: Number((project.total_seconds / 3600).toFixed(1))
-                }))
-                : [];
-
             return {
-                total: formattedTotal,
-                dailyAverage: wakaTimeData.data.human_readable_daily_average_including_other_language,
-                range: wakaTimeData.data.human_readable_range,
+                total: data.human_readable_total,
+                dailyAverage: data.human_readable_daily_average_including_other_language,
+                range: data.range,
                 bestDay: {
-                    date: wakaTimeData.data.best_day.date,
-                    timeSpent: wakaTimeData.data.best_day.text,
+                    date: data.best_day.date,
+                    timeSpent: data.best_day.text,
                     formattedDate: formattedBestDayDate,
                 },
-                languages: languageData,
-                projects: projectsData
+                languages: languagesData,
+                dependencies: dependenciesData,
+                projects: projectsData,
             };
         };
 
@@ -151,163 +177,161 @@ const DashboardPage = () => {
         }
     }, [wakaTimeData]);
 
-    const chartData =
-    wakaTimeSummary?.projects?.slice(0, 6)?.map((project) => ({
-          name: project.name,
-          hours: Number((project.hours).toFixed(1))
-        })) || [];
-
-  const maxYValue = Math.max(
-    Math.ceil(Math.max(...chartData.map((item) => item.hours), 60) / 10) * 10,
-    100
-  );
-
-  const Color = theme === 'dark' ? 'white' : 'black';
-
-    if (error) return <div>Failed to load dashboard data</div>;
+    if (error) return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="container mx-auto py-10 text-red-500"
+        >
+            Failed to load dashboard data
+        </motion.div>
+    );
 
     return (
-        <div className="container mx-auto py-10">
-            <h1 className="text-3xl font-semibold mb-6">Dashboard</h1>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="container mx-auto py-10 px-4"
+        >
+            <motion.h1
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-4xl font-bold mb-8 dark:text-white text-gray-800"
+            >
+                Dashboard
+            </motion.h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Total Coding Time */}
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Total Coding Time</CardTitle>
-                        <CardDescription>All time coding duration</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {isLoading ? (
-                            <Skeleton className="h-8 w-32" />
-                        ) : (
-                            <div className="text-2xl font-bold">{wakaTimeSummary?.total || 'N/A'}</div>
-                        )}
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                >
+                    <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <Clock className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <CardTitle className="dark:text-white text-gray-800">Total Time Coded</CardTitle>
+                            </div>
+                            <CardDescription className="dark:text-gray-400 text-gray-600">All time coding duration</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {isLoading ? (
+                                <Skeleton className="h-8 w-32" />
+                            ) : (
+                                <div className="text-2xl font-bold dark:text-white text-gray-800">
+                                    {totalCodingTime}
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 {/* Daily Average */}
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Daily Average</CardTitle>
-                        <CardDescription>Average coding time per day</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {isLoading ? (
-                            <Skeleton className="h-8 w-32" />
-                        ) : (
-                            <div className="text-2xl font-bold">{wakaTimeSummary?.dailyAverage || 'N/A'}</div>
-                        )}
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <Activity className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <CardTitle className="dark:text-white text-gray-800 text-xl">Daily Average</CardTitle>
+                            </div>
+                            <CardDescription className="dark:text-gray-400 text-gray-600">Average coding time per day</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {isLoading ? (
+                                <Skeleton className="h-8 w-32" />
+                            ) : (
+                                <div className="text-2xl font-bold dark:text-white text-gray-800">
+                                    {formattedDailyAverage}
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
                 {/* Best Day */}
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Best Day</CardTitle>
-                        <CardDescription>Most productive day</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {isLoading ? (
-                            <Skeleton className="h-16 w-48" />
-                        ) : (
-                            <>
-                                <div className="font-bold">{wakaTimeSummary?.bestDay.formattedDate || 'N/A'}</div>
-                                <div>{wakaTimeSummary?.bestDay.timeSpent || 'N/A'}</div>
-                            </>
-                        )}
-                    </CardContent>
-                </Card>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <Trophy className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <CardTitle className="dark:text-white text-gray-800">Best Day</CardTitle>
+                            </div>
+                            <CardDescription className="dark:text-gray-400 text-gray-600">Most productive day</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {isLoading ? (
+                                <Skeleton className="h-16 w-48" />
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.4 }}
+                                >
+                                    <div className="dark:text-gray-400 text-gray-600">{wakaTimeSummary?.bestDay.formattedDate || 'N/A'}</div>
+                                    <div className="font-bold dark:text-white text-gray-800">{wakaTimeSummary?.bestDay.timeSpent || 'N/A'}</div>
+                                </motion.div>
+                            )}
+                        </CardContent>
+                    </Card>
+                </motion.div>
 
-                {/* Languages Chart */}
-                <Card className="col-span-1 md:col-span-2 lg:col-span-3">
-                    <CardHeader>
-                        <CardTitle>Languages</CardTitle>
-                        <CardDescription>Percentage of time spent in each language</CardDescription>
-                    </CardHeader>
-                    <CardContent className="h-[400px] w-full">
-                        {isLoading ? (
-                            <Skeleton className="h-full w-full" />
-                        ) : wakaTimeSummary?.languages && wakaTimeSummary.languages.length > 0 ? (
-                            <ResponsiveContainer width="100%" height="100%">
-                                <PieChart>
-                                    <Pie
-                                        data={wakaTimeSummary.languages}
-                                        dataKey="value"
-                                        nameKey="name"
-                                        cx="50%"
-                                        cy="50%"
-                                        outerRadius={120}
-                                        label={(entry) => `${entry.name} (${entry.value}%)`}
-                                        labelLine={false}
-                                    >
-                                        {wakaTimeSummary.languages.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={CHART_COLORS[`language${index + 1}` as keyof typeof CHART_COLORS] || CHART_COLORS.language5} />
-                                        ))}
-                                    </Pie>
-                                    <Tooltip formatter={(value) => `${value}%`} />
-                                    <Legend layout="vertical" align="right" verticalAlign="middle" />
-                                </PieChart>
-                            </ResponsiveContainer>
-                        ) : (
-                            <div>No language data available.</div>
-                        )}
-                    </CardContent>
-                </Card>
-
-                {/* Project Chart */}
-                <Card className="col-span-1 md:col-span-2">
-                    <CardHeader>
-                        <CardTitle>Top 6 Projects Coded On Recently</CardTitle>
-                        <CardDescription>Hours spent per project</CardDescription>
-                    </CardHeader>
-                    <CardContent className="h-[400px] w-full">
-                    {isLoading ? (
-                        <Skeleton className="h-full w-full" />
-                    ) : wakaTimeSummary?.projects && wakaTimeSummary.projects.length > 0 ? (
-                        <div className="h-[300px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={chartData}>
-                            <CartesianGrid
-                                strokeDasharray="3 3"
-                                stroke="hsl(var(--border))"
-                            />
-                            <XAxis
-                                dataKey="name"
-                                angle={-45}
-                                textAnchor="end"
-                                interval={0}
-                                height={80}
-                                tick={{ fontSize: 12 }}
-                                stroke={Color}
-                            />
-                            <YAxis
-                                stroke={Color}
-                                domain={[0, maxYValue]}
-                                tickCount={Math.min(maxYValue + 1, 7)}
-                            />
-                            <Tooltip
-                                formatter={(value: number) => [`${value} hours`, 'Time']}
-                                contentStyle={{
-                                backgroundColor: 'hsl(var(--background))',
-                                border: '1px solid hsl(var(--border))',
-                                color: 'hsl(var(--text-color))'
-                                }}
-                            />
-                            <Bar dataKey="hours" fill={CHART_COLORS.project} radius={[4, 4, 0, 0]}>
-                                <LabelList dataKey="hours" position="top" />
-                            </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
-                        </div>
-                    ) : (
-                        <div>No project data available.</div>
-                    )}
-                    </CardContent>
-                </Card>
+                {/* Projects Coded On Recently */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="col-span-1 md:col-span-2 lg:col-span-3"
+                >
+                    <Card className="border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <FolderGit2 className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <CardTitle className="dark:text-white text-gray-800">Top 6 Projects Coded On Recently</CardTitle>
+                            </div>
+                            <CardDescription className="dark:text-gray-400 text-gray-600">Hours spent per project</CardDescription>
+                        </CardHeader>
+                        <CardContent className="h-max w-full">
+                            {isLoading ? (
+                                <Skeleton className="h-full w-full" />
+                            ) : wakaTimeSummary?.projects && wakaTimeSummary.projects.length > 0 ? (
+                                <div className="space-y-4">
+                                    {wakaTimeSummary.projects.map((project, index) => (
+                                        <motion.div
+                                            key={index}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.1 * index }}
+                                            className="flex justify-between items-center p-4 rounded-[4px]-lg border border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-300"
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-2 h-2 rounded-full bg-gray-500 dark:bg-gray-400" />
+                                                <span className="font-medium text-gray-700 dark:text-gray-200">
+                                                    {project.name}
+                                                </span>
+                                            </div>
+                                            <span className="text-gray-500 dark:text-gray-400">
+                                                {project.text}
+                                            </span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="dark:text-gray-400 text-gray-600">No project data available.</div>
+                            )}
+                        </CardContent>
+                    </Card>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
-};
-
-export default DashboardPage;
+}
