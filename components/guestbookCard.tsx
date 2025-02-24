@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface GuestbookCardProps {
@@ -23,10 +24,13 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
         <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900">
             <div className="flex items-center gap-3">
                 {avatar ? (
-                    <img
+                    <Image
+                        width={10}
+                        height={10}
                         src={avatar}
                         alt={name}
                         className="w-7 h-7 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                        priority
                     />
                 ) : (
                     <div className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">

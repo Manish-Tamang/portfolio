@@ -15,6 +15,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link";
+import { BlurFadeImage } from "./BlurFade";
 
 const components = [
   {
@@ -45,6 +46,16 @@ const components = [
   {
     title: "Statistics",
     href: "/dashboard",
+    description: "Insights and analytics",
+  },
+  {
+    title: "Colophon",
+    href: "/colophon",
+    description: "Insights and analytics",
+  },
+  {
+    title: "Projects",
+    href: "/project",
     description: "Insights and analytics",
   },
 ]
@@ -134,8 +145,21 @@ export default function Navbar() {
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 bg-white dark:bg-gray-950 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {components.slice(2, 4).map((component) => (
+                  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
+                      <li className="row-span-3">
+                        <NavigationMenuLink asChild>
+
+                          <BlurFadeImage
+                            src="/IMG-20250217-WA0011.jpg"
+                            alt="Manish Tamang in Sushma Godawari Collage"
+                            delay={0.1}
+                            className="object-cover w-full h-full"
+                            width={800}
+                            height={600}
+                          />
+
+                        </NavigationMenuLink>
+                      </li> {components.slice(2, 4).map((component) => (
                         <ListItem
                           key={component.title}
                           title={component.title}
@@ -154,7 +178,7 @@ export default function Navbar() {
                     Dashboard
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 bg-white dark:bg-gray-950 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    <ul className="grid w-[300px] gap-2 p-4 bg-white dark:bg-gray-950 md:w-[300px] md:grid-cols-2 lg:w-[400px]">
                       {components.slice(4).map((component) => (
                         <ListItem
                           key={component.title}
