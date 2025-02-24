@@ -15,7 +15,7 @@ const config: Config = {
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
             fontFamily: {
-                geist: ['Geist', 'sans-serif'],
+                geist: ['var(--font-geist)', 'sans-serif'],
                 peachi: ['Peachi', 'sans-serif'],
             },
             borderRadius: {
