@@ -16,6 +16,7 @@ const config: Config = {
             },
             fontFamily: {
                 geist: ['Geist', 'sans-serif'],
+                peachi: ['Peachi', 'sans-serif'],
             },
             borderRadius: {
                 lg: 'var(--radius)',

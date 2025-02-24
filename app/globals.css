@@ -134,3 +134,10 @@ input[type="button"],
   border-radius: 10px;
   background-color: gray;
 }
+
+@font-face { 
+  font-family: 'Peachi';
+  src: url('/fonts/peachi-bold.otf') format('opentype');
+  font-weight: bold; 
+  font-style: normal;
+}

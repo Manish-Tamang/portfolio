@@ -20,7 +20,7 @@ export default function Home() {
       <section className="mb-16 pt-20">
         <div className="flex flex-col items-start justify-between">
           <div className="flex-1">
-            <h1 className="text-3xl md:text-6xl lg:text-5xl font-serif flex items-center flex-wrap gap-2">
+            <h1 className="text-3xl md:text-6xl lg:text-5xl font-peachi flex items-center flex-wrap gap-2">
               Hi, I'm
               <div className="inline-flex items-center">
                 <div className="flip-container inline-block" style={{ width: '50px', height: '50px' }}>
