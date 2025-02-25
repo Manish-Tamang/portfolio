@@ -1,4 +1,5 @@
-// /app/blogs/[slug]/page.tsx
+import 'server-only';
+
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { format } from 'date-fns';
@@ -8,8 +9,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import components from '@/components/MDXComponent';
 import { Post } from '@/lib/types';
 import { notFound } from 'next/navigation';
-import PostLayout from '@/components/PostLayout'; 
-
+import PostLayout from '@/components/PostLayout';
 
 interface Props {
   params: Promise<{ slug: string }> | { slug: string };
@@ -19,15 +19,12 @@ export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await Promise.resolve(params);
   const { slug } = resolvedParams;
 
-  // Fetch the post from Sanity using the slug
   const post: Post = await client.fetch(postQuery, { slug });
 
-  // If post is not found, show a 404 page
   if (!post) {
     notFound();
   }
 
-  // Get the MDX content, already pre-processed by Sanity
   const mdxContent = post.content;
 
   return (
@@ -40,7 +37,6 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Display cover image if available */}
         {post.coverImage && (
           <img
             src={urlFor(post.coverImage).url()}

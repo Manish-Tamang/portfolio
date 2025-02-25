@@ -1,4 +1,5 @@
-// components/MDXComponent.tsx
+"use client";
+
 import { CH } from '@code-hike/mdx/components';
 import ImageWithTheme from '@/components/ImageWithTheme';
 import { highlight } from 'sugar-high';
@@ -8,7 +9,7 @@ import Link from 'next/link';
 import TOCInline from 'pliny/ui/TOCInline'
 import Pre from 'pliny/ui/Pre'
 import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
-
+import React from 'react';
 
 // Custom link component to handle internal and external links
 const CustomLink = ({ href, children, ...props }: { href: string, children: ReactNode }) => {
@@ -45,7 +46,7 @@ const Code = ({ children }: { children: string }) => {
     const isInlineCode = children.startsWith('`') && children.endsWith('`') && !children.includes('\n');
     return isInlineCode ? (
         <code className="bg-pink-100 text-pink-900 rounded px-1 py-0.5 text-sm">
-            {highlight(children.slice(1, -1))} {/* Highlight inline code */}
+            {highlight(children.slice(1, -1))}
         </code>
     ) : (
         // Use Code Hike for block code
@@ -61,11 +62,11 @@ const MDXComponents = {
     ImageWithTheme,
     a: CustomLink,
     Callout,
-    CH, // Code Hike component for code blocks
+    CH,
     pre: PreFormatted,
-    code: Code, // Use the custom Code component for block and inline code
-    TOCInline, // FROM repo 2
-    BlogNewsletterForm, // From repo 2
+    code: Code,
+    TOCInline,
+    BlogNewsletterForm,
     h1: (props: any) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
     h2: (props: any) => <h2 className="text-3xl font-bold mt-8 mb-4" {...props} />,
     h3: (props: any) => <h3 className="text-2xl font-bold mt-6 mb-3" {...props} />,
