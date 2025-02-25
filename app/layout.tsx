@@ -59,6 +59,28 @@ const geist = localFont({
   variable: '--font-geist',
 })
 
+const lifeofapple = localFont({
+  src: [
+    {
+      path: '../public/fonts/Life-of-Apple.ttf',
+      weight: '400',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-lifeofapple',
+})
+
+const ridemybike = localFont({
+  src: [
+    {
+      path: '../public/fonts/latinotype-ridemybike-pro-bold-italic.otf',
+      weight: '700',
+      style: 'italic',
+    }
+  ],
+  variable: '--font-ridemybike',
+})
+
 export const metadata: Metadata = {
   title: 'Manish Tamang - A young developer',
   description: 'Hi, I\'m Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.',
@@ -74,7 +96,7 @@ export default function RootLayout({
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
-      <body className={`${geist.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
+      <body className={`${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />

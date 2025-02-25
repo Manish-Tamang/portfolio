@@ -48,7 +48,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <span className="font-medium">Manish Tamang</span>,
+              <span className="font-medium ">Manish Tamang</span>,
               <span className="block">
                 developer & creator
               </span>

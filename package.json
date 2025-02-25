@@ -66,6 +66,7 @@
     "next-mdx-remote": "^5.0.0",
     "next-sanity": "^9.8.47",
     "next-themes": "^0.3.0",
+    "pliny": "^0.4.1",
     "postcss": "8.4.30",
     "prismjs": "^1.29.0",
     "react": "^19.0.0",

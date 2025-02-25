@@ -1,9 +1,14 @@
+// components/MDXComponent.tsx
 import { CH } from '@code-hike/mdx/components';
 import ImageWithTheme from '@/components/ImageWithTheme';
 import { highlight } from 'sugar-high';
 import { ReactNode } from 'react';
 import { BlurFadeImage } from './BlurFade';
 import Link from 'next/link';
+import TOCInline from 'pliny/ui/TOCInline'
+import Pre from 'pliny/ui/Pre'
+import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
+
 
 // Custom link component to handle internal and external links
 const CustomLink = ({ href, children, ...props }: { href: string, children: ReactNode }) => {
@@ -29,7 +34,7 @@ const Callout = ({ emoji, children }: { emoji: string, children: ReactNode }) =>
 );
 
 // Preformatted block component (for pre tags with code blocks)
-const Pre = ({ children, ...props }: { children: ReactNode }) => (
+const PreFormatted = ({ children, ...props }: { children: ReactNode }) => (
     <pre {...props} className="sugar-high overflow-auto p-4 rounded-lg">
         {children}
     </pre>
@@ -57,8 +62,10 @@ const MDXComponents = {
     a: CustomLink,
     Callout,
     CH, // Code Hike component for code blocks
-    pre: Pre,
+    pre: PreFormatted,
     code: Code, // Use the custom Code component for block and inline code
+    TOCInline, // FROM repo 2
+    BlogNewsletterForm, // From repo 2
     h1: (props: any) => <h1 className="text-4xl font-bold mt-8 mb-4" {...props} />,
     h2: (props: any) => <h2 className="text-3xl font-bold mt-8 mb-4" {...props} />,
     h3: (props: any) => <h3 className="text-2xl font-bold mt-6 mb-3" {...props} />,

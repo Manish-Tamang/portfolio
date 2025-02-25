@@ -11,7 +11,7 @@ const About = () => {
             <section className="py-12 md:py-24">
                 <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-12">
                     <div className="w-full">
-                        <h1 className="text-4xl font-bold mb-6 leading-tight">
+                        <h1 className="text-4xl font-geist font-bold mb-6 leading-tight">
                             I'm Manish Tamang, I live in
                             <span className="group relative inline-block">
                                 <span>Itahari</span>

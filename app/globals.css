@@ -1,5 +1,3 @@
-/* globals.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -205,4 +203,19 @@ input[type="button"],
   src: url('/fonts/Geist-Black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Life of Apple';
+  src: url('/fonts/Life-of-Apple.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ride My Bike';
+  src: url('/fonts/latinotype-ridemybike-pro-bold-italic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
 }

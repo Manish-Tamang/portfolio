@@ -1,29 +1,12 @@
-// components/BlogPostContent.tsx
+//layouts/PostLayout.tsx
 'use client';
 
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
-import { HighlightedCode, Inline, Pre } from "codehike/code";
 
 interface Props {
     mdxSource: any;
-}
-
-interface CodeProps {
-    codeblock: HighlightedCode;
-}
-
-interface InlineCodeProps {
-    codeblock: HighlightedCode;
-}
-
-
-function Code({ codeblock }: CodeProps) {
-    return <Pre code={codeblock} />;
-}
-
-function InlineCode({ codeblock }: InlineCodeProps) {
-    return <Inline code={codeblock} />;
+    children?: React.ReactNode;
 }
 
 const components = {
@@ -36,19 +19,18 @@ const components = {
         <a href={props.href} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
             {props.children}
         </a>
-    ),
-    code: Code,
-    inlineCode: InlineCode,
+    ),  
 };
 
 
-const BlogPostContent = ({ mdxSource }: Props) => {
+const PostLayout = ({ mdxSource, children }: Props) => {
 
     return (
-        <article className="max-w-none prose prose-lg dark:prose-invert">
+        <article className="max-w-none prose dark:prose-invert">
             {mdxSource && <MDXRemote {...mdxSource} components={components} />}
+            {children}
         </article>
     );
 };
 
-export default BlogPostContent;
+export default PostLayout;

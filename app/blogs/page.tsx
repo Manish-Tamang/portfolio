@@ -25,7 +25,7 @@ export default async function Blogs() {
 
     return (
         <section className="container mx-auto py-8">
-            <h2 className="text-3xl font-semibold mb-4">Blogs</h2>
+            <h2 className="text-3xl font-semibold mb-4 font-peachi">Blogs</h2>
             <p className="text-black dark:text-gray-100 mb-8">
                 Welcome to my digital garden, where I share my thoughts, explore new things I learn, and nurture
                 ideas that spark my curiosity.

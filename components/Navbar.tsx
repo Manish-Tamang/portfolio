@@ -97,7 +97,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-ridemybike font-bold text-gray-900 dark:text-white">
               Gole Codes
             </h1>
           </Link>
@@ -129,7 +129,7 @@ export default function Navbar() {
                           </a>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/blogs/latest" title="Latest Posts">
+                      <ListItem href="/blogs" title="Latest Posts">
                         Recently published articles and updates
                       </ListItem>
                       <ListItem href="/blogs/categories" title="Categories">
