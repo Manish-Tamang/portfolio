@@ -16,8 +16,8 @@ const About = () => {
                             <span className="group relative inline-block">
                                 <span>Itahari</span>
                                 <div className="hidden group-hover:block">
-                                    <div className="absolute -top-8 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center rounded-sm text-center text-sm text-slate-300">
-                                        <div className="rounded-sm bg-black py-1 px-2 font-geist">
+                                    <div className="absolute -top-8 rounded-[4px] left-1/2 z-50 flex -translate-x-1/2 flex-col items-center text-center text-sm text-slate-300">
+                                        <div className="rounded-[4px] bg-black py-1 px-2 font-geist">
                                             <p className="whitespace-nowrap">A beautiful city in eastern Nepal</p>
                                         </div>
                                         <div className="h-0 w-fit border-l-8 border-r-8 border-t-8 border-transparent border-t-black"></div>
@@ -35,6 +35,12 @@ const About = () => {
                             learning and improving myself, so I try my best to learn in any situation possible,
                             unfavorable or not.
                         </p>
+                        <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-6 text-gray-600 dark:text-gray-400">
+                            म आफुलाइ राम्रो ठान्छु तर म भन्दा ठूलो पापी छैन
+                            मैले गरेको पाप हरुको सायेद कुनै माफी छैन
+                            हे भग्वान समये बित्यो ऐले म सारै लज्जित छु
+                            पस्चताप को आगो ले म निकै त्रसित छु
+                        </blockquote>
                     </div>
 
                     {/* Right Column - Profile Section - No BlurFade */}
