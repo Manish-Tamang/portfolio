@@ -2,6 +2,7 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { MDXComponents } from '@/components/mdx/MDXComponents';
 import Image from 'next/image';
+import CarbonAds from '@/components/carbonAds';
 
 export interface FullBlog {
   currentSlug: string;
@@ -58,6 +59,7 @@ export default async function BlogPost({
         />
       )}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
+      <CarbonAds className="fixed bottom-4 right-4 w-1/4" />  
         <MDXComponents content={post.content} />
       </div>
     </article>
