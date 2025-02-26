@@ -48,11 +48,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <span className="font-medium ">Manish Tamang</span>,
+              <span className="font-medium bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-transparent bg-clip-text">Manish Tamang</span>,
               <span className="block">
                 developer & creator
               </span>
-              <span className="block">
+              <span className="block bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-cyan-400 dark:to-green-500">
                 at Swikar Codes.
               </span>
             </h1>

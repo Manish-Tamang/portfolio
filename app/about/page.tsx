@@ -11,13 +11,13 @@ const About = () => {
             <section className="py-12 md:py-24">
                 <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-12">
                     <div className="w-full">
-                        <h1 className="text-4xl font-geist font-bold mb-6 leading-tight">
-                            I'm Manish Tamang, I live in
+                        <h1 className="text-4xl font-ridemybike font-bold mb-6 leading-tight">
+                            I'm Manish Tamang, I live in{' '}
                             <span className="group relative inline-block">
                                 <span>Itahari</span>
                                 <div className="hidden group-hover:block">
                                     <div className="absolute -top-8 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center rounded-sm text-center text-sm text-slate-300">
-                                        <div className="rounded-sm bg-black py-1 px-2">
+                                        <div className="rounded-sm bg-black py-1 px-2 font-geist">
                                             <p className="whitespace-nowrap">A beautiful city in eastern Nepal</p>
                                         </div>
                                         <div className="h-0 w-fit border-l-8 border-r-8 border-t-8 border-transparent border-t-black"></div>
@@ -61,7 +61,7 @@ const About = () => {
                         </div>
                     </div>
                     <div className="md:col-span-2">
-                        <h2 className="text-2xl font-semibold mb-4">What is My Ambition?</h2>
+                        <h2 className="text-2xl font-semibold mb-4 font-peachi">What is My Ambition?</h2>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
                             front-end and back-end development to craft powerful, versatile web applications.
@@ -88,7 +88,7 @@ const About = () => {
                             textClassName="text-sm text-gray-500"
                         />
 
-                        <h2 className="text-2xl font-semibold mt-10 mb-4">Soft Skills</h2>
+                        <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Soft Skills</h2>
                         <ul className="list-disc pl-5 space-y-2">
                             <li>
                                 <span className="font-semibold">Attention to detail:</span> I take pleasure in creating designs and UIs with careful precision, emphasizing quality over quantity.
@@ -101,7 +101,7 @@ const About = () => {
                             </li>
                         </ul>
 
-                        <h2 className="text-2xl font-semibold mt-10 mb-4">Education</h2>
+                        <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Education</h2>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                             Here's little <a href="/photos" className="text-blue-500 hover:underline">photo </a>snippet and timeline of my education
                         </p>
