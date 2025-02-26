@@ -20,7 +20,7 @@ export const post = {
     {
       name: 'content',
       title: 'Content',
-      type: 'text',
+      type: 'markdown',
     },
     {
       name: 'excerpt',

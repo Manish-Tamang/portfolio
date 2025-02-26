@@ -1,37 +1,64 @@
-// app/blogs/[slug]/page.tsx
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
-import { postQuery } from '@/lib/queries';
-import MDXContent from '@/components/mdx/MDXcontent';
+import { MDXComponents } from '@/components/mdx/MDXComponents';
+import Image from 'next/image';
 
-interface BlogPostProps {
-  params: { slug: string };
+export interface FullBlog {
+  currentSlug: string;
+  title: string;
+  content: string;
+  coverImage?: any;
+  date: string;
 }
 
-export default async function BlogPost({ params }: BlogPostProps) {
-  // Correctly extract the slug
-  const slug = params.slug;
-  
-  // Use the slug directly in the fetch
-  const post = await client.fetch(postQuery, { slug });
+async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
+  const query = `*[_type == "post" && slug.current == $slug][0] {
+    "currentSlug": slug.current,
+    title,
+    date,
+    coverImage,
+    content
+  }`;
+
+  try {
+    const post = await client.fetch(query, { slug });
+    return post || null;
+  } catch (error) {
+    console.error("Error fetching blog post:", error);
+    return null;
+  }
+}
+
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+  const post = await getBlogPostContent(slug);
 
   if (!post) {
-    return <div>Post not found</div>;
+    return (
+      <div className="text-center py-10 text-gray-500 text-lg">
+        Post not found or error loading.
+      </div>
+    );
   }
 
   return (
-    <article className="container mx-auto py-8">
-      <h1 className="text-3xl font-semibold mb-4">{post.title}</h1>
+    <article className="container mx-auto py-12 px-6 max-w-3xl">
+      <h1 className="text-4xl font-bold mb-6 font-peachi">{post.title}</h1>
       {post.coverImage && (
-        <img
+        <Image
+        width={100}
+        height={100}
           src={urlFor(post.coverImage).url()}
           alt={post.title}
-          className="w-full h-auto mb-4 rounded-md"
+          className="w-full h-auto mb-6 rounded-[8px]"
         />
       )}
-
-      <div className="prose dark:prose-invert max-w-none">
-        <MDXContent content={post.content} />
+      <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
+        <MDXComponents content={post.content} />
       </div>
     </article>
   );
