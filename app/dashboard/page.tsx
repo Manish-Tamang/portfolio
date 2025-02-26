@@ -196,17 +196,19 @@ export default function DashboardPage() {
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl font-bold mb-8 dark:text-white text-gray-800"
+                className="text-4xl font-bold font-peachi mb-8 dark:text-white text-gray-800"
             >
                 Dashboard
             </motion.h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
                 {/* Total Coding Time */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
+                    className="col-span-1 md:col-span-2 lg:col-span-3" // Take full width
                 >
                     <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <CardHeader>
@@ -233,6 +235,7 @@ export default function DashboardPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
+                    className="col-span-1 md:col-span-2 lg:col-span-3" // Take full width
                 >
                     <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <CardHeader>
@@ -259,6 +262,7 @@ export default function DashboardPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
+                    className="col-span-1 md:col-span-2 lg:col-span-3" // Take full width
                 >
                     <Card className="transform transition-all duration-300 hover:scale-105 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <CardHeader>
