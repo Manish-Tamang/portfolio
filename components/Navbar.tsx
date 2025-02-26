@@ -145,7 +145,7 @@ export default function Navbar() {
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
 
@@ -224,11 +224,14 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <MenuIcon className="w-6 h-6" />
-            )}
+            <div className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-xl px-2 py-1">
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <MenuIcon className="w-6 h-6" />
+              )}
+              <span className="ml-2">Menu</span>
+            </div>
           </button>
         </div>
 
