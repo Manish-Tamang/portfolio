@@ -1,10 +1,10 @@
-export const postQuery = `
-*[_type == "post" && slug.current == $slug][0] {
+export const postQuery = `*[_type == "post" && slug.current == $slug][0] {
   title,
-  "slug": slug.current, 
-  content,
+  slug,
+  excerpt,
   date,
-  coverImage
+  coverImage,
+  content
 }`;
 
 export const postSlugsQuery = `
