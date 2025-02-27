@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Container from "@/components/Container";
-import { BlurFade, BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
+import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
+import TechStacks from "@/components/TechStacks";
 
 
 
@@ -41,6 +42,7 @@ const About = () => {
                             हे भग्वान समये बित्यो ऐले म सारै लज्जित छु
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
+
                     </div>
 
                     {/* Right Column - Profile Section - No BlurFade */}
@@ -67,8 +69,9 @@ const About = () => {
                         </div>
                     </div>
                     <div className="md:col-span-2">
-                        <h2 className="text-2xl font-semibold mb-4 font-peachi">What is My Ambition?</h2>
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                    <TechStacks />
+                        <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>
+                        <p className="text-gray-700 font-inter dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
                             front-end and back-end development to craft powerful, versatile web applications.
                             Each <a href="#" className="text-blue-500 hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt
@@ -76,7 +79,6 @@ const About = () => {
                             through innovation and creativity, one project at a time. A passionate and amateur computer
                             science enthusiast, I have a deep love for technology and innovation. 🚀
                         </p>
-
                         <div className="relative rounded-lg overflow-hidden mb-6">
                             <BlurFadeImage
                                 src="/IMG-20250217-WA0011.jpg"

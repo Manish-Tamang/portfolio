@@ -5,9 +5,9 @@ import { ThemeProvider } from 'next-themes';
 import Container from '@/components/Container';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
 
-const inter = Inter({ subsets: ['latin'] });
+
 const geist = localFont({
   src: [
     {
@@ -96,7 +96,7 @@ export default function RootLayout({
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
-      <body className={`${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
+      <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />
