@@ -1,10 +1,10 @@
+"use client";
+import React, { useState, useRef, useEffect } from "react";
 import { LayoutGrid } from "@/components/ui/layout-grid";
-import SignIn from "@/components/sign-in";
 
 export default function LayoutGridDemo() {
     return (
         <div className="h-screen py-20 w-full">
-            <SignIn />
             <LayoutGrid cards={cards} />
         </div>
     );
