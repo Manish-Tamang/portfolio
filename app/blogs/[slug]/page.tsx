@@ -48,8 +48,9 @@ export default async function BlogPost({
 
   return (
     <article className="container mx-auto py-12 px-6 max-w-3xl">
-      <h1 className="text-4xl font-bold mb-6 font-peachi">{post.title}</h1>
-      {post.coverImage && (
+      <h1 className="text-4xl font-bold mb-2 font-peachi">{post.title}</h1>
+      <span className="block text-gray-500 text-sm mb-6">{post.date}</span>
+      {/* {post.coverImage && (
         <Image
         width={100}
         height={100}
@@ -57,9 +58,9 @@ export default async function BlogPost({
           alt={post.title}
           className="w-full h-auto mb-6 rounded-[8px]"
         />
-      )}
+      )} */}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
-      <CarbonAds className="fixed bottom-4 right-4 w-1/4" />  
+        <CarbonAds className="fixed bottom-4 right-4 w-1/4" />
         <MDXComponents content={post.content} />
       </div>
     </article>

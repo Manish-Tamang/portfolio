@@ -42,10 +42,7 @@ const About = () => {
                             हे भग्वान समये बित्यो ऐले म सारै लज्जित छु
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
-
                     </div>
-
-                    {/* Right Column - Profile Section - No BlurFade */}
                     <div className="flex flex-col items-center top-40 self-start">
                         <div className="relative rounded-md w-48 h-full">
                             <div className="relative group duration-500 cursor-pointer overflow-hidden text-gray-50 h-72 w-56 rounded-2xl hover:duration-700">
@@ -62,14 +59,14 @@ const About = () => {
                                 </div>
                                 <div className="absolute bg-gray-50 dark:bg-gray-800 -bottom-24 w-56 p-3 flex flex-col gap-1 group-hover:-bottom-0 group-hover:duration-600 duration-500">
                                     <span className="text-blue-500 font-bold text-xs">Hover here</span>
-                                    <span className="text-blue-500 font-bold text-3xl">Manish Gole</span>
+                                    <span className="text-blue-500 font-bold font-peachi text-3xl">Manish Gole</span>
                                     <p className="text-neutral-800 dark:text-neutral-100">My friends also call me Gole.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="md:col-span-2">
-                    <TechStacks />
+                        <TechStacks />
                         <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>
                         <p className="text-gray-700 font-inter dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
@@ -89,13 +86,11 @@ const About = () => {
                                 height={600}
                             />
                         </div>
-
                         <BlurFadeContent
                             delay={0.2}
                             content="Me, absolutely chaotic in my first week of high school."
                             textClassName="text-sm text-gray-500"
                         />
-
                         <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Soft Skills</h2>
                         <ul className="list-disc pl-5 space-y-2">
                             <li>
