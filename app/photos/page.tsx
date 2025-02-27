@@ -1,5 +1,3 @@
-"use client";
-import React, { useState, useRef, useEffect } from "react";
 import { LayoutGrid } from "@/components/ui/layout-grid";
 
 export default function LayoutGridDemo() {
