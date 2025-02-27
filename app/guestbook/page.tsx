@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import GuestbookCard from "@/components/guestbookCard";
@@ -10,37 +10,53 @@ interface GuestbookEntryData {
     id: string;
     name: string;
     imageUrl?: string;
-    timestamp: number; 
+    timestamp: number;
     message: string;
 }
+
+const guestbookCache = {
+    data: null as GuestbookEntryData[] | null,
+    timestamp: null as number | null,
+    expiry: 60 * 1000, 
+};
 
 export default function GuestbookPage() {
     const [entries, setEntries] = useState<GuestbookEntryData[]>([]);
     const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "guestbook"));
-                const data = querySnapshot.docs.map((doc) => {
-                    const entry = doc.data();
-                    return {
-                        id: doc.id,
-                        name: entry.name,
-                        imageUrl: entry.imageUrl || "", 
-                        timestamp: entry.timestamp instanceof Timestamp ? entry.timestamp.toMillis() : 0,
-                        message: entry.message,
-                    };
-                });
-
-                setEntries(data);
-            } catch (error) {
-                console.error("Error fetching entries: ", error);
+    const fetchData = useCallback(async () => {
+        try {
+            
+            if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
+                setEntries(guestbookCache.data);
+                return; 
             }
-        };
 
-        fetchData();
+            const querySnapshot = await getDocs(collection(db, "guestbook"));
+            const data = querySnapshot.docs.map((doc) => {
+                const entry = doc.data();
+                return {
+                    id: doc.id,
+                    name: entry.name,
+                    imageUrl: entry.imageUrl || "",
+                    timestamp: entry.timestamp instanceof Timestamp ? entry.timestamp.toMillis() : 0,
+                    message: entry.message,
+                };
+            });
+
+            // Update cache
+            guestbookCache.data = data;
+            guestbookCache.timestamp = Date.now();
+
+            setEntries(data);
+        } catch (error) {
+            console.error("Error fetching entries: ", error);
+        }
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const sortedEntries = [...entries].sort((a, b) =>
         sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp

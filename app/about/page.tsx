@@ -2,7 +2,6 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
-import TechStacks from "@/components/TechStacks";
 
 
 
@@ -37,9 +36,9 @@ const About = () => {
                             unfavorable or not.
                         </p>
                         <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-6 text-gray-600 dark:text-gray-400">
-                            म आफुलाइ राम्रो ठान्छु तर म भन्दा ठूलो पापी छैन
-                            मैले गरेको पाप हरुको सायेद कुनै माफी छैन
-                            हे भग्वान समये बित्यो ऐले म सारै लज्जित छु
+                            म आफुलाइ राम्रो ठान्छु तर म भन्दा ठूलो पापी छैन, <br />
+                            मैले गरेको पाप हरुको सायेद कुनै माफी , <br />
+                            हे भग्वान समये बित्यो ऐले म सारै लज्जित छु, <br />
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
                     </div>
@@ -66,7 +65,6 @@ const About = () => {
                         </div>
                     </div>
                     <div className="md:col-span-2">
-                        <TechStacks />
                         <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>
                         <p className="text-gray-700 font-inter dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
