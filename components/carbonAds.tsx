@@ -18,8 +18,12 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
     // Track if ad has been loaded already
     const adLoadedRef = React.useRef(false);
 
+    // Create a ref to track route changes
+    const routeRef = React.useRef("");
+
     // Completely clean up any existing Carbon ads on the page
     const cleanupAllAds = () => {
+        // Remove all Carbon ad scripts
         const scripts = document.querySelectorAll('script[src*="carbonads"]');
         scripts.forEach(script => {
             if (script.parentNode) {
@@ -27,6 +31,7 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
             }
         });
 
+        // Remove all Carbon ad divs
         const ads = document.querySelectorAll('#carbonads');
         ads.forEach(ad => {
             if (ad.parentNode) {
@@ -34,24 +39,118 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
             }
         });
 
+        // Remove the Carbon styles
         const styles = document.getElementById('carbon-styles');
         if (styles && styles.parentNode) {
             styles.parentNode.removeChild(styles);
         }
     };
 
-    // Load ad function (idempotent)
-    const loadAd = React.useCallback(() => {
-        // Guard to prevent concurrent ad loading.
-        if (adLoadedRef.current) return;
+    // Standard cleanup for our specific container
+    const cleanupAd = () => {
+        const existingScript = document.getElementById('_carbonads_js');
+        if (existingScript && existingScript.parentNode) {
+            existingScript.parentNode.removeChild(existingScript);
+        }
 
+        const existingAd = document.querySelector('#carbon-container #carbonads');
+        if (existingAd && existingAd.parentNode) {
+            existingAd.parentNode.removeChild(existingAd);
+        }
+    };
+
+    React.useEffect(() => {
+        // Clean up all existing ads on the page when the component first mounts
         cleanupAllAds();
+
+        // Only load ad if it hasn't been loaded yet or if we're reopening
+        if (!adLoadedRef.current && !isMinimized) {
+            loadAd();
+        }
+
+        // Add theme change listener to handle dark mode changes
+        const handleThemeChange = () => {
+            if (!isMinimized) {
+                applyCarbonTheme();
+            }
+        };
+
+        // Listen for theme changes
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', handleThemeChange);
+
+        // Also apply theme on first load
+        applyCarbonTheme();
+
+        // Track the current route to detect navigation
+        if (typeof window !== 'undefined') {
+            routeRef.current = window.location.pathname;
+        }
+
+        return () => {
+            mediaQuery.removeEventListener('change', handleThemeChange);
+            cleanupAd(); // Clean up on unmount
+        };
+    }, [router, isMinimized]);
+
+    // Add a check for route changes
+    React.useEffect(() => {
+        const checkRouteChange = () => {
+            const currentRoute = window.location.pathname;
+
+            // If route has changed, reload the ad
+            if (routeRef.current !== currentRoute) {
+                routeRef.current = currentRoute;
+
+                // Clean up old ads and load new one if not minimized
+                if (!isMinimized) {
+                    cleanupAllAds();
+                    loadAd();
+                }
+            }
+        };
+
+        // Check for route changes
+        window.addEventListener('popstate', checkRouteChange);
+
+        return () => {
+            window.removeEventListener('popstate', checkRouteChange);
+        };
+    }, [isMinimized]);
+
+    // Apply theming to Carbon Ads based on current mode
+    const applyCarbonTheme = () => {
+        setTimeout(() => {
+            const carbonAd = document.querySelector('#carbonads');
+            if (carbonAd) {
+                // First remove any existing theme classes
+                carbonAd.classList.remove('carbon-dark', 'carbon-light');
+
+                // Then add the appropriate one
+                const isDarkMode =
+                    document.documentElement.classList.contains('dark') ||
+                    window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (isDarkMode) {
+                    carbonAd.classList.add('carbon-dark');
+                } else {
+                    carbonAd.classList.add('carbon-light');
+                }
+            }
+        }, 100);
+    };
+
+    const loadAd = () => {
+        // First clean up any existing ads
+        cleanupAd();
 
         const carbonContainer = document.getElementById('carbon-container');
         if (!carbonContainer) return;
 
+        // Clear container to be safe
         carbonContainer.innerHTML = '';
 
+        // Add style for Carbon Ads
         const style = document.createElement('style');
         style.id = 'carbon-styles';
         style.textContent = `
@@ -89,18 +188,6 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
                 overflow: hidden;
             }
 
-            .carbon-dark .carbon-img,
-            .carbon-dark .carbon-text,
-            .carbon-dark .carbon-poweredby {
-                color: #e8e8e8;
-            }
-
-            .carbon-light .carbon-img,
-            .carbon-light .carbon-text,
-            .carbon-light .carbon-poweredby {
-                color: #333333;
-            }
-
             .carbon-img {
                 display: block;
                 margin: 0 auto;
@@ -109,16 +196,16 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
 
             .carbon-text {
                 display: block;
-                padding: 8px;
-                line-height: 1.4;
+                padding: 6px; /* Reduced padding */
+                line-height: 1.2; /* Reduced line height */
             }
 
             .carbon-poweredby {
                 display: block;
-                padding: 6px;
+                padding: 4px; /* Reduced padding */
                 background: rgba(128, 128, 128, .15);
                 text-align: center;
-                font-size: 9px;
+                font-size: 8px;  /* Reduced font size */
                 letter-spacing: .5px;
             }
 
@@ -135,6 +222,7 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
             document.head.appendChild(style);
         }
 
+        // Create new script with a unique ID to avoid conflicts
         const script = document.createElement('script');
         script.src =
             'https://cdn.carbonads.com/carbon.js?serve=CW7I6K7U&placement=wwwmanishtamangcom&format=cover';
@@ -144,66 +232,12 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
 
         carbonContainer.appendChild(script);
 
-        const onLoad = () => {
+        script.addEventListener('load', () => {
             setShowing(true);
             adLoadedRef.current = true;
+            // Apply theme after ad loads
             applyCarbonTheme();
-            script.removeEventListener('load', onLoad);
-        };
-
-        script.addEventListener('load', onLoad);
-
-        // In case the script fails to load, clear ref
-        script.addEventListener('error', () => {
-            script.removeEventListener('load', onLoad);
-            adLoadedRef.current = false;
         });
-
-        return () => {
-            script.removeEventListener('load', onLoad);
-            script.removeEventListener('error', () => { });  //remove error listner as well
-        };
-
-    }, []);
-
-    React.useEffect(() => {
-        if (!adLoadedRef.current && !isMinimized) {
-            loadAd();
-        }
-
-        const handleThemeChange = () => {
-            if (!isMinimized) {
-                applyCarbonTheme();
-            }
-        };
-
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        mediaQuery.addEventListener('change', handleThemeChange);
-
-        applyCarbonTheme();
-
-        return () => {
-            mediaQuery.removeEventListener('change', handleThemeChange);
-        };
-    }, [loadAd, isMinimized]);
-
-    const applyCarbonTheme = () => {
-        setTimeout(() => {
-            const carbonAd = document.querySelector('#carbonads');
-            if (carbonAd) {
-                carbonAd.classList.remove('carbon-dark', 'carbon-light');
-
-                const isDarkMode =
-                    document.documentElement.classList.contains('dark') ||
-                    window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-                if (isDarkMode) {
-                    carbonAd.classList.add('carbon-dark');
-                } else {
-                    carbonAd.classList.add('carbon-light');
-                }
-            }
-        }, 100);
     };
 
     const handleClose = () => {
@@ -215,17 +249,17 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
 
     const toggleMinimize = () => {
         if (isMinimized) {
+            // When expanding, first update state
             setIsMinimized(false);
 
+            // Wait for component to render expanded state before reloading ad
             setTimeout(() => {
-                const existingAd = document.querySelector('#carbonads');
-                if (!existingAd) {
-                    loadAd();
-                } else {
-                    applyCarbonTheme();
-                }
+                // Clean up any existing ads and load a new one
+                cleanupAllAds();
+                loadAd();
             }, 100);
         } else {
+            // When minimizing, just update the state
             setIsMinimized(true);
         }
     };
@@ -240,7 +274,7 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
                 'fixed bottom-4 right-4 z-50 transition-all duration-300 ease-in-out',
                 isMinimized
                     ? 'w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md cursor-pointer'
-                    : 'rounded-[4px] w-full sm:w-64 max-w-[90vw] bg-white dark:bg-gray-800 backdrop-blur-sm shadow-md',
+                    : 'rounded-[4px] w-full sm:w-52 max-w-[90vw] bg-white dark:bg-gray-800 backdrop-blur-sm shadow-md', // Adjusted width here
                 fadeOut ? 'opacity-0' : 'opacity-100',
                 className
             )}
@@ -255,7 +289,7 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
                 </div>
             ) : (
                 <>
-                    <div className="flex justify-between items-center p-1.5 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center p-1 border-b border-gray-200 dark:border-gray-700"> {/* Reduced padding here */}
                         <button
                             onClick={toggleMinimize}
                             className="p-1 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
@@ -275,7 +309,7 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
                     <div id="carbon-container" className="w-full flex justify-center"></div>
 
                     {showing && (
-                        <div className="px-2 pb-1.5 pt-1">
+                        <div className="px-1 pb-1 pt-0.5"> {/* Reduced padding here */}
                             <span className="block text-center text-xs text-gray-500 dark:text-gray-400">
                                 ♥ Supports this site
                             </span>

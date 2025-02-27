@@ -96,7 +96,7 @@ export default async function BlogPost({
         />
       )} */}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
-        <CarbonAds className="fixed bottom-4 right-4 w-1/4" />
+        <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
       </div>
     </article>

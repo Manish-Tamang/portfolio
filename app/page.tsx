@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import TechStacks from "@/components/TechStacks";
 
 
 export default function Home() {
@@ -52,9 +53,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-
-       
-
+        <TechStacks />
       </section>
       <section className="mb-16">
         <h2 className="text-2xl font-medium mb-4">Work</h2>
