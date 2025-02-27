@@ -47,19 +47,15 @@ export default function Blogs() {
         };
 
         fetchPosts();
-    }, []); // Fetch posts only once on component mount
+    }, []);
 
-    // Filter and sort posts
     const filteredAndSortedPosts = React.useMemo(() => {
-        // First filter by search query
         const filtered = searchQuery
             ? posts.filter(post =>
                 post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
             )
             : posts;
-
-        // Then sort by date
         return [...filtered].sort((a, b) => {
             const dateA = new Date(a.date).getTime();
             const dateB = new Date(b.date).getTime();
@@ -126,7 +122,6 @@ export default function Blogs() {
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                 )}
-
                                 <div className="p-6 flex-grow flex flex-col">
                                     <h3 className="text-xl font-bold font-peachi group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 text-black dark:text-white mb-3">
                                         {post.title}
