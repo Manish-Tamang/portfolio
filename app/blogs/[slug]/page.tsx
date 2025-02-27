@@ -69,7 +69,7 @@ export default async function BlogPost({
     <article className="container mx-auto py-12 px-6 max-w-3xl">
       <h1 className="text-4xl font-bold mb-2 font-peachi">{post.title}</h1>
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Image
             src='/profile.png'
@@ -84,6 +84,7 @@ export default async function BlogPost({
           {formattedDate} - {readingTime} min read
         </span>
       </div>
+      <hr className="mb-8 border-gray-200 dark:border-gray-700" />
 
       {/* {post.coverImage && (
         <Image
