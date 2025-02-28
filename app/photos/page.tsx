@@ -1,8 +1,10 @@
+import SignIn from "@/components/Sign-in";
 import { LayoutGrid } from "@/components/ui/layout-grid";
 
 export default function LayoutGridDemo() {
     return (
         <div className="h-screen py-20 w-full">
+            <SignIn />
             <LayoutGrid cards={cards} />
         </div>
     );

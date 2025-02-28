@@ -57,8 +57,8 @@ const About = () => {
                                     </div>
                                 </div>
                                 <div className="absolute bg-gray-50 dark:bg-gray-800 -bottom-24 w-56 p-3 flex flex-col gap-1 group-hover:-bottom-0 group-hover:duration-600 duration-500">
-                                    <span className="text-blue-500 font-bold text-xs">Hover here</span>
-                                    <span className="text-blue-500 font-bold font-peachi text-3xl">Manish Gole</span>
+                                    <span className="text-[#38A662] font-bold text-xs">Hover here</span>
+                                    <span className="text-[#38A662] font-bold font-peachi text-3xl">Manish Gole</span>
                                     <p className="text-neutral-800 dark:text-neutral-100">My friends also call me Gole.</p>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ const About = () => {
                         <p className="text-gray-700 font-inter dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
                             front-end and back-end development to craft powerful, versatile web applications.
-                            Each <a href="#" className="text-blue-500 hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt
+                            Each <a href="#" className="text-[#38A662] hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt
                             to the ever-evolving world of technology. I’m dedicated to making a meaningful impact
                             through innovation and creativity, one project at a time. A passionate and amateur computer
                             science enthusiast, I have a deep love for technology and innovation. 🚀
@@ -104,7 +104,7 @@ const About = () => {
 
                         <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Education</h2>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                            Here's little <a href="/photos" className="text-blue-500 hover:underline">photo </a>snippet and timeline of my education
+                            Here's little <a href="/photos" className="text-[#38A662] hover:underline">photo </a>snippet and timeline of my education
                         </p>
                         <Education />
                         <div className="relative rounded-lg overflow-hidden mb-6">

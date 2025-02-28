@@ -135,6 +135,11 @@ input[type="button"],
   background-color: gray;
 }
 
+::selection {
+  background-color: #38A662;
+  color: white; 
+}
+
 @font-face { 
   font-family: 'Peachi';
   src: url('/fonts/peachi-bold.otf') format('opentype');

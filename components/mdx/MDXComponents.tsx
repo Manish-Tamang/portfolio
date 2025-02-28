@@ -90,7 +90,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ toc }) => {
         {toc.map((item) => (
           <li
             key={item.id}
-            className={`ml-${(item.level - 1) * 4} text-gray-700 dark:text-gray-300 hover:text-blue-500`}
+            className={`ml-${(item.level - 1) * 4} text-gray-700 dark:text-gray-300 hover:text-[#38A662]`}
           >
             <a
               className="block py-1 hover:underline"

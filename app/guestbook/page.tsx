@@ -1,10 +1,17 @@
+// app/guestbook/page.tsx
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { collection, getDocs, Timestamp } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { collection, getDocs, Timestamp, addDoc } from "firebase/firestore";
+import { db, auth } from "@/firebase/config";
 import GuestbookCard from "@/components/guestbookCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 interface GuestbookEntryData {
     id: string;
@@ -12,24 +19,28 @@ interface GuestbookEntryData {
     imageUrl?: string;
     timestamp: number;
     message: string;
+    email?: string;
 }
 
 const guestbookCache = {
     data: null as GuestbookEntryData[] | null,
     timestamp: null as number | null,
-    expiry: 60 * 1000, 
+    expiry: 60 * 1000,
 };
 
 export default function GuestbookPage() {
     const [entries, setEntries] = useState<GuestbookEntryData[]>([]);
     const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+    const [message, setMessage] = useState("");
+    const { toast } = useToast();
+    const { data: session, status } = useSession();
+    const router = useRouter();
 
     const fetchData = useCallback(async () => {
         try {
-            
             if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
                 setEntries(guestbookCache.data);
-                return; 
+                return;
             }
 
             const querySnapshot = await getDocs(collection(db, "guestbook"));
@@ -41,10 +52,10 @@ export default function GuestbookPage() {
                     imageUrl: entry.imageUrl || "",
                     timestamp: entry.timestamp instanceof Timestamp ? entry.timestamp.toMillis() : 0,
                     message: entry.message,
+                    email: entry.email || "",
                 };
             });
 
-            // Update cache
             guestbookCache.data = data;
             guestbookCache.timestamp = Date.now();
 
@@ -62,8 +73,88 @@ export default function GuestbookPage() {
         sortOrder === "newest" ? b.timestamp - a.timestamp : a.timestamp - b.timestamp
     );
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!session?.user) {
+            toast({
+                title: "You must be logged in to leave a message.",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        if (!message.trim()) {
+            toast({
+                title: "Message cannot be empty.",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "guestbook"), {
+                name: session.user.name,
+                imageUrl: session.user.image,
+                timestamp: Timestamp.now(),
+                message: message,
+                email: session.user.email,
+            });
+
+            setMessage("");
+            fetchData();
+
+            toast({
+                title: "Message added successfully!",
+            });
+        } catch (error: any) {
+            console.error("Error adding entry: ", error);
+            toast({
+                title: "Error adding message.",
+                description: error.message,
+                variant: "destructive",
+            });
+        }
+    };
+
     return (
         <div className="max-w-2xl mx-auto p-4">
+            <div className="mb-4">
+                {status === "loading" ? (
+                    <div>Loading...</div>
+                ) : session?.user ? (
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                            <Avatar>
+                                <AvatarImage src={session.user.image as string} alt={session.user.name as string} />
+                                <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <span>{session.user.name}</span>
+                        </div>
+                        <Button variant="outline" size="sm" onClick={() => signOut()}>
+                            Sign Out
+                        </Button>
+                    </div>
+                ) : (
+                    <Button onClick={() => signIn("google", { callbackUrl: '/guestbook' })}>Sign In with Google</Button>
+                )}
+            </div>
+
+            {session?.user && (
+                <form onSubmit={handleSubmit} className="mb-4">
+                    <Input
+                        type="text"
+                        placeholder="Leave a message..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        disabled={!session?.user}
+                    />
+                    <Button type="submit" disabled={!session?.user} className="mt-2">
+                        Post Message
+                    </Button>
+                </form>
+            )}
+
             <div className="flex justify-end mb-4">
                 <Select onValueChange={(value) => setSortOrder(value as "newest" | "oldest")} defaultValue="newest">
                     <SelectTrigger className="w-[120px]">
@@ -75,6 +166,7 @@ export default function GuestbookPage() {
                     </SelectContent>
                 </Select>
             </div>
+
             {entries.length === 0 ? (
                 <p className="text-center text-gray-500">No messages yet.</p>
             ) : (

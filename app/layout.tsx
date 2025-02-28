@@ -6,6 +6,7 @@ import Container from '@/components/Container';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import localFont from 'next/font/local';
+import { SessionProvider } from 'next-auth/react';
 
 
 const geist = localFont({
@@ -92,18 +93,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
       <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <SessionProvider><ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />
             {children}
             <Footer />
           </Container>
         </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -123,7 +123,7 @@ export default function Blogs() {
                                     </div>
                                 )}
                                 <div className="p-6 flex-grow flex flex-col">
-                                    <h3 className="text-xl font-bold font-peachi group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 text-black dark:text-white mb-3">
+                                    <h3 className="text-xl font-bold font-peachi group-hover:text-[#38A662] dark:group-hover:text-blue-400 transition-colors duration-300 text-black dark:text-white mb-3">
                                         {post.title}
                                     </h3>
                                     <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm space-x-2 mb-4">
@@ -145,7 +145,7 @@ export default function Blogs() {
                                         {post.excerpt}
                                     </p>
                                     <div className="mt-auto">
-                                        <span className="inline-block text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                                        <span className="inline-block text-[#7AC594] dark:text-blue-400 font-medium group-hover:underline">
                                             Read more
                                         </span>
                                     </div>
