@@ -17,7 +17,7 @@ const EducationItem = ({ logo, institution, degree, dateRange, description }: Ed
             <h3 className="font-bold text-lg text-gray-900 dark:text-white">{institution}</h3>
             <p className="text-gray-800 dark:text-gray-300">{degree}</p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                <span className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-4 py-1 rounded-full">{dateRange}</span>
+                <span className="bg-[#7AC594] dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-4 py-1 rounded-full">{dateRange}</span>
             </p>
             <p className="text-gray-800 dark:text-gray-300 mt-2">{description}</p>
         </div>

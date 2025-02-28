@@ -69,7 +69,7 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
                 {isExpanded ? comment : truncatedComment}
                 {comment.length > MAX_LENGTH && (
                     <span
-                        className="text-blue-500 cursor-pointer ml-1"
+                        className="text-[#38A662] cursor-pointer ml-1"
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
                         {isExpanded ? " See less" : " See more"}
