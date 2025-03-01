@@ -111,7 +111,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full bg-white/75 dark:bg-gray-950/75 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+    <header className="w-full bg-white/75 dark:bg-[#09090B] backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex-shrink-0">
@@ -126,14 +126,14 @@ export default function Navbar() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
                     className={cn(
-                      "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300",
+                      "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:[#09090B] transition-colors duration-300",
                       isActive(pathname, "/blogs") ? "text-[#38A662]" : ""
                     )}
                   >
                     Blog
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-[#09090B]">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <a
@@ -167,7 +167,7 @@ export default function Navbar() {
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-gray-950">
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-[#09090B]">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <BlurFadeImage
@@ -193,14 +193,14 @@ export default function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300",
+                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-[#09090B] transition-colors duration-300",
                       isActive(pathname, "/dashboard") ? "text-[#38A662]" : ""
                     )}
                   >
                     Dashboard
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[300px] gap-2 p-4 bg-white dark:bg-gray-950 md:w-[300px] md:grid-cols-2 lg:w-[400px]">
+                    <ul className="grid w-[300px] gap-2 p-4 bg-white dark:bg-[#09090B] md:w-[300px] md:grid-cols-2 lg:w-[400px]">
                       {components.slice(4).map((component) => (
                         <ListItem
                           key={component.title}

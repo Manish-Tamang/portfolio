@@ -12,7 +12,7 @@ export default function NowPlaying() {
     return (
         <div className="relative">
             {showTooltip && (
-                <div className="absolute bottom-full left-0 mb-2 px-3 py-2 w-auto max-w-xs bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-xs rounded-md border z-50 whitespace-normal">
+                <div className="absolute bottom-full left-0 mb-2 px-3 py-2 w-auto max-w-xs bg-white dark:bg-[#09090B] text-gray-700 dark:text-gray-200 text-xs rounded-[4px] border z-50 whitespace-normal">
                     Song that I'm currently listening to on Spotify
                 </div>
             )}

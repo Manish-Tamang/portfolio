@@ -5,7 +5,7 @@ import Image from "next/image";
 const stories = [
     {
         id: 1,
-        image: "/img/classx.jpeg",
+        image: "/img/chindey.jpg",
     },
     {
         id: 2,
@@ -14,12 +14,12 @@ const stories = [
     {
         id: 3,
         image:
-            "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "/img/IMG-20241228-WA0053.jpg",
     },
     {
         id: 4,
         image:
-            "https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "/img/dev.png",
     },
     {
         id: 5,

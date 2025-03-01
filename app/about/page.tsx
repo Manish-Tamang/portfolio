@@ -64,9 +64,7 @@ const About = () => {
                                 </div>
                             </div>
                         </div>
-                       
                     </div>
-                   
                     <div className="md:col-span-2">
                     <ImageGrid />
                         <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>

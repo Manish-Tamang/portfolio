@@ -98,7 +98,7 @@ export default function RootLayout({
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
-      <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
+      <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-[#09090B] dark:text-white antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />
