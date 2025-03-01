@@ -27,6 +27,10 @@ export async function GET(req: Request) {
       const endAt = now;
       const startAt = now - 100000 * 60 * 1000;
       apiUrl = `${UMAMI_API_URL}/websites/${WEBSITE_ID}/sessions?startAt=${startAt}&endAt=${endAt}`;
+    } else if (type === "stats") {
+      const now = Date.now();
+      const threeMonthsAgo = now - 90 * 24 * 60 * 60 * 1000;
+      apiUrl = `${UMAMI_API_URL}/websites/${WEBSITE_ID}/stats?startAt=${threeMonthsAgo}&endAt=${now}`;
     } else {
       apiUrl = `${UMAMI_API_URL}/websites/${WEBSITE_ID}/active`;
     }

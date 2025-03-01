@@ -2,6 +2,7 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
+import ImageGrid from "@/components/ImageGrid";
 
 
 
@@ -63,8 +64,11 @@ const About = () => {
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
+                   
                     <div className="md:col-span-2">
+                    <ImageGrid />
                         <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>
                         <p className="text-gray-700 font-inter dark:text-gray-300 leading-relaxed mb-6">
                             My ambition is to grow into a proficient full-stack developer, mastering both
