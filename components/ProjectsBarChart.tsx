@@ -17,7 +17,7 @@ interface WakaTimeData {
 
 const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
     if (!data || !data.projects || data.projects.length === 0) {
-        return <div>No project data available</div>;
+        return <div className="text-gray-600 dark:text-gray-300">No project data available</div>;
     }
 
     const chartData = data.projects.slice(0, 6).map(project => {
@@ -41,9 +41,11 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
         if (active && payload && payload.length) {
             const data = payload[0].payload;
             return (
-                <div className="bg-black rounded-[4px] flex items-center gap-2 p-1 text-xs">
-                    <div className="w-2 h-2" style={{ backgroundColor: data.fill }} />
-                    <span>{data.hoursDisplay} hrs {data.minsDisplay} mins</span>
+                <div className="bg-black text-white rounded-[4px] p-2 text-xs">
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2" style={{ backgroundColor: data.fill }} />
+                        <span>{data.hoursDisplay} hrs {data.minsDisplay} mins</span>
+                    </div>
                 </div>
             );
         }
@@ -51,18 +53,18 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
     };
 
     return (
-        <Card className="w-full border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <Card className="w-full border dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md rounded-[4px] p-4">
             <CardHeader>
                 <div className="flex items-center gap-2">
-                    <FolderGit2 className="w-6 h-6 text-gray-500 dark:text-gray-400" />
-                    <CardTitle className="dark:text-white text-gray-800">Top 6 Projects Coded On Recently</CardTitle>
+                    <FolderGit2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                    <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">Top 6 Active Projects</CardTitle>
                 </div>
-                <CardDescription className="dark:text-gray-400 text-gray-600">Hours spent per project</CardDescription>
+                <CardDescription className="text-gray-500 dark:text-gray-400">Hours spent per project</CardDescription>
             </CardHeader>
             <CardContent>
-                <ResponsiveContainer width="100%" height={280}>
-                    <BarChart data={chartData} layout="vertical" margin={{ left: 16, right: 16, top: 8, bottom: 8 }} barSize={20}>
-                        <YAxis dataKey="project" type="category" tickLine={false} tickMargin={8} axisLine={false} width={110} style={{ fontSize: '12px' }} />
+                <ResponsiveContainer width="100%" height={200}>
+                    <BarChart data={chartData} layout="vertical" margin={{ left: 16, right: 16, top: 8, bottom: 8 }} barSize={14}>
+                        <YAxis dataKey="project" type="category" tickLine={false} tickMargin={6} axisLine={false} width={100} style={{ fontSize: '12px', fill: 'var(--foreground)' }} />
                         <XAxis dataKey="hours" type="number" hide />
                         <Tooltip cursor={false} content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }} />
                         <Bar dataKey="hours" layout="vertical" radius={[0, 4, 4, 0]} fillOpacity={0.8}>
@@ -73,13 +75,11 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
                     </BarChart>
                 </ResponsiveContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
+            <CardFooter className="flex flex-col items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <div className="flex gap-2 font-medium">
                     <TrendingUp className="h-4 w-4" /> Total coding time: {getTotalHours(data.projects)} hrs
                 </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing your top 6 most active projects
-                </div>
+                <div className="text-gray-500 dark:text-gray-400">Displaying top 6 projects</div>
             </CardFooter>
         </Card>
     );
