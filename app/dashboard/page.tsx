@@ -1,3 +1,4 @@
+// components/DashboardPage.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -15,6 +16,7 @@ import { useTheme } from 'next-themes';
 import { Clock, Activity, Trophy, FolderGit2 } from 'lucide-react';
 import WakaTimeCard from '@/components/WakaTimeCard';
 import WakaTimeBarChart from '@/components/ProjectsBarChart';
+import PieChartComponent from '@/components/PieChartComponent';
 
 const fetcher = async (url: string) => {
     const res = await fetch(url);
@@ -105,6 +107,13 @@ const formatDailyAverage = (dailyAverage: string): string => {
     return 'N/A';
 };
 
+const languageColors = [
+    "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5",
+    "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50",
+    "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800",
+    "#FF5722", "#795548", "#9E9E9E", "#607D8B"
+];
+
 export default function DashboardPage() {
     const { data: wakaTimeData, error, isLoading } = useSWR<WakaTimeData>('/api/wakatime', fetcher);
     const [wakaTimeSummary, setWakaTimeSummary] = useState<WakaTimeSummary | null>(null);
@@ -136,11 +145,15 @@ export default function DashboardPage() {
         const processData = () => {
             const { data } = wakaTimeData;
 
-            const languagesData = data.languages?.map(lang => ({
+            const filteredLanguages = data.languages.filter(
+                (lang) => lang.name !== 'Other'
+            );
+            const totalPercent = filteredLanguages.reduce((sum, lang) => sum + lang.percent, 0);
+            const recalculatedLanguages = filteredLanguages.map((lang) => ({
                 name: lang.name,
-                percent: lang.percent,
+                percent: (lang.percent / totalPercent) * 100,
                 total_seconds: lang.total_seconds,
-            })) || [];
+            }));
 
             const projectsData = data.projects.slice(0, 6).map(project => ({
                 name: project.name,
@@ -168,7 +181,7 @@ export default function DashboardPage() {
                     timeSpent: data.best_day.text,
                     formattedDate: formattedBestDayDate,
                 },
-                languages: languagesData,
+                languages: recalculatedLanguages,
                 dependencies: dependenciesData,
                 projects: projectsData,
             };
@@ -178,6 +191,17 @@ export default function DashboardPage() {
             setWakaTimeSummary(processData());
         }
     }, [wakaTimeData]);
+
+    const pieChartData = wakaTimeSummary?.languages.map((lang, index) => ({
+        name: lang.name,
+        value: lang.percent,
+        fill: languageColors[index % languageColors.length]
+    })) || [];
+
+    const chartConfig = {
+        height: { label: 'Height', value: 250 },
+        width: { label: 'Width', value: 250 },
+    };
 
     if (error) return (
         <motion.div
@@ -266,6 +290,23 @@ export default function DashboardPage() {
                     ) : (
                         <div className="dark:text-gray-400 text-gray-600">No project data available.</div>
                     )}
+                </motion.div>
+
+                {/* Languages Pie Chart */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="col-span-1 md:col-span-1 lg:col-span-1"
+                >
+                    <PieChartComponent
+                        data={pieChartData}
+                        isLoading={isLoading}
+                        title="Languages Used"
+                        description="Percentage of time spent on each language"
+                        chartConfig={chartConfig}
+                        languageColors={languageColors}
+                    />
                 </motion.div>
             </div>
         </motion.div>
