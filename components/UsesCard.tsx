@@ -37,7 +37,7 @@ const UsesCard: React.FC<UsesCardProps> = ({ item, displayStyle }) => {
                         <item.icon className="h-8 w-8 mb-2 text-gray-800 dark:text-gray-100" />
                     </div>
                 )}
-                <CardTitle className="text-md font-semibold text-center">{item.name}</CardTitle>
+                <CardTitle className="text-md font-semibold text-gray-800 dark:text-gray-100 text-center">{item.name}</CardTitle>
                 {displayStyle === 'imageWithTags' && (
                     <>
                         <CardDescription className="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">

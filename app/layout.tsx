@@ -6,8 +6,6 @@ import Container from '@/components/Container';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import localFont from 'next/font/local';
-import { SessionProvider } from 'next-auth/react';
-
 
 const geist = localFont({
   src: [

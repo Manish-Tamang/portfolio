@@ -6,7 +6,6 @@ import {
     SiMdx,
     SiVercel,
     SiGithub,
-    SiIntercom,
     SiReact,
     SiTypescript,
     SiSanity,

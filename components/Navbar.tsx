@@ -56,7 +56,7 @@ const components = [
   },
   {
     title: "Projects",
-    href: "/project",
+    href: "/projects",
     description: "Insights and analytics",
   },
 ]
