@@ -84,7 +84,7 @@ export default function Blogs() {
                     <div className="relative w-full">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                         <Input
-                            className="pl-10 pr-4 py-2 border-2 border-gray-200 focus:border-[#38A662] focus:ring-2 focus:ring-blue-200 transition-all rounded-[4px]"
+                            className="pl-10 pr-4 py-2 border-2 dark:bg-gray-800 bg-gray-100 border-gray-200  focus:ring-2 focus:ring-blue-200 transition-all rounded-[4px]"
                             placeholder="Search posts..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}

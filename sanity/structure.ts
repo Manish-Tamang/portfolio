@@ -1,7 +1,22 @@
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from 'sanity/structure';
+import { Rss, Code } from 'lucide-react'; // Import Lucide icons
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Content')
-    .items(S.documentTypeListItems())
+    .title('Content Management')
+    .items([
+      S.listItem()
+        .title('Posts')
+        .icon(Rss) 
+        .child(S.documentTypeList('post')),
+
+      S.listItem()
+        .title('Projects')
+        .icon(Code) 
+        .child(S.documentTypeList('project')),
+        
+      ...S.documentTypeListItems().filter(
+        (listItem) => !['post', 'project'].includes(listItem.getId() ?? '')
+      ), 
+
+    ]);

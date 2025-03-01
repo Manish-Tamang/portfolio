@@ -53,7 +53,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, children }) => {
         className="absolute top-2 right-2 p-2 rounded-[4px] bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
         aria-label={copied ? "Copied!" : "Copy code"}
       >
-        {copied ? <Check size={18} /> : <Copy size={18} />}
+        {copied ? <Check size={12} /> : <Copy size={12} />}
       </button>
     </div>
   );
