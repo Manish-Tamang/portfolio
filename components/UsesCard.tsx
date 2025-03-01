@@ -26,7 +26,7 @@ const UsesCard: React.FC<UsesCardProps> = ({ item, displayStyle }) => {
                             src={item.image}
                             alt={item.name}
                             className="rounded-[4px] object-contain transition-transform duration-300 hover:scale-110"
-                            delay={0.2}
+                            delay={0.1}
                             width={100}
                             height={100}
                         />

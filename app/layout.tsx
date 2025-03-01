@@ -99,14 +99,13 @@ export default function RootLayout({
         <meta name="description" content={metadata.description ?? ''} />
       </head>
       <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-gray-950 dark:text-white antialiased`}> {/* Added font-geist class here */}
-        <SessionProvider><ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Container>
             <Navbar />
             {children}
             <Footer />
           </Container>
         </ThemeProvider>
-        </SessionProvider>
       </body>
     </html>
   );

@@ -1,4 +1,3 @@
-// app/guestbook/page.tsx
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
@@ -119,42 +118,6 @@ export default function GuestbookPage() {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
-            <div className="mb-4">
-                {status === "loading" ? (
-                    <div>Loading...</div>
-                ) : session?.user ? (
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                            <Avatar>
-                                <AvatarImage src={session.user.image as string} alt={session.user.name as string} />
-                                <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <span>{session.user.name}</span>
-                        </div>
-                        <Button variant="outline" size="sm" onClick={() => signOut()}>
-                            Sign Out
-                        </Button>
-                    </div>
-                ) : (
-                    <Button onClick={() => signIn("google", { callbackUrl: '/guestbook' })}>Sign In with Google</Button>
-                )}
-            </div>
-
-            {session?.user && (
-                <form onSubmit={handleSubmit} className="mb-4">
-                    <Input
-                        type="text"
-                        placeholder="Leave a message..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        disabled={!session?.user}
-                    />
-                    <Button type="submit" disabled={!session?.user} className="mt-2">
-                        Post Message
-                    </Button>
-                </form>
-            )}
-
             <div className="flex justify-end mb-4">
                 <Select onValueChange={(value) => setSortOrder(value as "newest" | "oldest")} defaultValue="newest">
                     <SelectTrigger className="w-[120px]">
