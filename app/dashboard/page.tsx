@@ -17,7 +17,8 @@ import { Clock, Activity, Trophy, FolderGit2 } from 'lucide-react';
 import WakaTimeCard from '@/components/WakaTimeCard';
 import WakaTimeBarChart from '@/components/ProjectsBarChart';
 import PieChartComponent from '@/components/PieChartComponent';
-import AnalyticsDashboard from '@/components/dashboard/AnalyticsDashboard';
+import SessionStats from '@/components/dashboard/SessionStats';
+import GithubStats from '@/components/dashboard/GithubStats';
 
 const fetcher = async (url: string) => {
     const res = await fetch(url);
@@ -309,9 +310,10 @@ export default function DashboardPage() {
                         languageColors={languageColors}
                     />
                 </motion.div>
-             
+
             </div>
-            <AnalyticsDashboard className="mt-4 mb-4"/>
+            <SessionStats className="mt-4 mb-4" />
+            <GithubStats username="Manish-Tamang" />
         </motion.div>
     );
 }

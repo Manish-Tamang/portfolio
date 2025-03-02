@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import { format } from "date-fns";
 
 interface SessionData {
@@ -40,7 +39,7 @@ interface Props {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const AnalyticsDashboard: React.FC<Props> = ({ className }) => {
+const SessionStats: React.FC<Props> = ({ className }) => {
     const { data, error, isLoading } = useSWR<APIResponse>("/api/analytics?type=sessions", fetcher);
 
     if (error) {
@@ -64,28 +63,23 @@ const AnalyticsDashboard: React.FC<Props> = ({ className }) => {
     }
 
     const countryData = data?.data.reduce((acc: { [key: string]: SessionData }, session) => {
-        if (!acc[session.country]) {
-            acc[session.country] = session;
+        if (Object.keys(acc).length < 4) {
+            if (!acc[session.country]) {
+                acc[session.country] = session;
+            }
         }
         return acc;
     }, {});
 
-    const chartData = data?.data.map((session) => ({
-        name: `${session.city}, ${session.country}`,
-        Visits: session.visits,
-        Views: session.views,
-    })) || [];
-
     const formatISODate = (dateString: string): string => {
         try {
             const date = new Date(dateString);
-            return format(date, 'MMM dd, yyyy hh:mm:ss a'); // Customize the format as needed
+            return format(date, 'MMM dd, yyyy hh:mm:ss a');
         } catch (error) {
             console.error("Error formatting date:", error);
             return "Invalid Date";
         }
     };
-
 
     return (
         <Card className={cn("w-full border dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md rounded-[4px] p-4", className)}>
@@ -94,7 +88,7 @@ const AnalyticsDashboard: React.FC<Props> = ({ className }) => {
                 <CardDescription className="text-gray-500 dark:text-gray-400">Session data overview</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
                     {countryData && Object.values(countryData).map((session) => (
                         <Card key={session.country} className="border dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md rounded-[4px] p-4">
                             <div className="flex items-center space-x-2">
@@ -121,4 +115,4 @@ const AnalyticsDashboard: React.FC<Props> = ({ className }) => {
     );
 };
 
-export default AnalyticsDashboard;
+export default SessionStats;
