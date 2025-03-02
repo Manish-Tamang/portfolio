@@ -1,0 +1,61 @@
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 4px;
+}
+
+.cell {
+  position: relative;
+  background-color: #ededed;
+  border-radius: 2px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.contributions {
+  display: none;
+}
+
+.tooltip {
+  width: max-content;
+  max-width: 300px;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  top: -5px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  text-align: center;
+  z-index: 99;
+  white-space: nowrap;
+}
+
+.cell:hover .tooltip {
+  display: block;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.date {
+  color: #7c7c7c;
+  font-size: 12px;
+  margin: 4px 0;
+}
