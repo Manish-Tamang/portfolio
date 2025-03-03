@@ -1,4 +1,3 @@
-
 "use client";
 import { FC, useState } from 'react';
 import { format, parseISO, isAfter } from 'date-fns';
@@ -41,8 +40,6 @@ export const ContributionGrid: FC<ContributionGridProps> = ({ weeks, colors }) =
                     return colors[4];
             }
         } else {
-            console.warn("Colors array is not properly populated. Using default colors.");
-
             switch (true) {
                 case count === 0:
                     return '#EDEDED';
@@ -64,14 +61,13 @@ export const ContributionGrid: FC<ContributionGridProps> = ({ weeks, colors }) =
     return (
         <div
             className={styles.grid}
-            style={{ gridTemplateColumns: `repeat(${numWeeks}, 15px)` }}
+            style={{ gridTemplateColumns: `repeat(${numWeeks}, 10px)` }}
         >
             {Array.from({ length: maxDaysInWeek }).map((_, dayIndex) => (
                 Array.from({ length: numWeeks }).map((__, weekIndex) => {
                     const week = weeks[weekIndex];
                     const day = week.contributionDays[dayIndex];
                     const cellId = `${weekIndex}-${dayIndex}`;
-
 
                     if (!day || isAfter(parseISO(day.date), today)) {
                         return (
@@ -99,7 +95,7 @@ export const ContributionGrid: FC<ContributionGridProps> = ({ weeks, colors }) =
                                 <div className={styles.tooltip}>
                                     <div>{day?.contributionCount || 0} contributions</div>
                                     <div className={styles.date}>
-                                        {day ? format(parseISO(day.date), 'EEEE, MMMM d, yyyy', { locale: enUS }) : 'No Date'}
+                                        {day ? format(parseISO(day.date), 'EEE, MMM d, yyyy', { locale: enUS }) : 'No Date'} { }
                                     </div>
                                 </div>
                             )}

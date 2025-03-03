@@ -1,20 +1,27 @@
 .title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #586069;
 }
 
 .grid {
   display: grid;
-  grid-gap: 4px;
+  grid-gap: 2px;
 }
 
 .cell {
   position: relative;
-  background-color: #ededed;
+  background-color: #ebedf0;
   border-radius: 2px;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cell:hover {
+  background-color: #0366d6; /* Highlight on hover (GitHub style) */
 }
 
 .contributions {
@@ -23,19 +30,20 @@
 
 .tooltip {
   width: max-content;
-  max-width: 300px;
+  max-width: 200px;
   cursor: pointer;
   display: none;
   position: absolute;
-  background-color: black;
-  color: white;
-  padding: 5px;
+  background-color: #333;
+  color: #fff;
+  padding: 4px;
   border-radius: 3px;
-  top: -5px;
+  top: -30px;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translateX(-50%);
   text-align: center;
   z-index: 99;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -46,16 +54,60 @@
 .tooltip::after {
   content: "";
   position: absolute;
-  top: 100%;
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
+  border-color: #333 transparent transparent transparent;
 }
 
 .date {
-  color: #7c7c7c;
+  color: #586069;
   font-size: 12px;
-  margin: 4px 0;
+  margin: 2px 0;
+}
+
+.months {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.month {
+  color: #586069;
+  font-size: 12px;
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4px;
+}
+
+.weekday {
+  color: #586069;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.legend {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #586069;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
 }

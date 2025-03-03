@@ -1,20 +1,17 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ContributionGrid } from './ContributionGrid';
 import { Info } from './Info';
 import { Months } from './Months';
 import { Weekdays } from './Weekdays';
 import styles from '@/styles/ContributionGraph.module.css';
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button";
 
 interface ContributionData {
     data?: {
         followers?: number;
         stars?: number;
         contributions?: {
-            colors: string[];
+            colors?: string[];
             totalContributions: number;
             months: {
                 firstDay: string;
@@ -60,55 +57,62 @@ const ContributionGraph = () => {
     }, []);
 
     if (loading) {
-        return <Card>
-            <CardHeader>
-                <CardTitle>Contribution Graph</CardTitle>
-            </CardHeader>
-            <CardContent> Loading graph...</CardContent>
-        </Card>
+        return (
+            <div className="w-full max-w-md mx-auto p-4">
+                <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
+                <div className="text-center mt-2">Loading graph...</div>
+            </div>
+        );
     }
 
     if (contributionData.error) {
-        return <Card>
-            <CardHeader>
-                <CardTitle>Contribution Graph</CardTitle>
-            </CardHeader>
-            <CardContent> Error: {contributionData.error}</CardContent>
-        </Card>
+        return (
+            <div className="w-full max-w-md mx-auto p-4">
+                <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
+                <div className="text-center mt-2 text-red-500">Error: {contributionData.error}</div>
+            </div>
+        );
     }
 
     const { contributions } = contributionData.data || {};
 
     if (!contributions) {
-        return <Card>
-            <CardHeader>
-                <CardTitle>Contribution Graph</CardTitle>
-            </CardHeader>
-            <CardContent>No contribution data available.</CardContent>
-        </Card>
+        return (
+            <div className="w-full max-w-md mx-auto p-4">
+                <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
+                <div className="text-center mt-2">No contribution data available.</div>
+            </div>
+        );
     }
 
-    return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Contribution Graph</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="w-full flex flex-col items-center">
-                    <div className="flex justify-center items-start overflow-visible p-5">
-                        <div style={{ marginTop: "15px" }}>
-                            <Weekdays />
-                        </div>
 
-                        <div style={{ overflow: "visible" }}>
-                            <Months months={contributions.months} />
-                            <ContributionGrid weeks={contributions.weeks} colors={contributions.colors} />
-                        </div>
+    const defaultColors = [
+        '#EDEDED',
+        '#ACD5F2',
+        '#7FA8C9',
+        '#527BA0',
+        '#254E77'
+    ];
+
+    return (
+        <div className="w-full max-w-md mx-auto p-4">
+            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
+            <div className="w-full flex flex-col items-center mt-2">
+                <div className="flex justify-center items-start overflow-visible p-1">
+                    <div className="mt-1">
+                        <Weekdays />
                     </div>
-                    <Info colors={contributions.colors} />
+                    <div className="overflow-visible">
+                        <Months months={contributions.months} />
+                        <ContributionGrid
+                            weeks={contributions.weeks}
+                            colors={contributions.colors || defaultColors}
+                        />
+                    </div>
                 </div>
-            </CardContent>
-        </Card>
+                <Info colors={defaultColors} />
+            </div>
+        </div>
     );
 };
 

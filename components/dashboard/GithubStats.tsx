@@ -1,4 +1,3 @@
-// components/dashboard/GithubStats.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -12,6 +11,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ContributionGraph from "@/components/contribution-chart/ContributionGraph";
+import { Users, Star, User } from "lucide-react"; // Import Lucide React icons
 
 interface GithubStatsProps {
     username: string;
@@ -19,6 +19,7 @@ interface GithubStatsProps {
 
 const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
     const [followers, setFollowers] = useState<number | null>(null);
+    const [totalStars, setTotalStars] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
@@ -26,16 +27,27 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
         const fetchGithubStats = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`https://api.github.com/users/${username}`);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch GitHub stats for ${username}`);
+                // Fetch user data (followers and avatar)
+                const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                if (!userResponse.ok) {
+                    throw new Error(`Failed to fetch GitHub user data for ${username}`);
                 }
-                const data = await response.json();
-                setFollowers(data.followers);
-                setAvatarUrl(data.avatar_url);
+                const userData = await userResponse.json();
+                setFollowers(userData.followers);
+                setAvatarUrl(userData.avatar_url);
+
+                // Fetch repository data to calculate total stars
+                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
+                if (!reposResponse.ok) {
+                    throw new Error(`Failed to fetch GitHub repositories for ${username}`);
+                }
+                const reposData = await reposResponse.json();
+                const totalStarsCount = reposData.reduce((sum: number, repo: any) => sum + repo.stargazers_count, 0);
+                setTotalStars(totalStarsCount);
             } catch (error: any) {
                 console.error("Error fetching GitHub stats:", error.message);
                 setFollowers(null);
+                setTotalStars(null);
                 setAvatarUrl(null);
             } finally {
                 setIsLoading(false);
@@ -46,46 +58,56 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
     }, [username]);
 
     return (
-        <Card className="border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-4">
+        <Card className="border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-2">
             <CardHeader>
                 <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">
                     GitHub Stats
                 </CardTitle>
                 <CardDescription className="text-gray-500 dark:text-gray-400">
-                    Followers and contributions of {username}
+                    Followers, stars, and contributions of {username}
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                    <div>
+                <div className="flex flex-row items-center justify-between gap-4">
+                    <div className="flex flex-row items-center gap-2">
                         {isLoading ? (
-                            <Skeleton className="h-6 w-20" />
-                        ) : followers !== null ? (
-                            <div className="text-2xl font-semibold dark:text-white text-gray-800">
-                                {followers}
-                            </div>
+                            <>
+                                <Skeleton className="h-6 w-20 mb-2" />
+                                <Skeleton className="h-6 w-20" />
+                            </>
+                        ) : followers !== null && totalStars !== null ? (
+                            <>
+                                <div className="flex items-center gap-2">
+                                    <Users className="text-gray-800 dark:text-white h-5 w-5" />
+                                    <span className="text-2xl font-semibold dark:text-white text-gray-800">
+                                        {followers} Followers
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Star className="text-gray-800 dark:text-white h-5 w-5" />
+                                    <span className="text-xl font-semibold dark:text-white text-gray-800">
+                                        {totalStars} Stars
+                                    </span>
+                                </div>
+                            </>
                         ) : (
-                            <div className="text-gray-600 dark:text-gray-300">
-                                Failed to load followers.
+                            <div className="text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                                <User className="h-5 w-5" />
+                                <span>Failed to load stats.</span>
                             </div>
                         )}
                     </div>
-                    <Avatar>
+                    <Avatar className="w-12 h-12">
                         {avatarUrl ? (
                             <AvatarImage src={avatarUrl} alt={username} />
                         ) : (
-                            <AvatarFallback>
-                                {username.substring(0, 2).toUpperCase()}
+                            <AvatarFallback className="flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+                                <User className="h-6 w-6 text-gray-800 dark:text-white" />
                             </AvatarFallback>
                         )}
                     </Avatar>
                 </div>
-
-                {/* GitHub Contributions Chart */}
                 <div className="mt-4">
-                    <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Contribution Chart
-                    </h3>
                     <ContributionGraph />
                 </div>
             </CardContent>
