@@ -1,3 +1,4 @@
+// components/dashboard/GithubStats.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import ContributionGraph from "@/components/contribution-chart/ContributionGraph";
 
 interface GithubStatsProps {
     username: string;
@@ -78,16 +80,13 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
                         )}
                     </Avatar>
                 </div>
+
                 {/* GitHub Contributions Chart */}
                 <div className="mt-4">
                     <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Contribution Chart
                     </h3>
-                    <img
-                        src={`https://ghchart.rshah.org/${username}`}
-                        alt={`${username}'s GitHub Contribution Chart`}
-                        className="w-full rounded-md border dark:border-gray-600"
-                    />
+                    <ContributionGraph />
                 </div>
             </CardContent>
         </Card>

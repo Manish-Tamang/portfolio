@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import styles from '@/styles/Info.module.css';
 
-export const Info: FC = () => {
-    const colors = ['#EDEDED', '#ACD5F2', '#7FA8C9', '#527BA0', '#254E77'];
+type InfoProps = {
+    colors: string[];
+};
+
+export const Info: FC<InfoProps> = ({ colors }) => {
     const tooltipTexts = [
         'No contributions',
         '1-9 contributions',
