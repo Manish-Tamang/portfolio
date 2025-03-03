@@ -1,55 +1,112 @@
+
 "use client";
-import { FC, useState, useMemo } from 'react';
-import { format, parseISO } from 'date-fns';
+import { FC, useState } from 'react';
+import { format, parseISO, isAfter } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import styles from '@/styles/ContributionGraph.module.css';
 
-type ContributionGridProps = {
-  weeks: {
-    contributionDays: {
-      color: string;
-      contributionCount: number;
-      date: string;
-    }[];
+interface ContributionDay {
+    color: string;
+    contributionCount: number;
+    date: string;
+}
+
+interface ContributionWeek {
+    contributionDays: ContributionDay[];
     firstDay: string;
-  }[];
-};
+}
 
-export const ContributionGrid: FC<ContributionGridProps> = ({ weeks }) => {
-  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+interface ContributionGridProps {
+    weeks: ContributionWeek[];
+    colors: string[];
+}
 
-  const reversedWeeks = useMemo(
-    () =>
-      [...weeks].reverse().map(week => ({
-        ...week,
-        contributionDays: [...week.contributionDays] // Revert days
-      })),
-    [weeks]
-  );
+export const ContributionGrid: FC<ContributionGridProps> = ({ weeks, colors }) => {
+    const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+    const [hoveredCell, setHoveredCell] = useState<string | null>(null);
+    const today = new Date();
 
-  return (
-    <div className={styles.grid} style={{ gridTemplateColumns: `repeat(53, 15px)` }}>
-      {reversedWeeks.map((week, weekIndex) => (
-        week.contributionDays.map((day, dayIndex) => (
-          <div
-            key={`${weekIndex}-${dayIndex}`}
-            className={styles.cell}
-            style={{ backgroundColor: day.color }}
-            onMouseEnter={() => setActiveTooltip(day.date)}
-            onMouseLeave={() => setActiveTooltip(null)}
-          >
-            <div className={styles.contributions}>{day.contributionCount}</div>
-            {activeTooltip === day.date && (
-              <div className={styles.tooltip}>
-                <div>{day.contributionCount} contributions</div>
-                <div className={styles.date}>
-                  {format(parseISO(day.date), 'EEEE, MMMM d, yyyy', { locale: enUS })}
-                </div>
-              </div>
-            )}
-          </div>
-        ))
-      ))}
-    </div>
-  );
+    const getCellColor = (count: number) => {
+        if (colors && colors.length >= 5) {
+            switch (true) {
+                case count === 0:
+                    return colors[0];
+                case count < 10:
+                    return colors[1];
+                case count < 20:
+                    return colors[2];
+                case count < 30:
+                    return colors[3];
+                default:
+                    return colors[4];
+            }
+        } else {
+            console.warn("Colors array is not properly populated. Using default colors.");
+
+            switch (true) {
+                case count === 0:
+                    return '#EDEDED';
+                case count < 10:
+                    return '#ACD5F2';
+                case count < 20:
+                    return '#7FA8C9';
+                case count < 30:
+                    return '#527BA0';
+                default:
+                    return '#254E77';
+            }
+        }
+    };
+
+    const maxDaysInWeek = Math.max(...weeks.map(week => week.contributionDays.length));
+    const numWeeks = weeks.length;
+
+    return (
+        <div
+            className={styles.grid}
+            style={{ gridTemplateColumns: `repeat(${numWeeks}, 15px)` }}
+        >
+            {Array.from({ length: maxDaysInWeek }).map((_, dayIndex) => (
+                Array.from({ length: numWeeks }).map((__, weekIndex) => {
+                    const week = weeks[weekIndex];
+                    const day = week.contributionDays[dayIndex];
+                    const cellId = `${weekIndex}-${dayIndex}`;
+
+
+                    if (!day || isAfter(parseISO(day.date), today)) {
+                        return (
+                            <div
+                                key={cellId}
+                                className={styles.cell}
+                                style={{ backgroundColor: "#EDEDED" }}
+                            >
+                                <div className={styles.contributions}></div>
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <div
+                            key={cellId}
+                            className={styles.cell}
+                            style={{ backgroundColor: getCellColor(day.contributionCount) }}
+                            onMouseEnter={() => setHoveredCell(cellId)}
+                            onMouseLeave={() => setHoveredCell(null)}
+                            onClick={() => setActiveTooltip(activeTooltip === cellId ? null : cellId)}
+                        >
+                            <div className={styles.contributions}>{day?.contributionCount || 0}</div>
+                            {(activeTooltip === cellId || hoveredCell === cellId) && (
+                                <div className={styles.tooltip}>
+                                    <div>{day?.contributionCount || 0} contributions</div>
+                                    <div className={styles.date}>
+                                        {day ? format(parseISO(day.date), 'EEEE, MMMM d, yyyy', { locale: enUS }) : 'No Date'}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })
+            ))}
+        </div>
+    );
 };

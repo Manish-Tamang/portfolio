@@ -1,9 +1,10 @@
+
 import { FC } from 'react';
 import styles from '@/styles/Info.module.css';
 
-type InfoProps = {
+interface InfoProps {
     colors: string[];
-};
+}
 
 export const Info: FC<InfoProps> = ({ colors }) => {
     const tooltipTexts = [

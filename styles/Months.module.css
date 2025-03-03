@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: row; /* Changed to column */
   justify-content: space-between;
   margin-bottom: 15px;
 }
