@@ -64,7 +64,18 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
             <CardContent>
                 <ResponsiveContainer width="100%" height={200}>
                     <BarChart data={chartData} layout="vertical" margin={{ left: 16, right: 16, top: 8, bottom: 8 }} barSize={14}>
-                        <YAxis dataKey="project" type="category" tickLine={false} tickMargin={6} axisLine={false} width={100} style={{ fontSize: '12px', fill: 'var(--foreground)' }} />
+                        <YAxis
+                            dataKey="project"
+                            type="category"
+                            tickLine={false}
+                            tickMargin={6}
+                            axisLine={false}
+                            width={100}
+                            style={{
+                                fontSize: "10px",
+                                fill: document.documentElement.classList.contains("dark") ? "#F9FAFB" : "#111827",
+                            }}
+                        />
                         <XAxis dataKey="hours" type="number" hide />
                         <Tooltip cursor={false} content={<CustomTooltip />} wrapperStyle={{ zIndex: 1000 }} />
                         <Bar dataKey="hours" layout="vertical" radius={[0, 4, 4, 0]} fillOpacity={0.8}>

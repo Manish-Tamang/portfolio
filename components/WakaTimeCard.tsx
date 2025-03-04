@@ -15,7 +15,7 @@ interface WakaTimeCardProps {
     title: string;
     description: string;
     isLoading: boolean;
-    value?: string | JSX.Element; 
+    value?: string | JSX.Element;
     icon: React.ReactNode;
     motionDelay?: number;
 }
@@ -26,7 +26,7 @@ const WakaTimeCard: React.FC<WakaTimeCardProps> = ({
     isLoading,
     value,
     icon,
-    motionDelay = 0, // Default delay
+    motionDelay = 0,
 }) => {
     return (
         <motion.div

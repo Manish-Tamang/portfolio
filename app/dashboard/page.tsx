@@ -1,4 +1,3 @@
-// components/DashboardPage.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -15,7 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useTheme } from 'next-themes';
 import { Clock, Activity, Trophy, FolderGit2 } from 'lucide-react';
 import WakaTimeCard from '@/components/WakaTimeCard';
-import WakaTimeBarChart from '@/components/ProjectsBarChart';
+import ProjectsBarChart from '@/components/ProjectsBarChart';
 import PieChartComponent from '@/components/PieChartComponent';
 import SessionStats from '@/components/dashboard/SessionStats';
 import GithubStats from '@/components/dashboard/GithubStats';
@@ -66,8 +65,8 @@ interface WakaTimeData {
             percent: number;
             text: string;
         }[];
-        is_coding_activity_visible: boolean
-        total_seconds_including_other_language: number
+        is_coding_activity_visible: boolean;
+        total_seconds_including_other_language: number;
     };
 }
 
@@ -83,7 +82,7 @@ interface WakaTimeSummary {
     languages: {
         name: string;
         percent: number;
-        total_seconds: number
+        total_seconds: number;
     }[];
     dependencies?: {
         name: string;
@@ -169,10 +168,10 @@ export default function DashboardPage() {
 
             const bestDayDate = new Date(wakaTimeData.data.best_day.date);
             const formattedBestDayDate = bestDayDate.toLocaleDateString('en-US', {
-                month: 'long',
+                month: 'short',
                 day: 'numeric',
                 year: 'numeric',
-            });
+            }).replace(/,/g, '');
 
             return {
                 total: data.human_readable_total,
@@ -230,7 +229,6 @@ export default function DashboardPage() {
             </motion.h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Total Coding Time */}
                 <WakaTimeCard
                     title="Total Time Coded"
                     description="All time coding duration"
@@ -240,7 +238,6 @@ export default function DashboardPage() {
                     motionDelay={0.1}
                 />
 
-                {/* Daily Average */}
                 <WakaTimeCard
                     title="Daily Average"
                     description="Average coding time per day"
@@ -250,7 +247,6 @@ export default function DashboardPage() {
                     motionDelay={0.2}
                 />
 
-                {/* Best Day */}
                 <WakaTimeCard
                     title="Best Day"
                     description="Most productive day"
@@ -267,7 +263,6 @@ export default function DashboardPage() {
                     motionDelay={0.3}
                 />
 
-                {/* Projects Coded On Recently */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -288,18 +283,17 @@ export default function DashboardPage() {
                             </CardContent>
                         </Card>
                     ) : wakaTimeSummary ? (
-                        <WakaTimeBarChart data={wakaTimeSummary} />
+                        <ProjectsBarChart data={wakaTimeSummary} />
                     ) : (
                         <div className="dark:text-gray-400 text-gray-600">No project data available.</div>
                     )}
                 </motion.div>
 
-                {/* Languages Pie Chart */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="col-span-1 md:col-span-1 lg:col-span-1"
+                    className="col-span-full"
                 >
                     <PieChartComponent
                         data={pieChartData}
@@ -310,7 +304,6 @@ export default function DashboardPage() {
                         languageColors={languageColors}
                     />
                 </motion.div>
-
             </div>
             <SessionStats className="mt-4 mb-4" />
             <GithubStats username="Manish-Tamang" />
