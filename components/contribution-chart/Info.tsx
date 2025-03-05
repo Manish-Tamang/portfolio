@@ -1,4 +1,3 @@
-
 import { FC } from 'react';
 import styles from '@/styles/Info.module.css';
 
@@ -9,15 +8,15 @@ interface InfoProps {
 export const Info: FC<InfoProps> = ({ colors }) => {
     const tooltipTexts = [
         'No contributions',
-        '1-9 contributions',
-        '10-19 contributions',
-        '20-29 contributions',
-        '30+ contributions',
+        'Low contributions',
+        'Moderate contributions',
+        'High contributions',
+        'Highest contributions',
     ];
 
     return (
         <div className={styles.container}>
-            <div className={styles.less}>Less</div>
+            <div className="text-gray-900 dark:text-gray-100 text-sm">Less</div>
             <div className={styles.colors}>
                 {colors.map((color, index) => (
                     <div
@@ -29,7 +28,7 @@ export const Info: FC<InfoProps> = ({ colors }) => {
                     </div>
                 ))}
             </div>
-            <div className={styles.more}>More</div>
+            <div className="text-gray-900 dark:text-gray-100 text-sm">More</div>
         </div>
     );
 };

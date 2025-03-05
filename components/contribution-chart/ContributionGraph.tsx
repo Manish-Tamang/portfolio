@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { ContributionGrid } from './ContributionGrid';
 import { Info } from './Info';
-import { Months } from './Months';
-import { Weekdays } from './Weekdays';
-import styles from '@/styles/ContributionGraph.module.css';
 
 interface ContributionData {
     data?: {
@@ -85,13 +82,12 @@ const ContributionGraph = () => {
         );
     }
 
-
-    const defaultColors = [
-        '#EDEDED',
-        '#ACD5F2',
-        '#7FA8C9',
-        '#527BA0',
-        '#254E77'
+    const githubColors = [
+        '#EDEDED',  // No contributions
+        '#9BE9A8',  // Low
+        '#40C463',  // Moderate
+        '#30A14E',  // High
+        '#216E39'   // Very high
     ];
 
     return (
@@ -99,18 +95,16 @@ const ContributionGraph = () => {
             <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
             <div className="w-full flex flex-col items-center mt-2">
                 <div className="flex justify-center items-start overflow-visible p-1">
-                    <div className="mt-1">
-                        <Weekdays />
-                    </div>
+
                     <div className="overflow-visible">
-                        <Months months={contributions.months} />
+
                         <ContributionGrid
                             weeks={contributions.weeks}
-                            colors={contributions.colors || defaultColors}
+                            colors={contributions.colors || githubColors}
                         />
                     </div>
                 </div>
-                <Info colors={defaultColors} />
+                <Info colors={githubColors} />
             </div>
         </div>
     );
