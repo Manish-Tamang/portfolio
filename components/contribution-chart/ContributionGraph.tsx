@@ -102,7 +102,7 @@ const ContributionGraph = () => {
 
     return (
         <div className="w-full max-w-md mx-auto p-4">
-            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
+            <h2 className="text-xl  text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
             <div className="w-full flex flex-col items-center mt-2">
                 <div className="flex justify-center items-start overflow-visible p-1">
                     <div className="overflow-visible">
