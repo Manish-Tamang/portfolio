@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ContributionGrid } from './ContributionGrid';
 import { Info } from './Info';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ContributionData {
     data?: {
@@ -57,7 +58,16 @@ const ContributionGraph = () => {
         return (
             <div className="w-full max-w-md mx-auto p-4">
                 <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
-                <div className="text-center mt-2">Loading graph...</div>
+                <div className="mt-2 flex flex-col items-center">
+                    <Skeleton className="w-[640px] h-[82px] rounded-md" />
+                    <div className="flex gap-2 mt-4">
+                        <Skeleton className="w-6 h-6 rounded-sm" />
+                        <Skeleton className="w-6 h-6 rounded-sm" />
+                        <Skeleton className="w-6 h-6 rounded-sm" />
+                        <Skeleton className="w-6 h-6 rounded-sm" />
+                        <Skeleton className="w-6 h-6 rounded-sm" />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -83,21 +93,19 @@ const ContributionGraph = () => {
     }
 
     const githubColors = [
-        '#EDEDED',  // No contributions
-        '#9BE9A8',  // Low
-        '#40C463',  // Moderate
-        '#30A14E',  // High
-        '#216E39'   // Very high
+        '#EDEDED',
+        '#9BE9A8',
+        '#40C463',
+        '#30A14E',
+        '#216E39'
     ];
 
     return (
         <div className="w-full max-w-md mx-auto p-4">
-            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
+            <h2 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
             <div className="w-full flex flex-col items-center mt-2">
                 <div className="flex justify-center items-start overflow-visible p-1">
-
                     <div className="overflow-visible">
-
                         <ContributionGrid
                             weeks={contributions.weeks}
                             colors={contributions.colors || githubColors}
