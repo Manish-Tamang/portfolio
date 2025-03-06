@@ -111,7 +111,7 @@ export default function Blogs() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
                         <Link key={post.slug.current} href={`/blogs/${post.slug.current}`} className="group">
-                            <article className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-gray-800 h-full flex flex-col">
+                            <article className="rounded-xl border overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-gray-800 h-full flex flex-col">
                                 {post.coverImage && (
                                     <div className="relative w-full pt-[56.25%] overflow-hidden">
                                         <BlurFadeImage
