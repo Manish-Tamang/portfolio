@@ -1,11 +1,28 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { Trash2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { db } from "@/firebase/config";
+import { doc, deleteDoc } from "firebase/firestore";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface GuestbookCardProps {
     name: string;
     avatar?: string;
     timestamp: string;
     comment: string;
+    id: string;
 }
 
 const MAX_LENGTH = 90;
@@ -15,13 +32,54 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
     avatar,
     timestamp,
     comment,
+    id,
 }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const truncatedComment =
         comment.length > MAX_LENGTH ? comment.slice(0, MAX_LENGTH) + "..." : comment;
+    const { data: session } = useSession();
+    const { toast } = useToast();
+
+    const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+
+    const deleteGuestbookEntry = async () => {
+        try {
+            const guestbookDoc = doc(db, "guestbook", id);
+            await deleteDoc(guestbookDoc);
+            toast({ title: "Guestbook entry deleted successfully!" }); // Use hook here
+            console.log("Guestbook entry deleted successfully!");
+        } catch (error: any) {
+            console.error("Error deleting guestbook entry:", error);
+            toast({ title: "Error deleting guestbook entry:", description: error.message, variant: "destructive" }); // Use hook here
+        }
+    };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900 relative">
+            {isAdmin && (
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                        <button className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none">
+                            <Trash2 className="h-4 w-4" />
+                        </button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete this
+                                guestbook entry.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={deleteGuestbookEntry}>
+                                Delete
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+            )}
             <div className="flex items-center gap-3">
                 {avatar ? (
                     <Image
