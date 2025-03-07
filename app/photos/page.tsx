@@ -1,10 +1,12 @@
+"use client"
 import SignIn from "@/components/Sign-in";
 import { LayoutGrid } from "@/components/ui/layout-grid";
+import { signIn } from "next-auth/react"
 
 export default function LayoutGridDemo() {
     return (
         <div className="h-screen py-20 w-full">
-            <SignIn />
+           <button onClick={() => signIn("google")}>Button</button>
             <LayoutGrid cards={cards} />
         </div>
     );
