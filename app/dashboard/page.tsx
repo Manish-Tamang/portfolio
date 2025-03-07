@@ -19,6 +19,7 @@ import PieChartComponent from '@/components/PieChartComponent';
 import SessionStats from '@/components/dashboard/SessionStats';
 import GithubStats from '@/components/dashboard/GithubStats';
 
+
 const fetcher = async (url: string) => {
     const res = await fetch(url);
     if (!res.ok) {
@@ -223,11 +224,14 @@ export default function DashboardPage() {
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl font-bold font-peachi mb-8 dark:text-white text-gray-800"
+                className="text-4xl font-bold font-peachi mb-1 dark:text-white text-gray-800"
             >
                 Dashboard
             </motion.h1>
-
+            <p className="text-gray-500 dark:text-gray-400 mb-8">
+                A comprehensive overview of my coding activity, powered by WakaTime and GitHub.
+                Followed by Umami Analytics for session tracking.
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <WakaTimeCard
                     title="Total Time Coded"
