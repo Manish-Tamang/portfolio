@@ -22,5 +22,8 @@ export const GuestbookSkeletons = () => (
         <GuestbookCardSkeleton />
         <GuestbookCardSkeleton />
         <GuestbookCardSkeleton />
+        <GuestbookCardSkeleton />
+        <GuestbookCardSkeleton />
+        <GuestbookCardSkeleton />
     </>
 );
