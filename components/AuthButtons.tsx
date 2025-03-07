@@ -10,7 +10,7 @@ const AuthButtons: React.FC<AuthButtonsProps> = ({ session }) => {
     return (
         <>
             {session?.user && (
-                <Button variant="ghost" onClick={() => signOut()}>
+                <Button className="hover:text-red-600"  onClick={() => signOut()}>
                     Logout
                 </Button>
             )}

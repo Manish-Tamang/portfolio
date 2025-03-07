@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import localFont from 'next/font/local';
 import { SessionProvider } from 'next-auth/react';
+import { Toaster } from 'react-hot-toast';
 
 const geist = localFont({
   src: [
@@ -101,6 +102,10 @@ export default function RootLayout({
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Container>
+              <Toaster
+                position="top-center"
+                reverseOrder={false}
+              />
               <Navbar />
               {children}
               <Footer />
