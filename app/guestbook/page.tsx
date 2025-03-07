@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { collection, getDocs, Timestamp, addDoc } from "firebase/firestore";
+import { collection, getDocs, Timestamp, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "@/firebase/config";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,8 @@ import { GuestbookSkeletons } from "@/components/GuestbookSkeletons";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
+import { Trash2 } from "lucide-react";
+import { useTheme } from "next-themes";
 
 
 interface GuestbookEntryData {
@@ -33,7 +35,81 @@ const guestbookCache = {
     expiry: 60 * 1000,
 };
 
+interface GuestbookCardProps {
+    name: string;
+    avatar?: string;
+    timestamp: string;
+    comment: string;
+    id: string;
+}
 
+const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
+    name,
+    avatar,
+    timestamp,
+    comment,
+    id,
+}) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const truncatedComment =
+        comment.length > 90 ? comment.slice(0, 90) + "..." : comment;
+    const { data: session } = useSession();
+
+    const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+
+    const deleteGuestbookEntry = async () => {
+        try {
+            const guestbookDoc = doc(db, "guestbook", id);
+            await deleteDoc(guestbookDoc);
+            toast.success("Guestbook entry deleted successfully!");
+        } catch (error: any) {
+            console.error("Error deleting guestbook entry:", error);
+            toast.error("Error deleting guestbook entry:" + error.message);
+        }
+    };
+
+    return (
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900 relative">
+            {isAdmin && (
+                <button
+                    onClick={deleteGuestbookEntry}
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none"
+                >
+                    <Trash2 className="h-4 w-4" />
+                </button>
+            )}
+            <div className="flex items-center gap-3">
+                {avatar ? (
+                    <Avatar>
+                        <AvatarImage src={avatar} alt={name} />
+                        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                ) : (
+                    <Avatar>
+                        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                )}
+                <div className="flex flex-col">
+                    <span className="text-[13px] font-semibold text-gray-800 dark:text-gray-200">
+                        {name}
+                    </span>
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400">{timestamp}</p>
+                </div>
+            </div>
+            <p className="mt-2 text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed">
+                {isExpanded ? comment : truncatedComment}
+                {comment.length > 90 && (
+                    <span
+                        className="text-[#38A662] cursor-pointer ml-1"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                        {isExpanded ? " See less" : " See more"}
+                    </span>
+                )}
+            </p>
+        </div>
+    );
+};
 
 export default function GuestbookPage() {
     const [entries, setEntries] = useState<GuestbookEntryData[]>([]);
@@ -42,6 +118,8 @@ export default function GuestbookPage() {
     const { data: session, status } = useSession();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
+    const { toast: useTheToast } = useToast();
+    const { theme } = useTheme();
 
 
     const fetchData = useCallback(async () => {
@@ -88,7 +166,7 @@ export default function GuestbookPage() {
         e.preventDefault();
 
         if (!session?.user) {
-            useToast().toast({ 
+            useTheToast({
                 title: "You must be logged in to leave a message.",
                 variant: "destructive",
             });
@@ -96,7 +174,7 @@ export default function GuestbookPage() {
         }
 
         if (!message.trim()) {
-            useToast().toast({ 
+            useTheToast({
                 title: "Message cannot be empty.",
                 variant: "destructive",
             });
@@ -115,10 +193,10 @@ export default function GuestbookPage() {
             setMessage("");
             fetchData();
 
-            toast.success("Message added successfully!"); 
+            toast.success("Message added successfully!");
         } catch (error: any) {
             console.error("Error adding entry: ", error);
-            useToast().toast({ 
+            useTheToast({
                 title: "Error adding message.",
                 description: error.message,
                 variant: "destructive",
@@ -135,22 +213,15 @@ export default function GuestbookPage() {
                 containerClassName=""
                 containerStyle={{}}
                 toastOptions={{
-                    // Define default options
                     className: '',
                     duration: 5000,
                     removeDelay: 1000,
                     style: {
-                        background: '#363636',
-                        color: '#fff',
+                        background: theme === 'light' ? '#F9FAFB' : '#363636',
+                        color: theme === 'light' ? '#374151' : '#fff',
                     },
-
-                    // Default options for specific types
                     success: {
                         duration: 3000,
-                        iconTheme: {
-                            primary: 'green',
-                            secondary: 'black',
-                        },
                     },
                 }}
             />
@@ -213,8 +284,9 @@ export default function GuestbookPage() {
                 <p className="text-center text-gray-500 dark:text-gray-400">No messages yet.</p>
             ) : (
                 sortedEntries.map((entry) => (
-                    <GuestbookCard
+                    <GuestbookCardComponent
                         key={entry.id}
+                        id={entry.id}
                         name={entry.name}
                         avatar={entry.imageUrl}
                         timestamp={new Date(entry.timestamp).toLocaleString()}
