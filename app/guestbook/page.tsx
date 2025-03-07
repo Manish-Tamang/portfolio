@@ -3,14 +3,19 @@
 import { useEffect, useState, useCallback } from "react";
 import { collection, getDocs, Timestamp, addDoc } from "firebase/firestore";
 import { db, auth } from "@/firebase/config";
-import GuestbookCard from "@/components/guestbookCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import GuestbookCard from "@/components/guestbookCard";
+import SignInCard from "@/components/SignIn";
+import AuthButtons from "@/components/AuthButtons";
+import { GuestbookSkeletons } from "@/components/GuestbookSkeletons";
+
+
 
 interface GuestbookEntryData {
     id: string;
@@ -27,6 +32,8 @@ const guestbookCache = {
     expiry: 60 * 1000,
 };
 
+
+
 export default function GuestbookPage() {
     const [entries, setEntries] = useState<GuestbookEntryData[]>([]);
     const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
@@ -34,11 +41,14 @@ export default function GuestbookPage() {
     const { toast } = useToast();
     const { data: session, status } = useSession();
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchData = useCallback(async () => {
+        setIsLoading(true);
         try {
             if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
                 setEntries(guestbookCache.data);
+                setIsLoading(false);
                 return;
             }
 
@@ -61,6 +71,8 @@ export default function GuestbookPage() {
             setEntries(data);
         } catch (error) {
             console.error("Error fetching entries: ", error);
+        } finally {
+            setIsLoading(false);
         }
     }, []);
 
@@ -118,7 +130,11 @@ export default function GuestbookPage() {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
-            <div className="flex justify-end mb-4">
+            <div className="mb-4" >
+                <SignInCard />
+                <AuthButtons session={session} />
+            </div>
+            <div className="flex justify-end mb-2">
                 <Select onValueChange={(value) => setSortOrder(value as "newest" | "oldest")} defaultValue="newest">
                     <SelectTrigger className="w-[120px]">
                         <SelectValue placeholder="Sort by" />
@@ -129,8 +145,9 @@ export default function GuestbookPage() {
                     </SelectContent>
                 </Select>
             </div>
-
-            {entries.length === 0 ? (
+            {isLoading ? (
+                <GuestbookSkeletons />
+            ) : entries.length === 0 ? (
                 <p className="text-center text-gray-500">No messages yet.</p>
             ) : (
                 sortedEntries.map((entry) => (
