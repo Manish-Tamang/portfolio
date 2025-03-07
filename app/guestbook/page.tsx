@@ -5,7 +5,6 @@ import { collection, getDocs, Timestamp, addDoc } from "firebase/firestore";
 import { db, auth } from "@/firebase/config";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
@@ -14,7 +13,7 @@ import GuestbookCard from "@/components/guestbookCard";
 import SignInCard from "@/components/SignIn";
 import AuthButtons from "@/components/AuthButtons";
 import { GuestbookSkeletons } from "@/components/GuestbookSkeletons";
-
+import { Textarea } from "@/components/ui/textarea";
 
 
 interface GuestbookEntryData {
@@ -131,7 +130,42 @@ export default function GuestbookPage() {
     return (
         <div className="max-w-2xl mx-auto p-4">
             <div className="mb-4" >
-                <SignInCard />
+                {!session?.user ? (
+                    <SignInCard />
+                ) : (
+                    <form onSubmit={handleSubmit} className="mb-4">
+                        <div className="flex items-center gap-3 mb-2">
+                            {session.user.image ? (
+                                <Avatar>
+                                    <AvatarImage src={session?.user?.image} alt={session.user.name || "User Avatar"} />
+                                    <AvatarFallback>{session.user.name?.charAt(0) || "U"}</AvatarFallback>
+                                </Avatar>
+                            ) : (
+                                <Avatar>
+                                    <AvatarFallback>{session.user.name?.charAt(0) || "U"}</AvatarFallback>
+                                </Avatar>
+                            )}
+                            <div>
+                                <p className="font-semibold text-gray-800 dark:text-gray-200">{session.user.name}</p>
+                            </div>
+                        </div>
+                        <Textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Leave a message..."
+                            className="w-full mb-2 rounded-[4px] border border-[#38A662] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#38A662] focus:border-[#38A662]"
+                        />
+                        {/* <Button type="submit" className="bg-[#38A662] hover:bg-[#2c8a4f] text-white">Post Message</Button> */}
+                        <button
+                            type="submit"
+                            className="cursor-pointer transition-all bg-[#38A662] text-white px-6 py-2 rounded-[4px]
+border-[#2D8A4D] w-full
+border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+                        >Post Message
+                        </button>
+                    </form>
+                )}
                 <AuthButtons session={session} />
             </div>
             <div className="flex justify-end mb-2">
@@ -148,7 +182,7 @@ export default function GuestbookPage() {
             {isLoading ? (
                 <GuestbookSkeletons />
             ) : entries.length === 0 ? (
-                <p className="text-center text-gray-500">No messages yet.</p>
+                <p className="text-center text-gray-500 dark:text-gray-400">No messages yet.</p>
             ) : (
                 sortedEntries.map((entry) => (
                     <GuestbookCard
