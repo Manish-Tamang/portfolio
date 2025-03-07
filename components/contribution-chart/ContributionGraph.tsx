@@ -32,6 +32,7 @@ interface ContributionData {
 const ContributionGraph = () => {
     const [contributionData, setContributionData] = useState<ContributionData>({});
     const [loading, setLoading] = useState(true);
+    const [totalContributions, setTotalContributions] = useState<number>(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,6 +44,13 @@ const ContributionGraph = () => {
                 }
                 const data = await response.json();
                 setContributionData(data);
+
+                if (data.data?.contributions?.weeks) {
+                    const total = data.data.contributions.weeks.reduce((acc: any, week: { contributionDays: any[]; }) => {
+                        return acc + week.contributionDays.reduce((dayAcc: any, day: { contributionCount: any; }) => dayAcc + day.contributionCount, 0);
+                    }, 0);
+                    setTotalContributions(total);
+                }
             } catch (error: any) {
                 console.error("Error fetching data:", error);
                 setContributionData({ error: error.message });
@@ -102,7 +110,8 @@ const ContributionGraph = () => {
 
     return (
         <div className="w-full max-w-md mx-auto p-4">
-            <h2 className="text-xl  text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
+            <h2 className="text-xl text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
+            <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div> {/* Display total contributions here */}
             <div className="w-full flex flex-col items-center mt-2">
                 <div className="flex justify-center items-start overflow-visible p-1">
                     <div className="overflow-visible">
