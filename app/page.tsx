@@ -10,7 +10,7 @@ export default function Home() {
       <section className="mb-16 pt-20">
         <div className="flex flex-col items-start justify-between">
           <div className="flex-1">
-            <h1 className="text-3xl md:text-6xl lg:text-5xl font-peachi flex items-center flex-wrap gap-2">
+            <h1 className="text-3xl md:text-6xl lg:text-5xl font-lifeofapple flex items-center flex-wrap gap-2">
               Hi, I'm
               <div className="inline-flex items-center">
                 <div className="flip-container inline-block" style={{ width: '50px', height: '50px' }}>
@@ -38,11 +38,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <span className="font-medium bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-transparent bg-clip-text">Manish Tamang</span>,
+              <span className="font-medium">Manish Tamang</span>,
               <span className="block">
                 developer & creator
               </span>
-              <span className="block bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-cyan-400 dark:to-green-500">
+              <span className="">
                 at Swikar Codes.
               </span>
             </h1>
