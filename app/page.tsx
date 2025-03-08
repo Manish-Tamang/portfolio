@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TechStacks from "@/components/TechStacks";
 import dynamic from "next/dynamic";
+import JokeCard from "@/components/JokeCard";
 
 const HomeScene = dynamic(() => import("@/components/3d-scene"), {
   ssr: false,
@@ -56,10 +57,12 @@ export default function Home() {
               and creating useful tools.
             </p>
           </div>
+          <JokeCard />
         </div>
         <TechStacks />
       </section>
       <section className="mb-16">
+
         <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
         <p className="text-lg mb-4 leading-relaxed max-w-3xl">
           I focus on building fast, future-proof solutions that thrive at the intersection of speed and precision.
@@ -79,9 +82,22 @@ export default function Home() {
           <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
           <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
         </div>
+        <div className="mt-4" >
+          <Link
+            href="https://github.com/Manish-Tamang/opera-surgical-centre"
+            className="group flex items-center gap-2 text-xl font-medium underline mb-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            FreeLancing
+            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
+          <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
+          <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
-            
+
           </div>
           <div>
             <HomeScene />
