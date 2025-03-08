@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 const initialImages = [
     {
         id: 1,
-        src: "/chill-guy.png",
+        src: "/img/chindey.jpg",
         alt: "Gallery Image 1",
         width: 800,
         height: 600,
@@ -32,7 +32,7 @@ const initialImages = [
     },
     {
         id: 4,
-        src: "/img/chindey.jpg",
+        src: "/img/IMG-20250308-WA0021.jpg",
         alt: "Gallery Image 4",
         width: 800,
         height: 800,
