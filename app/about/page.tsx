@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
 import ImageGrid from "@/components/ImageGrid";
+import { Dock } from "@/components/Dock";
 
 
 
@@ -42,6 +43,7 @@ const About = () => {
                             हे भग्वान समये बित्यो ऐले म सारै लज्जित छु, <br />
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
+                        <Dock />
                     </div>
                     <div className="flex flex-col items-center top-40 self-start">
                         <div className="relative rounded-md w-48 h-full">
@@ -111,7 +113,7 @@ const About = () => {
                         <Education />
                         <div className="relative rounded-lg overflow-hidden mb-6">
                             <BlurFadeImage
-                                src="/img/classx.jpeg"
+                                src="/img/IMG-20250308-WA0011.jpg"
                                 alt="Class 10"
                                 delay={0.3}
                                 className="w-full h-full"
