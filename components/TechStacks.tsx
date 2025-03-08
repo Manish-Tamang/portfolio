@@ -43,11 +43,12 @@ const Icons = () => {
                 { icon: <SiSupabase color="#39ca94" />, label: "Supabase", desc: "Open-source DB" },
                 { icon: <SiPostgresql color="#336791" />, label: "PostgreSQL", desc: "Relational DB" }
             ].map((tech, index) => (
-                <TechCard tech={tech} index={index} />
+                <TechCard key={tech.label} tech={tech} index={index} />
             ))}
         </div>
     );
 };
+
 
 export default function TechStacks() {
     return (
