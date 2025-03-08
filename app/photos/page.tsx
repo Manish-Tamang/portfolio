@@ -64,7 +64,7 @@ const initialImages = [
     },
     {
         id: 8,
-        src: "/img/IMG-20250217-WA0003.jpg",
+        src: "/img/IMG-20250308-WA0011.jpg",
         alt: "Gallery Image 8",
         width: 400,
         height: 600,
