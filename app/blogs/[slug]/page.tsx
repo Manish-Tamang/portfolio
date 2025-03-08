@@ -3,6 +3,7 @@ import { urlFor } from '@/sanity/lib/image';
 import { MDXComponents } from '@/components/mdx/MDXComponents';
 import Image from 'next/image';
 import CarbonAds from '@/components/carbonAds';
+import { Metadata } from 'next';
 
 export interface FullBlog {
   currentSlug: string;
@@ -46,11 +47,29 @@ async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
   }
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const params = await props.params;
+  const { slug } = params;
+  const post = await getBlogPostContent(slug);
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  return {
+    title: post.title,
+    description: `Read more about ${post.title} on Manish Tamang's blog.`,
+  };
+}
+
+export default async function BlogPost(props: {
+  params: Promise<{ slug: string }>
 }) {
+  const params = await props.params;
   const { slug } = params;
   const post = await getBlogPostContent(slug);
 
@@ -68,11 +87,10 @@ export default async function BlogPost({
   return (
     <article className="container mx-auto py-12 px-6 max-w-3xl">
       <h1 className="text-4xl font-bold mb-2 font-peachi">{post.title}</h1>
-
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Image
-            src='/profile.png'
+            src="/profile.png"
             alt="Manish Tamang"
             width={30}
             height={30}
@@ -85,7 +103,7 @@ export default async function BlogPost({
         </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-
+      {/* Uncomment and adjust if you want to include the cover image */}
       {/* {post.coverImage && (
         <Image
           width={100}
