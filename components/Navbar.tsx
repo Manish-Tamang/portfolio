@@ -35,9 +35,9 @@ const components = [
     description: "Learn more about who I am",
   },
   {
-    title: "My Journey",
-    href: "/journey",
-    description: "My development journey",
+    title: "Photos",
+    href: "/photos",
+    description: "My random collection of photos",
   },
   {
     title: "Uses",
