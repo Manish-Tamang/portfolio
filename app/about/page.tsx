@@ -43,7 +43,7 @@ const About = () => {
                             हे भग्वान समये बित्यो ऐले म सारै लज्जित छु, <br />
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
-                        <Dock />
+                        {/* <Dock /> */}
                     </div>
                     <div className="flex flex-col items-center top-40 self-start">
                         <div className="relative rounded-md w-48 h-full">
