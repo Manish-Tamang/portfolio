@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "npm install --force"
+    "lint": "next lint"
   },
   "dependencies": {
     "@code-hike/mdx": "^0.9.0",
