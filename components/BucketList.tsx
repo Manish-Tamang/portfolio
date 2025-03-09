@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import Zoom from 'react-medium-image-zoom';
 
 interface BucketListItem {
     id: number;
@@ -44,9 +43,6 @@ const BucketList: React.FC<BucketListProps> = ({ bucketList, setBucketList }) =>
 
     return (
         <div>
-            <h2 className="font-bold text-3xl tracking-tight mb-6 text-black dark:text-white transform transition-transform duration-300 hover:scale-110">
-                Bucket List
-            </h2>
             <div className="space-y-2">
                 {bucketList.map((item, index) => (
                     <div
@@ -58,7 +54,7 @@ const BucketList: React.FC<BucketListProps> = ({ bucketList, setBucketList }) =>
                                 type="checkbox"
                                 className="mr-2 h-4 w-4 rounded border-gray-300 text-[#D67BFF] focus:ring-[#D67BFF]"
                                 checked={item.completed}
-                                onChange={() => { }}  // TODO: Implement onChange logic if needed
+                                onChange={() => { }}
                             />
                             <div className="text-gray-700 dark:text-gray-300">
                                 <span className="font-medium"> {item.title} </span>
@@ -81,45 +77,44 @@ const BucketList: React.FC<BucketListProps> = ({ bucketList, setBucketList }) =>
                                 ref={imageRef}
                             >
                                 {item.images.slice(0, 4).map((image, imageIndex) => (
-                                    <Zoom zoomMargin={45} key={imageIndex}>
-                                        <img
-                                            src={image}
-                                            alt={item.title}
-                                            className="h-10 w-10 rounded-md ml-1 object-cover transform transition-transform duration-300 hover:scale-110"
-                                            onMouseEnter={(e) => {
-                                                if (!isMobile) {
-                                                    const rect =
-                                                        e.currentTarget.getBoundingClientRect();
-                                                    setHoveredImage({
-                                                        index: imageIndex,
-                                                        image,
-                                                        posX: e.clientX + 20,
-                                                        posY: rect.top
-                                                    });
-                                                }
-                                            }}
-                                        />
-                                    </Zoom>
+                                    <img
+                                        src={image}
+                                        alt={item.title}
+                                        className="h-10 w-10 rounded-[4px] ml-1 object-cover transform transition-transform duration-300 hover:scale-110"
+                                        onMouseEnter={(e) => {
+                                            if (!isMobile) {
+                                                const rect =
+                                                    e.currentTarget.getBoundingClientRect();
+                                                setHoveredImage({
+                                                    index: imageIndex,
+                                                    image,
+                                                    posX: e.clientX + 20,
+                                                    posY: rect.top
+                                                });
+                                            }
+                                        }}
+                                    />
+
                                 ))}
                                 {hoveredImage.index !== -1 &&
                                     hoveredImage.image &&
                                     !isMobile && (
                                         <div
-                                            className={`fixed z-10 bg-black bg-opacity-70 flex items-center justify-center w-[18rem] h-[18rem] rounded-md`}
+                                            className={`fixed z-10 flex items-center justify-center rounded-[4px]`}
                                             style={{
                                                 top: hoveredImage.posY,
                                                 left: hoveredImage.posX
                                             }}
                                         >
-                                            <Zoom>
-                                                <Image
-                                                    src={hoveredImage.image}
-                                                    alt={item.title}
-                                                    width={400}
-                                                    height={400}
-                                                    className="rounded-md"
-                                                />
-                                            </Zoom>
+
+                                            <Image
+                                                src={hoveredImage.image}
+                                                alt={item.title}
+                                                width={200}
+                                                height={200}
+                                                className="rounded-[4px] object-cover"
+                                            />
+
                                         </div>
                                     )}
                             </div>
