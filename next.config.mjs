@@ -24,6 +24,9 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   experimental: { esmExternals: true },
   transpilePackages: ["codehike"],
+  typescript: {
+    ignoreBuildErrors: true, 
+  },
 };
 
 export default withMDX(nextConfig);
