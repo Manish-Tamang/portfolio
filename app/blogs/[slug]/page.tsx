@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { MDXComponents } from '@/components/mdx/MDXComponents';
@@ -48,13 +47,17 @@ async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
   }
 }
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const params = await props.params;
+  const { slug } = params;
   const post = await getBlogPostContent(slug);
 
   if (!post) {
-    return { title: 'Post Not Found' };
+    return {
+      title: 'Post Not Found',
+    };
   }
 
   return {
@@ -63,7 +66,10 @@ export async function generateMetadata(
   };
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost(props: {
+  params: Promise<{ slug: string }>
+}) {
+  const params = await props.params;
   const { slug } = params;
   const post = await getBlogPostContent(slug);
 
@@ -97,15 +103,16 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-      {post.coverImage && (
+      {/* Uncomment and adjust if you want to include the cover image */}
+      {/* {post.coverImage && (
         <Image
-          width={1000}
-          height={500}
+          width={100}
+          height={100}
           src={urlFor(post.coverImage).url()}
           alt={post.title}
           className="w-full h-auto mb-6 rounded-[8px]"
         />
-      )}
+      )} */}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
