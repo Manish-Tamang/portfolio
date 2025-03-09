@@ -9,15 +9,18 @@ import {
   FaFacebookSquare,
   FaGithub,
   FaLinkedin,
-  FaRegEnvelope
+  FaRegEnvelope,
+  FaRegStar
 } from 'react-icons/fa';
 import {
   HiOutlineInformationCircle,
   HiOutlinePhotograph,
   HiOutlineBookOpen,
   HiOutlineDesktopComputer,
-  HiOutlineBriefcase
+  HiOutlineBriefcase,
 } from 'react-icons/hi';
+
+
 
 export default function Footer() {
   const { theme, setTheme } = useTheme();
@@ -45,6 +48,11 @@ export default function Footer() {
               <li>
                 <Link href="/colophon" className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200">
                   <HiOutlineBookOpen className="mr-2" /> Colophon
+                </Link>
+              </li>
+              <li>
+                <Link href="/manifest" className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200">
+                  <FaRegStar className="mr-2" /> Manifest
                 </Link>
               </li>
             </ul>
