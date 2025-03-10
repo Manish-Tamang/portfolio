@@ -46,7 +46,7 @@ const ManifestPage = () => {
 
             { }
             <section>
-                <h2 className="text-2xl font-semibold mb-4">Things I Wish To Have</h2>
+                <h2 className="text-2xl font-semibold mb-4">My Wish List</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {WishListItems.map((item) => (
                         <Card key={item.id} className="bg-white dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
