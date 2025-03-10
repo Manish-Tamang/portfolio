@@ -14,55 +14,55 @@ export default function Home() {
   return (
     <main className="max-w-4xl mx-auto px-4">
       <section className="mb-16 pt-20">
-        <div className="flex flex-col items-start justify-between">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-6">
           <div className="flex-1">
-            <h1 className="text-3xl md:text-6xl lg:text-5xl font-lifeofapple flex items-center flex-wrap gap-2">
-              Hi, I'm
-              <div className="inline-flex items-center">
-                <div
-                  className="flip-container inline-block"
-                  style={{ width: "50px", height: "50px" }}
-                >
-                  <div className="flip-card" style={{ width: "50px", height: "50px" }}>
-                    <div className="flip-card-front">
-                      <Image
-                        alt="Profile Image"
-                        src="/profile.png"
-                        width={50}
-                        height={50}
-                        priority
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div className="flip-card-back">
-                      <Image
-                        alt="Back Image"
-                        src="/chill-guy.png"
-                        width={50}
-                        height={50}
-                        priority
-                        className="rounded-full"
-                      />
-                    </div>
+            <div className="flex items-center gap-4">
+              <h1 className="text-3xl md:text-6xl lg:text-5xl font-peachi flex flex-col flex-wrap">
+                Manish Tamang,
+                <span>developer & creator</span>
+                <span>at Swikar Codes.</span>
+              </h1>
+              {/* Flip-card container with increased size */}
+              <div
+                className="flip-container inline-block"
+                style={{ width: "100px", height: "100px" }}
+              >
+                <div className="flip-card" style={{ width: "100px", height: "100px" }}>
+                  <div className="flip-card-front">
+                    <Image
+                      alt="Profile Image"
+                      src="/profile.png"
+                      width={100}
+                      height={100}
+                      priority
+                      className="rounded-full"
+                    />
+                  </div>
+                  <div className="flip-card-back">
+                    <Image
+                      alt="Back Image"
+                      src="/chill-guy.png"
+                      width={100}
+                      height={100}
+                      priority
+                      className="rounded-full"
+                    />
                   </div>
                 </div>
               </div>
-              <span className="font-medium">Manish Tamang</span>,
-              <span className="block">developer & creator</span>
-              <span className="">at Swikar Codes.</span>
-            </h1>
+            </div>
             <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
               A wizard who loves development and code. I tell stories through my projects
               and applications. I spend most of my time crafting web experiences
               and creating useful tools.
             </p>
           </div>
-          <JokeCard />
+      
         </div>
+        {/* <JokeCard /> */}
         <TechStacks />
       </section>
       <section className="mb-16">
-
         <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
         <p className="text-lg mb-4 leading-relaxed max-w-3xl">
           I focus on building fast, future-proof solutions that thrive at the intersection of speed and precision.
@@ -82,7 +82,7 @@ export default function Home() {
           <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
           <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
         </div>
-        <div className="mt-4" >
+        <div className="mt-4">
           <Link
             href="https://github.com/Manish-Tamang/opera-surgical-centre"
             className="group flex items-center gap-2 text-xl font-medium underline mb-2"
@@ -96,9 +96,7 @@ export default function Home() {
           <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-
-          </div>
+          <div></div>
           <div>
             <HomeScene />
           </div>
