@@ -80,7 +80,7 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
                     </AlertDialogContent>
                 </AlertDialog>
             )}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 bg-white dark:bg-[#09090B]">
                 {avatar ? (
                     <Image
                         width={10}
