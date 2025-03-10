@@ -46,16 +46,16 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
         try {
             const guestbookDoc = doc(db, "guestbook", id);
             await deleteDoc(guestbookDoc);
-            toast({ title: "Guestbook entry deleted successfully!" }); // Use hook here
+            toast({ title: "Guestbook entry deleted successfully!" });
             console.log("Guestbook entry deleted successfully!");
         } catch (error: any) {
             console.error("Error deleting guestbook entry:", error);
-            toast({ title: "Error deleting guestbook entry:", description: error.message, variant: "destructive" }); // Use hook here
+            toast({ title: "Error deleting guestbook entry:", description: error.message, variant: "destructive" });
         }
     };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900 relative">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-[#09090B] relative">
             {isAdmin && (
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
