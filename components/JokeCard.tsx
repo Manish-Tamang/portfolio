@@ -47,7 +47,7 @@ const JokeCard = () => {
     }, []);
 
     return (
-        <article className="mb-2 mt-2 rounded-[4px] border-2 border-gray-100 bg-white dark:border-gray-800 dark:bg-[#09090B]">
+        <article className="mb-1 mt-1 w-full  border-t-2 border-b-2 border-gray-100 bg-white dark:border-gray-800 dark:bg-[#09090B]">
             <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
                 <div>
                     <h3 className="font-medium sm:text-lg text-gray-900 dark:text-gray-100">
