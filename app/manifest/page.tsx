@@ -21,11 +21,11 @@ const WishListItems = [
 const ManifestPage = () => {
     const [bucketList, setBucketList] = useState<BucketListItem[]>([
         { id: 3, title: "Buy a Gaming PC", completed: true },
-        { id: 4, title: "Buy a Insta360 GO 2", completed: false },
+        { id: 4, title: "Buy a Insta360 GO 2", images: ["/img/bucketlist/insta-360-go-2.jpg"], completed: false },
         { id: 5, title: "Complete MERN Stack", completed: false },
         { id: 6, title: "Earn NPR 100k", completed: false },
-        { id: 7, title: "Buy a MacBook Air M2", images: ["/img/macbook.jpg",], completed: false },
-        { id: 8, title: "Buy a Samsung Galaxy S24", completed: false },
+        { id: 7, title: "Buy a MacBook Air M2", images: ["/img/bucketlist/macbook.jpg",], completed: false },
+        { id: 8, title: "Buy a Samsung Galaxy S24",  completed: false },
     ]);
 
     return (
@@ -34,13 +34,13 @@ const ManifestPage = () => {
 
             { }
             <section className="mb-8">
-                <Card className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200">
+                <Card className="bg-white dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
                     <CardHeader>
                         <CardTitle> <h2 className="font-bold text-3xl tracking-tight mb-6 text-black dark:text-white ">
-                Bucket List
-            </h2></CardTitle>
+                            Bucket List
+                        </h2></CardTitle>
                     </CardHeader>
-                <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} /></CardContent>
+                    <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} /></CardContent>
                 </Card>
             </section>
 
@@ -49,12 +49,12 @@ const ManifestPage = () => {
                 <h2 className="text-2xl font-semibold mb-4">Things I Wish To Have</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {WishListItems.map((item) => (
-                        <Card key={item.id} className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200">
+                        <Card key={item.id} className="bg-white dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
                             <CardHeader>
                                 <CardTitle>{item.title}</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <CardDescription>{item.description}</CardDescription>
+                                <CardDescription className='text-gray-900 dark:text-gray-200' >{item.description}</CardDescription>
                             </CardContent>
                         </Card>
                     ))}
