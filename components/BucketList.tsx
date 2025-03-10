@@ -78,7 +78,7 @@ const BucketList: React.FC<BucketListProps> = ({ bucketList, setBucketList }) =>
                             >
                                 {item.images.slice(0, 4).map((image, imageIndex) => (
                                     <img
-                                        key={imageIndex} // Add key prop here
+                                        key={imageIndex} 
                                         src={image}
                                         alt={item.title}
                                         className="h-10 w-10 rounded-[4px] ml-1 object-cover transform transition-transform duration-300 hover:scale-110"
