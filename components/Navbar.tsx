@@ -21,7 +21,7 @@ import { usePathname } from 'next/navigation';
 const components = [
   {
     title: "Latest Posts",
-    href: "/blogs",
+    href: "/blog",
     description: "Recently published articles and updates",
   },
   {
@@ -95,8 +95,8 @@ function isActive(pathname: string, href: string): boolean {
   if (href === "/about") {
     return pathname.startsWith("/about");
   }
-  if (href === "/blogs") {
-    return pathname.startsWith("/blogs");
+  if (href === "/blog") {
+    return pathname.startsWith("/blog");
   }
   if (href === "/") {
     return pathname === "/";
@@ -127,7 +127,7 @@ export default function Navbar() {
                   <NavigationMenuTrigger
                     className={cn(
                       "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:[#09090B] transition-colors duration-300",
-                      isActive(pathname, "/blogs") ? "text-[#38A662]" : ""
+                      isActive(pathname, "/blog") ? "text-[#38A662]" : ""
                     )}
                   >
                     Blog
@@ -149,10 +149,10 @@ export default function Navbar() {
                           </a>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/blogs" title="Latest Posts">
+                      <ListItem href="/blog" title="Latest Posts">
                         Recently published articles and updates
                       </ListItem>
-                      <ListItem href="/blogs/categories" title="Categories">
+                      <ListItem href="/blog/categories" title="Categories">
                         Browse articles by topic
                       </ListItem>
                     </ul>
