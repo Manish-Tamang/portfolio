@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Karla } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import Container from '@/components/Container';
 import Navbar from '@/components/Navbar';
@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 import localFont from 'next/font/local';
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
+
+const karla = Karla({ subsets: ['latin'] });
 
 const geist = localFont({
   src: [
@@ -58,7 +60,7 @@ const geist = localFont({
     },
   ],
   variable: '--font-geist',
-})
+});
 
 const lifeofapple = localFont({
   src: [
@@ -66,10 +68,10 @@ const lifeofapple = localFont({
       path: '../public/fonts/Life-of-Apple.ttf',
       weight: '400',
       style: 'normal',
-    }
+    },
   ],
   variable: '--font-lifeofapple',
-})
+});
 
 const ridemybike = localFont({
   src: [
@@ -77,10 +79,10 @@ const ridemybike = localFont({
       path: '../public/fonts/latinotype-ridemybike-pro-bold-italic.otf',
       weight: '700',
       style: 'italic',
-    }
+    },
   ],
   variable: '--font-ridemybike',
-})
+});
 
 export const metadata: Metadata = {
   title: 'Manish Tamang - A young developer',
@@ -93,19 +95,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="description" content={metadata.description ?? ''} />
       </head>
-      <body className={`${geist.variable} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} font-geist bg-white text-black dark:bg-[#09090B] dark:text-white antialiased`}>
+      <body
+        className={`${karla.className} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} bg-white text-black dark:bg-[#09090B] dark:text-white antialiased`}
+      >
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Container>
-              <Toaster
-                position="top-center"
-                reverseOrder={false}
-              />
+              <Toaster position="top-center" reverseOrder={false} />
               <Navbar />
               {children}
               <Footer />
