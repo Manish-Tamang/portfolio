@@ -20,8 +20,6 @@ import {
   HiOutlineBriefcase,
 } from 'react-icons/hi';
 
-
-
 export default function Footer() {
   const { theme, setTheme } = useTheme();
   const currentYear = new Date().getFullYear();
@@ -32,7 +30,7 @@ export default function Footer() {
         <div className="mb-6">
           <NowPlaying />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div>
             <ul className="space-y-3">
               <li>
@@ -75,16 +73,16 @@ export default function Footer() {
                   <HiOutlineBookOpen className="mr-2" /> Blogs
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <ul className='space-y-3'>
               <li>
                 <Link href="/uses" className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200">
                   <HiOutlineDesktopComputer className="mr-2" /> Uses
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <ul className='space-y-3'>
               <li>
                 <Link href="/projects" className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200">
                   <HiOutlineBriefcase className="mr-2" /> Projects
