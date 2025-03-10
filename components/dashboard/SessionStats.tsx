@@ -48,7 +48,7 @@ const SessionStats: React.FC<Props> = ({ className }) => {
 
     if (isLoading) {
         return (
-            <Card className={cn("w-full border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-4", className)}>
+            <Card className={cn("w-full border dark:border-gray-700 bg-white dark:bg-[#09090B] rounded-[4px] p-4", className)}>
                 <CardHeader>
                     <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">User Sessions</CardTitle>
                     <CardDescription className="text-gray-500 dark:text-gray-400">Session data overview</CardDescription>
@@ -82,7 +82,7 @@ const SessionStats: React.FC<Props> = ({ className }) => {
     };
 
     return (
-        <Card className={cn("w-full border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-4", className)}>
+        <Card className={cn("w-full border dark:border-gray-700 bg-white dark:bg-[#09090B] rounded-[4px] p-4", className)}>
             <CardHeader>
                 <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">User Sessions (Analytics)</CardTitle>
                 <CardDescription className="text-gray-500 dark:text-gray-400">Recent 4 session made into my website</CardDescription>
@@ -90,7 +90,7 @@ const SessionStats: React.FC<Props> = ({ className }) => {
             <CardContent className="grid gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
                     {countryData && Object.values(countryData).map((session) => (
-                        <Card key={session.country} className="border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-4">
+                        <Card key={session.country} className="border dark:border-gray-700 bg-white dark:bg-[#09090B] rounded-[4px] p-4">
                             <div className="flex items-center space-x-2">
                                 <img
                                     src={`https://flagcdn.com/h240/${session.country.toLowerCase()}.png`}

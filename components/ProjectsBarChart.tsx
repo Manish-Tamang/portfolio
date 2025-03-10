@@ -53,7 +53,7 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
     };
 
     return (
-        <Card className="w-full border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-4">
+        <Card className="w-full border dark:border-gray-700 bg-white dark:bg-[#09090B] rounded-[4px] p-4">
             <CardHeader>
                 <div className="flex items-center gap-2">
                     <FolderGit2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />

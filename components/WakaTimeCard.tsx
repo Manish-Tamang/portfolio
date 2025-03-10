@@ -34,7 +34,7 @@ const WakaTimeCard: React.FC<WakaTimeCardProps> = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: motionDelay }}
         >
-            <Card className="border border-gray-200 rounded-[4px] dark:border-gray-700 bg-white dark:bg-gray-800 h-48 flex flex-col">
+            <Card className="border border-gray-200 rounded-[4px] dark:border-gray-700 bg-white dark:bg-[#09090B] h-48 flex flex-col">
                 <CardHeader className="pb-2">
                     <div className="flex items-center gap-2">
                         {icon}

@@ -58,7 +58,7 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
     }, [username]);
 
     return (
-        <Card className="border dark:border-gray-700 bg-white dark:bg-gray-800 rounded-[4px] p-2">
+        <Card className="border dark:border-gray-700 bg-white dark:bg-[#09090B] rounded-[4px] p-2">
             <CardHeader>
                 <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">
                     GitHub Stats

@@ -42,7 +42,7 @@ const PieChartComponent: React.FC<PieChartProps> = ({
     const top5Data = [...processedData].sort((a, b) => b.value - a.value).slice(0, 5);
 
     return (
-        <Card className="flex flex-col border dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
+        <Card className="flex flex-col border dark:border-gray-700 bg-white dark:bg-[#09090B] w-full">
             <CardHeader className="items-left pb-0">
                 <div className="flex items-center gap-2">
                     <CardTitle className="text-gray-800 dark:text-gray-100 text-lg flex items-center">
