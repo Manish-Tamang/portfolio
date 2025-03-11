@@ -28,39 +28,43 @@ const TechCard = ({ tech, index }: { tech: any, index: number }) => (
 );
 
 
-const Icons = () => {
-    return (
-        <div className="flex flex-wrap">
-            {[
-                { icon: <SiReact color="#61DBFB" />, label: "React", desc: "UI Library" },
-                { icon: <SiTypescript color="#007acc" />, label: "TypeScript", desc: "Typed JavaScript" },
-                { icon: <SiJavascript color="#F7DF1E" />, label: "JavaScript", desc: "Web Language" },
-                { icon: <SiNextdotjs className="text-black dark:text-white" />, label: "Next.js", desc: "React Framework" },
-                { icon: <SiTailwindcss color="#20c8e9" />, label: "Tailwind CSS", desc: "Utility-first CSS" },
-                { icon: <SiSanity color="#ea4a36" />, label: "Sanity", desc: "Headless CMS" },
-                { icon: <FaGit color="#f64d27" />, label: "Git", desc: "Version Control" },
-                { icon: <SiFirebase color="#ffcb2d" />, label: "Firebase", desc: "Backend Services" },
-                { icon: <SiSupabase color="#39ca94" />, label: "Supabase", desc: "Open-source DB" },
-                { icon: <SiPostgresql color="#336791" />, label: "PostgreSQL", desc: "Relational DB" }
-            ].map((tech, index) => (
-                <TechCard key={tech.label} tech={tech} index={index} />
-            ))}
-        </div>
-    );
-};
+const TechStacks = () => {
+    const techStack = [
+        { icon: <SiReact color="#61DBFB" />, label: "React", desc: "UI Library" },
+        { icon: <SiTypescript color="#007acc" />, label: "TypeScript", desc: "Typed JavaScript" },
+        { icon: <SiJavascript color="#F7DF1E" />, label: "JavaScript", desc: "Web Language" },
+        { icon: <SiNextdotjs className="text-black dark:text-white" />, label: "Next.js", desc: "React Framework" },
+        { icon: <SiTailwindcss color="#20c8e9" />, label: "Tailwind CSS", desc: "Utility-first CSS" },
+        { icon: <SiSanity color="#ea4a36" />, label: "Sanity", desc: "Headless CMS" },
+        { icon: <FaGit color="#f64d27" />, label: "Git", desc: "Version Control" },
+        { icon: <SiFirebase color="#ffcb2d" />, label: "Firebase", desc: "Backend Services" },
+        { icon: <SiSupabase color="#39ca94" />, label: "Supabase", desc: "Open-source DB" },
+        { icon: <SiPostgresql color="#336791" />, label: "PostgreSQL", desc: "Relational DB" }
+    ];
 
+    const firstRow = techStack.slice(0, 5);  // Changed slicing
+    const secondRow = techStack.slice(5); // Changed slicing
 
-export default function TechStacks() {
     return (
         <>
             <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
                 <Marquee pauseOnHover className="[--duration:30s] [--gap:0.5rem]">
-                    <Icons />
+                    <div className="flex">
+                        {firstRow.map((tech, index) => (
+                            <TechCard key={`first-${tech.label}`} tech={tech} index={index} />
+                        ))}
+                    </div>
                 </Marquee>
                 <Marquee reverse pauseOnHover className="[--duration:30s] [--gap:0.5rem]">
-                    <Icons />
+                    <div className="flex">
+                        {secondRow.map((tech, index) => (
+                            <TechCard key={`second-${tech.label}`} tech={tech} index={index} />
+                        ))}
+                    </div>
                 </Marquee>
             </div>
         </>
     );
-}
+};
+
+export default TechStacks;
