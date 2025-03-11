@@ -245,15 +245,15 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-200 "
           >
-            <div className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-xl px-2 py-1">
+            <div className="flex items-center rounded-xl px-2 py-1">
+              <span className="mr-2">Menu</span>
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
               ) : (
                 <MenuIcon className="w-6 h-6" />
               )}
-              <span className="ml-2">Menu</span>
             </div>
           </button>
         </div>
