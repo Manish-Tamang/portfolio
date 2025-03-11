@@ -47,7 +47,7 @@ const TechStacks = () => {
 
     return (
         <>
-            <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+            <div className="relative flex w-full flex-col mt-1 items-center justify-center overflow-hidden">
                 <Marquee pauseOnHover className="[--duration:30s] [--gap:0.2rem]">
                     <div className="flex">
                         {firstRow.map((tech, index) => (
