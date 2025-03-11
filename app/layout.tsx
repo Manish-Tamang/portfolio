@@ -98,6 +98,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="description" content={metadata.description ?? ''} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body
         className={`${karla.className} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} bg-white text-black dark:bg-[#09090B] dark:text-white antialiased`}
