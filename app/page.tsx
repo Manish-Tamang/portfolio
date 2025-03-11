@@ -54,7 +54,7 @@ export default function Home() {
                 </span>
               </h1>
             </div>
-            <p className="text-lg md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
+            <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
               A wizard who loves development and code. I tell stories through my projects
               and applications. I spend most of my time crafting web experiences
               and creating useful tools.
