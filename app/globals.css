@@ -48,11 +48,11 @@
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
-  --color-chrome: #4285F4;        /* Example: Google Chrome Blue */
-  --color-safari: #007AFF;        /* Example: Apple Safari Blue */
-  --color-firefox: #FF9500;       /* Example: Mozilla Firefox Orange */
-  --color-edge: #00ABEB;          /* Example: Microsoft Edge Blue */
-  --color-other: #8E24AA;         /* Example: A purple for "Other" browsers */
+  --color-chrome: #4285F4;       
+  --color-safari: #007AFF;       
+  --color-firefox: #FF9500;      
+  --color-edge: #00ABEB;          
+  --color-other: #8E24AA;       
 }
 
 
