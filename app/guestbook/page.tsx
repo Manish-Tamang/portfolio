@@ -62,6 +62,8 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
             const guestbookDoc = doc(db, "guestbook", id);
             await deleteDoc(guestbookDoc);
             toast.success("Guestbook entry deleted successfully!");
+            window.location.reload()
+
         } catch (error: any) {
             console.error("Error deleting guestbook entry:", error);
             toast.error("Error deleting guestbook entry:" + error.message);
@@ -69,7 +71,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
     };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-[#09090B] relative">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900 relative">
             {isAdmin && (
                 <button
                     onClick={deleteGuestbookEntry}
@@ -125,11 +127,11 @@ export default function GuestbookPage() {
     const fetchData = useCallback(async () => {
         setIsLoading(true);
         try {
-            if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
-                setEntries(guestbookCache.data);
-                setIsLoading(false);
-                return;
-            }
+            // if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
+            //     setEntries(guestbookCache.data);
+            //     setIsLoading(false);
+            //     return;
+            // }
             const querySnapshot = await getDocs(collection(db, "guestbook"));
             const data = querySnapshot.docs.map((doc) => {
                 const entry = doc.data();
@@ -240,7 +242,7 @@ export default function GuestbookPage() {
                         <div className="flex items-center gap-3 mb-2">
                             {session.user.image ? (
                                 <Avatar>
-                                    <AvatarImage src={session?.user?.image} alt={session.user.name || "User Avatar"} />
+                                    <img src={session?.user?.image} alt={session.user.name || "User Avatar"} />
                                     <AvatarFallback>{session.user.name?.charAt(0) || "U"}</AvatarFallback>
                                 </Avatar>
                             ) : (
