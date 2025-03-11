@@ -283,3 +283,8 @@ input[type="button"],
   font-weight: bold;
   font-style: italic;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
