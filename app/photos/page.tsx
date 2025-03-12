@@ -132,7 +132,7 @@ export default function PhotoGallery() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
                 {loading && images.length === 0
-                    ? // Loading skeletons
+                    ? 
                     Array.from({ length: 9 }).map((_, index) => (
                         <Skeleton
                             key={`skeleton-${index}`}
@@ -165,7 +165,6 @@ export default function PhotoGallery() {
                     ))}
             </div>
 
-            {/* Load more button */}
             <div className="flex justify-center mt-8">
                 <button
                     onClick={loadMoreImages}
@@ -175,6 +174,9 @@ export default function PhotoGallery() {
                     {loading ? "Loading..." : "Load More Images"}
                 </button>
             </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+                This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
+            </p>
         </div>
     )
 }
