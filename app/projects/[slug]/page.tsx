@@ -1,9 +1,10 @@
-
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { MDXComponents } from '@/components/mdx/MDXComponents';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+import { Code, ExternalLink } from 'lucide-react'; 
 
 export interface FullProject {
     currentSlug: string;
@@ -14,6 +15,7 @@ export interface FullProject {
     projectUrl?: string;
     githubUrl?: string;
     techStack?: string[];
+    excerpt?: string; 
 }
 
 const estimateReadingTime = (content: string): number => {
@@ -39,9 +41,10 @@ async function getProjectContent(slug: string): Promise<FullProject | null> {
         date,
         thumbnail,
         content,
-        projectUrl,   
-        githubUrl,    
-        techStack     
+        projectUrl,
+        githubUrl,
+        techStack,
+        excerpt
     }`;
 
     try {
@@ -51,6 +54,38 @@ async function getProjectContent(slug: string): Promise<FullProject | null> {
         console.error("Error fetching project:", error);
         return null;
     }
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: { slug: string };
+}): Promise<Metadata> {
+    const { slug } = params;
+    const project = await getProjectContent(slug);
+
+    if (!project) {
+        return {
+            title: 'Project Not Found',
+        };
+    }
+
+    return {
+        title: project.title,
+        description: project.excerpt || `Explore ${project.title} on Manish Tamang's portfolio.`,
+        openGraph: {
+            title: project.title,
+            description: project.excerpt || `Explore ${project.title} on Manish Tamang's portfolio.`,
+            images: project.thumbnail ? [urlFor(project.thumbnail).url()] : ['/profile.png'],
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: project.title,
+            description: project.excerpt || `Explore ${project.title} on Manish Tamang's portfolio.`,
+            images: project.thumbnail ? [urlFor(project.thumbnail).url()] : ['/profile.png'],
+        },
+    };
 }
 
 export default async function ProjectPage({
@@ -88,26 +123,17 @@ export default async function ProjectPage({
                 </span>
             </div>
             <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-
-            {project.thumbnail && (
-                <Image
-                    width={1200}
-                    height={600}
-                    src={urlFor(project.thumbnail).url()}
-                    alt={project.title}
-                    className="w-full h-auto mb-6 rounded-[8px] object-cover"
-                />
-            )}
-
-            <div className="mb-4">
+            <div className="mb-4 flex items-center space-x-4">
                 {project.projectUrl && (
-                    <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="mr-4 text-blue-500 hover:underline">
+                    <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-500 hover:underline">
                         Live Project
+                        <ExternalLink className="h-4 w-4 ml-1" />
                     </a>
                 )}
                 {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-500 hover:underline">
                         GitHub Repository
+                        <Code className="h-4 w-4 ml-1" />
                     </a>
                 )}
             </div>
