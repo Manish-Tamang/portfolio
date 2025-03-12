@@ -11,11 +11,6 @@ interface FormData {
     category: string;
 }
 
-interface TimeZoneDBResponse {
-    datetime: string;
-    formatted: string;
-}
-
 const ContactPage = () => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [formData, setFormData] = useState<FormData>({
@@ -25,7 +20,6 @@ const ContactPage = () => {
         category: "general"
     });
     const [nepalTime, setNepalTime] = useState<string | null>(null);
-    const [availabilityMessage, setAvailabilityMessage] = useState<string>("");
 
     useEffect(() => {
         const fetchNepalTime = async () => {
@@ -44,7 +38,6 @@ const ContactPage = () => {
             } catch (error: any) {
                 console.error("Failed to fetch Nepal time:", error);
                 setNepalTime(null);
-                setAvailabilityMessage("Unable to determine current availability due to an error.");
             }
         };
 
@@ -99,6 +92,28 @@ const ContactPage = () => {
         setFormData({ ...formData, category });
     };
 
+    const getAvailabilityMessage = () => {
+        if (!nepalTime) {
+            return <span className="inline-block w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>;
+        }
+
+        const date = new Date(nepalTime);
+        const day = date.getDay();
+        const hours = date.getHours();
+
+        if (day === 6) {
+            return "It's Saturday! I'm likely chilling 🍹";
+        } else {
+            if (hours >= 0 && hours < 8) {
+                return "I'm likely sleeping 😴";
+            } else if (hours >= 10 && hours < 17.5) {
+                return "I'm likely at college 🎓";
+            } else {
+                return "I'm likely working 👨‍💻 or Studying";
+            }
+        }
+    };
+
     return (
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
             <Toaster />
@@ -108,24 +123,7 @@ const ContactPage = () => {
                     <>{new Date(nepalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</>
                 ) : (
                     <span className="inline-block w-16 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>
-                )} in <strong>Nepal</strong> and {
-                    (() => {
-                        if (!nepalTime) {
-                            return <span className="inline-block w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>;
-                        }
-
-                        const date = new Date(nepalTime);
-                        const hours = date.getHours();
-
-                        if (hours >= 0 && hours < 8) {
-                            return "I'm likely sleeping 😴";
-                        } else if (hours >= 10 && hours < 17.5) {
-                            return "I'm likely at college 🎓";
-                        } else {
-                            return "I'm likely working 👨‍💻 or Studying";
-                        }
-                    })()
-                }. Feel free to send me a message, I will get back to you as soon as possible.
+                )} in <strong>Nepal</strong> and {getAvailabilityMessage()}. Feel free to send me a message, I will get back to you as soon as possible.
             </p>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
