@@ -4,6 +4,7 @@ import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
 import ImageGrid from "@/components/ImageGrid";
 import { Dock } from "@/components/Dock";
+import Piano from "@/components/piano/Piano";
 
 
 
@@ -128,6 +129,10 @@ const About = () => {
                         />
                     </div>
                 </div>
+               <div className="mt-4" >
+               <h2 className="text-2xl font-peachi font-medium mb-4">Piano</h2>
+                <Piano />
+                </div> 
             </section>
         </Container >
     );
