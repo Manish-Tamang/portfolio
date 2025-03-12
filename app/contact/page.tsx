@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { Mail, Send, Loader2, MapPin, Linkedin, Clock } from "lucide-react"
+import toast, { Toaster } from 'react-hot-toast'
 
 const ContactPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -30,12 +31,12 @@ const ContactPage = () => {
 
             if (response.ok) {
                 setFormData({ email: "", message: "", emotion: "", category: "general" })
-                alert("Message sent successfully! We'll respond within 24 hours.")
+                toast.success("Message sent successfully!")
             } else {
                 throw new Error()
             }
         } catch (error) {
-            alert("Failed to send message. Please try again later.")
+            toast.error("Failed to send message. Please try again later.")
         } finally {
             setIsSubmitting(false)
         }
@@ -55,6 +56,7 @@ const ContactPage = () => {
 
     return (
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
+            <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
             <p className="text-gray-700 dark:text-gray-300 text-left mb-8">
                 Feel free to reach out with any questions or opportunities. I'll get back to you as soon as possible.
@@ -73,7 +75,7 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         placeholder="you@example.com"
-                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#58a6ff]"
+                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
                     />
                 </div>
 
@@ -88,7 +90,7 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#58a6ff]"
+                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
                     />
                 </div>
 
@@ -98,21 +100,21 @@ const ContactPage = () => {
                         <div className="flex space-x-2">
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "happy" ? "border-[#58a6ff]" : "border-gray-300 dark:border-[#30363d]"} `}
+                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "happy" ? "border-[#38A662]" : "border-gray-300 dark:border-[#30363d]"} `}
                                 onClick={() => handleEmotionSelect("happy")}
                             >
                                 <span role="img" aria-label="happy" className="text-xl">😍</span>
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "thanks" ? "border-[#58a6ff]" : "border-gray-300 dark:border-[#30363d]"} `}
+                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "thanks" ? "border-[#38A662]" : "border-gray-300 dark:border-[#30363d]"} `}
                                 onClick={() => handleEmotionSelect("thanks")}
                             >
                                 <span role="img" aria-label="thanks" className="text-xl">👋</span>
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "gift" ? "border-[#58a6ff]" : "border-gray-300 dark:border-[#30363d]"} `}
+                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "gift" ? "border-[#38A662]" : "border-gray-300 dark:border-[#30363d]"} `}
                                 onClick={() => handleEmotionSelect("gift")}
                             >
                                 <span role="img" aria-label="gift" className="text-xl">🎁</span>
@@ -125,14 +127,14 @@ const ContactPage = () => {
                         <div className="flex space-x-2">
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "general" ? "border-[#58a6ff]" : "border-gray-300 dark:border-[#30363d]"} text-gray-700 dark:text-white px-4`}
+                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "general" ? "border-[#38A662]" : "border-gray-300 dark:border-[#30363d]"} text-gray-700 dark:text-white px-4`}
                                 onClick={() => handleCategorySelect("general")}
                             >
                                 general
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "help" ? "border-[#58a6ff]" : "border-gray-300 dark:border-[#30363d]"} text-gray-700 dark:text-white px-4`}
+                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "help" ? "border-[#38A662]" : "border-gray-300 dark:border-[#30363d]"} text-gray-700 dark:text-white px-4`}
                                 onClick={() => handleCategorySelect("help")}
                             >
                                 help
