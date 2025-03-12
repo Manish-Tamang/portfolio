@@ -86,13 +86,20 @@ const ridemybike = localFont({
 
 export const metadata: Metadata = {
   title: 'Manish Tamang - A young developer',
-  description: 'Hi, I\'m Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.',
+  description: "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
+  openGraph: {
+    title: 'Manish Tamang - A young developer',
+    description: "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
+    images: '/IMG-20250217-WA0011.jpg',
+    type: 'website',
+  },
 };
+
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; 
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
