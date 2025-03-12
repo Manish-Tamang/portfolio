@@ -90,7 +90,7 @@ const About = () => {
                             My ambition is to grow into a proficient full-stack developer, mastering both front-end and back-end development to craft powerful, versatile web applications.
                             Each <a href="#" className="text-[#38A662] hover:underline">project</a> is an opportunity to refine my skills, expand my knowledge, and adapt to the ever-evolving world of technology. I’m dedicated to making a meaningful impact through innovation and creativity, one project at a time. A passionate and amateur computer science enthusiast, I have a deep love for technology and innovation. 🚀
                         </p>
-                        <div className="relative rounded-lg overflow-hidden mb-6">
+                        <div className="relative rounded-xl overflow-hidden mb-6">
                             <BlurFadeImage
                                 src="/IMG-20250217-WA0011.jpg"
                                 alt="Manish Tamang in Sushma Godawari College"
@@ -123,7 +123,7 @@ const About = () => {
                             Here's a little <a href="/photos" className="text-[#38A662] hover:underline">photo</a> snippet and timeline of my education.
                         </p>
                         <Education />
-                        <div className="relative rounded-lg overflow-hidden mb-6">
+                        <div className="relative rounded-xl overflow-hidden mb-6">
                             <BlurFadeImage
                                 src="/img/IMG-20250308-WA0011.jpg"
                                 alt="Class 10"
