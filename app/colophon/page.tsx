@@ -157,6 +157,7 @@ const ColophonPage = () => {
                     Beyond the core tech stack, the website utilizes the following libraries to enhance specific features:
                 </p>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                    <li><Link href="https://ui.shadcn.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Shadcn UI</Link>: For beautifully-designed, accessible components</li>
                     <li><Link href="https://authjs.dev/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">auth.js v2</Link>: For secure and streamlined user authentication.</li>
                     <li><Link href="https://github.com/nygardk/react-share" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-share</Link>: To enable easy sharing of content on social media platforms.</li>
                     <li>Icons: Sourced from both <Link href="https://react-icons.github.io/react-icons/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-icons</Link> and <Link href="https://feathericons.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-feather</Link>, providing a diverse and consistent icon set.</li>
