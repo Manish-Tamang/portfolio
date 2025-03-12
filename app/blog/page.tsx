@@ -1,5 +1,4 @@
 'use client';
-
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import Link from 'next/link';
@@ -9,6 +8,7 @@ import { BlurFadeImage } from '@/components/BlurFade';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import BlogCardSkeleton from '@/components/BlogCardSkeleton';
 
 const query = `*[_type == "post"] {
     title,
@@ -63,14 +63,6 @@ export default function Blogs() {
         });
     }, [posts, searchQuery, sortOrder]);
 
-    if (loading) {
-        return <div className="container mx-auto py-12 px-4">Loading posts...</div>;
-    }
-
-    if (error) {
-        return <div className="container mx-auto py-12 px-4 text-red-500">Error: {error}</div>;
-    }
-
     return (
         <section className="container mx-auto py-12 px-4">
             <h2 className="text-4xl font-semibold mb-4 font-peachi">Blogs</h2>
@@ -107,7 +99,18 @@ export default function Blogs() {
                 </p>
             </div>
 
-            {filteredAndSortedPosts.length > 0 ? (
+            {loading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <BlogCardSkeleton />
+                    <BlogCardSkeleton />
+                    <BlogCardSkeleton />
+                    <BlogCardSkeleton />
+                </div>
+            ) : error ? (
+                <div className="text-center py-12 border border-dashed border-red-300 rounded-[4px]">
+                    <p className="text-red-500 dark:text-red-400">Error: {error}</p>
+                </div>
+            ) : filteredAndSortedPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
                         <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
