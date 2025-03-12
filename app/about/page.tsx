@@ -129,10 +129,10 @@ const About = () => {
                         />
                     </div>
                 </div>
-               <div className="mt-4" >
-               <h2 className="text-2xl font-peachi font-medium mb-4">Piano</h2>
-                <Piano />
-                </div> 
+                <div className="mt-4" >
+                    <h2 className="text-2xl font-peachi font-medium mb-4">Piano</h2>
+                    <Piano />
+                </div>
             </section>
         </Container >
     );
