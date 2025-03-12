@@ -166,6 +166,9 @@ const ColophonPage = () => {
                     <li><Link href="https://www.npmjs.com/package/react-medium-image-zoom" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-medium-image-zoom</Link>: Enables image zooming functionality.</li>
                 </ul>
             </section>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+                This page is inspired by <a href="https://jahir.dev/colophon" className="underline">Jahir Fiquitiva</a>.
+            </p>
         </div>
     );
 };
