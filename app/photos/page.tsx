@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Skeleton } from "@/components/ui/skeleton"
 
-// Sample image data with different aspect ratios and sizes
 const initialImages = [
     {
         id: 1,
@@ -64,7 +63,7 @@ const initialImages = [
     },
     {
         id: 8,
-        src: "/img/IMG-20250308-WA0011.jpg",
+        src: "/img/IMG-20241219-WA0000.jpg",
         alt: "Gallery Image 8",
         width: 400,
         height: 600,
@@ -86,6 +85,22 @@ const initialImages = [
         height: 400,
         gridArea: "span 1 / span 1",
     },
+    {
+        id: 11,
+        src: "/img/manish-junior.jpg",
+        alt: "Gallery Image 1",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 1",
+    },
+    {
+        id: 12,
+        src: "/img/received_624136276549992_053056.jpg",
+        alt: "Gallery Image 2",
+        width: 600,
+        height: 800,
+        gridArea: "span 1 / span 2",
+    },
 ]
 
 interface ImageType {
@@ -97,50 +112,60 @@ interface ImageType {
     gridArea: string
 }
 
+const IMAGES_PER_LOAD = 10;
+
 export default function PhotoGallery() {
     const [images, setImages] = useState<ImageType[]>([])
     const [loading, setLoading] = useState(true)
+    const [allLoaded, setAllLoaded] = useState(false)
+    const [displayedImages, setDisplayedImages] = useState<ImageType[]>([]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setImages(initialImages)
-            setLoading(false)
-        }, 1000)
+            setImages(initialImages);
+            setDisplayedImages(initialImages.slice(0, IMAGES_PER_LOAD)); 
+            setLoading(false);
+            if (initialImages.length <= IMAGES_PER_LOAD) {
+                setAllLoaded(true);
+            }
+        }, 1000);
 
-        return () => clearTimeout(timer)
-    }, [])
+        return () => clearTimeout(timer);
+    }, []);
+
     const loadMoreImages = () => {
-        setLoading(true)
+        setLoading(true);
         setTimeout(() => {
-            const newImages = initialImages.map((img) => ({
-                ...img,
-                id: img.id + images.length,
-            }))
+            const nextImages = initialImages.slice(displayedImages.length, displayedImages.length + IMAGES_PER_LOAD);
+            setDisplayedImages((prevImages) => [...prevImages, ...nextImages]);
 
-            setImages((prevImages) => [...prevImages, ...newImages])
-            setLoading(false)
-        }, 1000)
-    }
+            if (displayedImages.length + nextImages.length >= initialImages.length) {
+                setAllLoaded(true);
+            }
+
+            setLoading(false);
+        }, 1000);
+    };
+
+
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <div className="mb-6"  >
+            <div className="mb-6">
                 <h1 className="text-3xl font-peachi font-bold text-left">Photo Gallery</h1>
                 <p className="text-gray-500 dark:text-gray-400 mb-8">
-                    A collection of randowm images from my gallery. Click on the images to view them in full size.
+                    A collection of random images from my gallery. Click on the images to view them in full size.
                 </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
-                {loading && images.length === 0
-                    ? 
-                    Array.from({ length: 9 }).map((_, index) => (
+                {loading && displayedImages.length === 0
+                    ? Array.from({ length: IMAGES_PER_LOAD }).map((_, index) => (
                         <Skeleton
                             key={`skeleton-${index}`}
                             className={`rounded-[4px] ${index % 5 === 0 ? "col-span-2 row-span-2" : index % 3 === 0 ? "col-span-2" : index % 2 === 0 ? "row-span-2" : ""}`}
                         />
                     ))
-                    : 
-                    images.map((image) => (
+                    : displayedImages.map((image) => (
                         <div
                             key={image.id}
                             className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] ${image.gridArea === "span 2 / span 2"
@@ -149,8 +174,7 @@ export default function PhotoGallery() {
                                     ? "col-span-2"
                                     : image.gridArea === "span 2 / span 1"
                                         ? "row-span-2"
-                                        : ""
-                                }`}
+                                        : ""}`}
                         >
                             <Image
                                 src={image.src || "/placeholder.svg"}
@@ -165,19 +189,20 @@ export default function PhotoGallery() {
                     ))}
             </div>
 
-            <div className="flex justify-center mt-8">
-                <button
-                    onClick={loadMoreImages}
-                    disabled={loading}
-                    className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-70"
-                >
-                    {loading ? "Loading..." : "Load More Images"}
-                </button>
-            </div>
+            {!allLoaded && (
+                <div className="flex justify-center mt-8">
+                    <button
+                        onClick={loadMoreImages}
+                        disabled={loading}
+                        className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-70"
+                    >
+                        {loading ? "Loading..." : "Load More Images"}
+                    </button>
+                </div>
+            )}
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
             </p>
         </div>
     )
 }
-
