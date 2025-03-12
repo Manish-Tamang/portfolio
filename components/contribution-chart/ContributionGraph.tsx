@@ -64,7 +64,7 @@ const ContributionGraph = () => {
 
     if (loading) {
         return (
-            <div className="w-full max-w-md mx-auto p-4">
+            <div className="w-full p-4">
                 <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
                 <div className="mt-2 flex flex-col items-center">
                     <Skeleton className="w-[640px] h-[82px] rounded-md" />
@@ -82,7 +82,7 @@ const ContributionGraph = () => {
 
     if (contributionData.error) {
         return (
-            <div className="w-full max-w-md mx-auto p-4">
+            <div className="w-full p-4">
                 <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
                 <div className="text-center mt-2 text-red-500">Error: {contributionData.error}</div>
             </div>
@@ -93,7 +93,7 @@ const ContributionGraph = () => {
 
     if (!contributions) {
         return (
-            <div className="w-full max-w-md mx-auto p-4">
+            <div className="w-full p-4">
                 <h2 className="text-xl font-semibold text-center">Contribution Graph</h2>
                 <div className="text-center mt-2">No contribution data available.</div>
             </div>
@@ -109,12 +109,12 @@ const ContributionGraph = () => {
     ];
 
     return (
-        <div className="w-full max-w-md mx-auto p-4">
+        <div className="w-full p-4">
             <h2 className="text-xl text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
-            <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div> {/* Display total contributions here */}
-            <div className="w-full flex flex-col items-center mt-2">
-                <div className="flex justify-center items-start overflow-visible p-1">
-                    <div className="overflow-visible">
+            <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
+            <div className="w-full flex flex-col items-center mt-2 overflow-x-auto md:overflow-x-visible">
+                <div className="flex justify-center items-start p-1 w-full">
+                    <div className="w-full max-w-none">
                         <ContributionGrid
                             weeks={contributions.weeks}
                             colors={contributions.colors || githubColors}
