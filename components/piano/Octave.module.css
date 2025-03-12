@@ -1,0 +1,118 @@
+/* components/Piano/Octave.module.css */
+
+.octave {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  max-width: 200px;
+}
+
+.octave:nth-child(1) span:nth-child(1) {
+  border-left: 1px solid #aaaaaa;
+}
+
+.blackNotes {
+  height: 55px;
+  display: flex;
+  width: auto;
+  left: 0;
+  right: 0;
+  top: 1px;
+  position: absolute;
+}
+
+.whiteNotes {
+  height: 100%;
+  display: flex;
+}
+
+.whiteNotes > span {
+  width: auto;
+  height: 100%;
+  display: inline-block;
+  border-right: 1px solid #aaaaaa;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaaaaa;
+  flex-grow: 1;
+  order: 1;
+  box-sizing: border-box;
+  /* transition: background-color 0.1s; */
+  /* box-shadow: inset 5px 4px 0px 0px rgba(0, 0, 0, 0.03); */
+  background-position: center;
+  background-size: cover;
+  background-color: white;
+}
+
+/* .whiteNotes > span:first-child
+{
+    border-left: 1px solid #aaaaaa;
+} */
+.whiteNotes > span[active]:nth-child(1) {
+  background-color: #f00;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(2),
+.blackNotes > span[active]:nth-child(2) {
+  background-color: #ff5b1b;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(3),
+.blackNotes > span[active]:nth-child(3) {
+  background-color: #0fddff;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(4) {
+  background-color: #fcff21;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(5),
+.blackNotes > span[active]:nth-child(6) {
+  background-color: #026400;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(6),
+.blackNotes > span[active]:nth-child(7) {
+  background-color: #7100a4;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.whiteNotes > span[active]:nth-child(7),
+.blackNotes > span[active]:nth-child(8) {
+  background-color: #ff00a7;
+  /* background-image: url('https://static.nulled.to/public/assets/sparkling.gif'); */
+  /* background-image: url('/gold.gif'); */
+}
+
+.blackNotes > span {
+  background-color: black;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+  height: 100%;
+  display: inline-block;
+  flex-grow: 1;
+  order: 1;
+  width: auto;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: cover;
+}
+
+.blackNotes > span:nth-child(1),
+.blackNotes > span:nth-child(4),
+.blackNotes > span:nth-child(5),
+.blackNotes > span:last-child {
+  visibility: hidden;
+}
