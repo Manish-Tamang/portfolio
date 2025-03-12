@@ -154,7 +154,7 @@ export default function PhotoGallery() {
             <div className="mb-6">
                 <h1 className="text-3xl font-peachi font-bold text-left">Photo Gallery</h1>
                 <p className="text-gray-500 dark:text-gray-400 mb-8">
-                    A collection of random images from my gallery. Click on the images to view them in full size.
+                    A collection of random images from my gallery.
                 </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
