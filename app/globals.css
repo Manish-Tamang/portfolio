@@ -42,19 +42,18 @@
   --input: 240 5.9% 90%;
   --ring: 240 10% 3.9%;
 
-    /* Chart Colors */
+  /* Chart Colors */
   --chart-1: 173 58% 39%;
   --chart-2: 12 76% 61%;
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
-  --color-chrome: #4285F4;       
-  --color-safari: #007AFF;       
-  --color-firefox: #FF9500;      
-  --color-edge: #00ABEB;          
-  --color-other: #8E24AA;       
+  --color-chrome: #4285f4;
+  --color-safari: #007aff;
+  --color-firefox: #ff9500;
+  --color-edge: #00abeb;
+  --color-other: #8e24aa;
 }
-
 
 :root {
   --sh-class: #2d5e9d;
@@ -195,91 +194,91 @@ input[type="button"],
 }
 
 ::selection {
-  background-color: #38A662;
-  color: white; 
+  background-color: #38a662;
+  color: white;
 }
 
-@font-face { 
-  font-family: 'Peachi';
-  src: url('/fonts/peachi-bold.otf') format('opentype');
-  font-weight: bold; 
+@font-face {
+  font-family: "Peachi";
+  src: url("/fonts/peachi-bold.otf") format("opentype");
+  font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Thin.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Thin.otf") format("opentype");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-ExtraLight.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-ExtraLight.otf") format("opentype");
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Light.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Regular.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Medium.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-SemiBold.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-SemiBold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Bold.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-ExtraBold.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-ExtraBold.otf") format("opentype");
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Black.otf') format('opentype');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Black.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Life of Apple';
-  src: url('/fonts/Life-of-Apple.ttf') format('truetype');
+  font-family: "Life of Apple";
+  src: url("/fonts/Life-of-Apple.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Ride My Bike';
-  src: url('/fonts/latinotype-ridemybike-pro-bold-italic.otf') format('opentype');
+  font-family: "Ride My Bike";
+  src: url("/fonts/latinotype-ridemybike-pro-bold-italic.otf")
+    format("opentype");
   font-weight: bold;
   font-style: italic;
 }
@@ -287,4 +286,167 @@ input[type="button"],
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+}
+
+/* Piano Styles */
+.piano-main {
+  align-items: center;
+  display: flex;
+  overflow: auto;
+  position: relative;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.piano-child1 {
+  position: relative;
+  width: 100%;
+  flex: 1 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.piano-child2 {
+  position: relative;
+  height: 90px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.piano-child2 > div:nth-child(1) {
+  height: 30px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  display: inline-flex;
+}
+
+.piano-child2 > div:nth-child(2) {
+  flex: 1 1;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+  display: flex;
+}
+
+.piano-container {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+
+.piano-roll {
+  height: 60%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  flex: 1;
+  /* background-color: #191A19; */
+}
+
+.octave {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  max-width: 200px;
+}
+
+.octave:nth-child(1) span:nth-child(1) {
+  border-left: 1px solid #aaaaaa;
+}
+
+.blackNotes {
+  height: 55px;
+  display: flex;
+  width: auto;
+  left: 0;
+  right: 0;
+  top: 1px;
+  position: absolute;
+}
+
+.whiteNotes {
+  height: 100%;
+  display: flex;
+}
+
+.whiteNotes > span {
+  width: auto;
+  height: 100%;
+  display: inline-block;
+  border-right: 1px solid #aaaaaa;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaaaaa;
+  flex-grow: 1;
+  order: 1;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: cover;
+  background-color: white;
+}
+
+.whiteNotes > span[active]:nth-child(1) {
+  background-color: #f00;
+}
+
+.whiteNotes > span[active]:nth-child(2),
+.blackNotes > span[active]:nth-child(2) {
+  background-color: #ff5b1b;
+}
+
+.whiteNotes > span[active]:nth-child(3),
+.blackNotes > span[active]:nth-child(3) {
+  background-color: #0fddff;
+}
+
+.whiteNotes > span[active]:nth-child(4) {
+  background-color: #fcff21;
+}
+
+.whiteNotes > span[active]:nth-child(5),
+.blackNotes > span[active]:nth-child(6) {
+  background-color: #026400;
+}
+
+.whiteNotes > span[active]:nth-child(6),
+.blackNotes > span[active]:nth-child(7) {
+  background-color: #7100a4;
+}
+
+.whiteNotes > span[active]:nth-child(7),
+.blackNotes > span[active]:nth-child(8) {
+  background-color: #ff00a7;
+}
+
+.blackNotes > span {
+  background-color: black;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+  height: 100%;
+  display: inline-block;
+  flex-grow: 1;
+  order: 1;
+  width: auto;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: cover;
+}
+
+.blackNotes > span:nth-child(1),
+.blackNotes > span:nth-child(4),
+.blackNotes > span:nth-child(5),
+.blackNotes > span:last-child {
+  visibility: hidden;
 }
