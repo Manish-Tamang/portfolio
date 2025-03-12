@@ -8,6 +8,7 @@
 .grid {
   display: grid;
   grid-gap: 2px;
+  min-width: 640px;
 }
 
 .cell {
@@ -21,7 +22,7 @@
 }
 
 .cell:hover {
-  background-color: #0366d6; /* Highlight on hover (GitHub style) */
+  background-color: #0366d6;
 }
 
 .contributions {
@@ -110,4 +111,25 @@
   width: 12px;
   height: 12px;
   border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: auto;
+  }
+
+  .grid::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .grid::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+
+  .grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
 }
