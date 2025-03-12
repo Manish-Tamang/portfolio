@@ -25,7 +25,7 @@ const ManifestPage = () => {
         { id: 5, title: "Complete MERN Stack", completed: false },
         { id: 6, title: "Earn NPR 100k", completed: false },
         { id: 7, title: "Buy a MacBook Air M2", images: ["/img/bucketlist/macbook.jpg",], completed: false },
-        { id: 8, title: "Buy a Samsung Galaxy S24",  completed: false },
+        { id: 8, title: "Buy a Samsung Galaxy S24", completed: false },
     ]);
 
     return (
@@ -40,7 +40,8 @@ const ManifestPage = () => {
                             Bucket List
                         </h2></CardTitle>
                     </CardHeader>
-                    <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} /></CardContent>
+                    <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} />
+                    </CardContent>
                 </Card>
             </section>
 
@@ -60,6 +61,9 @@ const ManifestPage = () => {
                     ))}
                 </div>
             </section>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+                The Bucket List section is inspired by <a href="https://theodorusclarence.com/bucket-list" className="underline">Theodorus Clarence</a>.
+            </p>
         </div>
     );
 };
