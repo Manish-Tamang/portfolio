@@ -9,6 +9,9 @@ const UsesPage = () => {
                 A peek into the tools and technologies I use daily.
             </p>
             <UsesGrid />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+                This page is inspired by <a href="https://sayandey.dev/utilities" className="underline">Sayan Dey</a>.
+            </p>
         </div>
     );
 };
