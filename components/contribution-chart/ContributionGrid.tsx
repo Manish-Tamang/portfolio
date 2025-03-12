@@ -54,16 +54,32 @@ export const ContributionGrid: FC<ContributionGridProps> = ({ weeks, colors }) =
     const numWeeks = weeks.length;
 
     return (
-
-        <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${numWeeks}, 10px)` }} > {Array.from({ length: maxDaysInWeek }).map((_, dayIndex) => (Array.from({ length: numWeeks }).map((__, weekIndex) => {
-            const week = weeks[weekIndex]; const day = week.contributionDays[dayIndex]; const cellId = `${weekIndex}-${dayIndex}`;
-            if (!day || isAfter(parseISO(day.date), today)) {
-                return (
-
-                    <div key={cellId} className={styles.cell} style={{ backgroundColor: "#EDEDED" }} > <div className={styles.contributions}></div> </div>);
-            }
-            return (
-
-                <div key={cellId} className={styles.cell} style={{ backgroundColor: getCellColor(day.contributionCount) }} onMouseEnter={() => setHoveredCell(cellId)} onMouseLeave={() => setHoveredCell(null)} onClick={() => setActiveTooltip(activeTooltip === cellId ? null : cellId)} > <div className={styles.contributions}>{day?.contributionCount || 0}</div> {(activeTooltip === cellId || hoveredCell === cellId) && (<div className={styles.tooltip}> <div>{day?.contributionCount || 0} contributions</div> <div className={styles.date}> {day ? format(parseISO(day.date), 'EEE, MMM d, yyyy', { locale: enUS }) : 'No Date'} </div> </div>)} </div>);
-        })))} </div>);
+        <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${numWeeks}, 10px)` }}>
+            {Array.from({ length: maxDaysInWeek }).map((_, dayIndex) => (
+                Array.from({ length: numWeeks }).map((__, weekIndex) => {
+                    const week = weeks[weekIndex];
+                    const day = week.contributionDays[dayIndex];
+                    const cellId = `${weekIndex}-${dayIndex}`;
+                    if (!day || isAfter(parseISO(day.date), today)) {
+                        return (
+                            <div key={cellId} className={styles.cell} style={{ backgroundColor: "#EDEDED" }}>
+                                <div className={styles.contributions}></div>
+                            </div>
+                        );
+                    }
+                    return (
+                        <div key={cellId} className={styles.cell} style={{ backgroundColor: getCellColor(day.contributionCount) }} onMouseEnter={() => setHoveredCell(cellId)} onMouseLeave={() => setHoveredCell(null)} onClick={() => setActiveTooltip(activeTooltip === cellId ? null : cellId)}>
+                            <div className={styles.contributions}>{day?.contributionCount || 0}</div>
+                            {(activeTooltip === cellId || hoveredCell === cellId) && (
+                                <div className={styles.tooltip}>
+                                    <div>{day?.contributionCount || 0} contributions</div>
+                                    <div className={styles.date}>{day ? format(parseISO(day.date), 'EEE, MMM d, yyyy', { locale: enUS }) : 'No Date'}</div>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })
+            ))}
+        </div>
+    );
 };
