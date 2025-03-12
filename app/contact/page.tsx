@@ -1,21 +1,64 @@
 "use client"
 
-import React, { useState } from "react"
-import { Mail, Send, Loader2, MapPin, Linkedin, Clock } from "lucide-react"
+import React, { useState, useEffect } from "react"
+import { Loader2 } from "lucide-react"
 import toast, { Toaster } from 'react-hot-toast'
 
+interface FormData {
+    email: string;
+    message: string;
+    emotion: string;
+    category: string;
+}
+
+interface TimeZoneDBResponse {
+    datetime: string;
+    formatted: string;
+}
+
 const ContactPage = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [formData, setFormData] = useState({
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [formData, setFormData] = useState<FormData>({
         email: "",
         message: "",
         emotion: "",
         category: "general"
-    })
+    });
+    const [nepalTime, setNepalTime] = useState<string | null>(null);
+    const [availabilityMessage, setAvailabilityMessage] = useState<string>("");
 
-    const handleSubmit = async (e: { preventDefault: () => void }) => {
-        e.preventDefault()
-        setIsSubmitting(true)
+    useEffect(() => {
+        const fetchNepalTime = async () => {
+            try {
+                const response = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${process.env.NEXT_PUBLIC_TIMEZONEDB_API_KEY}&format=json&by=zone&zone=Asia/Kathmandu`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (data.status === 'OK') {
+                    setNepalTime(data.formatted);
+                } else {
+                    throw new Error(`TimezoneDB error: ${data.message}`);
+                }
+
+            } catch (error: any) {
+                console.error("Failed to fetch Nepal time:", error);
+                setNepalTime(null);
+                setAvailabilityMessage("Unable to determine current availability due to an error.");
+            }
+        };
+
+        fetchNepalTime();
+        const intervalId = setInterval(fetchNepalTime, 60000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
@@ -27,41 +70,63 @@ const ContactPage = () => {
                     ...formData,
                     access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
                 }),
-            })
+            });
 
             if (response.ok) {
-                setFormData({ email: "", message: "", emotion: "", category: "general" })
-                toast.success("Message sent successfully!")
+                setFormData({ email: "", message: "", emotion: "", category: "general" });
+                toast.success("Message sent successfully!");
             } else {
-                throw new Error()
+                throw new Error(`Failed to submit form: ${response.status}`);
             }
-        } catch (error) {
-            toast.error("Failed to send message. Please try again later.")
+        } catch (error: any) {
+            console.error("Form submission error:", error);
+            toast.error("Failed to send message. Please try again later.");
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
-    }
+    };
 
-    const handleChange = (e: { target: { name: any; value: any } }) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
     const handleEmotionSelect = (emotion: string) => {
-        setFormData({ ...formData, emotion })
-    }
+        setFormData({ ...formData, emotion });
+    };
 
     const handleCategorySelect = (category: string) => {
-        setFormData({ ...formData, category })
-    }
+        setFormData({ ...formData, category });
+    };
 
     return (
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
             <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
-            <p className="text-gray-700 dark:text-gray-300 text-left mb-8">
-                Feel free to reach out with any questions or opportunities. I'll get back to you as soon as possible.
-            </p>
+            <p className="text-gray-700 dark:text-gray-300 text-left mb-2">
+                It's currently {nepalTime ? (
+                    <>{new Date(nepalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</>
+                ) : (
+                    <span className="inline-block w-16 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>
+                )} in <strong>Nepal</strong> and {
+                    (() => {
+                        if (!nepalTime) {
+                            return <span className="inline-block w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>;
+                        }
 
+                        const date = new Date(nepalTime);
+                        const hours = date.getHours();
+
+                        if (hours >= 0 && hours < 8) {
+                            return "I'm likely sleeping 😴";
+                        } else if (hours >= 10 && hours < 17.5) {
+                            return "I'm likely at college 🎓";
+                        } else {
+                            return "I'm likely working 👨‍💻 or Studying";
+                        }
+                    })()
+                }. Feel free to send me a message, I will get back to you as soon as possible.
+            </p>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                     <label htmlFor="email" className="block text-gray-700 dark:text-white">
