@@ -117,7 +117,7 @@ export default async function BlogPost(props: {
         </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-      {post.coverImage && (
+      {/* {post.coverImage && (
         <Image
           width={800}
           height={400}
@@ -129,7 +129,7 @@ export default async function BlogPost(props: {
           }}
           priority
         />
-      )}
+      )} */}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
