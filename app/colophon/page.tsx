@@ -139,6 +139,7 @@ const ColophonPage = () => {
                     <li>Joke API: To generate random jokes.</li>
                     <li>Spotify API: To showcase listening activity.</li>
                     <li>WakaTime API: To display coding statistics.</li>
+                    <li><Link href="https://timezonedb.com/api" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Time API</Link>: To display time in contact page.</li>
                     <li><Link href="https://umami.is/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Umami API</Link>: For privacy-focused website analytics.</li>
                     <li><Link href="https://feedback.fish/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Feedback.fish</Link>: Providing the feedback widget.</li>
                     <li><Link href="https://threejs.org/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Three.js</Link> & <Link href="https://docs.pmnd.rs/react-three-fiber/getting-started/introduction" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">React Three Fiber</Link>: For creating interactive 3D elements.</li>
