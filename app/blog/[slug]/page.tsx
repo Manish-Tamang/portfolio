@@ -11,6 +11,7 @@ export interface FullBlog {
   content: string;
   coverImage?: any;
   date: string;
+  excerpt: string;
 }
 
 const estimateReadingTime = (content: string): number => {
@@ -35,7 +36,8 @@ async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
     title,
     date,
     coverImage,
-    content
+    content,
+    excerpt 
   }`;
 
   try {
@@ -48,7 +50,7 @@ async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }): Promise<Metadata> {
   const params = await props.params;
   const { slug } = params;
@@ -62,12 +64,24 @@ export async function generateMetadata(props: {
 
   return {
     title: post.title,
-    description: `Read more about ${post.title} on Manish Tamang's blog.`,
+    description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
+      images: post.coverImage ? [urlFor(post.coverImage).url()] : ['/profile.png'],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
+      images: post.coverImage ? [urlFor(post.coverImage).url()] : ['/profile.png'],
+    },
   };
 }
 
 export default async function BlogPost(props: {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }) {
   const params = await props.params;
   const { slug } = params;
@@ -103,16 +117,19 @@ export default async function BlogPost(props: {
         </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-      {/* Uncomment and adjust if you want to include the cover image */}
-      {/* {post.coverImage && (
+      {post.coverImage && (
         <Image
-          width={100}
-          height={100}
+          width={800}
+          height={400}
           src={urlFor(post.coverImage).url()}
           alt={post.title}
           className="w-full h-auto mb-6 rounded-[8px]"
+          style={{
+            objectFit: 'cover',
+          }}
+          priority
         />
-      )} */}
+      )}
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
