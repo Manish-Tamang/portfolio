@@ -235,7 +235,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <WakaTimeCard
                     title="Total Time Coded"
-                    description="All time coding duration"
+                    description="All time coding duration since sep 2 2024"
                     isLoading={isLoading}
                     value={totalCodingTime}
                     icon={<Clock className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
