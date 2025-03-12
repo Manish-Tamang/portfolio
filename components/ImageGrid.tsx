@@ -31,7 +31,7 @@ const stories = [
 export default function ImageGrid() {
     return (
         
-            <div className="mt-4 mb-4 flex justify-center items-center gap-4 max-w-6xl">
+            <div className="mb-4 flex justify-center items-center gap-4 max-w-6xl">
                 {stories.map((story, index) => (
                     <div
                         key={story.id}
