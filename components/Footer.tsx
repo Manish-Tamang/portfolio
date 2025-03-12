@@ -25,7 +25,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 pb-8 rounded-t-3xl pt-10 px-4 sm:px-6 lg:px-8">
+    <footer className="mt-4 pb-8 rounded-t-3xl pt-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="mb-6">
           <NowPlaying />
