@@ -16,12 +16,14 @@ import {
     SiNodedotjs
 } from 'react-icons/si';
 import { Karla } from 'next/font/google';
+import CarbonAds from '@/components/carbonAds';
 
 const karla = Karla({ subsets: ['latin'] });
 
 const ColophonPage = () => {
     return (
         <div className="container mx-auto py-12 px-6 max-w-3xl">
+            {/* <CarbonAds className="fixed bottom-4 left-20 w-1/4" /> */}
             <h1 className="text-4xl font-bold mb-6 font-peachi">Colophon</h1>
 
             <section className="mb-8">
@@ -185,7 +187,7 @@ const IconItem: React.FC<IconItemProps> = ({ url, icon }) => (
 );
 
 const TypographyItem: React.FC<{ label: string; font?: string }> = ({ label, font }) => (
-    <div className="border p-4 text-4xl rounded-[4px] text-center" style={{ fontFamily: font || 'inherit' }}>
+    <div className="border p-4 text-4xl text-center" style={{ fontFamily: font || 'inherit' }}>
         {label}
     </div>
 );
