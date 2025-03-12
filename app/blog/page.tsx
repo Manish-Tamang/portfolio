@@ -84,8 +84,8 @@ export default function Blogs() {
                     <div className="relative w-full">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                         <Input
-                            className="pl-10 pr-4 py-2 border-2 dark:bg-gray-800 bg-gray-100 border-gray-200  focus:ring-2 focus:ring-blue-200 transition-all rounded-[4px]"
-                            placeholder="Search posts..."
+                            className="pl-10 pr-4 py-2 border dark:bg-gray-800 bg-gray-100 border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#38A662] transition-all rounded-[4px]"
+                            placeholder="Search blogs..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -103,7 +103,7 @@ export default function Blogs() {
                     </div>
                 </div>
                 <p className="text-sm text-gray-500 ml-2">
-                    {filteredAndSortedPosts.length} {filteredAndSortedPosts.length === 1 ? 'post' : 'posts'} found
+                    {filteredAndSortedPosts.length} {filteredAndSortedPosts.length === 1 ? 'blog' : 'blogs'} found
                 </p>
             </div>
 
@@ -111,7 +111,7 @@ export default function Blogs() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
                         <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
-                            <article className="rounded-xl border overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-gray-800 h-full flex flex-col">
+                            <article className="rounded-[4px] border-2 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-gray-800 h-full flex flex-col">
                                 {post.coverImage && (
                                     <div className="relative w-full pt-[56.25%] overflow-hidden">
                                         <BlurFadeImage
@@ -144,11 +144,6 @@ export default function Blogs() {
                                     <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
                                         {post.excerpt}
                                     </p>
-                                    <div className="mt-auto">
-                                        <span className="inline-block text-[#7AC594] dark:text-blue-400 font-medium group-hover:underline">
-                                            Read more
-                                        </span>
-                                    </div>
                                 </div>
                             </article>
                         </Link>
