@@ -24,7 +24,7 @@ const About = () => {
 
     return (
         <Container>
-            <section className="py-12 md:py-24">
+            <section className="py-12 md:py-12">
                 <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-12">
                     <div className="w-full">
                         <h1 className="text-5xl font-lifeofapple mb-6 leading-tight">
@@ -83,7 +83,6 @@ const About = () => {
                     )}
 
                     <div className="md:col-span-2">
-                        {/* Show ImageGrid only on larger screens */}
                         {isLargeScreen && <ImageGrid />}
 
                         <h2 className="text-2xl font-semibold mb-4 font-peachi mt-4">What is My Ambition?</h2>
