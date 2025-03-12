@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@code-hike/mdx": "^0.9.0",
+    "@feedback-fish/react": "^1.2.2",
     "@hookform/resolvers": "^3.9.0",
     "@next/mdx": "^15.1.6",
     "@next/swc-wasm-nodejs": "13.5.1",
