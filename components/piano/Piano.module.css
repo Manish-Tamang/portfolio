@@ -1,0 +1,63 @@
+.main {
+  align-items: center;
+  display: flex;
+  overflow: auto;
+  position: relative;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.child1 {
+  position: relative;
+  width: 100%;
+  flex: 1 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.child2 {
+  position: relative;
+  height: 90px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.child2 > div:nth-child(1) {
+  height: 30px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  display: inline-flex;
+}
+
+.child2 > div:nth-child(2) {
+  flex: 1 1;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+  display: flex;
+}
+
+.pianoContainer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+
+.roll {
+  height: 60%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  flex: 1;
+}
