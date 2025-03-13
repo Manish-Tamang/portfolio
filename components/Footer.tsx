@@ -134,7 +134,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/blogs"
+                  href="/blog"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
                 >
                   <HiOutlineBookOpen className="mr-2 h-5 w-5" aria-hidden="true" />
