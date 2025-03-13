@@ -182,7 +182,7 @@ export default function Blogs() {
                                         </span>
                                         <span>•</span>
                                         <span className="text-gray-500 text-sm">
-                                            {typeof views[post.slug.current] === 'number' ? `${views[post.slug.current]} views` : "Loading views..."}
+                                            {typeof views[post.slug.current] === 'number' ? `${views[post.slug.current]} views` : "* views"}
                                         </span>
                                     </div>
                                     <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
