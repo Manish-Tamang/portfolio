@@ -198,14 +198,14 @@ const TypographyItem: React.FC<{ label: string; font?: string }> = ({ label, fon
 );
 
 const ColorPalette: React.FC = () => {
-    const colors = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+    const shades = [90, 80, 70, 60, 50, 40, 30, 20, 10, 5];
     return (
         <div className="flex flex-wrap gap-1">
-            {colors.map((color) => (
+            {shades.map((shade, index) => (
                 <div
-                    key={color}
+                    key={index}
                     className="w-6 h-6 rounded-[4px]"
-                    style={{ backgroundColor: `hsl(220, 89%, ${100 - color / 10}%)` }}
+                    style={{ backgroundColor: `hsl(147, 50%, ${shade}%)` }}
                 ></div>
             ))}
         </div>
