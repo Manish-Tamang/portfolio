@@ -1,4 +1,4 @@
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export enum Form {
   Initial,
@@ -45,8 +45,6 @@ export type Artist = {
   url: string;
 };
 
-
-
 export type Post = {
   _id: string;
   slug: string;
@@ -57,4 +55,15 @@ export type Post = {
   coverImage: string;
   readingTime: string;
   tweets: any[];
+};
+
+export type BlogPostStats = {
+  slug: string;
+  title: string;
+  thumbsUp: number;
+  heart: number;
+  trophy: number;
+  bookmark: number;
+  views: number;
+  totalReactions: number;
 };
