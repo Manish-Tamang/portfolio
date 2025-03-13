@@ -19,11 +19,13 @@ const ShareButton = ({ url }: { url: string }) => {
         <Popover>
             <PopoverTrigger asChild>
                 <Button
-                    className="cursor-pointer transition-all bg-[#38A662] text-white px-4 py-2 rounded-[4px] 
+                    className={`cursor-pointer transition-all bg-[#38A662] text-white px-4 py-2 rounded-[4px] 
                         border-[#2D8A4D] border-b-[4px] hover:bg-[#3EBF70] hover:-translate-y-[1px] 
                         hover:border-b-[6px] active:border-b-[2px] active:bg-[#2D8A4D] active:translate-y-[2px]
                         flex items-center gap-2 dark:bg-[#38A662] dark:border-[#2D8A4D] dark:text-white
-                        dark:hover:bg-[#3EBF70] dark:active:bg-[#2D8A4D] w-full h-10 mt-2"
+                        dark:hover:bg-[#3EBF70] dark:active:bg-[#2D8A4D]
+                        w-full h-10 mt-6 
+                        sm:w-auto`}
                 >
                     <FiShare2 className="w-5 h-5" />
                     Share
