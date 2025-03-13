@@ -121,7 +121,7 @@ export default async function BlogPost(props: { params: { slug: string } }) {
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
-        <div className="flex mt-4 justify-center space-x-4">
+        <div className="flex border-t border-b mt-4 justify-center space-x-4">
           <ShareButton url={process.env.NEXT_PUBLIC_SITE_URL + `/blog/${post.currentSlug}`} />
           <LikeButtons slug={post.currentSlug} />
         </div>
