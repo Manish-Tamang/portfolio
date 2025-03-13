@@ -26,7 +26,7 @@ const ManifestPage = () => {
         { id: 4, title: "Complete MERN Stack", completed: false },
         { id: 5, title: "Earn NPR 100k", completed: false },
         { id: 6, title: "Buy a MacBook Air M2", images: ["/img/bucketlist/macbook.jpg",], completed: false },
-        { id: 7, title: "Buy a Samsung Galaxy S24", completed: false },
+        { id: 7, title: "Buy a Nothing Phone 2a", completed: false },
     ]);
 
     return (
