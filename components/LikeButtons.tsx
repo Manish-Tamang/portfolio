@@ -4,6 +4,7 @@ import { FaThumbsUp, FaHeart, FaTrophy, FaBookmark } from 'react-icons/fa';
 import { db } from '@/firebase/config';
 import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
 import { useCookies } from 'react-cookie';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface LikeCounts {
     thumbsUp?: number;
@@ -100,65 +101,75 @@ const LikeButtons: React.FC<LikeButtonsProps> = ({ slug }) => {
     };
 
     return (
-        <div className="flex justify-end gap-3 mb-6 p-2 bg-gray-50 dark:bg-[#09090B] rounded-xl">
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <>
-                    <button
-                        className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'thumbsUp' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
-                        onClick={() => handleButtonClick('thumbsUp')}
-                        style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
-                    >
-                        <span className="inline-flex items-center mr-1.5">
-                            <FaThumbsUp
-                                size={18}
-                                color={activeButton === 'thumbsUp' ? '#4dabf7' : undefined}
-                            />
-                        </span>
-                        {likeCounts.thumbsUp || 0}
-                    </button>
-                    <button
-                        className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'heart' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
-                        onClick={() => handleButtonClick('heart')}
-                        style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
-                    >
-                        <span className="inline-flex items-center mr-1.5">
-                            <FaHeart
-                                size={18}
-                                color={activeButton === 'heart' ? '#ff6b6b' : undefined}
-                            />
-                        </span>
-                        {likeCounts.heart || 0}
-                    </button>
-                    <button
-                        className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'trophy' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
-                        onClick={() => handleButtonClick('trophy')}
-                        style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
-                    >
-                        <span className="inline-flex items-center mr-1.5">
-                            <FaTrophy
-                                size={18}
-                                color={activeButton === 'trophy' ? '#ffd43b' : undefined}
-                            />
-                        </span>
-                        {likeCounts.trophy || 0}
-                    </button>
-                    <button
-                        className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'bookmark' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
-                        onClick={() => handleButtonClick('bookmark')}
-                        style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
-                    >
-                        <span className="inline-flex items-center mr-1.5">
-                            <FaBookmark
-                                size={18}
-                                color={activeButton === 'bookmark' ? '#40c057' : undefined}
-                            />
-                        </span>
-                        {likeCounts.bookmark || 0}
-                    </button>
-                </>
-            )}
+        <div className="flex justify-end gap-2 mb-6 p-2 bg-gray-50 dark:bg-[#09090B] rounded-xl">
+            <button
+                className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'thumbsUp' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
+                onClick={() => handleButtonClick('thumbsUp')}
+                style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
+            >
+                <span className="inline-flex items-center mr-1.5">
+                    <FaThumbsUp
+                        size={18}
+                        color={activeButton === 'thumbsUp' ? '#4dabf7' : undefined}
+                    />
+                </span>
+                {isLoading ? (
+                    <Skeleton className="w-4 h-4 rounded-full" />
+                ) : (
+                    likeCounts.thumbsUp || 0
+                )}
+            </button>
+            <button
+                className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'heart' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
+                onClick={() => handleButtonClick('heart')}
+                style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
+            >
+                <span className="inline-flex items-center mr-1.5">
+                    <FaHeart
+                        size={18}
+                        color={activeButton === 'heart' ? '#ff6b6b' : undefined}
+                    />
+                </span>
+                {isLoading ? (
+                    <Skeleton className="w-4 h-4 rounded-full" />
+                ) : (
+                    likeCounts.heart || 0
+                )}
+            </button>
+            <button
+                className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'trophy' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
+                onClick={() => handleButtonClick('trophy')}
+                style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
+            >
+                <span className="inline-flex items-center mr-1.5">
+                    <FaTrophy
+                        size={18}
+                        color={activeButton === 'trophy' ? '#ffd43b' : undefined}
+                    />
+                </span>
+                {isLoading ? (
+                    <Skeleton className="w-4 h-4 rounded-full" />
+                ) : (
+                    likeCounts.trophy || 0
+                )}
+            </button>
+            <button
+                className={`inline-flex items-center justify-center px-3.5 py-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-base font-medium transition-all duration-300 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-px ${activeButton === 'bookmark' ? 'bg-gray-200 dark:bg-gray-700 shadow-md' : ''}`}
+                onClick={() => handleButtonClick('bookmark')}
+                style={{ cursor: hasReacted ? 'not-allowed' : 'pointer' }}
+            >
+                <span className="inline-flex items-center mr-1.5">
+                    <FaBookmark
+                        size={18}
+                        color={activeButton === 'bookmark' ? '#40c057' : undefined}
+                    />
+                </span>
+                {isLoading ? (
+                    <Skeleton className="w-4 h-4 rounded-full" />
+                ) : (
+                    likeCounts.bookmark || 0
+                )}
+            </button>
         </div>
     );
 };
