@@ -18,6 +18,9 @@ import ProjectsBarChart from '@/components/ProjectsBarChart';
 import PieChartComponent from '@/components/PieChartComponent';
 import SessionStats from '@/components/dashboard/SessionStats';
 import GithubStats from '@/components/dashboard/GithubStats';
+import BlogStatsTable from '@/components/dashboard/BlogStatsTable';
+import { getBlogPostStats } from "@/lib/BlogStats";
+import TotalBlogStats from '@/components/dashboard/TotalBlogStats';
 
 
 const fetcher = async (url: string) => {
@@ -122,6 +125,16 @@ export default function DashboardPage() {
     const { theme } = useTheme();
     const [totalCodingTime, setTotalCodingTime] = useState<string>('N/A');
     const [formattedDailyAverage, setFormattedDailyAverage] = useState<string>('N/A');
+    const [blogPostStats, setBlogPostStats] = useState<any[]>([]); // Add Blog Post Stats
+
+    useEffect(() => {
+        const loadBlogStats = async () => {
+            const stats = await getBlogPostStats();
+            setBlogPostStats(stats);
+        };
+
+        loadBlogStats();
+    }, []);
 
     useEffect(() => {
         if (wakaTimeData?.data) {
@@ -311,6 +324,20 @@ export default function DashboardPage() {
             </div>
             <SessionStats className="mt-4 mb-4" />
             <GithubStats username="Manish-Tamang" />
+            <TotalBlogStats />
+            <Card className="col-span-full mt-6 bg-white dark:bg-[#09090B] border text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
+                <CardHeader>
+                    <CardTitle>Blog Post Stats</CardTitle>
+                    <CardDescription>Summary of blog post engagement.</CardDescription>
+                </CardHeader>
+                <CardContent className="p-4">
+                    {blogPostStats.length > 0 ? (
+                        <BlogStatsTable stats={blogPostStats} isLoading={false} />
+                    ) : (
+                        <p>No blog post stats available.</p>
+                    )}
+                </CardContent>
+            </Card>
         </motion.div>
     );
 }
