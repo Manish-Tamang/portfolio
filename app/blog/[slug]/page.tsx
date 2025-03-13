@@ -1,11 +1,11 @@
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { MDXComponents } from "@/components/mdx/MDXComponents";
-import Image from "next/image";
 import CarbonAds from "@/components/carbonAds";
 import { Metadata } from "next";
 import LikeButtons from "@/components/LikeButtons";
 import ShareButton from "@/components/ShareButton";
+import ViewCounter from "@/components/ViewCounter"; 
 
 export interface FullBlog {
   currentSlug: string;
@@ -34,13 +34,13 @@ function formatDate(dateString: string): string {
 
 async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
   const query = `*[_type == "post" && slug.current == $slug][0] {
-    "currentSlug": slug.current,
-    title,
-    date,
-    coverImage,
-    content,
-    excerpt 
-  }`;
+ "currentSlug": slug.current,
+ title,
+ date,
+ coverImage,
+ content,
+ excerpt
+ }`;
 
   try {
     const post = await client.fetch(query, { slug });
@@ -66,18 +66,28 @@ export async function generateMetadata(props: {
 
   return {
     title: post.title,
-    description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
+    description:
+      post.excerpt ||
+      `Read more about ${post.title} on Manish Tamang's blog.`,
     openGraph: {
       title: post.title,
-      description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
-      images: post.coverImage ? [urlFor(post.coverImage).url()] : ["/profile.png"],
+      description:
+        post.excerpt ||
+        `Read more about ${post.title} on Manish Tamang's blog.`,
+      images: post.coverImage
+        ? [urlFor(post.coverImage).url()]
+        : ["/profile.png"],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
-      images: post.coverImage ? [urlFor(post.coverImage).url()] : ["/profile.png"],
+      description:
+        post.excerpt ||
+        `Read more about ${post.title} on Manish Tamang's blog.`,
+      images: post.coverImage
+        ? [urlFor(post.coverImage).url()]
+        : ["/profile.png"],
     },
   };
 }
@@ -103,26 +113,23 @@ export default async function BlogPost(props: { params: { slug: string } }) {
       <h1 className="text-4xl font-bold mb-2 font-peachi">{post.title}</h1>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <Image
-            src="/profile.png"
-            alt="Manish Tamang"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-          <span className="text-gray-500 text-sm">Manish Tamang</span>
+          <span className="text-gray-500 text-sm">
+            {formattedDate} - {readingTime} min read
+          </span>
+          <span className="text-gray-400">•</span>
+          <ViewCounter slug={post.currentSlug} />
         </div>
-        <span className="text-gray-500 text-sm">
-          {formattedDate} - {readingTime} min read
-        </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
         <div className="flex border-t border-b mt-4 justify-center space-x-4">
-          <ShareButton url={process.env.NEXT_PUBLIC_SITE_URL + `/blog/${post.currentSlug}`} />
+          <ShareButton
+            url={
+              process.env.NEXT_PUBLIC_SITE_URL + `/blog/${post.currentSlug}`
+            }
+          />
           <LikeButtons slug={post.currentSlug} />
         </div>
       </div>
