@@ -4,6 +4,7 @@ import { MDXComponents } from '@/components/mdx/MDXComponents';
 import Image from 'next/image';
 import CarbonAds from '@/components/carbonAds';
 import { Metadata } from 'next';
+import LikeButtons from '@/components/LikeButtons';
 
 export interface FullBlog {
   currentSlug: string;
@@ -117,22 +118,13 @@ export default async function BlogPost(props: {
         </span>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-      {/* {post.coverImage && (
-        <Image
-          width={800}
-          height={400}
-          src={urlFor(post.coverImage).url()}
-          alt={post.title}
-          className="w-full h-auto mb-6 rounded-[8px]"
-          style={{
-            objectFit: 'cover',
-          }}
-          priority
-        />
-      )} */}
+
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
+        <div className="flex mt-4 justify-center">
+            <LikeButtons slug={post.currentSlug} />
+        </div>
       </div>
     </article>
   );
