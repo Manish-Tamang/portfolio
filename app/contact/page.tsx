@@ -104,7 +104,7 @@ const ContactPage = () => {
         if (day === 6) {
             return "It's Saturday! I'm likely chilling 🍹";
         } else {
-            if (hours >= 0 && hours < 8) {
+            if (hours >= 23 || hours < 7) {
                 return "I'm likely sleeping 😴";
             } else if (hours >= 10 && hours < 17.5) {
                 return "I'm likely at college 🎓";
