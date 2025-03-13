@@ -338,6 +338,9 @@ export default function DashboardPage() {
                     )}
                 </CardContent>
             </Card>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+                This page is inspired by <a href="https://theodorusclarence.com/statistics" className="underline">Theodorus Clarence (Blog stats)</a>and <a href="https://victoreke.com/" className="underline">Victor Eke (Contribution Graph)</a>.
+            </p>
         </motion.div>
     );
 }
