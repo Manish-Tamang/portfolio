@@ -166,6 +166,7 @@ const ColophonPage = () => {
                     <li><Link href="https://www.npmjs.com/package/react-canvas-confetti" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-canvas-confetti</Link>: To generate engaging confetti effects.</li>
                     <li><Link href="https://custom-cursor.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Custom Cursor</Link>: For unique and personalized custom cursors.</li>
                     <li><Link href="https://www.npmjs.com/package/react-medium-image-zoom" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-medium-image-zoom</Link>: Enables image zooming functionality.</li>
+                    <li><Link href="https://www.npmjs.com/package/react-cookie" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-cookie</Link>: For Storing Blog Views and Likes.</li>
                 </ul>
             </section>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
