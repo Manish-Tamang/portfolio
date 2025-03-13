@@ -46,16 +46,12 @@ export async function POST(
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      await updateDoc(docRef, {
-        count: increment(1),
-      });
+      await updateDoc(docRef, { count: increment(1) });
     } else {
-      await setDoc(docRef, {
-        count: 1,
-      });
+      await setDoc(docRef, { count: 1 });
     }
 
-    await cookieStore.set(`viewed-${slug}`, "true", {
+    cookieStore.set(`viewed-${slug}`, "true", {
       httpOnly: true,
       sameSite: "strict",
       path: "/",
