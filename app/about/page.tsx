@@ -40,7 +40,7 @@ const About = () => {
                                     </div>
                                 </div>
                             </span>
-                            , where I build the future.
+                            , where I code and commit.
                         </h1>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                             I'm a 16-year-old from Itahari, Nepal, driven by a fervent passion for web development. My coding journey began at a young age, and since then, I've immersed myself in building captivating websites, integrating and customizing various technologies like React, Next.js, Tailwind CSS, PostgreSQL, and more.
@@ -55,8 +55,6 @@ const About = () => {
                             पस्चताप को आगो ले म निकै त्रसित छु
                         </blockquote>
                     </div>
-
-                    {/* Show the hover image only on larger screens */}
                     {isLargeScreen && (
                         <div className="flex flex-col items-center top-40 self-start">
                             <div className="relative rounded-md w-48 h-full">
@@ -108,15 +106,16 @@ const About = () => {
                         <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Soft Skills</h2>
                         <ul className="list-disc pl-5 space-y-2">
                             <li>
-                                <span className="font-semibold">Attention to detail:</span> I take pleasure in creating designs and UIs with careful precision, emphasizing quality over quantity.
+                                <span className="font-semibold">Passion for learning:</span> As highlighted on <a href="https://manishtamang.com" className="text-blue-500 underline">my website</a>, I am deeply passionate about web development and continuously seek opportunities to expand my knowledge and skills.
                             </li>
                             <li>
-                                <span className="font-semibold">Open-source/Collaboration:</span> I founded a community on GitHub called Communitypro that helps newbie developers learn how to contribute to open-source projects and collaborate in building together.
+                                <span className="font-semibold">Adaptability:</span> My experience as a FullStack Web Development Intern, where I learned and applied TypeScript and Next.js in complex projects, showcases my ability to adapt to new technologies and challenges.
                             </li>
                             <li>
-                                <span className="font-semibold">Ability to work with little supervision:</span> I understand people are busy and strive to deliver assignments and projects efficiently.
+                                <span className="font-semibold">Community engagement:</span> Through my contributions to open-source projects and collaboration within the developer community, I actively engage in knowledge sharing and mentorship.
                             </li>
                         </ul>
+
 
                         <h2 className="text-2xl font-semibold mt-10 mb-4 font-peachi">Education</h2>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
