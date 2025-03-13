@@ -25,12 +25,28 @@ const estimateReadingTime = (content: string): number => {
     return Math.ceil(wordCount / wordsPerMinute);
 };
 
+const fetchViews = async (slug: string): Promise<number | null> => {
+    try {
+        const response = await fetch(`/api/views/${slug}`);
+        if (!response.ok) {
+            console.error(`Failed to fetch views for slug: ${slug}`);
+            return null;
+        }
+        const data = await response.json();
+        return data.views || 0;
+    } catch (error) {
+        console.error("Error fetching view count:", error);
+        return null;
+    }
+};
+
 export default function Blogs() {
     const [posts, setPosts] = useState<any[]>([]);
     const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [views, setViews] = useState<{ [slug: string]: number }>({});
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -48,6 +64,27 @@ export default function Blogs() {
 
         fetchPosts();
     }, []);
+
+    useEffect(() => {
+        const fetchAllViews = async () => {
+            const initialViews: { [slug: string]: number } = {};
+            if (posts && posts.length > 0) {
+                for (const post of posts) {
+                    try {
+                        const viewCount = await fetchViews(post.slug.current);
+                        initialViews[post.slug.current] = viewCount !== null ? viewCount : 0;
+                    } catch (error) {
+                        console.error(`Failed to fetch views for ${post.title}:`, error);
+                        initialViews[post.slug.current] = 0;
+                    }
+                }
+                setViews(initialViews);
+            }
+        };
+
+        fetchAllViews();
+    }, [posts]);
+
 
     const filteredAndSortedPosts = React.useMemo(() => {
         const filtered = searchQuery
@@ -113,8 +150,8 @@ export default function Blogs() {
             ) : filteredAndSortedPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
-                        <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
-                            <article className="rounded-[4px] border-2 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
+                        <article key={post.slug.current} className="rounded-[4px] border-2 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
+                            <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
                                 {post.coverImage && (
                                     <div className="relative w-full pt-[56.25%] overflow-hidden">
                                         <BlurFadeImage
@@ -143,13 +180,17 @@ export default function Blogs() {
                                             </svg>
                                             {format(new Date(post.date), 'MMM d, yyyy')}
                                         </span>
+                                        <span>•</span>
+                                        <span className="text-gray-500 text-sm">
+                                            {typeof views[post.slug.current] === 'number' ? `${views[post.slug.current]} views` : "Loading views..."}
+                                        </span>
                                     </div>
                                     <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
                                         {post.excerpt}
                                     </p>
                                 </div>
-                            </article>
-                        </Link>
+                            </Link>
+                        </article>
                     ))}
                 </div>
             ) : (
