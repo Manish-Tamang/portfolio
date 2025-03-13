@@ -23,7 +23,6 @@ export async function GET(
       return NextResponse.json({ views: 0 });
     }
   } catch (error: any) {
-    console.error("Error fetching views:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -35,6 +34,11 @@ export async function POST(
   const { slug } = params;
 
   try {
+    const host = request.headers.get("host");
+    if (host?.includes("localhost:3000")) {
+      return NextResponse.json({ message: "Views not counted on localhost" });
+    }
+
     const cookieStore = await cookies();
     const viewCookie = cookieStore.get(`viewed-${slug}`);
 
@@ -60,7 +64,6 @@ export async function POST(
 
     return NextResponse.json({ message: "View registered successfully" });
   } catch (error: any) {
-    console.error("Error registering view:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
