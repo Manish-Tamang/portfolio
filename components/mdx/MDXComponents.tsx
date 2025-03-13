@@ -198,8 +198,10 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               <li className="mb-0">{children}</li>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-0 text-gray-600 dark:text-gray-400">
+              <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                <span className="absolute -top-3 left-2 text-4xl text-gray-400 dark:text-gray-600">“</span>
                 {children}
+                <span className="absolute -bottom-3 right-2 text-4xl text-gray-400 dark:text-gray-600">”</span>
               </blockquote>
             ),
             a: ({ href, children }) => (
@@ -217,7 +219,7 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
                 src={src || ''}
                 alt={alt || ''}
                 delay={0.3}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full mt-4 mb-2"
                 width={800}
                 height={600}
               />
