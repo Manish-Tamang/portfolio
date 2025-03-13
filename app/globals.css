@@ -21,7 +21,6 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
   --card: 0 0% 100%;
@@ -41,8 +40,6 @@
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
   --ring: 240 10% 3.9%;
-
-  /* Chart Colors */
   --chart-1: 173 58% 39%;
   --chart-2: 12 76% 61%;
   --chart-3: 197 37% 24%;
@@ -53,9 +50,6 @@
   --color-firefox: #ff9500;
   --color-edge: #00abeb;
   --color-other: #8e24aa;
-}
-
-:root {
   --sh-class: #2d5e9d;
   --sh-identifier: #354150;
   --sh-sign: #8996a3;
@@ -70,9 +64,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
+    --background-start-rgb: 9, 9, 11;
+    --background-end-rgb: 9, 9, 11;
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -92,18 +85,11 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
-
-    /* Chart Colors Dark Mode */
     --chart-1: 220 70% 50%;
     --chart-5: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-2: 340 75% 55%;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
     --sh-class: #3b82f6;
     --sh-identifier: #b0bec5;
     --sh-sign: #607d8b;
@@ -124,7 +110,6 @@ html {
     pointer;
 }
 
-/* Custom cursor for clickable elements */
 a,
 button,
 [role="button"],
@@ -135,6 +120,7 @@ input[type="button"],
     url("/mac-cursor.png") 10 10,
     pointer;
 }
+
 .nav-underline {
   position: relative;
   -webkit-text-decoration: underline dotted;
@@ -147,6 +133,7 @@ input[type="button"],
 .nav-underline::after {
   content: none;
 }
+
 .flip-container {
   perspective: 1000px;
 }
@@ -183,6 +170,7 @@ input[type="button"],
   align-items: center;
   justify-content: center;
 }
+
 ::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.75rem;
@@ -288,7 +276,6 @@ input[type="button"],
   -webkit-touch-callout: none;
 }
 
-/* Piano Styles */
 .piano-main {
   align-items: center;
   display: flex;
@@ -351,7 +338,6 @@ input[type="button"],
   overflow-y: scroll;
   overflow-x: scroll;
   flex: 1;
-  /* background-color: #191A19; */
 }
 
 .octave {
