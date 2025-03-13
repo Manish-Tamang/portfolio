@@ -7,12 +7,12 @@ import { ThemeSwitcher } from './ui/theme-switcher';
 import Link from 'next/link';
 import {
   FaInstagram,
-  FaFacebookSquare,
   FaGithub,
   FaLinkedin,
   FaRegEnvelope,
   FaRegStar
 } from 'react-icons/fa';
+import { SiDailydotdev } from "react-icons/si";
 import {
   HiOutlineInformationCircle,
   HiOutlinePhotograph,
@@ -188,7 +188,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/codewithmanish_/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
@@ -199,18 +199,18 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://facebook.com"
+                  href="https://app.daily.dev/manishtamang"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
                 >
-                  <FaFacebookSquare className="mr-2 h-5 w-5" aria-hidden="true" />
-                  Facebook
+                  <SiDailydotdev className="mr-2 h-5 w-5" aria-hidden="true" />
+                  Daily.dev
                 </a>
               </li>
               <li>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Manish-Tamang"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
@@ -221,7 +221,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/manish-tamang/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
