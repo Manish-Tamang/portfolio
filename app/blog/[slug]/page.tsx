@@ -1,10 +1,11 @@
-import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
-import { MDXComponents } from '@/components/mdx/MDXComponents';
-import Image from 'next/image';
-import CarbonAds from '@/components/carbonAds';
-import { Metadata } from 'next';
-import LikeButtons from '@/components/LikeButtons';
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { MDXComponents } from "@/components/mdx/MDXComponents";
+import Image from "next/image";
+import CarbonAds from "@/components/carbonAds";
+import { Metadata } from "next";
+import LikeButtons from "@/components/LikeButtons";
+import ShareButton from "@/components/ShareButton";
 
 export interface FullBlog {
   currentSlug: string;
@@ -24,9 +25,9 @@ const estimateReadingTime = (content: string): number => {
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
   return date.toLocaleDateString(undefined, options);
 }
@@ -51,7 +52,7 @@ async function getBlogPostContent(slug: string): Promise<FullBlog | null> {
 }
 
 export async function generateMetadata(props: {
-  params: { slug: string }
+  params: { slug: string };
 }): Promise<Metadata> {
   const params = await props.params;
   const { slug } = params;
@@ -59,7 +60,7 @@ export async function generateMetadata(props: {
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: "Post Not Found",
     };
   }
 
@@ -69,21 +70,19 @@ export async function generateMetadata(props: {
     openGraph: {
       title: post.title,
       description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
-      images: post.coverImage ? [urlFor(post.coverImage).url()] : ['/profile.png'],
-      type: 'article',
+      images: post.coverImage ? [urlFor(post.coverImage).url()] : ["/profile.png"],
+      type: "article",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.title,
       description: post.excerpt || `Read more about ${post.title} on Manish Tamang's blog.`,
-      images: post.coverImage ? [urlFor(post.coverImage).url()] : ['/profile.png'],
+      images: post.coverImage ? [urlFor(post.coverImage).url()] : ["/profile.png"],
     },
   };
 }
 
-export default async function BlogPost(props: {
-  params: { slug: string }
-}) {
+export default async function BlogPost(props: { params: { slug: string } }) {
   const params = await props.params;
   const { slug } = params;
   const post = await getBlogPostContent(slug);
@@ -122,8 +121,9 @@ export default async function BlogPost(props: {
       <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
         <CarbonAds className="fixed bottom-4 left-20 w-1/4" />
         <MDXComponents content={post.content} />
-        <div className="flex mt-4 justify-center">
-            <LikeButtons slug={post.currentSlug} />
+        <div className="flex mt-4 justify-center space-x-4">
+          <ShareButton url={process.env.NEXT_PUBLIC_SITE_URL + `/blog/${post.currentSlug}`} />
+          <LikeButtons slug={post.currentSlug} />
         </div>
       </div>
     </article>
