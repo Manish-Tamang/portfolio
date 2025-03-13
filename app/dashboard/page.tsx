@@ -242,8 +242,8 @@ export default function DashboardPage() {
                 Dashboard
             </motion.h1>
             <p className="text-gray-500 dark:text-gray-400 mb-8">
-                A comprehensive overview of my coding activity, powered by WakaTime and GitHub.
-                Followed by Umami Analytics for session tracking.
+                A comprehensive overview of my coding activity, powered by WakaTime and GitHub, followed by Umami Analytics for session tracking. Additionally, blog statistics are included to give
+                insights into engagement and user interaction with my technical posts.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <WakaTimeCard
