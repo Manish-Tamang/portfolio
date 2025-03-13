@@ -9,6 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import BlogCardSkeleton from '@/components/BlogCardSkeleton';
+import { db } from "@/firebase/config";
+import { doc, getDoc } from "firebase/firestore";
+import { Eye } from "lucide-react";
 
 const query = `*[_type == "post"] {
     title,
@@ -25,24 +28,24 @@ const estimateReadingTime = (content: string): number => {
     return Math.ceil(wordCount / wordsPerMinute);
 };
 
-const fetchViews = async (slug: string): Promise<number | null> => {
+const fetchViewsFromFirebase = async (slug: string): Promise<number> => {
     try {
-        const response = await fetch(`/api/views/${slug}`);
-        if (!response.ok) {
-            console.error(`Failed to fetch views for slug: ${slug}`);
-            return null;
+        const docRef = doc(db, "views", slug);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data().count || 0;
+        } else {
+            return 0;
         }
-        const data = await response.json();
-        return data.views || 0;
     } catch (error) {
-        console.error("Error fetching view count:", error);
-        return null;
+        console.error("Error fetching views from Firebase:", error);
+        return 0;
     }
 };
 
 export default function Blogs() {
     const [posts, setPosts] = useState<any[]>([]);
-    const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+    const [sortOrder, setSortOrder] = useState<"newest" | "oldest" | "highest" | "lowest">("newest");
     const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -69,15 +72,17 @@ export default function Blogs() {
         const fetchAllViews = async () => {
             const initialViews: { [slug: string]: number } = {};
             if (posts && posts.length > 0) {
-                for (const post of posts) {
-                    try {
-                        const viewCount = await fetchViews(post.slug.current);
-                        initialViews[post.slug.current] = viewCount !== null ? viewCount : 0;
-                    } catch (error) {
-                        console.error(`Failed to fetch views for ${post.title}:`, error);
-                        initialViews[post.slug.current] = 0;
-                    }
-                }
+                await Promise.all(
+                    posts.map(async (post) => {
+                        try {
+                            const viewCount = await fetchViewsFromFirebase(post.slug.current);
+                            initialViews[post.slug.current] = viewCount;
+                        } catch (error) {
+                            console.error(`Failed to fetch views for ${post.title}:`, error);
+                            initialViews[post.slug.current] = 0;
+                        }
+                    })
+                );
                 setViews(initialViews);
             }
         };
@@ -87,18 +92,27 @@ export default function Blogs() {
 
 
     const filteredAndSortedPosts = React.useMemo(() => {
-        const filtered = searchQuery
+        let filtered = searchQuery
             ? posts.filter(post =>
                 post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
             )
             : posts;
-        return [...filtered].sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
-        });
-    }, [posts, searchQuery, sortOrder]);
+
+        let sorted = [...filtered];
+
+        if (sortOrder === "newest") {
+            sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        } else if (sortOrder === "oldest") {
+            sorted.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        } else if (sortOrder === "highest") {
+            sorted.sort((a, b) => (views[b.slug.current] || 0) - (views[a.slug.current] || 0));
+        } else if (sortOrder === "lowest") {
+            sorted.sort((a, b) => (views[a.slug.current] || 0) - (views[b.slug.current] || 0));
+        }
+
+        return sorted;
+    }, [posts, searchQuery, sortOrder, views]);
 
     return (
         <section className="container mx-auto py-12 px-4">
@@ -120,13 +134,15 @@ export default function Blogs() {
                         />
                     </div>
                     <div className="w-full md:w-auto">
-                        <Select onValueChange={(value) => setSortOrder(value as "newest" | "oldest")} defaultValue="newest">
+                        <Select onValueChange={(value) => setSortOrder(value as "newest" | "oldest" | "highest" | "lowest")} defaultValue="newest">
                             <SelectTrigger className="w-full md:w-[120px]">
                                 <SelectValue placeholder="Sort by" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="newest">Newest</SelectItem>
                                 <SelectItem value="oldest">Oldest</SelectItem>
+                                <SelectItem value="highest">Highest views</SelectItem>
+                                <SelectItem value="lowest">Lowest views</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -169,19 +185,13 @@ export default function Blogs() {
                                     <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm space-x-2 mb-4">
                                         <span className="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                            </svg>
-                                            {estimateReadingTime(post.content)} min read
-                                        </span>
-                                        <span>•</span>
-                                        <span className="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
                                             {format(new Date(post.date), 'MMM d, yyyy')}
                                         </span>
                                         <span>•</span>
-                                        <span className="text-gray-500 text-sm">
+                                        <span className="flex items-center">
+                                            <Eye className="h-4 w-4 mr-1" />
                                             {typeof views[post.slug.current] === 'number' ? `${views[post.slug.current]} views` : "* views"}
                                         </span>
                                     </div>
