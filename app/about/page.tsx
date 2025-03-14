@@ -48,11 +48,10 @@ const About = () => {
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                             I'm constantly seeking new challenges and learning opportunities to refine my skills.
                         </p>
-                        <blockquote className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic my-6 text-gray-600 dark:text-gray-400">
-                            म आफुलाइ राम्रो ठान्छु तर म भन्दा ठूलो पापी छैन, <br />
-                            मैले गरेको पाप हरुको सायेद कुनै माफी , <br />
-                            हे भग्वान समये बित्यो ऐले म सारै लज्जित छु, <br />
-                            पस्चताप को आगो ले म निकै त्रसित छु
+                        <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                            <span className="absolute -top-3 left-2 text-4xl text-gray-400 dark:text-gray-600">“</span>
+                            Good artists borrow, great artists steal.
+                            <span className="absolute -bottom-3 right-2 text-4xl text-gray-400 dark:text-gray-600">”</span>
                         </blockquote>
                     </div>
                     {isLargeScreen && (
