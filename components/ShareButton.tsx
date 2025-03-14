@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { FiShare2 } from "react-icons/fi";
 import { FaFacebook, FaTwitter, FaLinkedin, FaLink } from "react-icons/fa";
+import { PiShareFat } from "react-icons/pi";
 
 const ShareButton = ({ url }: { url: string }) => {
     const [copied, setCopied] = useState(false);
@@ -20,14 +20,14 @@ const ShareButton = ({ url }: { url: string }) => {
             <PopoverTrigger asChild>
                 <Button
                     className={`cursor-pointer transition-all bg-[#38A662] text-white px-4 py-2 rounded-[4px] 
-                        border-[#2D8A4D] border-b-[4px] hover:bg-[#3EBF70] hover:-translate-y-[1px] 
-                        hover:border-b-[6px] active:border-b-[2px] active:bg-[#2D8A4D] active:translate-y-[2px]
-                        flex items-center gap-2 dark:bg-[#38A662] dark:border-[#2D8A4D] dark:text-white
-                        dark:hover:bg-[#3EBF70] dark:active:bg-[#2D8A4D]
-                        w-full h-10 mt-6 
-                        sm:w-auto`}
+                            border-[#2D8A4D] border-b-[4px] hover:bg-[#3EBF70] hover:-translate-y-[1px] 
+                          hover:border-b-[6px] active:border-b-[2px] active:bg-[#2D8A4D] active:translate-y-[2px]
+                              flex items-center gap-2 dark:bg-[#38A662] dark:border-[#2D8A4D] dark:text-white
+                             dark:hover:bg-[#3EBF70] dark:active:bg-[#2D8A4D]
+                              w-full h-10 
+                           sm:w-auto`}
                 >
-                    <FiShare2 className="w-5 h-5" />
+                    <PiShareFat className="w-5 h-5" />
                     Share
                 </Button>
             </PopoverTrigger>
