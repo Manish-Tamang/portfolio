@@ -22,7 +22,7 @@ const components = [
   {
     title: "Latest Posts",
     href: "/blog",
-    description: "Recently published articles and updates",
+    description: "Recently published blogs",
   },
   {
     title: "Categories",
@@ -52,13 +52,14 @@ const components = [
   {
     title: "Colophon",
     href: "/colophon",
-    description: "Insights and analytics",
+    description: "Tech stack and behind-the-scenes details",
   },
   {
     title: "Projects",
     href: "/projects",
-    description: "Insights and analytics",
+    description: "A showcase of my work and creations",
   },
+
 ]
 
 const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
@@ -138,7 +139,7 @@ export default function Navbar() {
                         <NavigationMenuLink asChild>
                           <a
                             className="flex h-full w-full select-none flex-col justify-end rounded-[4px] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6 no-underline outline-none focus:shadow-md transition-all duration-300"
-                            href="/"
+                            href="/blog"
                           >
                             <div className="mb-2 mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
                               Developer Blog
