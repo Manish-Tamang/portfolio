@@ -23,7 +23,7 @@ const karla = Karla({ subsets: ['latin'] });
 const ColophonPage = () => {
     return (
         <div className="container mx-auto py-12 px-6 max-w-3xl">
-            {/* <CarbonAds className="fixed bottom-4 left-20 w-1/4" /> */}
+            <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
             <h1 className="text-4xl font-bold mb-6 font-peachi">Colophon</h1>
 
             <section className="mb-8">
@@ -35,7 +35,7 @@ const ColophonPage = () => {
                     This is the third version of my portfolio. My journey began in 2022 when I deployed my first portfolio, which I had copied from a YouTube tutorial. Later, after passing my SEE examination, I built the second version—this time inspired by and heavily influenced by Leerob’s portfolio. Now, with everything I’ve learned along the way, I’ve crafted this version from the ground up, blending all my experiences into a site that truly represents me.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                Built with Sanity, MDX, Firebase, TypeScript, NextJS and PostgreSQL, this website prioritizes performance, user experience, and maintainability.
+                    Built with Sanity, MDX, Firebase, TypeScript, NextJS and PostgreSQL, this website prioritizes performance, user experience, and maintainability.
                 </p>
 
             </section>
