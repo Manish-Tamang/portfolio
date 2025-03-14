@@ -118,8 +118,8 @@ export default function Blogs() {
         <section className="container mx-auto py-12 px-4">
             <h2 className="text-4xl font-semibold mb-4 font-peachi">Blogs</h2>
             <p className="text-black dark:text-gray-100 mb-8 max-w-2xl">
-                Welcome to my digital garden, where I share my thoughts, explore new things I learn, and nurture
-                ideas that spark my curiosity.
+                Welcome to my blog page, I've been writing online since 2023, mostly about web development, blogging & tech. 
+                Use the search below to filter by title.
             </p>
 
             <div className="mb-8 max-w-3xl mx-auto">
