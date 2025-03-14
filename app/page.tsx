@@ -66,9 +66,9 @@ export default function Home() {
                 <span className="block">
                   developer & creator
                 </span>
-                <span className="">
+                {/* <span className="">
                   at Swikar Codes.
-                </span>
+                </span> */}
               </h1>
             ) : (
               <h1 className="text-4xl md:text-6xl lg:text-5xl font-peachi flex items-center flex-wrap gap-2">
