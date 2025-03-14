@@ -5,6 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import TechStacks from "@/components/TechStacks";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+import FeaturedProjects from "@/components/FeaturedProject";
+import FeaturedBlogs from "@/components/FeaturedBlogs";
+import FeaturedPhotos from "@/components/FeaturedPhotos";
 
 const HomeScene = dynamic(() => import("@/components/3d-scene"), {
   ssr: false,
@@ -113,7 +116,7 @@ export default function Home() {
       </section>
       <section className="mb-16">
         <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
-        <p className="text-lg mb-4 leading-relaxed max-w-3xl">
+        <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mb-4 leading-relaxed max-w-3xl">
           I focus on building fast, future-proof solutions that thrive at the intersection of speed and precision.
           Every line of code I write balances rapid execution with meticulous structure, ensuring scalability and
           maintainability. To me, great development means shipping efficiently and leaving a foundation that lasts.
@@ -144,12 +147,15 @@ export default function Home() {
           <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
           <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <FeaturedProjects />
+        <FeaturedBlogs />
+        <FeaturedPhotos />
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div></div>
           <div>
             <HomeScene />
           </div>
-        </div>
+        </div> */}
       </section>
     </main>
   );
