@@ -21,11 +21,39 @@ import {
   HiOutlineBriefcase,
 } from 'react-icons/hi';
 import { FeedbackFish } from '@feedback-fish/react';
+import Image from 'next/image';
+
+type SessionData = {
+  id: string;
+  hostname: string;
+  browser: string;
+  os: string;
+  device: string;
+  screen: string;
+  language: string;
+  country: string;
+  subdivision1: string;
+  city: string;
+  firstAt: string;
+  lastAt: string;
+  visits: number;
+  views: number;
+  createdAt: string;
+};
+
+type SessionResponse = {
+  data: SessionData[];
+  count: number;
+  page: number;
+  pageSize: number;
+};
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [temperature, setTemperature] = useState(null);
+  const [temperature, setTemperature] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [lastVisit, setLastVisit] = useState<SessionData | null>(null);
+  const [sessionError, setSessionError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTemperature = async () => {
@@ -51,6 +79,32 @@ export default function Footer() {
 
     fetchTemperature();
   }, []);
+
+  useEffect(() => {
+    const fetchLastVisit = async () => {
+      try {
+        const response = await axios.get<SessionResponse>(
+          '/api/analytics?type=sessions&pageSize=1'
+        );
+
+        if (
+          response.status === 200 &&
+          response.data &&
+          response.data.data.length > 0
+        ) {
+          setLastVisit(response.data.data[0]);
+        } else {
+          console.error('Unexpected session data format:', response);
+          setSessionError('Unexpected session data format.');
+        }
+      } catch (error) {
+        console.error('Error fetching session data:', error);
+        setSessionError('Failed to fetch session data.');
+      }
+    };
+    fetchLastVisit();
+  }, []);
+
 
   return (
     <footer className="mt-4 pb-8 pt-10 px-4 sm:px-6 lg:px-8">
@@ -247,6 +301,23 @@ export default function Footer() {
             © {currentYear} Manish Tamang. All rights reserved.
           </p>
           <div className="flex items-center space-x-4">
+            {lastVisit && (
+              <div className="flex items-center gap-1 mt-2">
+                <Image
+                  src={`https://flagcdn.com/h240/${lastVisit.country.toLowerCase()}.png`}
+                  alt={`${lastVisit.country} flag`}
+                  width={16}
+                  height={14}
+                  loading="lazy"
+                />
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Last visit from {lastVisit.country}
+                </span>
+              </div>
+            )}
+            {sessionError && (
+              <p className="text-xs text-red-500 mt-2">{sessionError}</p>
+            )}
             <ThemeSwitcher />
           </div>
         </div>
