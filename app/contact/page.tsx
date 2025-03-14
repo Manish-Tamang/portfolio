@@ -1,8 +1,11 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { Loader2 } from "lucide-react"
-import toast, { Toaster } from 'react-hot-toast'
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import Link from 'next/link';
+import { Loader2 } from "lucide-react";
+import toast, { Toaster } from 'react-hot-toast';
+import CarbonAds from "@/components/carbonAds";
 
 interface FormData {
     email: string;
@@ -46,7 +49,6 @@ const ContactPage = () => {
 
         return () => clearInterval(intervalId);
     }, []);
-
 
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -116,6 +118,7 @@ const ContactPage = () => {
 
     return (
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
+            <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
             <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
             <p className="text-gray-700 dark:text-gray-300 text-left mb-2">
@@ -157,7 +160,7 @@ const ContactPage = () => {
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-x-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <label className="block text-gray-700 dark:text-white">Emotion</label>
                         <div className="flex space-x-2">
@@ -236,4 +239,4 @@ active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
     )
 }
 
-export default ContactPage
+export default ContactPage;
