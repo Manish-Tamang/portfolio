@@ -12,7 +12,7 @@ import {
   FaRegEnvelope,
   FaRegStar
 } from 'react-icons/fa';
-import { SiDailydotdev } from "react-icons/si";
+import { SiDailydotdev, SiSimpleanalytics } from "react-icons/si";
 import {
   HiOutlineInformationCircle,
   HiOutlinePhotograph,
@@ -181,6 +181,15 @@ export default function Footer() {
                     Feedback
                   </button>
                 </FeedbackFish>
+              </li>
+              <li>
+                <Link
+                  href="https://manish-analytics.vercel.app/share/jFK5VpX2c6h2JgRg/www.manishtamang.com"
+                  className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
+                >
+                  <SiSimpleanalytics className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Analytics
+                </Link>
               </li>
             </ul>
           </nav>
