@@ -29,9 +29,15 @@ const ColophonPage = () => {
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">About This Website</h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    This website is my personal portfolio, a digital canvas showcasing my skills and passion projects.
-                    It's built with a modern and robust tech stack, emphasizing performance, user experience, and maintainability.
+                    This website is my personal portfolio—my place on the internet. It's a digital canvas where I showcase my skills, projects, and everything I'm passionate about.
                 </p>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                    This is the third version of my portfolio. My journey began in 2022 when I deployed my first portfolio, which I had copied from a YouTube tutorial. Later, after passing my SEE examination, I built the second version—this time inspired by and heavily influenced by Leerob’s portfolio. Now, with everything I’ve learned along the way, I’ve crafted this version from the ground up, blending all my experiences into a site that truly represents me.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300">
+                Built with Sanity, MDX, Firebase, TypeScript, NextJS and PostgreSQL, this website prioritizes performance, user experience, and maintainability.
+                </p>
+
             </section>
 
             <section className="mb-8">
@@ -92,10 +98,15 @@ const ColophonPage = () => {
                     </div>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mt-4">
-                    The codebase is available on <Link href="https://github.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">GitHub</Link>, and the site is deployed on <Link href="https://vercel.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Vercel</Link>.
+                    I purchased my domain <span className="font-medium">manishtamang.com</span> for this site from{" "}
+                    <Link href="https://www.bisup.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                        Bisup
+                    </Link>, and the site is deployed on{" "}
+                    <Link href="https://vercel.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                        Vercel
+                    </Link>.
                 </p>
             </section>
-
             <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">Typography</h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
