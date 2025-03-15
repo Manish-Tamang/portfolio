@@ -3,17 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TechStacks from "@/components/TechStacks";
-import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import FeaturedProjects from "@/components/FeaturedProject";
 import FeaturedBlogs from "@/components/FeaturedBlogs";
 import FeaturedPhotos from "@/components/FeaturedPhotos";
 import CarbonAds from "@/components/carbonAds";
 import React from "react";
+import { TofuPolaroid } from "@/components/TofuPolaroid";
 
-const HomeScene = dynamic(() => import("@/components/3d-scene"), {
-  ssr: false,
-});
+
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,7 +20,7 @@ export default function Home() {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -66,12 +64,9 @@ export default function Home() {
                 <span className="block">
                   developer & creator
                 </span>
-                {/* <span className="">
-                  at Swikar Codes.
-                </span> */}
               </h1>
             ) : (
-              <h1 className="text-4xl md:text-6xl lg:text-5xl font-peachi flex items-center flex-wrap gap-2">
+              <h1 className="text-4xl md:text-6xl lg:text-5xl font-peachi flex items-center flex-wrap gap-2 relative"> {/* ADDED relative */}
                 Hi, I'm
                 <div className="inline-flex items-center">
                   <div className="flip-container inline-block" style={{ width: '50px', height: '50px' }}>
@@ -83,29 +78,31 @@ export default function Home() {
                           width={50}
                           height={50}
                           priority
-                          className="rounded-full"
+                          className="rounded-full pointer-events-none"
                         />
                       </div>
                       <div className="flip-card-back">
                         <Image
                           alt="Back Image"
-                          src="/chill-guy.png"
+                          src="/rickroll-roll.gif"
                           width={50}
                           height={50}
                           priority
-                          className="rounded-full"
+                          className="rounded-full pointer-events-none"
                         />
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div className="relative size-[150px]">
+                  <div className="highlight dark:highlight-invert absolute h-full w-full select-none rounded-full bg-gray-800/10 dark:bg-gray-100/10">
+                    <TofuPolaroid className="absolute right-0 top-[-2rem] w-[6rem]" />
                   </div>
                 </div>
                 <span className="font-medium">Manish Tamang</span>,
                 <span className="block">
                   developer & creator
                 </span>
-                {/* <span className="">
-                  at Swikar Codes.
-                </span> */}
               </h1>
             )}
             <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
@@ -153,12 +150,6 @@ export default function Home() {
         <FeaturedProjects />
         <FeaturedBlogs />
         <FeaturedPhotos />
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div></div>
-          <div>
-            <HomeScene />
-          </div>
-        </div> */}
       </section>
     </main>
   );
