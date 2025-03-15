@@ -284,6 +284,9 @@ export default function Navbar() {
                 <Link href="/about" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
                   About
                 </Link>
+                <Link href="/guestbook" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
+                  Guestbook
+                </Link>
                 <Link href="/dashboard" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/dashboard") ? "text-[#38A662]" : "")}>
                   Dashboard
                 </Link>
