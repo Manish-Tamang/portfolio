@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import Link from 'next/link';
 import {
@@ -17,6 +18,11 @@ import {
 } from 'react-icons/si';
 import { Karla } from 'next/font/google';
 import CarbonAds from '@/components/carbonAds';
+import dynamic from "next/dynamic";
+
+const HomeScene = dynamic(() => import("@/components/3d-scene"), {
+    ssr: false,
+  });
 
 const karla = Karla({ subsets: ['latin'] });
 
@@ -113,7 +119,7 @@ const ColophonPage = () => {
                     A carefully selected set of typefaces contributes to the website's visual identity:
                 </p>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4">
-                    <li><b>Geist:</b> Used for the majority of the body content for readability.</li>
+                    <li><b>Karla:</b> Used for the majority of the body content for readability.</li>
                     <li><b>Peachi:</b> Applied to headings to create a distinct and memorable visual hierarchy.</li>
                     <li><b>Life of Apple:</b> Elegantly displays my name, lending a personal touch.</li>
                     <li><b>MonoLisa:</b> Chosen for code snippets, ensuring clarity and legibility.</li>
