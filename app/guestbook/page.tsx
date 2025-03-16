@@ -4,12 +4,10 @@ import { useEffect, useState, useCallback } from "react";
 import { collection, getDocs, Timestamp, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "@/firebase/config";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import GuestbookCard from "@/components/guestbookCard";
 import SignInCard from "@/components/SignIn";
 import AuthButtons from "@/components/AuthButtons";
 import { GuestbookSkeletons } from "@/components/GuestbookSkeletons";
@@ -18,7 +16,6 @@ import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import { Trash2 } from "lucide-react";
 import { useTheme } from "next-themes";
-
 
 interface GuestbookEntryData {
     id: string;
@@ -184,6 +181,7 @@ export default function GuestbookPage() {
         }
 
         try {
+            // 1.  Add the guestbook entry to Firebase:
             await addDoc(collection(db, "guestbook"), {
                 name: session.user.name,
                 imageUrl: session.user.image,
@@ -191,6 +189,32 @@ export default function GuestbookPage() {
                 message: message,
                 email: session.user.email,
             });
+
+            // 2. **After** the entry is added, call the email API:
+            try {
+                const emailResponse = await fetch('/api/send-guestbook-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userName: session.user.name,
+                        userEmail: session.user.email,
+                        message: message,
+                    }),
+                });
+
+                if (!emailResponse.ok) {
+                    console.error("Failed to send email:", await emailResponse.text());
+                    toast.error("Message added, but failed to send notification email."); // Non-critical error
+                } else {
+                    console.log("Email sent successfully!");
+                }
+            } catch (emailError) {
+                console.error("Error calling email API:", emailError);
+                toast.error("Message added, but email notification failed."); // Non-critical error
+            }
+
 
             setMessage("");
             fetchData();
