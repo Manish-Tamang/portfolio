@@ -72,6 +72,7 @@
     "next-mdx-remote": "^5.0.0",
     "next-sanity": "^9.8.47",
     "next-themes": "^0.3.0",
+    "nodemailer": "^6.10.0",
     "pliny": "^0.4.1",
     "postcss": "8.4.30",
     "postcss-nesting": "^13.0.1",
@@ -114,6 +115,7 @@
   },
   "devDependencies": {
     "@types/node": "20.6.2",
+    "@types/nodemailer": "^6.4.17",
     "@types/prismjs": "^1.26.5",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
