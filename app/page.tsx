@@ -9,7 +9,7 @@ import FeaturedBlogs from "@/components/FeaturedBlogs";
 import FeaturedPhotos from "@/components/FeaturedPhotos";
 import CarbonAds from "@/components/carbonAds";
 import React from "react";
-import { TofuPolaroid } from "@/components/TofuPolaroid";
+import { Polaroid } from "@/components/Polaroid";
 
 
 
@@ -96,7 +96,7 @@ export default function Home() {
                 </div>
                 <div className="relative size-[150px]">
                   <div className="highlight dark:highlight-invert absolute h-full w-full select-none rounded-full bg-gray-800/10 dark:bg-gray-100/10">
-                    <TofuPolaroid className="absolute right-0 top-[-2rem] w-[6rem]" />
+                    <Polaroid className="absolute right-0 top-[-2rem] w-[6rem]" />
                   </div>
                 </div>
                 <span className="font-medium">Manish Tamang</span>,
