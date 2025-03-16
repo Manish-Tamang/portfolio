@@ -1,0 +1,166 @@
+"use client";
+
+import { clsx } from "clsx";
+import {
+    animate,
+    clamp,
+    motion,
+    useMotionValue,
+    useTransform,
+} from "motion/react";
+import Image from "next/image";
+import type { ComponentProps } from "react";
+import { useCallback, useEffect, useState } from "react";
+import styles from "./Polaroid.module.css";
+
+const PHOTOS = [
+    "/polaroid/1.jpeg",
+    "/polaroid/2.png",
+    "/polaroid/3.png",
+    "/polaroid/4.jpg",
+    "/polaroid/5.png",
+];
+
+/**
+ * A Polaroid-style portrait of Tofu, my cat.
+ *
+ * @param props - A set of `motion.div` props.
+ * @param [props.className] - A list of one or more classes.
+ * @param [props.style] - A set of inline styles.
+ */
+export function Polaroid({
+    className,
+    style,
+    ...props
+}: ComponentProps<typeof motion.div>) {
+    const [photoIndex, setPhotoIndex] = useState(0);
+    const [isDragging, setDragging] = useState(false);
+    const [isAnimating, setAnimating] = useState(false);
+    const overlayOpacity = useMotionValue(0);
+    const highlightOpacity = useMotionValue(1);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const scale = useTransform(() => {
+        const distance = Math.hypot(x.get(), y.get());
+
+        return clamp(0.2, 1, 0.2 + distance / 400);
+    });
+    const rotateZ = useTransform(() => {
+        const rotateZ = x.get() / 10;
+
+        return clamp(-40, 40, rotateZ + 6);
+    });
+
+    const handleDragStart = useCallback(() => {
+        setDragging(true);
+    }, []);
+
+    useEffect(() => {
+        if (isDragging) {
+            document.body.classList.add("grabbing");
+
+            const handlePointerUp = () => {
+                setDragging(false);
+                setPhotoIndex((index) => {
+                    let randomIndex = index;
+
+                    while (randomIndex === index) {
+                        randomIndex = Math.floor(Math.random() * PHOTOS.length);
+                    }
+
+                    return randomIndex;
+                });
+
+                overlayOpacity.set(1);
+                animate(overlayOpacity, 0, { duration: 2, ease: "easeOut" });
+                highlightOpacity.set(0.1);
+                animate(highlightOpacity, 1, { duration: 2, ease: "easeOut" });
+
+                if ((x.get() === 0 && y.get() === 0) || isAnimating) {
+                    x.stop();
+                    x.set(0);
+                    setAnimating(true);
+                    animate(x, [0, -3, 3, -3, 3, 0], {
+                        duration: 0.4,
+                        ease: "easeInOut",
+                        onComplete: () => setAnimating(false),
+                    });
+                }
+            };
+
+            document.addEventListener("pointerup", handlePointerUp);
+
+            return () => {
+                document.body.classList.remove("grabbing");
+                document.removeEventListener("pointerup", handlePointerUp);
+            };
+        }
+
+        return () => {
+            document.body.classList.remove("grabbing");
+        };
+    }, [isDragging, isAnimating]);
+
+    return (
+        <motion.div
+            aria-label="Tofu, my cat"
+            className={clsx(
+                className,
+                "absolute z-10 aspect-328/400 cursor-grab touch-none bg-white p-2 shadow-floaty will-change-transform"
+            )}
+            drag={!isAnimating}
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            dragElastic={0.25}
+            dragTransition={{ bounceStiffness: 600, bounceDamping: 30 }}
+            onPointerDown={handleDragStart}
+            style={{
+                x,
+                y,
+                scale,
+                rotateZ,
+                ...style,
+            }}
+            title="Mannu, Some of my photos"
+            {...props}
+        >
+            <div className="relative aspect-square w-full bg-gray-800">
+                <motion.div
+                    className="absolute inset-0 z-1 bg-gray-50"
+                    style={{ opacity: overlayOpacity }}
+                />
+                <motion.div
+                    className={clsx(styles.polaroidShadow, "absolute inset-0 z-1")}
+                    style={{ opacity: highlightOpacity }}
+                />
+                {PHOTOS.map((photo, index) => {
+                    if (index === photoIndex) {
+                        return (
+                            <Image
+                                alt="Mannu, Some of my photos"
+                                className="absolute inset-0 h-full w-full pointer-events-none"
+                                key={index}
+                                priority
+                                src={photo}
+                                title="Mannu, Some of my photos"
+                                width={400}
+                                height={400}
+                            />
+                        );
+                    }
+
+                    return (
+                        <Image
+                            alt="Mannu, Some of my photos"
+                            aria-hidden
+                            className="absolute inset-0 h-full w-full opacity-0 pointer-events-none"
+                            key={index}
+                            src={photo}
+                            width={400}
+                            height={400}
+                        />
+                    );
+                })}
+            </div>
+        </motion.div>
+    );
+}
