@@ -106,9 +106,8 @@ export default function Home() {
               </h1>
             )}
             <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
-              A wizard who loves development and code. I tell stories through my projects
-              and applications. I spend most of my time crafting web experiences
-              and creating useful tools.
+              A wizard of code, weaving stories through projects and applications. I’m passionate about web development and an 
+              enthusiast for technology, constantly crafting web experiences and building tools that make an impact.
             </p>
           </div>
         </div>
@@ -117,9 +116,9 @@ export default function Home() {
       <section className="mb-16">
         <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
         <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mb-4 leading-relaxed max-w-3xl">
-          I focus on building fast, future-proof solutions that thrive at the intersection of speed and precision.
-          Every line of code I write balances rapid execution with meticulous structure, ensuring scalability and
-          maintainability. To me, great development means shipping efficiently and leaving a foundation that lasts.
+          I craft high-performance, future-ready solutions where speed meets precision. Every line of code I write is
+          a blend of efficiency and structure, designed for scalability and long-term maintainability.
+          For me, great development is about delivering fast without compromising on a solid, lasting foundation.
         </p>
         <div>
           <Link
