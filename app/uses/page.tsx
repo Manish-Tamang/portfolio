@@ -18,7 +18,6 @@ const UsesPage = () => {
                 {bookmarks.map((bookmark, index) => (
                     <a key={index} href={bookmark.url} target="_blank" rel="noopener noreferrer" className="block p-5 border rounded-[4px] shadow-sm hover:shadow-md transition bg-white dark:bg-gray-900">
                         <div className="flex items-center mb-2 text-gray-500 dark:text-gray-400">
-                            {bookmark.icon && <img src={bookmark.icon} alt={bookmark.title} className="w-5 h-5 mr-2" />}
                             <span className="text-sm font-medium">{bookmark.url.replace(/https?:\/\//, '')}</span>
                             <FaExternalLinkAlt className="ml-2 text-xs" />
                         </div>
