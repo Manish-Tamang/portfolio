@@ -22,7 +22,7 @@ import dynamic from "next/dynamic";
 
 const HomeScene = dynamic(() => import("@/components/3d-scene"), {
     ssr: false,
-  });
+});
 
 const karla = Karla({ subsets: ['latin'] });
 
@@ -186,6 +186,32 @@ const ColophonPage = () => {
                     <li><Link href="https://www.npmjs.com/package/react-cookie" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">react-cookie</Link>: For Storing Blog Views and Likes.</li>
                 </ul>
             </section>
+
+            <section className="mb-8">
+                <h2 className="text-2xl font-bold mb-4">Acknowledgements</h2>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                    I would like to express my sincere gratitude to the following individuals and their work, which have significantly inspired the design and development of this portfolio:
+                </p>
+                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+                    <li><Link href="https://ouassim.tech/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Ouassim</Link>: For the inspiration to re-create my new portfolio.</li>
+                    <li><Link href="https://jahir.dev/colophon" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Jahir Fiquitiva</Link></li>
+                    <li><Link href="https://theodorusclarence.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Theodorus Clarence</Link></li>
+                    <li><Link href="https://bonabrian.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Bona Brian Siagian</Link></li>
+                    <li><Link href="https://leerob.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Lee Robinson</Link></li>
+                    <li><Link href="https://marcbouchenoire.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Marc Bouchenoire</Link></li>
+                    <li><Link href="https://victoreke.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Victor Eke</Link></li>
+                    <li><Link href="https://aulianza.id/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Ryan Aulia</Link></li>
+                    <li><Link href="https://vjy.me/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Vijay Verma</Link></li>
+                    <li><Link href="https://www.raphaelchelly.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Raphaël Chelly</Link></li>
+                    <li><a href="https://danielwirtz.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">danielwirtz</a></li>
+                    <li><Link href="https://darn.es/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">DavidDarnes</Link></li>
+                    <li><Link href="https://sayandey.dev/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Sayan Dey</Link></li>
+                </ul>
+                <p className="text-gray-700 dark:text-gray-300 mt-4">
+                    And to many more talented developers and designers whose work has unknowingly shaped my perspective and approach. Thank you all.
+                </p>
+            </section>
+
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://jahir.dev/colophon" className="underline">Jahir Fiquitiva</a>.
             </p>
