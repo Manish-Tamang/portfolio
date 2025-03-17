@@ -206,6 +206,7 @@ const ColophonPage = () => {
                     <li><a href="https://danielwirtz.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">danielwirtz</a></li>
                     <li><Link href="https://darn.es/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">DavidDarnes</Link></li>
                     <li><Link href="https://sayandey.dev/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Sayan Dey</Link></li>
+                    <li><Link href="https://www.havardbrynjulfsen.design/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Håvard Brynjulfsen</Link></li>
                 </ul>
                 <p className="text-gray-700 dark:text-gray-300 mt-4">
                     And to many more talented developers and designers whose work has unknowingly shaped my perspective and approach. Thank you all.
