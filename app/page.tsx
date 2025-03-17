@@ -60,6 +60,11 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+                <div className="relative size-[150px]">
+                  <div className="highlight dark:highlight-invert absolute h-full w-full select-none rounded-full bg-gray-800/10 dark:bg-gray-100/10">
+                    <Polaroid className="absolute right-0 top-[-2rem] w-[6rem]" />
+                  </div>
+                </div>
                 <span className="font-medium">Manish Tamang</span>,
                 <span className="block">
                   developer & creator
@@ -106,7 +111,7 @@ export default function Home() {
               </h1>
             )}
             <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl">
-              A wizard of code, weaving stories through projects and applications. I’m passionate about web development and an 
+              A wizard of code, weaving stories through projects and applications. I’m passionate about web development and an
               enthusiast for technology, constantly crafting web experiences and building tools that make an impact.
             </p>
           </div>
