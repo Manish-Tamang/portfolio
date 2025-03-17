@@ -50,7 +50,7 @@ export default function Home() {
                       <div className="flip-card-back">
                         <Image
                           alt="Back Image"
-                          src="/chill-guy.png"
+                          src="/rickroll-roll.gif"
                           width={50}
                           height={50}
                           priority
