@@ -29,7 +29,6 @@ export default function Home() {
     <main className="max-w-4xl mx-auto px-4">
       <section className="mb-4 pt-20">
         <div className="flex flex-col md:flex-row items-start justify-between gap-6">
-          <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
           <div className="flex-1">
             {isMobile ? (
               <h1 className="text-4xl md:text-6xl lg:text-5xl font-ridemybike flex items-center flex-wrap gap-2">
