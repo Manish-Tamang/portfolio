@@ -118,7 +118,6 @@ const ContactPage = () => {
 
     return (
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
-            <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
             <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
             <p className="text-gray-700 dark:text-gray-300 text-left mb-2">
