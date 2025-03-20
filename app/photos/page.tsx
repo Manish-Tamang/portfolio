@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 const initialImages = [
     {
         id: 1,
-        src: "/img/chindey.jpg",
+        src: "/polaroid/1.jpeg",
         alt: "Gallery Image 1",
         width: 800,
         height: 600,
@@ -15,7 +15,7 @@ const initialImages = [
     },
     {
         id: 2,
-        src: "/IMG-20250217-WA0011.jpg",
+        src: "/img/ktaharu.jpg",
         alt: "Gallery Image 2",
         width: 600,
         height: 800,
@@ -101,6 +101,30 @@ const initialImages = [
         height: 800,
         gridArea: "span 1 / span 2",
     },
+    {
+        id: 13,
+        src: "/img/haseko.jpg",
+        alt: "Gallery Image 1",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 1",
+    },
+    {
+        id: 14,
+        src: "/img/ashik.jpg",
+        alt: "Gallery Image 1",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 2",
+    },
+    {
+        id: 15,
+        src: "/img/sandesh-sanga.jpg",
+        alt: "Gallery Image 1",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 2",
+    },
 ]
 
 interface ImageType {
@@ -182,7 +206,7 @@ export default function PhotoGallery() {
                                 fill
                                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                 className="object-cover"
-                                priority={image.id <= 4}
+                                priority
                             />
                             <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300" />
                         </div>
