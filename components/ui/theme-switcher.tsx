@@ -12,6 +12,25 @@ export function ThemeSwitcher() {
         setMounted(true)
     }, [])
 
+    const playSound = (themeType: string) => {
+        let audioSrc;
+        switch (themeType) {
+            case 'light':
+                audioSrc = '/audio/toggle-on.mp3';
+                break;
+            case 'dark':
+                audioSrc = '/audio/toggle-off.mp3';
+                break;
+            case 'system':
+                audioSrc = '/audio/toggle-system.mp3'; 
+                break;
+            default:
+                return;
+        }
+        const audio = new Audio(audioSrc);
+        audio.play().catch(error => console.log("Audio playback failed:", error));
+    }
+
     if (!mounted) {
         return null
     }
@@ -19,7 +38,10 @@ export function ThemeSwitcher() {
     return (
         <div className="relative flex h-9 items-center justify-center rounded-2xl border border-gray-200 p-1 dark:border-gray-800">
             <button
-                onClick={() => setTheme("light")}
+                onClick={() => {
+                    setTheme("light")
+                    playSound("light")
+                }}
                 className={cn(
                     "relative inline-flex h-7 w-7 items-center justify-center rounded transition-all",
                     theme === "light" ? "text-[#38A662]" : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
@@ -32,7 +54,10 @@ export function ThemeSwitcher() {
                 )}
             </button>
             <button
-                onClick={() => setTheme("dark")}
+                onClick={() => {
+                    setTheme("dark")
+                    playSound("dark")
+                }}
                 className={cn(
                     "relative inline-flex h-7 w-7 items-center justify-center rounded transition-all",
                     theme === "dark" ? "text-[#38A662]" : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
@@ -45,7 +70,10 @@ export function ThemeSwitcher() {
                 )}
             </button>
             <button
-                onClick={() => setTheme("system")}
+                onClick={() => {
+                    setTheme("system")
+                    playSound("system")
+                }}
                 className={cn(
                     "relative inline-flex h-7 w-7 items-center justify-center rounded transition-all",
                     theme === "system" ? "text-[#38A662]" : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
