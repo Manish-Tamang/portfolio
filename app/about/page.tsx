@@ -7,6 +7,7 @@ import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
 import Piano from "@/components/piano/Piano";
 import ImageGrid from "@/components/ImageGrid";
+import Timeline from "@/components/Timeline";
 
 const About = () => {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -137,10 +138,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-4">
-                    <h2 className="text-2xl font-peachi font-medium mb-4">Piano</h2>
-                    <Piano />
-                </div>
+               <Timeline />
             </section>
         </Container>
     );
