@@ -19,7 +19,7 @@ export default function ProjectCard({ title, slug, excerpt, thumbnail, date }: P
 
     return (
         <Link href={`/projects/${slug}`} className="group block">
-            <div className="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+            <div className="relative overflow-hidden rounded-xl bg-white dark:bg-neutral-800 border shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                 <div className="relative h-64 overflow-hidden">
                     <BlurFadeImage
                         src={urlFor(thumbnail).url()}
@@ -35,7 +35,7 @@ export default function ProjectCard({ title, slug, excerpt, thumbnail, date }: P
                 <div className="p-5 flex flex-col flex-grow">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-sm text-gray-500 dark:text-gray-400">{formattedDate}</span>
-                        <span className="bg-[#38A662]/10 text-[#38A662] text-xs px-2 py-1 rounded-full">Project</span>
+                        <span className="bg-neutral-800/10 text-[#38A662] text-xs px-2 py-1 rounded-full">Project</span>
                     </div>
 
                     <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-white group-hover:text-[#38A662] dark:group-hover:text-[#7AC594] transition-colors duration-300">{title}</h2>
