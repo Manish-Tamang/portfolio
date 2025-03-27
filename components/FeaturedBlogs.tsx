@@ -97,13 +97,13 @@ export default function FeaturedBlogs() {
                                     gradient
                                 )}
                             >
-                                <div className="flex flex-col h-full bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 p-4 rounded-lg shadow-md">
+                                <div className="flex flex-col h-full bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 p-4 rounded-lg shadow-md">
                                     <div className="flex-1">
                                         <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{formattedDate}</p>
                                     </div>
                                     <div className="mt-4 flex justify-end">
-                                        <button className="rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 p-2 transition-colors duration-300">
+                                        <button className="rounded-full bg-gray-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 p-2 transition-colors duration-300">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="24"
