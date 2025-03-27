@@ -80,8 +80,6 @@ const About = () => {
                     )}
 
                     <div className="md:col-span-2">
-                        {/* {isLargeScreen && <ImageGrid />} */}
-
                         <h2 className="text-2xl font-semibold mb-4 font-peachi">
                             My Driving Ambition
                         </h2>
