@@ -31,7 +31,7 @@ const initialImages = [
     },
     {
         id: 4,
-        src: "/img/IMG-20250308-WA0021.jpg",
+        src: "/img/IMG-20250322-WA0081.jpg",
         alt: "Gallery Image 4",
         width: 800,
         height: 800,
@@ -124,6 +124,14 @@ const initialImages = [
         width: 800,
         height: 600,
         gridArea: "span 1 / span 2",
+    },
+    {
+        id: 16,
+        src: "/img/IMG-20250308-WA0021.jpg",
+        alt: "Gallery Image 1",
+        width: 800,
+        height: 600,
+        gridArea: "span 2 / span 2",
     },
 ]
 
