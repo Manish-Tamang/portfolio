@@ -124,11 +124,6 @@ export default function GuestbookPage() {
     const fetchData = useCallback(async () => {
         setIsLoading(true);
         try {
-            // if (guestbookCache.data && guestbookCache.timestamp && (Date.now() - guestbookCache.timestamp < guestbookCache.expiry)) {
-            //     setEntries(guestbookCache.data);
-            //     setIsLoading(false);
-            //     return;
-            // }
             const querySnapshot = await getDocs(collection(db, "guestbook"));
             const data = querySnapshot.docs.map((doc) => {
                 const entry = doc.data();
@@ -181,7 +176,6 @@ export default function GuestbookPage() {
         }
 
         try {
-            // 1.  Add the guestbook entry to Firebase:
             await addDoc(collection(db, "guestbook"), {
                 name: session.user.name,
                 imageUrl: session.user.image,
@@ -189,8 +183,6 @@ export default function GuestbookPage() {
                 message: message,
                 email: session.user.email,
             });
-
-            // 2. **After** the entry is added, call the email API:
             try {
                 const emailResponse = await fetch('/api/send-guestbook-email', {
                     method: 'POST',
@@ -206,13 +198,13 @@ export default function GuestbookPage() {
 
                 if (!emailResponse.ok) {
                     console.error("Failed to send email:", await emailResponse.text());
-                    toast.error("Message added, but failed to send notification email."); // Non-critical error
+                    toast.error("Message added, but failed to send notification email."); 
                 } else {
                     console.log("Email sent successfully!");
                 }
             } catch (emailError) {
                 console.error("Error calling email API:", emailError);
-                toast.error("Message added, but email notification failed."); // Non-critical error
+                toast.error("Message added, but email notification failed.");
             }
 
 
@@ -282,7 +274,7 @@ export default function GuestbookPage() {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Leave a message..."
-                            className="w-full mb-2 rounded-[4px] border border-[#38A662] bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#38A662] focus:border-[#38A662]"
+                            className="w-full mb-2 rounded-[4px] border border-[#38A662] bg-white dark:bg-neutral-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#38A662] focus:border-[#38A662]"
                         />
                         <button
                             type="submit"
