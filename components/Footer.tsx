@@ -115,10 +115,10 @@ export default function Footer() {
               <NowPlaying />
             </div>
             <div className="flex justify-end relative group">
-              <button className="px-3 py-2 rounded-[4px] border border-neutral-300 dark:border-neutral-600 bg-neutral-200 dark:bg-[#09090B] hover:bg-neutral-300 dark:hover:bg-neutral-700 text-sm font-medium text-neutral-600 dark:text-neutral-200 transition-colors duration-300">
+              <button className="px-3 py-2 rounded-[4px] border border-neutral-300 dark:border-neutral-600 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-sm font-medium text-neutral-600 dark:text-neutral-200 transition-colors duration-300">
                 {temperature !== null ? `${temperature}°C` : error || 'Loading...'}
               </button>
-              <div className="absolute bottom-full left-0 mb-2 px-3 py-2 w-auto max-w-xs bg-white dark:bg-[#09090B] text-gray-700 dark:text-gray-200 text-xs rounded-[4px] border z-50 whitespace-normal hidden group-hover:block">
+              <div className="absolute bottom-full left-0 mb-2 px-3 py-2 w-auto max-w-xs bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-200 text-xs rounded-[4px] border z-50 whitespace-normal hidden group-hover:block">
                 Current Temperature of the city I live in:{' '}
                 {temperature !== null ? `${temperature}°C` : error || 'Loading...'}
               </div>
