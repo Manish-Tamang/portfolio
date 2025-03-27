@@ -17,7 +17,7 @@ import { FaGit } from "react-icons/fa";
 const TechCard = ({ tech, index }: { tech: any, index: number }) => (
     <div
         key={index}
-        className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-800 px-2 py-2 rounded-[4px] shadow-sm transition-transform duration-300 hover:scale-105 w-44 mr-2 sm:w-44"
+        className="flex items-center space-x-2 bg-gray-100 dark:bg-neutral-800 px-2 py-2 rounded-[4px] shadow-sm transition-transform duration-300 hover:scale-105 w-44 mr-2 sm:w-44"
     >
         <div className="text-xl">{tech.icon}</div>
         <div>
