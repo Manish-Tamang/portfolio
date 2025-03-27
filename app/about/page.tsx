@@ -5,7 +5,6 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import { BlurFadeImage, BlurFadeContent } from "@/components/BlurFade";
 import Education from "@/components/Education";
-import Piano from "@/components/piano/Piano";
 import ImageGrid from "@/components/ImageGrid";
 import Timeline from "@/components/Timeline";
 
