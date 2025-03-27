@@ -28,7 +28,7 @@ const initialPhotos: Photo[] = [
     },
     {
         id: 9,
-        src: "/img/IMG-20241228-WA0224.jpg",
+        src: "/img/IMG-20250322-WA0081.jpg",
         alt: "Gallery Image 9",
 
     },
