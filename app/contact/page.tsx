@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Loader2 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
-
 interface FormData {
     email: string;
     message: string;
@@ -87,7 +86,7 @@ const ContactPage: React.FC = () => {
                 window.turnstile.render(turnstileRef.current, {
                     sitekey: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || "",
                     callback: (token: string) => {
-                        setTurnstileToken(token); // Store the token when verified
+                        setTurnstileToken(token);
                     },
                     "error-callback": () => {
                         toast.error("Turnstile verification failed. Please try again.");
@@ -108,7 +107,6 @@ const ContactPage: React.FC = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Check if Turnstile token is present
         if (!turnstileToken) {
             toast.error("Please complete the human verification.");
             setIsSubmitting(false);
@@ -130,8 +128,8 @@ const ContactPage: React.FC = () => {
 
             if (response.ok) {
                 setFormData({ email: "", message: "", emotion: "", category: "general" });
-                setTurnstileToken(null); // Reset Turnstile token
-                if (window.turnstile) window.turnstile.reset(); // Reset Turnstile widget
+                setTurnstileToken(null);
+                if (window.turnstile) window.turnstile.reset();
                 toast.success("Message sent successfully!");
             } else {
                 throw new Error(`Failed to submit form: ${response.status}`);
@@ -162,7 +160,7 @@ const ContactPage: React.FC = () => {
     const getAvailabilityMessage = (): JSX.Element | string => {
         if (!nepalTime) {
             return (
-                <span className="inline-block w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>
+                <span className="inline-block w-32 h-4 bg-gray-200 dark:bg-neutral-700 rounded animate-pulse"></span>
             );
         }
 
@@ -187,12 +185,12 @@ const ContactPage: React.FC = () => {
         <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
             <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
-            <p className="text-gray-700 dark:text-gray-300 text-left mb-2">
+            <p className="text-gray-700 dark:text-neutral-300 text-left mb-2">
                 It's currently{" "}
                 {nepalTime ? (
                     <>{new Date(nepalTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</>
                 ) : (
-                    <span className="inline-block w-16 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></span>
+                    <span className="inline-block w-16 h-4 bg-gray-200 dark:bg-neutral-700 rounded animate-pulse"></span>
                 )}{" "}
                 in <strong>Nepal</strong> and {getAvailabilityMessage()}. Feel free to send me a message, I
                 will get back to you as soon as possible.
@@ -210,7 +208,7 @@ const ContactPage: React.FC = () => {
                         onChange={handleChange}
                         required
                         placeholder="you@example.com"
-                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
+                        className="w-full p-4 rounded bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
                     />
                 </div>
 
@@ -225,7 +223,7 @@ const ContactPage: React.FC = () => {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="w-full p-4 rounded bg-gray-100 dark:bg-[#1e2738] border border-gray-300 dark:border-[#30363d] text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
+                        className="w-full p-4 rounded bg-gray-100 dark:bg-neutral-800 border border-gray-300 dark:border-neutral-600 text-gray-800 dark:text-white focus:outline-none focus:border-[#38A662]"
                     />
                 </div>
 
@@ -235,9 +233,9 @@ const ContactPage: React.FC = () => {
                         <div className="flex space-x-2">
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "happy"
-                                        ? "border-[#38A662]"
-                                        : "border-gray-300 dark:border-[#30363d]"
+                                className={`p-3 rounded bg-gray-100 dark:bg-neutral-800 border ${formData.emotion === "happy"
+                                    ? "border-[#38A662]"
+                                    : "border-gray-300 dark:border-neutral-600"
                                     }`}
                                 onClick={() => handleEmotionSelect("happy")}
                             >
@@ -247,9 +245,9 @@ const ContactPage: React.FC = () => {
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.emotion === "thanks"
-                                        ? "border-[#38A662]"
-                                        : "border-gray-300 dark:border-[#30363d]"
+                                className={`p-3 rounded bg-gray-100 dark:bg-neutral-800 border ${formData.emotion === "thanks"
+                                    ? "border-[#38A662]"
+                                    : "border-gray-300 dark:border-neutral-600"
                                     }`}
                                 onClick={() => handleEmotionSelect("thanks")}
                             >
@@ -259,9 +257,9 @@ const ContactPage: React.FC = () => {
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[# 🙂1e2738] border ${formData.emotion === "gift"
-                                        ? "border-[#38A662]"
-                                        : "border-gray-300 dark:border-[#30363d]"
+                                className={`p-3 rounded bg-gray-100 dark:bg-neutral-800 border ${formData.emotion === "gift"
+                                    ? "border-[#38A662]"
+                                    : "border-gray-300 dark:border-neutral-600"
                                     }`}
                                 onClick={() => handleEmotionSelect("gift")}
                             >
@@ -277,9 +275,9 @@ const ContactPage: React.FC = () => {
                         <div className="flex space-x-2">
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "general"
-                                        ? "border-[#38A662]"
-                                        : "border-gray-300 dark:border-[#30363d]"
+                                className={`p-3 rounded bg-gray-100 dark:bg-neutral-800 border ${formData.category === "general"
+                                    ? "border-[#38A662]"
+                                    : "border-gray-300 dark:border-neutral-600"
                                     } text-gray-700 dark:text-white px-4`}
                                 onClick={() => handleCategorySelect("general")}
                             >
@@ -287,9 +285,9 @@ const ContactPage: React.FC = () => {
                             </button>
                             <button
                                 type="button"
-                                className={`p-3 rounded bg-gray-100 dark:bg-[#1e2738] border ${formData.category === "help"
-                                        ? "border-[#38A662]"
-                                        : "border-gray-300 dark:border-[#30363d]"
+                                className={`p-3 rounded bg-gray-100 dark:bg-neutral-800 border ${formData.category === "help"
+                                    ? "border-[#38A662]"
+                                    : "border-gray-300 dark:border-neutral-600"
                                     } text-gray-700 dark:text-white px-4`}
                                 onClick={() => handleCategorySelect("help")}
                             >
@@ -299,7 +297,6 @@ const ContactPage: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Cloudflare Turnstile Widget */}
                 <div className="space-y-2">
                     <label className="block text-gray-700 dark:text-white">Verification</label>
                     <div ref={turnstileRef} className="cf-turnstile"></div>
@@ -328,7 +325,7 @@ const ContactPage: React.FC = () => {
                 </a>
             </p>
 
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
+            <p className="text-xs text-gray-500 dark:text-neutral-400 mt-8">
                 This page is inspired by{" "}
                 <a href="https://www.totaltypescript.com/contact" className="underline">
                     Total TypeScript
