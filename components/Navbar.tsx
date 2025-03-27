@@ -59,7 +59,6 @@ const components = [
     href: "/projects",
     description: "A showcase of my work and creations",
   },
-
 ]
 
 const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
@@ -71,8 +70,8 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-[4px] p-3 leading-none no-underline outline-none transition-colors duration-300",
-              "hover:bg-gray-100 dark:hover:bg-gray-800",
-              "focus:bg-gray-100 dark:focus:bg-gray-800",
+              "hover:bg-gray-100 dark:hover:bg-neutral-700",
+              "focus:bg-gray-100 dark:focus:bg-neutral-700",
               className
             )}
             {...props}
@@ -112,7 +111,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full bg-white/75 dark:bg-[#09090B] backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+    <header className="w-full bg-white/75 dark:bg-neutral-900 backdrop-blur-lg border-b border-gray-200 dark:border-neutral-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex-shrink-0">
@@ -127,18 +126,18 @@ export default function Navbar() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
                     className={cn(
-                      "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:[#09090B] transition-colors duration-300",
+                      "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                       isActive(pathname, "/blog") ? "text-[#38A662]" : ""
                     )}
                   >
                     Blog
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-[#09090B]">
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-neutral-700">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-[4px] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6 no-underline outline-none focus:shadow-md transition-all duration-300"
+                            className="flex h-full w-full select-none flex-col justify-end rounded-[4px] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-neutral-900 dark:to-neutral-700 p-6 no-underline outline-none focus:shadow-md transition-all duration-300"
                             href="/blog"
                           >
                             <div className="mb-2 mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -161,14 +160,14 @@ export default function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300",
+                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                       isActive(pathname, "/about") ? "text-[#38A662]" : ""
                     )}
                   >
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-[#09090B]">
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-neutral-700">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <BlurFadeImage
@@ -194,14 +193,14 @@ export default function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-[#09090B] transition-colors duration-300",
+                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                       isActive(pathname, "/dashboard") ? "text-[#38A662]" : ""
                     )}
                   >
                     Dashboard
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[300px] gap-2 p-4 bg-white dark:bg-[#09090B] md:w-[300px] md:grid-cols-2 lg:w-[400px]">
+                    <ul className="grid w-[300px] gap-2 p-4 bg-white dark:bg-neutral-700 md:w-[300px] md:grid-cols-2 lg:w-[400px]">
                       {components.slice(4).map((component) => (
                         <ListItem
                           key={component.title}
@@ -219,7 +218,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300",
+                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                         isActive(pathname, "/guestbook") ? "text-[#38A662]" : ""
                       )}
                     >
@@ -232,7 +231,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300",
+                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                         isActive(pathname, "/contact") ? "text-[#38A662]" : ""
                       )}
                     >
@@ -275,22 +274,22 @@ export default function Navbar() {
                 transition={{ duration: 0.2 }}
                 className="flex flex-col space-y-2 py-4"
               >
-                <Link href="/" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/") ? "text-[#38A662]" : "")}>
+                <Link href="/" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/") ? "text-[#38A662]" : "")}>
                   Home
                 </Link>
-                <Link href="/blog" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/blogs") ? "text-[#38A662]" : "")}>
+                <Link href="/blog" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/blogs") ? "text-[#38A662]" : "")}>
                   Blog
                 </Link>
-                <Link href="/about" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
+                <Link href="/about" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
                   About
                 </Link>
-                <Link href="/guestbook" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
+                <Link href="/guestbook" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
                   Guestbook
                 </Link>
-                <Link href="/dashboard" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/dashboard") ? "text-[#38A662]" : "")}>
+                <Link href="/dashboard" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/dashboard") ? "text-[#38A662]" : "")}>
                   Dashboard
                 </Link>
-                <Link href="/contact" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md", isActive(pathname, "/contact") ? "text-[#38A662]" : "")}>
+                <Link href="/contact" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/contact") ? "text-[#38A662]" : "")}>
                   Contact
                 </Link>
               </motion.nav>
