@@ -55,7 +55,7 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
     };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-[#09090B] relative">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative">
             {isAdmin && (
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
@@ -80,18 +80,18 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
                     </AlertDialogContent>
                 </AlertDialog>
             )}
-            <div className="flex items-center gap-3 bg-white dark:bg-[#09090B]">
+            <div className="flex items-center gap-3 bg-white dark:bg-neutral-900">
                 {avatar ? (
                     <Image
                         width={10}
                         height={10}
                         src={avatar}
                         alt={name}
-                        className="w-7 h-7 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+                        className="w-7 h-7 rounded-full object-cover border border-gray-300 dark:border-neutral-600"
                         priority
                     />
                 ) : (
-                    <div className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">
+                    <div className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-300 dark:bg-neutral-700">
                         <svg
                             fill="none"
                             viewBox="0 0 24 24"
