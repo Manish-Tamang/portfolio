@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 const SignInCard = () => {
     return (
         <div className="max-w-2xl mx-auto">
-            <div className="rounded-[4px] p-6 w-full bg-blue-50 dark:bg-[#09090B] border border-blue-100 dark:border-gray-700">
+            <div className="rounded-[4px] p-6 w-full bg-blue-50 dark:bg-neutral-900 border border-blue-100 dark:border-gray-700">
                 { }
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     Sign the Guestbook
@@ -23,7 +23,7 @@ const SignInCard = () => {
                     <Button
                         variant="outline"
                         onClick={() => signIn("google")}
-                        className="flex items-center rounded-[4px] justify-center border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white w-1/2"
+                        className="flex items-center rounded-[4px] justify-center border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-neutral-700 text-gray-900 dark:text-white w-1/2"
                     >
                         <FcGoogle className="mr-2" />
                         Google
@@ -33,7 +33,7 @@ const SignInCard = () => {
                     <Button
                         variant="outline"
                         onClick={() => signIn("github")}
-                        className="flex items-center rounded-[4px] justify-center border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white w-1/2"
+                        className="flex items-center rounded-[4px] justify-center border border-gray-300 dark:border-neutral-600 bg-gray-50 dark:bg-neutral-700 text-gray-900 dark:text-white w-1/2"
                     >
                         <FaGithub className="mr-2" />
                         GitHub
