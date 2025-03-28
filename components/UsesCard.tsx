@@ -17,7 +17,7 @@ interface UsesCardProps {
 
 const UsesCard: React.FC<UsesCardProps> = ({ item, displayStyle }) => {
     return (
-        <Card className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-[4px] flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
+        <Card className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-gray-700 rounded-[4px] flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
 
             <CardContent className="p-4 flex flex-col items-center">
                 {displayStyle === 'imageWithTags' && item.image && (
