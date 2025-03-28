@@ -68,7 +68,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
     };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-gray-900 relative">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative">
             {isAdmin && (
                 <button
                     onClick={deleteGuestbookEntry}
