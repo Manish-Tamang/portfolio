@@ -35,7 +35,7 @@ const ManifestPage = () => {
 
             { }
             <section className="mb-8">
-                <Card className="bg-white dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
+                <Card className="bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
                     <CardHeader>
                         <CardTitle> <h2 className="font-bold text-3xl tracking-tight mb-6 text-black dark:text-white ">
                             Bucket List
@@ -51,7 +51,7 @@ const ManifestPage = () => {
                 <h2 className="text-2xl font-semibold mb-4">My Wish List</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {WishListItems.map((item) => (
-                        <Card key={item.id} className="bg-white dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
+                        <Card key={item.id} className="bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
                             <CardHeader>
                                 <CardTitle>{item.title}</CardTitle>
                             </CardHeader>
