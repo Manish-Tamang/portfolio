@@ -16,7 +16,7 @@ const UsesPage = () => {
             <h2 className="text-2xl font-semibold mt-12 mb-4">Bookmarks</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {bookmarks.map((bookmark, index) => (
-                    <a key={index} href={bookmark.url} target="_blank" rel="noopener noreferrer" className="block p-5 border rounded-[4px] shadow-sm hover:shadow-md transition bg-white dark:bg-gray-900">
+                    <a key={index} href={bookmark.url} target="_blank" rel="noopener noreferrer" className="block p-5 border rounded-[4px] shadow-sm hover:shadow-md transition bg-white dark:bg-neutral-900">
                         <div className="flex items-center mb-2 text-gray-500 dark:text-gray-400">
                             <span className="text-sm font-medium">{bookmark.url.replace(/https?:\/\//, '')}</span>
                             <FaExternalLinkAlt className="ml-2 text-xs" />
