@@ -224,12 +224,12 @@ export default function CarbonAds({ className }: CarbonAdsProps) {
     return (
         <div
             className={clsx(
-                'rounded-[4px] w-44 sm:w-44 max-w-44 z-10 bg-white dark:bg-[#09090B]',
+                'rounded-[4px] w-44 sm:w-44 max-w-44 z-10 bg-white dark:bg-neutral-900',
                 className
             )}
         >
 
-            <div id="carbon-container" className="w-44 h-54 flex justify-center bg-[#1c1c1c] dark:bg-gray-900"></div>
+            <div id="carbon-container" className="w-44 h-54 flex justify-center bg-[#1c1c1c] dark:bg-neutral-900"></div>
 
             {showing && (
                 <div className="px-1 pb-1 pt-0.5">
