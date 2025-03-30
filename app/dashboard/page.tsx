@@ -287,7 +287,7 @@ export default function DashboardPage() {
                     className="col-span-1 md:col-span-2 lg:col-span-3"
                 >
                     {isLoading ? (
-                        <Card className="border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-[#09090B]">
+                        <Card className="border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-900">
                             <CardHeader>
                                 <div className="flex items-center gap-2">
                                     <FolderGit2 className="w-6 h-6 text-gray-500 dark:text-gray-400" />
@@ -325,7 +325,7 @@ export default function DashboardPage() {
             <SessionStats className="mt-4 mb-4" />
             <GithubStats username="Manish-Tamang" />
             <TotalBlogStats />
-            <Card className="col-span-full mt-6 bg-white dark:bg-[#09090B] border text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
+            <Card className="col-span-full mt-6 bg-white dark:bg-neutral-900 border text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
                 <CardHeader>
                     <CardTitle>Blog Post Stats</CardTitle>
                     <CardDescription>Summary of blog post engagement.</CardDescription>
