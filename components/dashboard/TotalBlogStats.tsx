@@ -55,7 +55,7 @@ const TotalBlogStats: React.FC<TotalBlogStatsProps> = () => {
     }, []);
 
     return (
-        <Card className="bg-white mt-4 dark:bg-[#09090B] text-gray-900 dark:text-gray-200">
+        <Card className="bg-white mt-4 dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
             <CardHeader>
                 <CardTitle>All Time Blog Stats</CardTitle>
                 <CardDescription>Total posts, views, and reactions.</CardDescription>
