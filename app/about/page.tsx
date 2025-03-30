@@ -54,7 +54,6 @@ const About = () => {
                             <span className="absolute -bottom-3 right-2 text-4xl text-gray-400 dark:text-gray-600">”</span>
                         </blockquote>
                     </div>
-                    {isLargeScreen && (
                         <div className="flex flex-col items-center top-40 self-start">
                             <div className="relative rounded-md w-48 h-full">
                                 <div className="relative group duration-500 cursor-pointer overflow-hidden text-gray-50 h-72 w-56 rounded-2xl hover:duration-700">
@@ -77,8 +76,6 @@ const About = () => {
                                 </div>
                             </div>
                         </div>
-                    )}
-
                     <div className="md:col-span-2">
                         <h2 className="text-2xl font-semibold mb-4 font-peachi">
                             My Driving Ambition
