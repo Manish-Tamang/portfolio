@@ -298,7 +298,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700 sm:flex-row">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-0">
-            © {currentYear} Manish Tamang. All rights reserved.
+            Proudly Made in Nepal by Manish Tamang  © {currentYear}
           </p>
           <div className="flex items-center space-x-4">
             {lastVisit && (
