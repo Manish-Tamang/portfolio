@@ -8,7 +8,7 @@ const initialImages = [
     {
         id: 1,
         src: "/polaroid/1.jpeg",
-        alt: "Gallery Image 1",
+        alt: "Manish in his childhood",
         width: 800,
         height: 600,
         gridArea: "span 1 / span 1",
@@ -16,7 +16,7 @@ const initialImages = [
     {
         id: 2,
         src: "/img/ktaharu.jpg",
-        alt: "Gallery Image 2",
+        alt: "Manish With his classmates",
         width: 600,
         height: 800,
         gridArea: "span 1 / span 2",
@@ -24,7 +24,7 @@ const initialImages = [
     {
         id: 3,
         src: "/profile.png",
-        alt: "Gallery Image 3",
+        alt: "Manish Profile Picture",
         width: 1200,
         height: 600,
         gridArea: "span 1 / span 1",
@@ -32,7 +32,7 @@ const initialImages = [
     {
         id: 4,
         src: "/img/IMG-20250322-WA0081.jpg",
-        alt: "Gallery Image 4",
+        alt: "Manish Tamang near Gausala Itahari",
         width: 800,
         height: 800,
         gridArea: "span 2 / span 2",
@@ -40,7 +40,7 @@ const initialImages = [
     {
         id: 5,
         src: "/img/IMG_20250226_194104.jpg",
-        alt: "Gallery Image 5",
+        alt: "Manish and his mates atg Imohang house",
         width: 600,
         height: 600,
         gridArea: "span 1 / span 2",
@@ -48,7 +48,7 @@ const initialImages = [
     {
         id: 6,
         src: "/img/classx.jpeg",
-        alt: "Gallery Image 6",
+        alt: "Manish Tamang and his school mates, 2080 BS",
         width: 600,
         height: 400,
         gridArea: "span 1 / span 2",
@@ -56,7 +56,7 @@ const initialImages = [
     {
         id: 7,
         src: "/img/IMG-20241228-WA0053.jpg",
-        alt: "Gallery Image 7",
+        alt: "Manish and Abhiman",
         width: 1200,
         height: 800,
         gridArea: "span 2 / span 2",
@@ -133,6 +133,14 @@ const initialImages = [
         height: 600,
         gridArea: "span 2 / span 2",
     },
+    {
+        id: 17,
+        src: "/img/IMG-20250331-WA0003.jpg",
+        alt: "Manish and Ankit",
+        width: 800,
+        height: 600,
+        gridArea: "span 2 / span 2",
+    },
 ]
 
 interface ImageType {
@@ -155,7 +163,7 @@ export default function PhotoGallery() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setImages(initialImages);
-            setDisplayedImages(initialImages.slice(0, IMAGES_PER_LOAD)); 
+            setDisplayedImages(initialImages.slice(0, IMAGES_PER_LOAD));
             setLoading(false);
             if (initialImages.length <= IMAGES_PER_LOAD) {
                 setAllLoaded(true);
@@ -234,6 +242,9 @@ export default function PhotoGallery() {
             )}
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
+            </p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
+                Last Update: 31 March 2025
             </p>
         </div>
     )
