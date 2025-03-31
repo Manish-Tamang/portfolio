@@ -109,6 +109,9 @@ const ColophonPage = () => {
                     </Link>, and the site is deployed on{" "}
                     <Link href="https://vercel.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
                         Vercel
+                    </Link>. The code for this site is open-source and available on{" "}
+                    <Link href="https://github.com/Manish-Tamang/portfolio" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                        GitHub
                     </Link>.
                 </p>
             </section>
@@ -119,6 +122,7 @@ const ColophonPage = () => {
                 </p>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4">
                     <li><b>Karla:</b> Used for the majority of the body content for readability.</li>
+                    <li><b>Geist:</b> Used for the content of Blogs and Projects Slug Page.</li>
                     <li><b>Peachi:</b> Applied to headings to create a distinct and memorable visual hierarchy.</li>
                     <li><b>Life of Apple:</b> Elegantly displays my name, lending a personal touch.</li>
                     <li><b>MonoLisa:</b> Chosen for code snippets, ensuring clarity and legibility.</li>
@@ -150,21 +154,54 @@ const ColophonPage = () => {
                     This website leverages several external APIs and libraries to enhance functionality and user experience:
                 </p>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                    <li><Link href="https://web3forms.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Web3Forms</Link>: For handling form submissions.</li>
-                    <li>Weather API: To dynamically display weather information.</li>
-                    <li>Joke API: To generate random jokes.</li>
-                    <li>Spotify API: To showcase listening activity.</li>
-                    <li>WakaTime API: To display coding statistics.</li>
-                    <li><Link href="https://timezonedb.com/api" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Time API</Link>: To display time in contact page.</li>
-                    <li><Link href="https://umami.is/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Umami API</Link>: For privacy-focused website analytics.</li>
-                    <li><Link href="https://feedback.fish/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Feedback.fish</Link>: Providing the feedback widget.</li>
-                    <li><Link href="https://threejs.org/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Three.js</Link> & <Link href="https://docs.pmnd.rs/react-three-fiber/getting-started/introduction" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">React Three Fiber</Link>: For creating interactive 3D elements.</li>
+                    <li>
+                        <Link href="https://web3forms.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Web3Forms
+                        </Link>: For handling form submissions.
+                    </li>
+                    <li>
+                        <Link href="https://www.weatherapi.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Weather API
+                        </Link>: To dynamically display weather information.
+                    </li>
+                    <li>
+                        <Link href="https://v2.jokeapi.dev/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Joke API
+                        </Link>: To generate random jokes.
+                    </li>
+                    <li>
+                        <Link href="https://developer.spotify.com/documentation/web-api/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Spotify API
+                        </Link>: To showcase listening activity.
+                    </li>
+                    <li>
+                        <Link href="https://wakatime.com/api" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            WakaTime API
+                        </Link>: To display coding statistics.
+                    </li>
+                    <li>
+                        <Link href="https://timezonedb.com/api" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Time API
+                        </Link>: To display time in the contact page.
+                    </li>
+                    <li>
+                        <Link href="https://umami.is/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Umami API
+                        </Link>: For privacy-focused website analytics.
+                    </li>
+                    <li>
+                        <Link href="https://feedback.fish/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                            Feedback.fish
+                        </Link>: Providing the feedback widget.
+                    </li>
+
+                    {/* <li><Link href="https://threejs.org/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Three.js</Link> & <Link href="https://docs.pmnd.rs/react-three-fiber/getting-started/introduction" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">React Three Fiber</Link>: For creating interactive 3D elements.</li>
                     <li><Link href="https://github.com/pmndrs/drei" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">@react-three/drei</Link>: For useful helpers and abstractions for React Three Fiber.</li>
-                    <li><Link href="https://github.com/pmndrs/fiber" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">@react-three/fiber</Link>: For React renderer for Threejs.</li>
+                    <li><Link href="https://github.com/pmndrs/fiber" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">@react-three/fiber</Link>: For React renderer for Threejs.</li>                     */}
                 </ul>
-                <p className="text-gray-700 dark:text-gray-300 mt-4">
+                {/* <p className="text-gray-700 dark:text-gray-300 mt-4">
                     The 3D model on the About page is generously provided by <Link href="https://craftz.dog/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Takuya Matsuyama at craftz.dog</Link>.
-                </p>
+                </p> */}
             </section>
 
             <section className="mb-8">
@@ -213,6 +250,9 @@ const ColophonPage = () => {
 
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://jahir.dev/colophon" className="underline">Jahir Fiquitiva</a>.
+            </p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
+                Last Update: 31 March 2025
             </p>
         </div>
     );
