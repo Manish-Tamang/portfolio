@@ -48,7 +48,7 @@ const Education = () => {
                 />
             ),
             institution: "Prashanti Academy",
-            degree: "Full-Stack Web Development",
+            degree: "Secondary Education",
             dateRange: "JUN 2020 - MAR 2024",
             description: "Completed my lower and upper secondary school at Prashanti Academy."
         },
@@ -61,7 +61,7 @@ const Education = () => {
                 />
             ),
             institution: "Y-pointing Sec. Boarding School",
-            degree: "Secondary Education",
+            degree: "Primary To Lower Secondary Education",
             dateRange: "JUN 2012 - MAR 2020",
             description: "Completed my primary education at Y-pointing Sec. Boarding School."
         }
