@@ -65,6 +65,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           data-website-id="87f8f3a2-7fad-4aed-b92d-5beeee4c4491"
           strategy="afterInteractive"
         />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3993510219762880"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className={`${karla.className} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} bg-white text-black dark:bg-neutral-900 dark:text-white antialiased`}
