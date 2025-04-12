@@ -186,7 +186,7 @@ const ContactPage: React.FC = () => {
             <Toaster />
             <h1 className="text-4xl font-bold mb-2 font-peachi text-left">Contact me</h1>
             <p className="text-gray-700 dark:text-neutral-300 text-left mb-2">
-                It's currently{" "}
+                It&apos;s currently{" "}
                 {nepalTime ? (
                     <>{new Date(nepalTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</>
                 ) : (
