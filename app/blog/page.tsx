@@ -166,7 +166,7 @@ export default function Blogs() {
             ) : filteredAndSortedPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
-                        <article key={post.slug.current} className="rounded-[4px] border-1 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
+                        <article key={post.slug.current} className="rounded-[4px] border-2 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
                             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
                                 {post.coverImage && (
                                     <div className="relative w-full pt-[56.25%] overflow-hidden">
