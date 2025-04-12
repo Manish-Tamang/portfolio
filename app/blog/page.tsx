@@ -118,7 +118,7 @@ export default function Blogs() {
         <section className="container mx-auto py-12 px-4">
             <h2 className="text-4xl font-semibold mb-4 font-peachi">Blogs</h2>
             <p className="text-black dark:text-gray-100 mb-8 max-w-2xl">
-                Welcome to my blog page, I've been writing online since 2023, mostly about web development, blogging & tech. 
+                Welcome to my blog page, I&apos;ve been writing online since 2023, mostly about web development, blogging & tech. 
                 Use the search below to filter by title.
             </p>
 
@@ -166,7 +166,7 @@ export default function Blogs() {
             ) : filteredAndSortedPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                     {filteredAndSortedPosts.map((post: any) => (
-                        <article key={post.slug.current} className="rounded-[4px] border-2 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
+                        <article key={post.slug.current} className="rounded-[4px] border-1 overflow-hidden  transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-white dark:bg-neutral-800 h-full flex flex-col">
                             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="group">
                                 {post.coverImage && (
                                     <div className="relative w-full pt-[56.25%] overflow-hidden">
@@ -179,7 +179,7 @@ export default function Blogs() {
                                     </div>
                                 )}
                                 <div className="p-6 flex-grow flex flex-col">
-                                    <h3 className="text-xl font-bold font-peachi group-hover:text-[#38A662] dark:group-hover:text-blue-400 transition-colors duration-300 text-black dark:text-white mb-3">
+                                    <h3 className="text-xl font-bold font-peachi group-hover:text-[#38A662] dark:group-hover:text-[#38A662] transition-colors duration-300 text-black dark:text-white mb-3">
                                         {post.title}
                                     </h3>
                                     <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm space-x-2 mb-4">
@@ -205,7 +205,7 @@ export default function Blogs() {
                 </div>
             ) : (
                 <div className="text-center py-12 border border-dashed border-gray-300 rounded-[4px]">
-                    <p className="text-gray-500 dark:text-gray-400">No posts found matching "{searchQuery}"</p>
+                    <p className="text-gray-500 dark:text-gray-400">No posts found matching &quot;{searchQuery}&quot;</p>
                     <button
                         className="mt-4 text-blue-600 dark:text-blue-400 underline"
                         onClick={() => setSearchQuery("")}
