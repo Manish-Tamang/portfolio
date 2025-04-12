@@ -31,7 +31,7 @@ export default function Home() {
                     'block transform transition-transform duration-500 group-hover:translate-y-full'
                   )}
                 >
-                  Hi, I'm Manish
+                  Hi, I&apos;m Manish
                 </span>
                 <span
                   className={clsx(
@@ -67,7 +67,6 @@ export default function Home() {
             <p className="text-gray-600 dark:text-gray-400 mb-3">
               A wizard of code, weaving stories through projects and applications. I’m passionate about web development and an enthusiast for technology, constantly crafting web experiences and building tools that make an impact.
             </p>
-
           </div>
           <div className="flip-container flex basis-1/3 justify-end w-[120px] mb-8 sm:mb-0 mr-8">
             <motion.div
