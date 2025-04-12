@@ -1,5 +1,6 @@
 import { client } from '@/sanity/lib/client';
-import ProjectCard from '@/components/ProjectCard';
+import { urlFor } from '@/sanity/lib/image';
+import StackingProjectCards from '@/components/StackingCards';
 
 interface Project {
     title: string;
@@ -7,6 +8,7 @@ interface Project {
     excerpt: string;
     thumbnail: any;
     date: string;
+    projectUrl?: string;
 }
 
 async function getProjects(): Promise<Project[]> {
@@ -15,7 +17,8 @@ async function getProjects(): Promise<Project[]> {
         "slug": slug.current,
         excerpt,
         thumbnail,
-        date
+        date,
+        projectUrl
     }`;
 
     try {
@@ -30,34 +33,31 @@ async function getProjects(): Promise<Project[]> {
 export default async function ProjectsPage() {
     const projects = await getProjects();
 
+    const stackingProjects = projects.map((project, index) => ({
+        bgColor: index % 2 === 0 ? "bg-[#f97316]" : "bg-[#0015ff]",
+        title: project.title,
+        description: project.excerpt,
+        image: urlFor(project.thumbnail).url(),
+        slug: project.slug,
+        projectUrl: project.projectUrl
+    }));
+
     return (
         <section className="py-16 px-4">
             <div className="container mx-auto max-w-7xl">
-                <div className="text-left mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white font-peachi">My Projects</h1>
-                    <p className="text-lg text-gray-600 dark:text-gray-300 ">
-                        Explore my portfolio of projects showcasing my skills and experience in web development.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                    {projects.map((project) => (
-                        <ProjectCard
-                            key={project.slug}
-                            title={project.title}
-                            slug={project.slug}
-                            excerpt={project.excerpt}
-                            thumbnail={project.thumbnail}
-                            date={project.date}
-                        />
-                    ))}
-                </div>
-
-                {projects.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-gray-500 dark:text-gray-400">No projects found.</p>
-                    </div>
-                )}
+                <StackingProjectCards
+                    projects={stackingProjects}
+                    showHeader={true}
+                    showFooter={true}
+                    headerText="Scroll Down ↓"
+                    footerText="Projects"
+                />
+                <p className="text-xs text-gray-500 dark:text-neutral-400 mt-8">
+                    The StackingCard UI is from{" "}
+                    <a href="https://www.fancycomponents.dev/docs/components/blocks/stacking-cards" className="underline">
+                        Fancy components
+                    </a>.
+                </p>
             </div>
         </section>
     );
