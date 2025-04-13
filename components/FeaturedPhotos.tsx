@@ -17,19 +17,19 @@ const initialPhotos: Photo[] = [
     {
         id: 7,
         src: "/img/IMG-20241228-WA0053.jpg",
-        alt: "Gallery Image 7",
+        alt: "Manish Tamang and Abhi Sigh Karki",
 
     },
     {
         id: 8,
         src: "/img/IMG-20250331-WA0003.jpg",
-        alt: "Gallery Image 8",
+        alt: "Ankit Katwal and Manish Tamang",
 
     },
     {
         id: 9,
-        src: "/img/IMG-20250322-WA0081.jpg",
-        alt: "Gallery Image 9",
+        src: "/img/shivajatta.jpg",
+        alt: "Manish Tamang at Dharan",
 
     },
 ];
@@ -58,7 +58,7 @@ export default function FeaturedPhotos() {
                         Photos
                     </div>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        If you're wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
+                        If you&apos;re wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
                     </p>
                     <div className="grid grid-cols-3 gap-4">
                         <PhotoSkeleton />
@@ -77,7 +77,7 @@ export default function FeaturedPhotos() {
                     Photos
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    If you're wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
+                    If you&apos;re wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                     {photos.map((photo) => (
