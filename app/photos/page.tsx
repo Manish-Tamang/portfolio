@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Skeleton } from "@/components/ui/skeleton"
 import { X } from "lucide-react"
+import { BlurImage } from "@/components/BlurImage"
+import Image from "next/image"
 
 const initialImages = [
     {
@@ -150,6 +151,14 @@ const initialImages = [
         height: 600,
         gridArea: "span 2 / span 2",
     },
+    {
+        id: 19,
+        src: "/img/IMG_20250406_210256.jpg",
+        alt: "me and her",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 2",
+    },
 ]
 
 interface ImageType {
@@ -235,7 +244,7 @@ export default function PhotoGallery() {
                                         : ""}`}
                             onClick={() => handleImageClick(image)}
                         >
-                            <Image
+                            <BlurImage
                                 src={image.src || "/placeholder.svg"}
                                 alt={image.alt}
                                 fill
@@ -265,6 +274,7 @@ export default function PhotoGallery() {
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
                 Last Update: 14 April 2025
             </p>
+
             {zoomedImage && (
                 <div 
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
