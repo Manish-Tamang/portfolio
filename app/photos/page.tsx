@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Skeleton } from "@/components/ui/skeleton"
+import { X } from "lucide-react"
 
 const initialImages = [
     {
@@ -141,6 +142,14 @@ const initialImages = [
         height: 600,
         gridArea: "span 2 / span 2",
     },
+    {
+        id: 18,
+        src: "/img/shivajatta.jpg",
+        alt: "Manish Tamang At Dharan",
+        width: 800,
+        height: 600,
+        gridArea: "span 2 / span 2",
+    },
 ]
 
 interface ImageType {
@@ -159,6 +168,7 @@ export default function PhotoGallery() {
     const [loading, setLoading] = useState(true)
     const [allLoaded, setAllLoaded] = useState(false)
     const [displayedImages, setDisplayedImages] = useState<ImageType[]>([]);
+    const [zoomedImage, setZoomedImage] = useState<ImageType | null>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -187,7 +197,15 @@ export default function PhotoGallery() {
         }, 1000);
     };
 
+    const handleImageClick = (image: ImageType) => {
+        setZoomedImage(image);
+        document.body.style.overflow = 'hidden';
+    };
 
+    const handleCloseZoom = () => {
+        setZoomedImage(null);
+        document.body.style.overflow = '';
+    };
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -208,13 +226,14 @@ export default function PhotoGallery() {
                     : displayedImages.map((image) => (
                         <div
                             key={image.id}
-                            className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] ${image.gridArea === "span 2 / span 2"
+                            className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] cursor-pointer ${image.gridArea === "span 2 / span 2"
                                 ? "col-span-2 row-span-2"
                                 : image.gridArea === "span 1 / span 2"
                                     ? "col-span-2"
                                     : image.gridArea === "span 2 / span 1"
                                         ? "row-span-2"
                                         : ""}`}
+                            onClick={() => handleImageClick(image)}
                         >
                             <Image
                                 src={image.src || "/placeholder.svg"}
@@ -244,8 +263,33 @@ export default function PhotoGallery() {
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-                Last Update: 31 March 2025
+                Last Update: 14 April 2025
             </p>
+            {zoomedImage && (
+                <div 
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+                    onClick={handleCloseZoom}
+                >
+                    <div className="relative max-w-5xl max-h-[90vh] w-full">
+                        <button 
+                            className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors"
+                            onClick={handleCloseZoom}
+                        >
+                            <X size={24} />
+                        </button>
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={zoomedImage.src}
+                                alt={zoomedImage.alt}
+                                width={zoomedImage.width}
+                                height={zoomedImage.height}
+                                className="object-contain max-h-[90vh] mx-auto"
+                                priority
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
