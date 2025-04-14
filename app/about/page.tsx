@@ -40,7 +40,7 @@ const About = () => {
                 <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-12">
                     <div className="w-full">
                         <h1 className="text-5xl font-ridemybike mb-6 leading-tight">
-                            Hi, I'm Manish Tamang from{" "}
+                            Hi, I&apos;m Manish Tamang from{" "}
                             <span className="group relative inline-block">
                                 <span>Itahari</span>
                                 <div className="hidden group-hover:block">
@@ -58,14 +58,14 @@ const About = () => {
                             time.
                         </h1>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                            Driven by a love for web development, I'm a 16-year-old full stack
+                            Driven by a love for web development, I&apos;m a 16-year-old full stack
                             aspirant from Itahari, Nepal. My coding journey began early, and
                             since then, I’ve dedicated myself to crafting engaging web
                             experiences using technologies like React, Next.js, and Tailwind
                             CSS.
                         </p>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                            I'm constantly seeking new challenges and learning opportunities
+                            I&apos;m constantly seeking new challenges and learning opportunities
                             to refine my skills.
                         </p>
                         <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-sm">
@@ -85,7 +85,7 @@ const About = () => {
                                 <div className="w-56 h-72 text-gray-800">
                                     <div className="flex flex-row justify-between opacity-90">
                                         <Image
-                                            src="/img/manish.png"
+                                            src="/img/about-image.png"
                                             alt="Manish Tamang"
                                             width={200}
                                             height={200}
