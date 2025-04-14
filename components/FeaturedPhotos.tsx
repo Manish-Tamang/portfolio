@@ -28,8 +28,8 @@ const initialPhotos: Photo[] = [
     },
     {
         id: 9,
-        src: "/img/shivajatta.jpg",
-        alt: "Manish Tamang at Dharan",
+        src: "/img/IMG-20250322-WA0081.jpg",
+        alt: "Manish Tamang at Gaushala",
 
     },
 ];
