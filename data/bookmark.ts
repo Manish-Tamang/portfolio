@@ -65,6 +65,30 @@ const bookmarks = [
     description:
       "Surge.sh is a static site hosting platform that allows developers to deploy front-end projects quickly with a simple CLI command.",
   },
+  {
+    url: "https://uiverse.io",
+    title: "Uiverse.io",
+    description:
+      "Community-made library of free and customizable UI elements made with CSS or Tailwind. It's all free to copy and use in your projects.",
+  },
+  {
+    url: "https://crotus.io",
+    title: "Crotus.io",
+    description:
+      "Crotus helps you collect reviews to embed onto your own website.",
+  },
+  {
+    url: "https://uithub.com",
+    title: "Uithub.com",
+    description:
+      "Change just one letter and get github repo context to use as context for your LLM.",
+  },
+  {
+    url: "https://filecr.com",
+    title: "Filecr.com",
+    description:
+      "Free Download Windows & MacOS software, Android Apps & Games, E-Learning Videos & E-Books, PC Games, Scripts and much more.",
+  },
 ];
 
 export default bookmarks;
