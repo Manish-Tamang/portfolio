@@ -363,7 +363,7 @@ export default function DashboardPage() {
                             <p className="text-red-500">Failed to load top songs</p>
                         ) : !topSongs ? (
                             <div className="space-y-4">
-                                {[...Array(50)].map((_, i) => (
+                                {[...Array(20)].map((_, i) => (
                                     <div key={i} className="flex items-center space-x-4">
                                         <Skeleton className="h-12 w-12 rounded-lg" />
                                         <div className="space-y-2">
@@ -375,7 +375,7 @@ export default function DashboardPage() {
                             </div>
                         ) : (
                             <div className="space-y-2">
-                                {topSongs.tracks.slice(0, 5).map((track, index) => (
+                                {topSongs.tracks.slice(0, 20).map((track, index) => (
                                     <Track key={track.songUrl} {...track} ranking={index + 1} />
                                 ))}
                             </div>
