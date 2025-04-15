@@ -69,7 +69,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.446.0",
     "motion": "^12.4.3",
-    "next": "^15.1.6",
+    "next": "^15.2.1",
     "next-auth": "^5.0.0-beta.25",
     "next-mdx-remote": "^5.0.0",
     "next-sanity": "^9.8.47",
