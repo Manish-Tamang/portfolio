@@ -30,6 +30,9 @@ const UsesPage = () => {
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://sayandey.dev/utilities" className="underline">Sayan Dey</a>.
             </p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
+                Last Update: 15 April 2025
+            </p>
         </div>
     );
 };
