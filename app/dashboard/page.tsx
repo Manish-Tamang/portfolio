@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTheme } from 'next-themes';
-import { Clock, Activity, Trophy, FolderGit2 } from 'lucide-react';
+import { Clock, Activity, Trophy, FolderGit2, Music } from 'lucide-react';
 import WakaTimeCard from '@/components/WakaTimeCard';
 import ProjectsBarChart from '@/components/ProjectsBarChart';
 import PieChartComponent from '@/components/PieChartComponent';
@@ -21,6 +21,8 @@ import GithubStats from '@/components/dashboard/GithubStats';
 import BlogStatsTable from '@/components/dashboard/BlogStatsTable';
 import { getBlogPostStats } from "@/lib/BlogStats";
 import TotalBlogStats from '@/components/dashboard/TotalBlogStats';
+import Track from '@/components/Track';
+import { Song } from '@/lib/types';
 
 
 const fetcher = async (url: string) => {
@@ -126,6 +128,7 @@ export default function DashboardPage() {
     const [totalCodingTime, setTotalCodingTime] = useState<string>('N/A');
     const [formattedDailyAverage, setFormattedDailyAverage] = useState<string>('N/A');
     const [blogPostStats, setBlogPostStats] = useState<any[]>([]); // Add Blog Post Stats
+    const { data: topSongs, error: topSongsError } = useSWR<{ tracks: Song[] }>('/api/top-songs', fetcher);
 
     useEffect(() => {
         const loadBlogStats = async () => {
@@ -242,8 +245,9 @@ export default function DashboardPage() {
                 Dashboard
             </motion.h1>
             <p className="text-gray-500 dark:text-gray-400 mb-8">
-                A comprehensive overview of my coding activity, powered by WakaTime and GitHub, followed by Umami Analytics for session tracking. Additionally, blog statistics are included to give
-                insights into engagement and user interaction with my technical posts.
+                A snapshot of my coding journey with WakaTime and GitHub, showing coding hours,
+                top languages, and projects. Umami tracks user sessions, while blog stats
+                reveal post engagement. Plus, my favorite Spotify tracks add a personal vibe.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <WakaTimeCard
@@ -338,6 +342,47 @@ export default function DashboardPage() {
                     )}
                 </CardContent>
             </Card>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-12"
+            >
+                <Card className="bg-white dark:bg-neutral-900 border text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
+                    <CardHeader>
+                        <div className="flex items-center gap-2">
+                            <Music className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                            <CardTitle className="dark:text-white text-gray-800">My Top Songs on Spotify</CardTitle>
+                        </div>
+                        <CardDescription className="dark:text-gray-400 text-gray-600">
+                            Here are my top tracks on Spotify this month. I love exploring different genres and artists!
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        {topSongsError ? (
+                            <p className="text-red-500">Failed to load top songs</p>
+                        ) : !topSongs ? (
+                            <div className="space-y-4">
+                                {[...Array(50)].map((_, i) => (
+                                    <div key={i} className="flex items-center space-x-4">
+                                        <Skeleton className="h-12 w-12 rounded-lg" />
+                                        <div className="space-y-2">
+                                            <Skeleton className="h-4 w-[250px]" />
+                                            <Skeleton className="h-4 w-[200px]" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="space-y-2">
+                                {topSongs.tracks.slice(0, 5).map((track, index) => (
+                                    <Track key={track.songUrl} {...track} ranking={index + 1} />
+                                ))}
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
+            </motion.div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 This page is inspired by <a href="https://theodorusclarence.com/statistics" className="underline">Theodorus Clarence (Blog stats)</a>and <a href="https://victoreke.com/" className="underline">Victor Eke (Contribution Graph)</a>.
             </p>
