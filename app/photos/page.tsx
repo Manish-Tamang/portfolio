@@ -57,8 +57,8 @@ const initialImages = [
     },
     {
         id: 7,
-        src: "/img/IMG-20241228-WA0053.jpg",
-        alt: "Manish and Abhiman",
+        src: "/img/Taltalaiya.jpg",
+        alt: "Gallery Image 10",
         width: 1200,
         height: 800,
         gridArea: "span 2 / span 2",
@@ -81,8 +81,8 @@ const initialImages = [
     },
     {
         id: 10,
-        src: "/img/IMG_20231003_205151_626 (1).jpg",
-        alt: "Gallery Image 10",
+        src: "/img/IMG-20241228-WA0053.jpg",
+        alt: "Manish and Abhiman",
         width: 800,
         height: 400,
         gridArea: "span 1 / span 1",
@@ -97,15 +97,15 @@ const initialImages = [
     },
     {
         id: 12,
-        src: "/img/received_624136276549992_053056.jpg",
-        alt: "Gallery Image 2",
+        src: "/img/harisir-bd.jpg",
+        alt: "Hari Sir Birthday 2080",
         width: 600,
         height: 800,
         gridArea: "span 1 / span 2",
     },
     {
         id: 13,
-        src: "/img/haseko.jpg",
+        src: "/img/IMG-20250308-WA0021.jpg",
         alt: "Gallery Image 1",
         width: 800,
         height: 600,
@@ -129,7 +129,7 @@ const initialImages = [
     },
     {
         id: 16,
-        src: "/img/IMG-20250308-WA0021.jpg",
+        src: "/img/IMG-20250414-WA0018.jpg",
         alt: "Gallery Image 1",
         width: 800,
         height: 600,
@@ -145,7 +145,7 @@ const initialImages = [
     },
     {
         id: 18,
-        src: "/img/shivajatta.jpg",
+        src: "/img/IMG-20250416-WA0010.jpg",
         alt: "Manish Tamang At Dharan",
         width: 800,
         height: 600,
@@ -272,7 +272,7 @@ export default function PhotoGallery() {
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-                Last Update: 14 April 2025
+                Last Update: 17 April 2025
             </p>
 
             {zoomedImage && (
