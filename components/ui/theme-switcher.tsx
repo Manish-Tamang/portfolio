@@ -16,13 +16,13 @@ export function ThemeSwitcher() {
         let audioSrc;
         switch (themeType) {
             case 'light':
-                audioSrc = '/audio/toggle-on.mp3';
+                audioSrc = '/audio/toggle-on.MP3';
                 break;
             case 'dark':
-                audioSrc = '/audio/toggle-off.mp3';
+                audioSrc = '/audio/toggle-off.MP3';
                 break;
             case 'system':
-                audioSrc = '/audio/toggle-system.mp3'; 
+                audioSrc = '/audio/toggle-system.MP3'; 
                 break;
             default:
                 return;
