@@ -121,7 +121,7 @@ export default async function BlogPost(props: { params: { slug: string } }) {
         </div>
       </div>
       <hr className="mb-8 border-gray-200 dark:border-gray-700" />
-      <div className="prose dark:prose-invert max-w-none leading-relaxed font-geist">
+      <div className="prose dark:prose-invert max-w-none leading-relaxed font-karla">
         <MDXComponents content={post.content} />
         <div className="flex border-t border-b mt-4 justify-center space-x-4">
           <ShareButton
