@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -39,7 +39,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, children }) => {
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group my-6">
       <SyntaxHighlighter
         PreTag="div"
         language={language}
@@ -87,7 +87,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ toc }) => {
 
   return (
     <div className="sticky top-0 overflow-y-auto p-4">
-      <ul className="list-none pl-0">
+      <ul className="list-none pl-0 space-y-2">
         {toc.map((item) => (
           <li
             key={item.id}
@@ -133,24 +133,24 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
   }, [content]);
 
   return (
-    <div>
-      <Accordion type="single" collapsible className="mb-4">
+    <div className="py-6">
+      <Accordion type="single" collapsible>
         <AccordionItem value="table-of-contents">
-          <AccordionTrigger className="font-semibold">Table of Contents</AccordionTrigger>
+          <AccordionTrigger className="font-semibold text-lg py-4">Table of Contents</AccordionTrigger>
           <AccordionContent className="p-0">
-            {toc.length > 0 ? <TableOfContents toc={toc} /> : <p>No table of contents available.</p>}
+            {toc.length > 0 ? <TableOfContents toc={toc} /> : <p className="p-4">No table of contents available.</p>}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
 
-      <div ref={contentRef}>
+      <div ref={contentRef} className="space-y-6">
         <Markdown
           rehypePlugins={[rehypeRaw]}
           components={{
             h1: ({ children }) => {
               const id = children ? slugify(children.toString()) : '';
               return (
-                <h1 id={id} className="text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100 border-b pb-2 border-gray-200 dark:border-gray-700">
+                <h1 id={id} className="text-4xl font-bold mt-10 mb-4 text-gray-900 dark:text-gray-100 border-b pb-4 border-gray-200 dark:border-gray-700">
                   {children}
                 </h1>
               );
@@ -158,7 +158,7 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
             h2: ({ children }) => {
               const id = children ? slugify(children.toString()) : '';
               return (
-                <h2 id={id} className="text-3xl font-bold mt-6 mb-3 text-gray-800 dark:text-gray-200">
+                <h2 id={id} className="text-3xl font-bold mt-8 mb-4 text-gray-800 dark:text-gray-200">
                   {children}
                 </h2>
               );
@@ -166,7 +166,7 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
             h3: ({ children }) => {
               const id = children ? slugify(children.toString()) : '';
               return (
-                <h3 id={id} className="text-2xl font-semibold font-peachi mt-5 mb-2 text-gray-800 dark:text-gray-200">
+                <h3 id={id} className="text-2xl font-semibold font-peachi mt-6 mb-3 text-gray-800 dark:text-gray-200">
                   {children}
                 </h3>
               );
@@ -174,31 +174,31 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
             h4: ({ children }) => {
               const id = children ? slugify(children.toString()) : '';
               return (
-                <h4 id={id} className="text-xl font-semibold mt-4 mb-2 text-gray-800 dark:text-gray-200">
+                <h4 id={id} className="text-xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-200">
                   {children}
                 </h4>
               );
             },
             p: ({ children }) => (
-              <p className="my-0 text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p className="my-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                 {children}
               </p>
             ),
             ul: ({ children }) => (
-              <ul className="list-disc pl-6 my-0 text-gray-700 dark:text-gray-300 space-y-0">
+              <ul className="list-disc pl-8 my-4 text-gray-700 dark:text-gray-300 space-y-2 text-lg">
                 {children}
               </ul>
             ),
             ol: ({ children }) => (
-              <ol className="list-decimal pl-6 my-0 text-gray-700 dark:text-gray-300 space-y-0">
+              <ol className="list-decimal pl-8 my-4 text-gray-700 dark:text-gray-300 space-y-2 text-lg">
                 {children}
               </ol>
             ),
             li: ({ children }) => (
-              <li className="mb-0">{children}</li>
+              <li className="mb-2">{children}</li>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+              <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-8 py-6 my-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                 <span className="absolute -top-3 left-2 text-4xl text-gray-400 dark:text-gray-600">“</span>
                 {children}
                 <span className="absolute -bottom-3 right-2 text-4xl text-gray-400 dark:text-gray-600">”</span>
@@ -219,7 +219,7 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
                 src={src || ''}
                 alt={alt || ''}
                 delay={0.3}
-                className="object-cover w-full h-full mt-4 mb-2"
+                className="object-cover w-full h-full my-6"
                 width={800}
                 height={600}
               />
@@ -248,12 +248,12 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               <tr>{children}</tr>
             ),
             th: ({ children }) => (
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                 {children}
               </th>
             ),
             td: ({ children }) => (
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+              <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                 {children}
               </td>
             ),
@@ -274,7 +274,7 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               );
             },
             pre: ({ children }) => (
-              <pre className="my-6">{children}</pre>
+              <pre className="my-0">{children}</pre>
             ),
           }}
         >
