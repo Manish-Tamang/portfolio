@@ -33,7 +33,7 @@ const initialImages = [
     },
     {
         id: 4,
-        src: "/img/IMG-20250322-WA0081.jpg",
+        src: "/img/IMG-20250322-WA0113.jpg",
         alt: "Manish Tamang near Gausala Itahari",
         width: 800,
         height: 800,
