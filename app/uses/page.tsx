@@ -88,7 +88,7 @@ const UsesPage = () => {
                 transition={{ delay: 0.9 }}
                 className="text-xl text-gray-500 dark:text-gray-400 mt-8"
             >
-                Last Update: 15 April 2025
+                Last Update: 24 April 2025
             </motion.p>
         </motion.div>
     );
