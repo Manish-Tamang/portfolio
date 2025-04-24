@@ -89,6 +89,12 @@ const bookmarks = [
     description:
       "Free Download Windows & MacOS software, Android Apps & Games, E-Learning Videos & E-Books, PC Games, Scripts and much more.",
   },
+  {
+    url: "https://toolfolio.io",
+    title: "Toolfolio",
+    description:
+      "Toolfolio is a curated collection of tools and resources for developers and designers to boost productivity and streamline workflows.",
+  },
 ];
 
 export default bookmarks;
