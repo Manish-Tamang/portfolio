@@ -229,7 +229,7 @@ export default function PhotoGallery() {
                     ? Array.from({ length: IMAGES_PER_LOAD }).map((_, index) => (
                         <Skeleton
                             key={`skeleton-${index}`}
-                            className={`rounded-[4px] ${index % 5 === 0 ? "col-span-2 row-span-2" : index % 3 === 0 ? "col-span-2" : index % 2 === 0 ? "row-span-2" : ""}`}
+                            className={`rounded-[4px] ${initialImages[index].gridArea === "span 2 / span 2" ? "col-span-2 row-span-2" : initialImages[index].gridArea === "span 1 / span 2" ? "col-span-2" : initialImages[index].gridArea === "span 2 / span 1" ? "row-span-2" : ""}`}
                         />
                     ))
                     : displayedImages.map((image) => (
