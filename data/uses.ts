@@ -23,11 +23,16 @@ import {
   SiDiscord,
   SiNetlify,
 } from "react-icons/si";
+import { BiLogoVisualStudio } from "react-icons/bi";
+import { VscCopilot } from "react-icons/vsc";
+import { FaWindows } from "react-icons/fa";
+import { FaEdge } from "react-icons/fa";
+import { SiVlcmediaplayer } from "react-icons/si";
 
 export const gearItems = [
   {
     name: "Laptop",
-    description: 'Acer Aspire 3 2024',
+    description: "Acer Aspire 3 2024",
     image: "/img/uses/laptop.png",
     tags: ["Acer", "Laptop", "Windows"],
   },
@@ -75,6 +80,24 @@ export const systemItems = [
     description: "Alternative Browser",
     icon: SiGooglechrome,
     link: "https://www.google.com/chrome/",
+  },
+  {
+    name: "Visual Studio Code",
+    description: "Code Editor",
+    icon: BiLogoVisualStudio,
+    link: "https://code.visualstudio.com/",
+  },
+  {
+    name: "Windows 11",
+    description: "Operating System",
+    icon: FaWindows,
+    link: "https://www.microsoft.com/en-us/windows/windows-11",
+  },
+  {
+    name: "Microsoft Edge",
+    description: "Primary Browser",
+    icon: FaEdge,
+    link: "https://www.microsoft.com/en-us/edge",
   },
 ];
 
@@ -157,6 +180,12 @@ export const codingItems = [
     icon: SiPostman,
     link: "https://www.postman.com/downloads/",
   },
+  {
+    name: "GitHub Copilot",
+    description: "AI-powered code completion tool",
+    icon: VscCopilot,
+    link: "https://copilot.github.com/",
+  },
 ];
 
 export const softwareItems = [
@@ -213,5 +242,11 @@ export const softwareItems = [
     description: "For Team Communication and Community",
     icon: SiDiscord,
     link: "https://discord.com/",
+  },
+  {
+    name: "VLC Media Player",
+    description: "For Playing Media Files",
+    icon: SiVlcmediaplayer,
+    link: "https://www.videolan.org/vlc/",
   },
 ];
