@@ -21,12 +21,12 @@ const WishListItems = [
 const ManifestPage = () => {
     const [bucketList, setBucketList] = useState<BucketListItem[]>([
         { id: 1, title: "Buy a Gaming PC", completed: false },
-        { id: 2, title: "Buy a Insta360 GO 2", images: ["/img/bucketlist/insta-360-go-2.jpg"], completed: false },
+        { id: 2, title: "Buy a Insta360 GO 3", images: ["/img/bucketlist/insta-360-go-3.jpg"], completed: false },
         { id: 3, title: "Buy a DJI Osmo Pocket 3", images: ["/img/bucketlist/dji.png"], completed: false },
-        { id: 4, title: "Complete MERN Stack", completed: false },
-        { id: 5, title: "Earn NPR 100k", completed: false },
-        { id: 6, title: "Buy a MacBook Air M2", images: ["/img/bucketlist/macbook.jpg",], completed: false },
-        { id: 7, title: "Buy a Nothing Phone 2a", completed: false },
+        { id: 4, title: "Earn NPR 100k", completed: false },
+        { id: 5, title: "Buy a MacBook Air M4", images: ["/img/bucketlist/macbook.jpg",], completed: false },
+        { id: 6, title: "Buy a Nothing Phone 3a", images: ["/img/bucketlist/Nothing-Phone-2a-White.jpg"], completed: false },
+        { id: 7, title: "Buy a Sony ZV E10 II", images: ["/img/bucketlist/sony-zv-e10-ii-mirrorless-camera.jpg"], completed: false },
     ]);
 
     return (
@@ -65,6 +65,10 @@ const ManifestPage = () => {
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-8">
                 The Bucket List section is inspired by <a href="https://theodorusclarence.com/bucket-list" className="underline">Theodorus Clarence</a>.
             </p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
+            >
+                Last Update: 26 April 2025
+            </p>    
         </div>
     );
 };
