@@ -159,6 +159,22 @@ const initialImages = [
         height: 600,
         gridArea: "span 1 / span 2",
     },
+    {
+        id: 20,
+        src: "/img/boquet.jpg",
+        alt: "Boquet of Paper flowers",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 1",
+    },
+    {
+        id: 21,
+        src: "/img/IMG-20240814-WA0005.jpg",
+        alt: "Color painting during holi 2073",
+        width: 800,
+        height: 600,
+        gridArea: "span 1 / span 1",
+    },
 ]
 
 interface ImageType {
@@ -170,7 +186,7 @@ interface ImageType {
     gridArea: string
 }
 
-const IMAGES_PER_LOAD = 10;
+const IMAGES_PER_LOAD = 11;
 
 export default function PhotoGallery() {
     const [images, setImages] = useState<ImageType[]>([])
@@ -272,7 +288,7 @@ export default function PhotoGallery() {
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-                Last Update: 17 April 2025
+                Last Update: 29 April 2025
             </p>
 
             {zoomedImage && (
