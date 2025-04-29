@@ -240,6 +240,8 @@ export default function Footer() {
                 <Link
                   href="https://manish-analytics.vercel.app/share/jFK5VpX2c6h2JgRg/www.manishtamang.com"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <SiSimpleanalytics className="mr-2 h-4 w-4" aria-hidden="true" />
                   Analytics
@@ -251,7 +253,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="https://www.instagram.com/codewithmanish_/"
+                  href="https://www.instagram.com/golecodes/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
