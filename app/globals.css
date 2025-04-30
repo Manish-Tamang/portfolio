@@ -15,6 +15,11 @@
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
   }
+
+  /* Make Karla the default font for the entire project */
+  html {
+    font-family: var(--font-karla), system-ui, sans-serif;
+  }
 }
 
 :root {
@@ -186,6 +191,11 @@ input[type="button"],
   color: white;
 }
 
+/* Font utility classes */
+.font-jetbrains {
+  font-family: var(--font-jetbrains), monospace;
+}
+
 @font-face {
   font-family: "Peachi";
   src: url("/fonts/peachi-bold.otf") format("opentype");
@@ -274,165 +284,4 @@ input[type="button"],
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-}
-
-.piano-main {
-  align-items: center;
-  display: flex;
-  overflow: auto;
-  position: relative;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.piano-child1 {
-  position: relative;
-  width: 100%;
-  flex: 1 1;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  justify-content: flex-end;
-  flex-direction: column;
-}
-
-.piano-child2 {
-  position: relative;
-  height: 90px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.piano-child2 > div:nth-child(1) {
-  height: 30px;
-  border-bottom: 1px solid #ccc;
-  width: 100%;
-  display: inline-flex;
-}
-
-.piano-child2 > div:nth-child(2) {
-  flex: 1 1;
-  width: 100%;
-  justify-content: left;
-  align-items: center;
-  display: flex;
-}
-
-.piano-container {
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  overflow: auto;
-  margin-bottom: 40px;
-}
-
-.piano-roll {
-  height: 60%;
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  flex: 1;
-}
-
-.octave {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex-grow: 1;
-  position: relative;
-  max-width: 200px;
-}
-
-.octave:nth-child(1) span:nth-child(1) {
-  border-left: 1px solid #aaaaaa;
-}
-
-.blackNotes {
-  height: 55px;
-  display: flex;
-  width: auto;
-  left: 0;
-  right: 0;
-  top: 1px;
-  position: absolute;
-}
-
-.whiteNotes {
-  height: 100%;
-  display: flex;
-}
-
-.whiteNotes > span {
-  width: auto;
-  height: 100%;
-  display: inline-block;
-  border-right: 1px solid #aaaaaa;
-  border-top: 1px solid #aaaaaa;
-  border-bottom: 1px solid #aaaaaa;
-  flex-grow: 1;
-  order: 1;
-  box-sizing: border-box;
-  background-position: center;
-  background-size: cover;
-  background-color: white;
-}
-
-.whiteNotes > span[active]:nth-child(1) {
-  background-color: #f00;
-}
-
-.whiteNotes > span[active]:nth-child(2),
-.blackNotes > span[active]:nth-child(2) {
-  background-color: #ff5b1b;
-}
-
-.whiteNotes > span[active]:nth-child(3),
-.blackNotes > span[active]:nth-child(3) {
-  background-color: #0fddff;
-}
-
-.whiteNotes > span[active]:nth-child(4) {
-  background-color: #fcff21;
-}
-
-.whiteNotes > span[active]:nth-child(5),
-.blackNotes > span[active]:nth-child(6) {
-  background-color: #026400;
-}
-
-.whiteNotes > span[active]:nth-child(6),
-.blackNotes > span[active]:nth-child(7) {
-  background-color: #7100a4;
-}
-
-.whiteNotes > span[active]:nth-child(7),
-.blackNotes > span[active]:nth-child(8) {
-  background-color: #ff00a7;
-}
-
-.blackNotes > span {
-  background-color: black;
-  border-right: 1px solid #fff;
-  cursor: pointer;
-  height: 100%;
-  display: inline-block;
-  flex-grow: 1;
-  order: 1;
-  width: auto;
-  box-sizing: border-box;
-  background-position: center;
-  background-size: cover;
-}
-
-.blackNotes > span:nth-child(1),
-.blackNotes > span:nth-child(4),
-.blackNotes > span:nth-child(5),
-.blackNotes > span:last-child {
-  visibility: hidden;
 }
