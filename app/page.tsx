@@ -104,7 +104,7 @@ export default function Home() {
       </section>
       <section className="mb-16">
         <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
-        <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mb-4 leading-relaxed max-w-3xl">
+        <p className=" text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
           I craft high-performance, future-ready solutions where speed meets precision. Every line of code I write is
           a blend of efficiency and structure, designed for scalability and long-term maintainability.
           For me, great development is about delivering fast without compromising on a solid, lasting foundation.
@@ -112,7 +112,7 @@ export default function Home() {
         <div>
           <Link
             href="https://staging.swikarcodes.com"
-            className="group flex items-center gap-2 text-xl font-medium underline mb-2"
+            className="group flex items-center gap-2 text-xl font-medium underline font-jetbrains mb-2"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -125,7 +125,7 @@ export default function Home() {
         <div className="mt-4">
           <Link
             href="https://github.com/Manish-Tamang/opera-surgical-centre"
-            className="group flex items-center gap-2 text-xl font-medium underline mb-2"
+            className="group flex items-center gap-2 text-xl font-medium underline mb-2 font-jetbrains"
             target="_blank"
             rel="noopener noreferrer"
           >
