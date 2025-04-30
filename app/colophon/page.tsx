@@ -203,6 +203,9 @@ const ColophonPage = () => {
           <li>
             <b>Ride My Bike:</b> Font for some special sections of the website.
           </li>
+          <li>
+            <b>JetBrains Mono:</b> Used for code blocks and technical content.
+          </li>
         </ul>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <TypographyItem label="Geist Regular" font="var(--font-geist)" />
@@ -213,6 +216,7 @@ const ColophonPage = () => {
             font="var(--font-lifeofapple)"
           />
           <TypographyItem label="Ride My Bike" font="var(--font-ridemybike)" />
+          <TypographyItem label="JetBrains Mono" font="var(--font-jetbrains)" />
         </div>
       </section>
 
@@ -620,7 +624,7 @@ const ColophonPage = () => {
         .
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: 31 March 2025
+        Last Update: 30 April 2025
       </p>
     </div>
   );
