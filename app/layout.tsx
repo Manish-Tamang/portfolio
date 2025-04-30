@@ -1,60 +1,111 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Karla } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
-import Container from '@/components/Container';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import localFont from 'next/font/local';
-import { SessionProvider } from 'next-auth/react';
-import { Toaster } from 'react-hot-toast';
-import Script from 'next/script';
-import CarbonAds from '@/components/carbonAds';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Karla, JetBrains_Mono } from "next/font/google";
+import { ThemeProvider } from "next-themes";
+import Container from "@/components/Container";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import localFont from "next/font/local";
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
+import Script from "next/script";
+import CarbonAds from "@/components/carbonAds";
 
-const karla = Karla({ subsets: ['latin'] });
+const karla = Karla({
+  subsets: ["latin"],
+  variable: "--font-karla",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 const geist = localFont({
   src: [
-    { path: '../public/fonts/Geist-Thin.otf', weight: '100', style: 'normal' },
-    { path: '../public/fonts/Geist-ExtraLight.otf', weight: '200', style: 'normal' },
-    { path: '../public/fonts/Geist-Light.otf', weight: '300', style: 'normal' },
-    { path: '../public/fonts/Geist-Regular.otf', weight: '400', style: 'normal' },
-    { path: '../public/fonts/Geist-Medium.otf', weight: '500', style: 'normal' },
-    { path: '../public/fonts/Geist-SemiBold.otf', weight: '600', style: 'normal' },
-    { path: '../public/fonts/Geist-Bold.otf', weight: '700', style: 'normal' },
-    { path: '../public/fonts/Geist-ExtraBold.otf', weight: '800', style: 'normal' },
-    { path: '../public/fonts/Geist-Black.otf', weight: '900', style: 'normal' },
+    { path: "../public/fonts/Geist-Thin.otf", weight: "100", style: "normal" },
+    {
+      path: "../public/fonts/Geist-ExtraLight.otf",
+      weight: "200",
+      style: "normal",
+    },
+    { path: "../public/fonts/Geist-Light.otf", weight: "300", style: "normal" },
+    {
+      path: "../public/fonts/Geist-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Geist-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Geist-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    { path: "../public/fonts/Geist-Bold.otf", weight: "700", style: "normal" },
+    {
+      path: "../public/fonts/Geist-ExtraBold.otf",
+      weight: "800",
+      style: "normal",
+    },
+    { path: "../public/fonts/Geist-Black.otf", weight: "900", style: "normal" },
   ],
-  variable: '--font-geist',
+  variable: "--font-geist",
 });
 
 const lifeofapple = localFont({
-  src: [{ path: '../public/fonts/Life-of-Apple.ttf', weight: '400', style: 'normal' }],
-  variable: '--font-lifeofapple',
+  src: [
+    {
+      path: "../public/fonts/Life-of-Apple.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-lifeofapple",
 });
 
 const ridemybike = localFont({
-  src: [{ path: '../public/fonts/latinotype-ridemybike-pro-bold-italic.otf', weight: '700', style: 'italic' }],
-  variable: '--font-ridemybike',
+  src: [
+    {
+      path: "../public/fonts/latinotype-ridemybike-pro-bold-italic.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-ridemybike",
 });
 
 export const metadata: Metadata = {
-  title: 'Manish Tamang - A young developer',
-  description: "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
+  title: "Manish Tamang - A young developer",
+  description:
+    "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
   openGraph: {
-    title: 'Manish Tamang - A young developer',
-    description: "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
-    images: '/OG-Image.png',
-    type: 'website',
+    title: "Manish Tamang - A young developer",
+    description:
+      "Hi, I'm Manish Gole Tamang, a 16-year-old from Itahari, Nepal, with a fervent passion for web development.",
+    images: "/OG-Image.png",
+    type: "website",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="description" content={metadata.description ?? ''} />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content={metadata.description ?? ""} />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
         <Script
           src="https://manish-analytics.vercel.app/script.js"
           data-website-id="d5fd3d82-d867-4e3d-badb-837ad2ff7f7d"
@@ -72,7 +123,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ></script>
       </head>
       <body
-        className={`${karla.className} ${geist.variable} ${lifeofapple.variable} ${ridemybike.variable} bg-white text-black dark:bg-neutral-900 dark:text-white antialiased`}
+        className={`
+          ${karla.className}
+          ${karla.variable} 
+          ${jetBrainsMono.variable} 
+          ${geist.variable} 
+          ${lifeofapple.variable} 
+          ${ridemybike.variable} 
+          bg-white 
+          text-black 
+          dark:bg-neutral-900 
+          dark:text-white 
+          antialiased
+        `}
       >
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
