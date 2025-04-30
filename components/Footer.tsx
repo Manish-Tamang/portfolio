@@ -125,7 +125,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-8 mb-10 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 mb-10 md:grid-cols-4 font-jetbrains">
           <nav aria-label="Footer navigation - About">
             <ul className="space-y-3">
               <li>
