@@ -240,7 +240,7 @@ export default function PhotoGallery() {
                     A collection of random images from my gallery.
                 </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 auto-rows-[200px]">
                 {loading && displayedImages.length === 0
                     ? Array.from({ length: IMAGES_PER_LOAD }).map((_, index) => (
                         <Skeleton
@@ -288,7 +288,7 @@ export default function PhotoGallery() {
                 This page is inspired by <a href="https://ouassim.tech/lens/" className="underline">Ouassim</a>.
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-                Last Update: 29 April 2025
+                Last Update: May 2 2025
             </p>
 
             {zoomedImage && (
