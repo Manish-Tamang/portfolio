@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { BiSolidQuoteRight } from "react-icons/bi";
+import SocialLinks from "@/components/SocialLinks";
 
 const About = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -57,6 +58,7 @@ const About = () => {
               , where I craft, break, and rebuild the internet, one line at a
               time.
             </h1>
+
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               Driven by a love for web development, I&apos;m a 16-year-old full
               stack aspirant from Itahari, Nepal. My coding journey began early,
@@ -68,6 +70,7 @@ const About = () => {
               I&apos;m constantly seeking new challenges and learning
               opportunities to refine my skills.
             </p>
+            <SocialLinks />
             <blockquote className="relative overflow-hidden tracking-tight text-lg my-8 lg:py-6 lg:pl-6 pr-12 p-4 border dark:border-zinc-800 border-zinc-200 rounded-[4px]">
               <BiSolidQuoteRight
                 className="text-7xl absolute -top-7 -right-5 -rotate-12 dark:text-zinc-800 text-zinc-200"
