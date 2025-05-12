@@ -467,6 +467,35 @@ const ColophonPage = () => {
           individuals and their work, which have significantly inspired the
           design and development of this portfolio:
         </p>
+        <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900/50 rounded-lg">
+          <Image 
+            src="/img/flowers.png" 
+            alt="Flowers decoration" 
+            width={730} 
+            height={100}
+            className="w-full mb-4 rounded-lg"
+          />
+          <p className="text-gray-700 dark:text-gray-300 text-center">
+            Beautiful flowers decoration used in the footer by{" "}
+            <Link
+              href="https://www.instagram.com/uiuxsesh/"
+              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Saira
+            </Link>
+            {" "}from{" "}
+            <Link
+              href="https://www.figma.com/design/uXZi2989oC14Z5EtNODWtJ/100-Day-Design-Challenge?t=PnkCBvQeWWRsgr5Q-0"
+              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              100 Day Design Challenge
+            </Link>
+          </p>
+        </div>
         <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
           <li>
             <Link
