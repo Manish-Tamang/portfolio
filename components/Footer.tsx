@@ -107,7 +107,7 @@ export default function Footer() {
 
 
   return (
-    <footer className="mt-4 pb-8 pt-10 px-4 sm:px-6 lg:px-8">
+    <footer className="mt-4 pb-24 pt-10 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-6xl mx-auto">
         <div className="mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
@@ -323,6 +323,13 @@ export default function Footer() {
             <ThemeSwitcher />
           </div>
         </div>
+        <Image 
+          src="/img/flowers.png" 
+          className="absolute bottom-0 left-0 w-full" 
+          alt="Flowers" 
+          width={730} 
+          height={100} 
+        />
       </div>
     </footer>
   );
