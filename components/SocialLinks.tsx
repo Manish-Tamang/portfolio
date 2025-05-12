@@ -21,7 +21,7 @@ const socialLinks = [
     icon: <FaInstagram color="#E4405F" size={28} />,
   },
   {
-    href: "https://x.com/intent/user?screen_name=Manishtamangxyz/",
+    href: "https://x.com/intent/user?screen_name=Manishtamangxyz",
     label: "X (Twitter)",
     icon: <FaXTwitter color="#000000" size={28} />,
   },
