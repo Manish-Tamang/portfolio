@@ -25,6 +25,8 @@ export default function NotFound() {
                     alt="404 Page Not Found"
                     width={400}
                     height={600}
+                    style={{userSelect: 'none'}}
+                    draggable={false}
                     priority
                 />
                 <h1 className="text-4xl font-bold mb-4 font-peachi">Page Not Found</h1>
