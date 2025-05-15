@@ -473,6 +473,8 @@ const ColophonPage = () => {
             alt="Flowers decoration" 
             width={730} 
             height={100}
+            style={{ userSelect: "none" }}
+            draggable="false"
             className="w-full mb-4 rounded-lg"
           />
           <p className="text-gray-700 dark:text-gray-300 text-center">
