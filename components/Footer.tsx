@@ -326,6 +326,9 @@ export default function Footer() {
         <Image 
           src="/img/flowers.png" 
           className="absolute bottom-0 left-0 w-full" 
+          style={{userSelect: 'none', pointerEvents: 'none'}}
+          draggable="false"
+          loading="lazy"
           alt="Flowers" 
           width={730} 
           height={100} 
