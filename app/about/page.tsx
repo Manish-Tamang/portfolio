@@ -60,7 +60,7 @@ const About = () => {
             </h1>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              Driven by a love for web development, I&apos;m a 16-year-old full
+              Driven by a love for web development, I&apos;m a 17-year-old full
               stack aspirant from Itahari, Nepal. My coding journey began early,
               and since then, I’ve dedicated myself to crafting engaging web
               experiences using technologies like React, Next.js, and Tailwind
