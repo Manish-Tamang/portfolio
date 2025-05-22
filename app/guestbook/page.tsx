@@ -144,7 +144,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
       <div className="flex items-center gap-3">
         {avatar ? (
           <Avatar>
-            <AvatarImage src={avatar} alt={name} />
+            <AvatarImage src={avatar} alt={name} draggable={false} />
             <AvatarFallback
               className={`bg-gradient-to-br ${getAvatarColor(name)} text-white`}
             >
