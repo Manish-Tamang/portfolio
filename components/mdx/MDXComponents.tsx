@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import Image from 'next/image';
 
 const slugify = (text: string): string => {
   return text
@@ -215,11 +216,10 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               </a>
             ),
             img: ({ src, alt }) => (
-              <BlurFadeImage
+              <Image
                 src={src || ''}
                 alt={alt || ''}
-                delay={0.3}
-                className="object-cover w-full h-full my-6"
+                className="object-cover w-full h-full my-6 rounded-md"
                 width={800}
                 height={600}
               />
