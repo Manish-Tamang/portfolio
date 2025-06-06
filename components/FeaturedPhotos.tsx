@@ -89,9 +89,11 @@ export default function FeaturedPhotos() {
                                 style={{
                                     objectFit: "cover",
                                     objectPosition: "center",
+                                    userSelect: "none",
                                 }}
                                 className="object-cover"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                draggable={false}
                             />
                         </div>
                     ))}
