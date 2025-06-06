@@ -8,6 +8,12 @@ import {
   FaMastodon,
 } from "react-icons/fa6";
 import { SiBluesky, SiDailydotdev } from "react-icons/si";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const socialLinks = [
   {
@@ -59,19 +65,27 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <div className="flex flex-wrap gap-3 justify-start items-center my-4">
-      {socialLinks.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={link.label}
-          className="hover:scale-110 transition-transform"
-        >
-          {link.icon}
-        </a>
-      ))}
-    </div>
+    <TooltipProvider>
+      <div className="flex flex-wrap gap-3 justify-start items-center my-4">
+        {socialLinks.map((link) => (
+          <Tooltip key={link.href}>
+            <TooltipTrigger asChild>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                className="hover:scale-110 transition-all duration-300 hover:rotate-3 hover:shadow-lg hover:shadow-gray-400/20 dark:hover:shadow-gray-600/20"
+              >
+                {link.icon}
+              </a>
+            </TooltipTrigger>
+            <TooltipContent className="rounded-[4px]">
+              <p className="font-medium">{link.label}</p>
+            </TooltipContent>
+          </Tooltip>
+        ))}
+      </div>
+    </TooltipProvider>
   );
 }
