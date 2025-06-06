@@ -61,7 +61,7 @@ const About = () => {
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               Driven by a love for web development, I&apos;m a{" "}
-              <span className="font-bold text-[#38A662]">17-year-old</span> full stack aspirant
+              <span className="font-bold text-[#38A662] hover:underline decoration-wavy">17-year-old</span> full stack aspirant
               from Itahari, Nepal. My coding journey began early, and since
               then, I&apos;ve dedicated myself to crafting engaging web
               experiences using technologies like React, Next.js, and Tailwind
