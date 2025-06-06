@@ -16,14 +16,14 @@ interface Photo {
 const initialPhotos: Photo[] = [
     {
         id: 1,
-        src: "/img/IMG-20241228-WA0053.jpg",
+        src: "/img/IMG-20250605-WA0021.jpg",
         alt: "Manish Tamang and Abhi Sigh Karki",
 
     },
     {
         id: 2,
         src: "/img/IMG-20250322-WA0113.jpg",
-        alt: "Ankit Katwal and Manish Tamang",
+        alt: "Photo of my Ukulele",
 
     },
     {
