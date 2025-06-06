@@ -17,7 +17,7 @@ const initialPhotos: Photo[] = [
     {
         id: 1,
         src: "/img/IMG-20250605-WA0021.jpg",
-        alt: "Manish Tamang and Abhi Sigh Karki",
+        alt: "Manish Tamang playing electric guitar",
 
     },
     {
