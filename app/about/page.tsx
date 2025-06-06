@@ -60,9 +60,10 @@ const About = () => {
             </h1>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              Driven by a love for web development, I&apos;m a 17-year-old full
-              stack aspirant from Itahari, Nepal. My coding journey began early,
-              and since then, I’ve dedicated myself to crafting engaging web
+              Driven by a love for web development, I&apos;m a{" "}
+              <span className="font-bold text-[#38A662]">17-year-old</span> full stack aspirant
+              from Itahari, Nepal. My coding journey began early, and since
+              then, I&apos;ve dedicated myself to crafting engaging web
               experiences using technologies like React, Next.js, and Tailwind
               CSS.
             </p>
@@ -93,6 +94,8 @@ const About = () => {
                       width={200}
                       height={200}
                       className="w-full h-full"
+                      draggable={false}
+                      style={{ userSelect: "none" }}
                     />
                   </div>
                 </div>
