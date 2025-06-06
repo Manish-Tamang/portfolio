@@ -83,6 +83,8 @@ export default function Home() {
                   sizes="30vw"
                   priority
                   className="w-full h-full object-cover rounded-full"
+                  draggable={false}
+                  style={{ userSelect: "none" }}
                 />
               </div>
               <div className="flip-card-back">
@@ -94,6 +96,8 @@ export default function Home() {
                   sizes="30vw"
                   priority
                   className="w-full h-full object-cover rounded-full"
+                  draggable={false}
+                  style={{ userSelect: "none" }}
                 />
               </div>
             </div>
