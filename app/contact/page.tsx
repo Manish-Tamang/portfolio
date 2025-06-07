@@ -188,38 +188,6 @@ const ContactPage: React.FC = () => {
   return (
     <div className="max-w-xl mx-auto px-6 py-12 relative text-gray-800 dark:text-gray-100">
       <Toaster />
-
-      {/* Get in Touch Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4 font-peachi">Get in Touch</h1>
-        <p className="text-gray-700 dark:text-neutral-300">
-          Have a question or want to work together? I&apos;d love to hear from
-          you. Whether you have a project in mind or just want to say hello,
-          feel free to reach out.
-        </p>
-      </div>
-
-      {/* Scheduling Card */}
-      <div className="mb-12 p-6 border border-gray-200 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-800 text-center">
-        <h2 className="text-2xl font-bold mb-2 font-peachi">
-          Schedule an Introductory Call
-        </h2>
-        <p className="text-gray-700 dark:text-neutral-300 mb-6">
-          The most efficient way to start the conversation is to book a
-          complimentary 30-minute consultation.
-        </p>
-        <a
-          href={process.env.NEXT_PUBLIC_CALENDLY_URL || "#"}
-          className="inline-block px-6 py-3 bg-[#38A662] text-white rounded-md hover:brightness-110 transition-colors"
-        >
-          Book a 30-Min Consultation
-        </a>
-        <p className="text-gray-500 dark:text-neutral-400 text-sm mt-2">
-          Held via Google Meet. Select a time that works best for you.
-        </p>
-      </div>
-
-      {/* Contact Form Section */}
       <div>
         <h2 className="text-4xl font-bold mb-2 font-peachi text-left">
           Contact me
@@ -387,7 +355,24 @@ const ContactPage: React.FC = () => {
           maneshtamang833@gmail.com
         </a>
       </p>
-
+      <div className="mb-12 mt-10 p-6 border border-gray-200 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-800 text-center">
+        <h2 className="text-2xl font-bold mb-2 font-peachi">
+          Schedule an Introductory Call
+        </h2>
+        <p className="text-gray-700 dark:text-neutral-300 mb-6">
+          The most efficient way to start the conversation is to book a
+          complimentary 30-minute consultation.
+        </p>
+        <a
+          href={process.env.NEXT_PUBLIC_CALENDLY_URL || "#"}
+          className="inline-block px-6 py-3 bg-[#38A662] text-white rounded-md hover:brightness-110 transition-colors"
+        >
+          Book a 30-Min Consultation
+        </a>
+        <p className="text-gray-500 dark:text-neutral-400 text-sm mt-2">
+          Held via Google Meet. Select a time that works best for you.
+        </p>
+      </div>
       <p className="text-xs text-gray-500 dark:text-neutral-400 mt-8">
         This page is inspired by{" "}
         <a href="https://www.totaltypescript.com/contact" className="underline">
