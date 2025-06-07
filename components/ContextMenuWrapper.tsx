@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import {
@@ -30,22 +30,40 @@ import {
   HiOutlineCog,
 } from "react-icons/hi";
 
+// Custom hook to detect mobile devices
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px is typical tablet/mobile breakpoint
+    };
+
+    // Initial check
+    checkIsMobile();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  return isMobile;
+};
+
 export default function ContextMenuWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const { theme, setTheme } = useTheme();
-  const handleContextMenu = useCallback((e: MouseEvent) => {
-    e.preventDefault();
-  }, []);
+  const isMobile = useIsMobile();
 
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, [handleContextMenu]);
+  // If on mobile, just render children without context menu
+  if (isMobile) {
+    return <>{children}</>;
+  }
 
   return (
     <ContextMenu>
@@ -150,19 +168,6 @@ export default function ContextMenuWrapper({
                 System
               </ContextMenuRadioItem>
             </ContextMenuRadioGroup>
-            <ContextMenuSeparator className="bg-neutral-200 dark:bg-neutral-800" />
-            <ContextMenuCheckboxItem
-              checked
-              className="text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Show Analytics
-            </ContextMenuCheckboxItem>
-            <ContextMenuCheckboxItem
-              checked
-              className="text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Enable Notifications
-            </ContextMenuCheckboxItem>
           </ContextMenuSubContent>
         </ContextMenuSub>
         <ContextMenuSeparator className="bg-neutral-200 dark:bg-neutral-800" />
