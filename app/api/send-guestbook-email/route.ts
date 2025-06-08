@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
                 <a href="https://www.facebook.com/manishgoletamang" target="_blank">
                     <img src="https://img-cache.net/im/4960397/71a0680b06c995e6030190a5c9d1420b7c20f80c36597f2144666c2b62a52d60.png" alt="Facebook">
                 </a>
-                <a href="https://www.instagram.com/codewithmanish_/" target="_blank">
+                <a href="https://www.instagram.com/golecodes/" target="_blank">
                     <img src="https://img-cache.net/im/4960397/c2c25c4d2076c7f37112ced457f98550565bdfc92294241b91ec5dff5262f4ac.png" alt="Instagram">
                 </a>
             </div>
