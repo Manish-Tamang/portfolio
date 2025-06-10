@@ -124,39 +124,17 @@ export default function Navbar() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger
-                    className={cn(
-                      "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
-                      isActive(pathname, "/blog") ? "text-[#38A662]" : ""
-                    )}
-                  >
-                    Blog
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white dark:bg-neutral-700">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-[4px] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-neutral-900 dark:to-neutral-700 p-6 no-underline outline-none focus:shadow-md transition-all duration-300"
-                            href="/blog"
-                          >
-                            <div className="mb-2 mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
-                              Developer Blog
-                            </div>
-                            <p className="text-sm leading-tight text-gray-600 dark:text-gray-400">
-                              Explore the latest in web development, coding tips, and tech insights.
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                      </li>
-                      <ListItem href="/blog" title="Latest Posts">
-                        Recently published articles and updates
-                      </ListItem>
-                      <ListItem href="/blog/categories" title="Categories">
-                        Browse articles by topic
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
+                  <Link href="/blog" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                        isActive(pathname, "/blog") ? "text-[#38A662]" : ""
+                      )}
+                    >
+                      Blog
+                    </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
