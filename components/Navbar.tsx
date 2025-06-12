@@ -70,14 +70,14 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-[4px] p-3 leading-none no-underline outline-none transition-colors duration-300",
-              "hover:bg-gray-100 dark:hover:bg-neutral-700",
-              "focus:bg-gray-100 dark:focus:bg-neutral-700",
+              "hover:bg-neutral-100 dark:hover:bg-neutral-700",
+              "focus:bg-neutral-100 dark:focus:bg-neutral-700",
               className
             )}
             {...props}
           >
             <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
+            <p className="line-clamp-2 text-sm leading-snug text-neutral-500 dark:text-neutral-400">
               {children}
             </p>
           </a>
@@ -111,7 +111,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full bg-white/75 dark:bg-neutral-900 backdrop-blur-lg border-b border-gray-200 dark:border-neutral-700 sticky top-0 z-50">
+    <header className="w-full bg-white/75 dark:bg-neutral-900 backdrop-blur-lg border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex-shrink-0">
@@ -128,7 +128,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                        "bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                         isActive(pathname, "/blog") ? "text-[#38A662]" : ""
                       )}
                     >
@@ -138,7 +138,7 @@ export default function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                    className={cn("bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                       isActive(pathname, "/about") ? "text-[#38A662]" : ""
                     )}
                   >
@@ -171,7 +171,7 @@ export default function Navbar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className={cn("bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                    className={cn("bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                       isActive(pathname, "/dashboard") ? "text-[#38A662]" : ""
                     )}
                   >
@@ -196,7 +196,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                        "bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                         isActive(pathname, "/guestbook") ? "text-[#38A662]" : ""
                       )}
                     >
@@ -209,7 +209,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors duration-300",
+                        "bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
                         isActive(pathname, "/contact") ? "text-[#38A662]" : ""
                       )}
                     >
@@ -223,7 +223,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-200 "
+            className="md:hidden p-2 rounded-md text-neutral-700 dark:text-neutral-200 "
           >
             <div className="flex items-center rounded-xl px-2 py-1">
               <span className="mr-2">Menu</span>
@@ -252,22 +252,22 @@ export default function Navbar() {
                 transition={{ duration: 0.2 }}
                 className="flex flex-col space-y-2 py-4"
               >
-                <Link href="/" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/") ? "text-[#38A662]" : "")}>
+                <Link href="/" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/") ? "text-[#38A662]" : "")}>
                   Home
                 </Link>
-                <Link href="/blog" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/blogs") ? "text-[#38A662]" : "")}>
+                <Link href="/blog" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/blogs") ? "text-[#38A662]" : "")}>
                   Blog
                 </Link>
-                <Link href="/about" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
+                <Link href="/about" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
                   About
                 </Link>
-                <Link href="/guestbook" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
+                <Link href="/guestbook" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/about") ? "text-[#38A662]" : "")}>
                   Guestbook
                 </Link>
-                <Link href="/dashboard" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/dashboard") ? "text-[#38A662]" : "")}>
+                <Link href="/dashboard" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/dashboard") ? "text-[#38A662]" : "")}>
                   Dashboard
                 </Link>
-                <Link href="/contact" className={cn("px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/contact") ? "text-[#38A662]" : "")}>
+                <Link href="/contact" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/contact") ? "text-[#38A662]" : "")}>
                   Contact
                 </Link>
               </motion.nav>
