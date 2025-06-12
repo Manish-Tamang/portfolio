@@ -17,7 +17,7 @@ interface GroupedTimelineData {
 
 const Divider = () => {
     return (
-        <div className="border-b border-gray-200 dark:border-gray-600 w-full my-8" />
+        <div className="border-b border-neutral-200 dark:border-neutral-600 w-full my-8" />
     );
 };
 
@@ -80,8 +80,8 @@ const Timeline = () => {
                 {visibleItems.map(({ year, items }) => (
                     <div key={year}>
                         <div className="mb-2 ml-4 relative">
-                            <div className="absolute -left-1.5 mt-1.5 -ml-4 h-3 w-3 rounded-full border border-white bg-gray-300 dark:border-gray-900 dark:bg-gray-700"></div>
-                            <time className="ml-2 text-sm font-normal leading-none text-gray-500 dark:text-[#c2c2c2]">
+                            <div className="absolute -left-1.5 mt-1.5 -ml-4 h-3 w-3 rounded-full border border-white bg-neutral-300 dark:border-neutral-900 dark:bg-neutral-700"></div>
+                            <time className="ml-2 text-sm font-normal leading-none text-neutral-500 dark:text-[#c2c2c2]">
                                 {year}
                             </time>
                             {items.map((item) => (
