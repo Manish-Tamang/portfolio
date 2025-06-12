@@ -93,13 +93,13 @@ export default function FeaturedProjects() {
                                     </svg>
                                 </Link>
                             </div>
-                            <p className="text-gray-600 dark:text-gray-300 mt-2">{project.excerpt}</p>
+                            <p className="text-neutral-600 dark:text-neutral-300 mt-2">{project.excerpt}</p>
                             <div className="mt-4 flex flex-wrap gap-2">
                                 {project.techStack && project.techStack.map((tech, index) => (
-                                    <span key={index} className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs px-2 py-1 rounded-[4px]">{tech}</span>
+                                    <span key={index} className="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 text-xs px-2 py-1 rounded-[4px]">{tech}</span>
                                 ))}
                             </div>
-                            <hr className="mt-4 border-gray-200 dark:border-gray-700" />
+                            <hr className="mt-4 border-neutral-200 dark:border-neutral-700" />
                         </div>
                     ))}
                 </div>
