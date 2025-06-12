@@ -35,7 +35,7 @@ const initialPhotos: Photo[] = [
 ];
 
 const PhotoSkeleton = () => (
-    <div className="flex items-center justify-center rounded-md bg-gray-200 dark:bg-gray-700 aspect-square">
+    <div className="flex items-center justify-center rounded-md bg-neutral-200 dark:bg-neutral-700 aspect-square">
         <Skeleton className="w-full h-full" />
     </div>
 );
@@ -54,11 +54,11 @@ export default function FeaturedPhotos() {
         return (
             <section className="py-8">
                 <div className="container mx-auto max-w-7xl">
-                    <div className="flex items-center gap-2 text-gray-900 dark:text-gray-100 font-bold text-xl mb-4 font-peachi">
+                    <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100 font-bold text-xl mb-4 font-peachi">
                         Photos
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        If you&apos;re wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
+                    <p className="text-neutral-600 dark:text-neutral-300 mb-4">
+                        If you&apos;re wondering what I look like in real life, here are some of my photos. I don&apos;t usually take pictures, but here are a few!
                     </p>
                     <div className="grid grid-cols-3 gap-4">
                         <PhotoSkeleton />
@@ -73,11 +73,11 @@ export default function FeaturedPhotos() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-                <div className="flex items-center gap-2 text-gray-900 dark:text-gray-100 font-bold text-xl mb-4 font-peachi">
+                <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100 font-bold text-xl mb-4 font-peachi">
                     Photos
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    If you&apos;re wondering what I look like in real life, here are some of my photos. I don’t usually take pictures, but here are a few!
+                <p className="text-neutral-600 dark:text-neutral-300 mb-4">
+                    If you&apos;re wondering what I look like in real life, here are some of my photos. I don&apos;t usually take pictures, but here are a few!
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                     {photos.map((photo) => (
