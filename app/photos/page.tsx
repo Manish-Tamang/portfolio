@@ -56,7 +56,7 @@ const images = [
   },
   {
     id: 7,
-    src: "/img/Taltalaiya.jpg",
+    src: "/img/IMG_20250712_132655.jpg",
     alt: "Gallery Image 10",
     width: 1200,
     height: 800,
@@ -64,7 +64,7 @@ const images = [
   },
   {
     id: 8,
-    src: "/img/IMG-20241219-WA0000.jpg",
+    src: "/img/IMG-20250712-WA0078.jpg",
     alt: "Gallery Image 8",
     width: 400,
     height: 600,
@@ -136,8 +136,8 @@ const images = [
   },
   {
     id: 17,
-    src: "/img/IMG-20250331-WA0003.jpg",
-    alt: "Manish and Ankit",
+    src: "/img/IMG_20250712_130554.jpg",
+    alt: "Manish and Ankit at Shiva Jatta",
     width: 800,
     height: 600,
     gridArea: "span 2 / span 2",
@@ -152,8 +152,8 @@ const images = [
   },
   {
     id: 19,
-    src: "/img/IMG_20250406_210256.jpg",
-    alt: "me and her",
+    src: "/img/IMG-20250701-WA0009.jpg",
+    alt: "Abhishek, Nishan, Manish and Sajak",
     width: 800,
     height: 600,
     gridArea: "span 1 / span 2",
@@ -176,7 +176,7 @@ const images = [
   },
   {
     id: 22,
-    src: "/img/IMG-20250414-WA0018.jpg",
+    src: "/img/IMG_20250712_132655.jpg",
     alt: "Manish Tamang, Dharan",
     width: 800,
     height: 600,
@@ -252,7 +252,7 @@ export default function PhotoGallery() {
         .
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: June 6 2025
+        Last Update: July 12 2025
       </p>
 
       {zoomedImage && (
