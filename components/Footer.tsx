@@ -299,8 +299,24 @@ export default function Footer() {
           </nav>
         </div>
         <div className="flex flex-col items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-700 sm:flex-row">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-0">
-            Proudly Made in Nepal by Manish Tamang  © {currentYear}
+          <p className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-0">
+            Proudly Made in
+            <Image
+              src={`https://flagcdn.com/h240/np.png`}
+              alt={`Nepal flag`}
+              width={16}
+              height={14}
+              loading="lazy"
+              draggable="false"
+              style={{userSelect: 'none', pointerEvents: 'none'}}
+              className="mx-1 inline-block align-middle"
+            />
+            by <a
+              href="https://www.linkedin.com/in/manish-tamang/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dark:text-[#38A662] text-[#38A662] dark:hover:text-[#38A662] transition-colors duration-200 ml-1"
+            >Manish Tamang </a>© {currentYear}
           </p>
           <div className="flex items-center space-x-4">
             {lastVisit && (
@@ -311,6 +327,8 @@ export default function Footer() {
                   width={16}
                   height={14}
                   loading="lazy"
+                  draggable="false"
+                  style={{userSelect: 'none', pointerEvents: 'none'}}
                 />
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   Last visit from {lastVisit.country}
