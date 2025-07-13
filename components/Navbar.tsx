@@ -209,11 +209,13 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent dark:bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors duration-300",
-                        isActive(pathname, "/contact") ? "text-[#38A662]" : ""
                       )}
                     >
-                      Contact
+                      <button
+                        className="cursor-pointer transition-all bg-[#38A662] text-white px-6 py-2 rounded-[4px] border-[#2D8A4D] w-full border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] disabled:bg-gray-400 disabled:border-gray-500 disabled:cursor-not-allowed"
+                      >
+                        Contact
+                      </button>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -268,7 +270,11 @@ export default function Navbar() {
                   Dashboard
                 </Link>
                 <Link href="/contact" className={cn("px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-md", isActive(pathname, "/contact") ? "text-[#38A662]" : "")}>
-                  Contact
+                  <button
+                    className="cursor-pointer transition-all bg-[#38A662] text-white px-6 py-2 rounded-[4px] border-[#2D8A4D] w-full border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] disabled:bg-gray-400 disabled:border-gray-500 disabled:cursor-not-allowed"
+                  >
+                    Contact
+                  </button>
                 </Link>
               </motion.nav>
             </motion.div>
