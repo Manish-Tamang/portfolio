@@ -109,7 +109,7 @@ export default async function BlogPost(props: { params: { slug: string } }) {
   const readingTime = estimateReadingTime(post.content);
 
   return (
-    <article className="container mx-auto py-12 px-6 max-w-3xl">
+    <article className="w-full max-w-full sm:max-w-2xl md:max-w-3xl mx-auto py-8 px-1 sm:px-2 md:px-6">
       <h1 className="text-4xl font-bold mb-2 font-peachi">{post.title}</h1>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
