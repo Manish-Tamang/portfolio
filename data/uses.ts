@@ -62,8 +62,8 @@ export const gearItems = [
   },
   {
     name: "Phone",
-    description: "Realme C15",
-    image: "/img/uses/phone.png",
+    description: "Vivo T2x 5g",
+    image: "/img/uses/vivo.png",
     tags: ["Phone", "Android"],
   },
   {
