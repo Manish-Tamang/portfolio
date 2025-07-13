@@ -33,6 +33,8 @@ const About = () => {
     "/img/ktaharu.jpg",
     "/img/IMG-20241219-WA0000.jpg",
     "/img/ashik.jpg",
+    "/img/IMG-20250701-WA0009.jpg",
+    "/img/IMG-20250712-WA0072.jpg",
   ];
 
   return (
@@ -89,7 +91,7 @@ const About = () => {
                 <div className="w-56 h-72 text-gray-800">
                   <div className="flex flex-row justify-between opacity-90">
                     <Image
-                      src="/img/about-image.png"
+                      src="/img/about-image.jpg"
                       alt="Manish Tamang"
                       width={200}
                       height={200}
