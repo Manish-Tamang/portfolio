@@ -106,6 +106,7 @@
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "remark-math": "^6.0.0",
+    "resend": "^4.7.0",
     "sanity": "^3.72.1",
     "sanity-plugin-markdown": "^5.1.0",
     "sanity-plugin-media": "^3.0.2",
