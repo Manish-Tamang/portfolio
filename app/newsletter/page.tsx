@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { client } from '@/sanity/lib/client';
@@ -11,10 +11,13 @@ import Image from 'next/image';
 
 export default function NewsletterPage() {
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState<null | "success" | "error">(null);
   const [loading, setLoading] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [blogsLoading, setBlogsLoading] = useState(true);
+  const [subscriberCount, setSubscriberCount] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchBlogs() {
@@ -31,6 +34,19 @@ export default function NewsletterPage() {
     fetchBlogs();
   }, []);
 
+  useEffect(() => {
+    async function fetchSubscriberCount() {
+      try {
+        const res = await fetch('/api/newsletter-subscribers');
+        const data = await res.json();
+        setSubscriberCount(data.count || 0);
+      } catch {
+        setSubscriberCount(0);
+      }
+    }
+    fetchSubscriberCount();
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -39,11 +55,13 @@ export default function NewsletterPage() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, firstName, lastName }),
       });
       if (res.ok) {
         setStatus("success");
         setEmail("");
+        setFirstName("");
+        setLastName("");
         toast.success('Thank you for subscribing! You will receive weekly updates.');
       } else {
         setStatus("error");
@@ -58,17 +76,17 @@ export default function NewsletterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-[80vh] py-12">
+    <div className="flex flex-col items-center min-h-[80vh] py-6 px-2 sm:px-4 md:px-6">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-md md:max-w-2xl">
         <div className="flex flex-col md:flex-row bg-white dark:bg-neutral-800 rounded-[4px] mb-10 shadow-md overflow-hidden">
-          {/* Form section */}
           <div className="flex-1 p-6 flex flex-col gap-5 justify-center">
             <h1 className="text-3xl font-bold mb-2 text-[#3EB76C]">Subscribe to the Newsletter</h1>
             <p className="mb-6 text-gray-700 dark:text-grsay-300">Get the latest hot tech topics, coding tips, and project updates delivered to your inbox every week. No spam, just value.</p>
-            <form className="flex flex-col items-start gap-5" onSubmit={handleSubmit}>
-              <div className="flex items-center justify-center w-14 h-14 bg-[#ECF1FD] rounded-[4px] mb-2">
-                {/* SVG icon */}
+            {subscriberCount !== null && (
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">{subscriberCount} subscriber{subscriberCount === 1 ? '' : 's'} and counting!</p>
+            )}
+             <div className="flex items-center justify-center w-14 h-14 bg-[#ECF1FD] rounded-[4px] mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 34 34" height="34" width="34">
                   <path strokeLinejoin="round" strokeWidth="2.5" stroke="#3EB76C" d="M7.08385 9.91666L5.3572 11.0677C4.11945 11.8929 3.50056 12.3055 3.16517 12.9347C2.82977 13.564 2.83226 14.3035 2.83722 15.7825C2.84322 17.5631 2.85976 19.3774 2.90559 21.2133C3.01431 25.569 3.06868 27.7468 4.67008 29.3482C6.27148 30.9498 8.47873 31.0049 12.8932 31.1152C15.6396 31.1838 18.3616 31.1838 21.1078 31.1152C25.5224 31.0049 27.7296 30.9498 29.331 29.3482C30.9324 27.7468 30.9868 25.569 31.0954 21.2133C31.1413 19.3774 31.1578 17.5631 31.1639 15.7825C31.1688 14.3035 31.1712 13.564 30.8359 12.9347C30.5004 12.3055 29.8816 11.8929 28.6437 11.0677L26.9171 9.91666"></path>
                   <path strokeLinejoin="round" strokeWidth="2.5" stroke="#3EB76C" d="M2.83331 14.1667L12.6268 20.0427C14.7574 21.3211 15.8227 21.9603 17 21.9603C18.1772 21.9603 19.2426 21.3211 21.3732 20.0427L31.1666 14.1667"></path>
@@ -80,6 +98,32 @@ export default function NewsletterPage() {
                 <label className="font-bold text-lg text-[#2B2B2F] dark:text-white">Subscribe for updates</label>
                 <span className="font-semibold text-sm text-[#5F5D6B] dark:text-neutral-300">Subscribe to this weekly newsletter so you don’t miss out on the new hot tech topics.</span>
               </div>
+            <form className="flex flex-col items-start gap-5" onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-2 w-full">
+                <label className="font-bold text-lg text-[#2B2B2F] dark:text-white">First Name</label>
+                <input
+                  placeholder="Enter your first name"
+                  name="firstName"
+                  type="text"
+                  className="w-full h-10 px-3 rounded-[4px] border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#3EB76C] transition"
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                <label className="font-bold text-lg text-[#2B2B2F] dark:text-white">Last Name</label>
+                <input
+                  placeholder="Enter your last name"
+                  name="lastName"
+                  type="text"
+                  className="w-full h-10 px-3 rounded-[4px] border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#3EB76C] transition"
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
+              <label className="font-bold text-lg text-[#2B2B2F] dark:text-white">Email</label>
               <input
                 placeholder="Enter your e-mail"
                 title="Enter your e-mail"
@@ -100,7 +144,6 @@ export default function NewsletterPage() {
               </button>
             </form>
           </div>
-          {/* Cat image section */}
           <div className="hidden md:flex flex-col items-center justify-center gap-4 p-6 bg-[#F8FAFB] dark:bg-neutral-900">
             <Image
               src="/img/cat.jpg"
@@ -124,7 +167,6 @@ export default function NewsletterPage() {
           </div>
         </div>
       </div>
-      {/* Blog cards section */}
       <div className="w-full max-w-2xl mt-8">
         <h2 className="text-2xl font-bold mb-4 text-[#3EB76C]">Latest from the Blog</h2>
         <p className="mb-6 text-gray-700 dark:text-gray-300">Check out some of my recent posts while you wait for the next newsletter!</p>
