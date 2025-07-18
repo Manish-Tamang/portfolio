@@ -21,6 +21,7 @@ import CarbonAds from "@/components/carbonAds";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import CountUp from "@/components/CountUp";
+import Script from "next/script";
 
 const HomeScene = dynamic(() => import("@/components/3d-scene"), {
   ssr: false,
@@ -655,8 +656,14 @@ const ColophonPage = () => {
         .
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: 30 April 2025
+        Last Update: 18 July 2025
       </p>
+      <div className="mt-8 flex justify-center">
+        <a href="//www.dmca.com/Protection/Status.aspx?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" title="DMCA.com Protection Status" className="dmca-badge">
+          <img src ="https://images.dmca.com/Badges/dmca_protected_24_120.png?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b"  alt="DMCA.com Protection Status" />
+        </a>
+      </div>
+      <Script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" strategy="afterInteractive" />
     </div>
   );
 };
