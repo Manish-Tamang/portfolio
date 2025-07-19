@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import StackingProjectCards from '@/components/StackingCards';
