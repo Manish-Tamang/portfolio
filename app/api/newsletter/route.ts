@@ -1,101 +1,216 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-export async function POST(req: NextRequest) {
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function POST(request: NextRequest) {
+  console.log("Newsletter API called");
+
   try {
-    const { email } = await req.json();
+    const body = await request.json();
+    const { email, firstName, lastName } = body;
+
+    console.log("Request data:", { email, firstName, lastName });
+
     if (!email || typeof email !== "string") {
-      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: "Valid email is required",
+        },
+        { status: 400 }
+      );
     }
 
-    const apiKey = process.env.RESEND_API_KEY || process.env.api;
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        {
+          error: "Invalid email format",
+        },
+        { status: 400 }
+      );
+    }
+
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY");
+      return NextResponse.json(
+        {
+          error: "Server configuration error",
+        },
+        { status: 500 }
+      );
+    }
+
+    if (!audienceId) {
+      console.error("Missing RESEND_AUDIENCE_ID or RESEND_LIST_ID");
+      return NextResponse.json(
+        {
+          error: "Server configuration error",
+        },
+        { status: 500 }
+      );
+    }
+
+    console.log("Using audience ID:", audienceId);
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    try {
+      console.log("Adding contact to Resend...");
+
+      const contactResult = await resend.contacts.create({
+        email: normalizedEmail,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        unsubscribed: false,
+        audienceId: audienceId,
+      });
+
+      console.log("Contact created:", contactResult);
+
+      console.log("Sending welcome email...");
+
+      const emailResult = await resend.emails.send({
         from: "newsletter@manishtamang.com",
-        to: email,
+        to: normalizedEmail,
         subject: "Thanks for subscribing!",
-        html: `<!DOCTYPE html>
+        html: getWelcomeEmailTemplate(normalizedEmail, firstName),
+      });
+
+      console.log("Welcome email sent:", emailResult);
+
+      return NextResponse.json({
+        success: true,
+        message: "Successfully subscribed and welcome email sent!",
+        contactId: contactResult.data?.id,
+        emailId: emailResult.data?.id,
+      });
+    } catch (resendError: any) {
+      console.error("Resend API error:", resendError);
+
+      if (
+        resendError.message?.includes("already exists") ||
+        resendError.message?.includes("duplicate")
+      ) {
+        return NextResponse.json(
+          {
+            error: "Email already subscribed",
+          },
+          { status: 409 }
+        );
+      }
+
+      return NextResponse.json(
+        {
+          error: "Failed to subscribe",
+          details: resendError.message,
+        },
+        { status: 500 }
+      );
+    }
+  } catch (error: any) {
+    console.error("Newsletter API error:", error);
+    return NextResponse.json(
+      {
+        error: "Internal server error",
+        details: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  console.log("Newsletter API GET called");
+
+  try {
+    const hasApiKey = !!process.env.RESEND_API_KEY;
+    const audienceId =
+      process.env.RESEND_AUDIENCE_ID || process.env.RESEND_LIST_ID;
+
+    return NextResponse.json({
+      message: "Newsletter API is running",
+      timestamp: new Date().toISOString(),
+      config: {
+        hasApiKey,
+        hasAudienceId: !!audienceId,
+        audienceId: audienceId,
+      },
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        error: "Configuration error",
+        details: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+function getWelcomeEmailTemplate(email: string, firstName?: string): string {
+  const name = firstName ? `, ${firstName}` : "";
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter Subscription - Manish Tamang</title>
+  <title>Welcome to Manish Tamang Newsletter</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
+    .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { color: #3EB76C; margin: 0; }
+    .content { margin-bottom: 30px; }
+    .button { display: inline-block; background: #3EB76C; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+    .footer { text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+    .social-links { text-align: center; margin: 20px 0; }
+    .social-links a { margin: 0 10px; }
+  </style>
 </head>
-<body style="margin:0;padding:20px;font-family:Arial,sans-serif;background-color:#fff;line-height:1.6;">
-  <div style="max-width:600px;margin:0 auto;background-color:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-    <div style="padding:40px 32px;text-align:center;">
-      <h1 style="font-size:28px;font-weight:bold;color:#1f2937;margin-bottom:24px;line-height:1.3;">
-        Welcome to the <span style="color:#3EB76C;">Manish Tamang</span> Newsletter!
-      </h1>
-      <p style="color:#6b7280;font-size:16px;margin-bottom:32px;line-height:1.5;">
-        Thank you for subscribing to Manish Tamang’s newsletter!<br>
-        You’ll now receive weekly updates on tech, coding, and more.<br>
-        We’re excited to have you with us.
-      </p>
-      <a href="#" style="background-color:#3EB76C;color:white;padding:12px 32px;border-radius:24px;text-decoration:none;font-weight:600;display:inline-block;border:none;cursor:pointer;">Visit Website</a>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Welcome to Manish Tamang Newsletter!</h1>
     </div>
-    <div style="background-color:#e5e7eb;padding:32px;text-align:center;">
-      <div style="font-size:12px;color:#4b5563;margin-bottom:24px;">
-        <a href="https://www.manishtamang.com/guestbook" style="color:#3EB76C;text-decoration:none;">Guestbook</a> |
-        <a href="https://app.daily.dev/squads/webnepal" style="color:#3EB76C;text-decoration:none;">Community</a> |
-        <a href="https://www.manishtamang.com/contact" style="color:#3EB76C;text-decoration:none;">Contact</a>
+    
+    <div class="content">
+      <p>Hi there${name}!</p>
+      
+      <p>Thank you for subscribing to my newsletter! I'm excited to have you join our community of developers and tech enthusiasts.</p>
+      
+      <p>You'll receive:</p>
+      <ul>
+        <li>Weekly updates on web development</li>
+        <li>Coding tips and tutorials</li>
+        <li>Tech industry insights</li>
+        <li>Exclusive content and resources</li>
+      </ul>
+      
+      <div style="text-align: center;">
+        <a href="https://www.manishtamang.com" class="button">Visit My Website</a>
       </div>
-      <div style="margin-bottom:24px;">
-        <span style="display:inline-flex;align-items:center;">
-          <span style="width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-right:12px;vertical-align:middle;overflow:hidden;background:#fff;">
-            <img src="https://www.manishtamang.com/profile.png" alt="Manish Tamang" style="width:100%;height:100%;object-fit:cover;" />
-          </span>
-          <span style="color:#3EB76C;font-weight:bold;font-size:20px;vertical-align:middle;">Manish Tamang</span>
-        </span>
-        <div style="color:#6b7280;font-size:14px;margin-top:8px;">More than a newsletter.</div>
-      </div>
-      <div style="margin:24px 0;">
-        <a href="https://www.youtube.com/@golecodes" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#FF0000"/><path d="M10 15.5V8.5L16 12L10 15.5Z" fill="white"/></svg>
-        </a>
-        <a href="https://twitter.com/ManishTamangxyz" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#1DA1F2"/><path d="M19.633 7.997c-.508.226-1.054.379-1.626.448a2.828 2.828 0 0 0 1.24-1.563 5.657 5.657 0 0 1-1.793.685A2.822 2.822 0 0 0 12 10.29c0 .222.025.438.073.645A8.01 8.01 0 0 1 5.67 7.15a2.822 2.822 0 0 0 .873 3.77 2.8 2.8 0 0 1-1.278-.353v.036a2.825 2.825 0 0 0 2.263 2.768c-.258.07-.53.108-.81.108-.198 0-.388-.019-.574-.054a2.828 2.828 0 0 0 2.64 1.96A5.66 5.66 0 0 1 4 17.13a7.978 7.978 0 0 0 4.29 1.257c5.148 0 7.967-4.266 7.967-7.967 0-.121-.003-.242-.009-.362A5.7 5.7 0 0 0 20 7.548a5.657 5.657 0 0 1-1.633.449z" fill="white"/></svg>
-        </a>
-        <a href="https://instagram.com/golecodes" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#E1306C"/><path d="M12 8.5A3.5 3.5 0 1 0 12 15.5A3.5 3.5 0 1 0 12 8.5Z" fill="white"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
-        </a>
-        <a href="https://linkedin.com/in/manish-tamang" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#0077B5"/><path d="M8.5 10.5H10.5V17H8.5V10.5ZM9.5 9.5C10.0523 9.5 10.5 9.05228 10.5 8.5C10.5 7.94772 10.0523 7.5 9.5 7.5C8.94772 7.5 8.5 7.94772 8.5 8.5C8.5 9.05228 8.94772 9.5 9.5 9.5ZM12.5 10.5H14.5V11.25C14.5 10.8358 14.8358 10.5 15.25 10.5C15.6642 10.5 16 10.8358 16 11.25V17H14V13.5C14 13.2239 13.7761 13 13.5 13C13.2239 13 13 13.2239 13 13.5V17H12.5V10.5Z" fill="white"/></svg>
-        </a>
-        <a href="https://facebook.com/Manishgoletamang" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#1877F3"/><path d="M15.5 8.5H14.5C13.9477 8.5 13.5 8.94772 13.5 9.5V10.5H15.5V12.5H13.5V17H11.5V12.5H10.5V10.5H11.5V9.5C11.5 8.11929 12.6193 7 14 7H15.5V8.5Z" fill="white"/></svg>
-        </a>
-        <a href="https://github.com/Manish-Tamang" style="width:40px;height:40px;background-color:#9ca3af;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 8px;text-decoration:none;" target="_blank">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#333"/><path d="M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM12 15.5C10.067 15.5 8.5 13.933 8.5 12C8.5 10.067 10.067 8.5 12 8.5C13.933 8.5 15.5 10.067 15.5 12C15.5 13.933 13.933 15.5 12 15.5Z" fill="white"/></svg>
-        </a>
-      </div>
-      <div style="font-size:12px;color:#6b7280;line-height:1.4;">
-        <p>manishtamang.com</p>
-        <p>
-          This email was sent to <a href="#" style="color:#3EB76C;text-decoration:none;">${email}</a>.
-          <a href="#" style="color:#3EB76C;text-decoration:none;">Update your notification settings</a> or
-          <a href="https://manishtamang.com/api/newsletter/unsubscribe?email=${encodeURIComponent(email)}" style="color:#3EB76C;text-decoration:none;">unsubscribe</a>
-        </p>
-      </div>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://github.com/Manish-Tamang">GitHub</a>
+      <a href="https://linkedin.com/in/manish-tamang">LinkedIn</a>
+      <a href="https://twitter.com/ManishTamangxyz">Twitter</a>
+      <a href="https://youtube.com/@golecodes">YouTube</a>
+    </div>
+    
+    <div class="footer">
+      <p>This email was sent to ${email}</p>
+      <p>
+        <a href="https://www.manishtamang.com/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a> | 
+        <a href="https://www.manishtamang.com">Visit Website</a>
+      </p>
+      <p>&copy; 2025 Manish Tamang. All rights reserved.</p>
     </div>
   </div>
 </body>
-</html>`,
-      }),
-    });
-
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: "Failed to send email" },
-        { status: 500 }
-      );
-    }
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
-  }
+</html>`;
 }
