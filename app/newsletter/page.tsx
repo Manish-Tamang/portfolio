@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
-import { toast } from '@/hooks/use-toast';
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Link from 'next/link';
 import { BlurFadeImage } from '@/components/BlurFade';
 import Image from 'next/image';
@@ -43,14 +44,14 @@ export default function NewsletterPage() {
       if (res.ok) {
         setStatus("success");
         setEmail("");
-        toast({ title: 'Thank you for subscribing!', description: 'You will receive weekly updates.' });
+        toast.success('Thank you for subscribing! You will receive weekly updates.');
       } else {
         setStatus("error");
-        toast({ title: 'Subscription failed', description: 'Please try again later.' });
+        toast.error('Subscription failed. Please try again later.');
       }
     } catch {
       setStatus("error");
-      toast({ title: 'Subscription failed', description: 'Please try again later.' });
+      toast.error('Subscription failed. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -58,12 +59,13 @@ export default function NewsletterPage() {
 
   return (
     <div className="flex flex-col items-center min-h-[80vh] py-12">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-md md:max-w-2xl">
         <div className="flex flex-col md:flex-row bg-white dark:bg-neutral-800 rounded-[4px] mb-10 shadow-md overflow-hidden">
           {/* Form section */}
           <div className="flex-1 p-6 flex flex-col gap-5 justify-center">
             <h1 className="text-3xl font-bold mb-2 text-[#3EB76C]">Subscribe to the Newsletter</h1>
-            <p className="mb-6 text-gray-700 dark:text-gray-300">Get the latest hot tech topics, coding tips, and project updates delivered to your inbox every week. No spam, just value.</p>
+            <p className="mb-6 text-gray-700 dark:text-grsay-300">Get the latest hot tech topics, coding tips, and project updates delivered to your inbox every week. No spam, just value.</p>
             <form className="flex flex-col items-start gap-5" onSubmit={handleSubmit}>
               <div className="flex items-center justify-center w-14 h-14 bg-[#ECF1FD] rounded-[4px] mb-2">
                 {/* SVG icon */}
