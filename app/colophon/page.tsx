@@ -31,7 +31,7 @@ const karla = Karla({ subsets: ["latin"] });
 
 const ColophonPage = () => {
   return (
-    <div className="container mx-auto py-12 px-6 max-w-3xl">
+    <div className="container mx-auto py-6 px-2 sm:px-4 md:px-6 max-w-3xl">
       <h1 className="text-4xl font-bold mb-6 font-peachi">Colophon</h1>
 
       <section className="mb-8">
