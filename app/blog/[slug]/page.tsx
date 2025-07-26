@@ -6,6 +6,10 @@ import { Metadata } from "next";
 import LikeButtons from "@/components/LikeButtons";
 import ShareButton from "@/components/ShareButton";
 import ViewCounter from "@/components/ViewCounter";
+import Container from "@/components/Container";
+import ImageWithTheme from "@/components/ImageWithTheme";
+import Link from "next/link";
+import BlogNotFound from "@/components/BlogNotFound";
 
 export interface FullBlog {
   currentSlug: string;
@@ -98,11 +102,7 @@ export default async function BlogPost(props: { params: { slug: string } }) {
   const post = await getBlogPostContent(slug);
 
   if (!post) {
-    return (
-      <div className="text-center py-10 text-gray-500 text-lg">
-        Post not found or error loading.
-      </div>
-    );
+    return <BlogNotFound />;
   }
 
   const formattedDate = formatDate(post.date);
