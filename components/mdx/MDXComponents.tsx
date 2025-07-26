@@ -118,6 +118,9 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
   const [toc, setToc] = useState<TocItem[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Image zoom modal state
+  const [zoomedImg, setZoomedImg] = useState<{ src: string; alt: string } | null>(null);
+
   useEffect(() => {
     const headings: TocItem[] = [];
     const headingElements = contentRef.current?.querySelectorAll("h1, h2, h3, h4");
@@ -133,8 +136,39 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
     setToc(headings);
   }, [content]);
 
+  const handleCloseModal = () => setZoomedImg(null);
+
   return (
     <div className="py-6">
+      {zoomedImg && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="relative max-w-full max-h-full flex items-center justify-center p-4"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              aria-label="Close image zoom"
+              className="absolute top-2 right-2 text-white bg-black/60 rounded-full p-2 hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-[#3EB76C] z-10"
+              onClick={handleCloseModal}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6l-12 12" />
+              </svg>
+            </button>
+            <Image
+              src={zoomedImg.src}
+              alt={zoomedImg.alt}
+              width={1200}
+              height={900}
+              className="rounded-lg shadow-2xl max-h-[80vh] max-w-[90vw] object-contain"
+              style={{ background: '#fff' }}
+            />
+          </div>
+        </div>
+      )}
       <Accordion type="single" collapsible>
         <AccordionItem value="table-of-contents">
           <AccordionTrigger className="font-semibold text-lg py-4">Table of Contents</AccordionTrigger>
@@ -216,13 +250,18 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               </a>
             ),
             img: ({ src, alt }) => (
-              <Image
-                src={src || ''}
-                alt={alt || ''}
-                className="object-cover w-full h-full my-6 rounded-md"
-                width={800}
-                height={600}
-              />
+              <>
+                <Image
+                  src={src || ''}
+                  alt={alt || ''}
+                  className="object-cover w-full h-full my-6 rounded-md cursor-zoom-in transition-transform hover:scale-105"
+                  width={800}
+                  height={600}
+                  onClick={() => src && setZoomedImg({ src, alt: alt || '' })}
+                  style={{ background: '#fff' }}
+                />
+                <span className="block text-center text-xs text-gray-400 mt-1 select-none">Click to zoom</span>
+              </>
             ),
             hr: () => (
               <hr className="my-8 border-gray-200 dark:border-gray-700" />
