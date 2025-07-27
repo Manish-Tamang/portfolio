@@ -29,12 +29,35 @@ Welcome to my personal portfolio website, a showcase of my professional journey,
 - **Photography Gallery:** Visual storytelling through photography
 - **"Uses" Page:** Detailed breakdown of my daily tools and software
 - **Guestbook:** Interactive visitor messaging system
+- **Newsletter Subscription:** Stay updated with weekly tech news and blog posts
 - **Protected Dashboard:** Personalized stats and insights
 - **Spotify Integration:** Real-time music listening tracker
 - **WakaTime Coding Stats:** Transparent view of coding activities
 - **Responsive Dark/Light Themes**
 - **MDX-Powered Blog Posts:** Rich, interactive content
 - **SEO Optimized:** Enhanced search engine visibility
+
+## 🔔 Newsletter
+
+Stay up-to-date with the latest hot tech topics, coding tips, and project updates by subscribing to the newsletter! Powered by a custom subscription form (see `app/newsletter/page.tsx`), subscribers receive weekly updates directly to their inbox. No spam, just value.
+
+**Features:**
+- Simple subscription form (First Name, Last Name, Email)
+- Real-time subscriber count
+- Toast notifications for feedback
+- Latest blog posts preview
+- Responsive and accessible UI
+
+**How to Subscribe:**
+1. Visit the [Newsletter page](https://manishtamang.com/newsletter) or `/newsletter` route in your local/dev environment.
+2. Fill in your details and submit the form.
+3. Receive a confirmation and start getting weekly updates!
+
+**Tech Stack:**
+- React (Next.js client component)
+- Sanity CMS for blog content
+- Custom API endpoints for subscription management
+- Toast notifications for user feedback
 
 ## 🚀 Technologies
 
