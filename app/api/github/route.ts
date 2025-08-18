@@ -59,10 +59,17 @@ const response = <T>(
   });
 };
 
-export async function GET(): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const GITHUB_API_URL = "https://api.github.com";
     const GITHUB_USERNAME = "Manish-Tamang";
+    // Optional year filter for contributions
+    const { searchParams } = new URL(request.url);
+    const yearParam = searchParams.get("year");
+    const year = yearParam ? Number(yearParam) : undefined;
+    const isValidYear = year && Number.isInteger(year) && year > 2007 && year < 3000;
+    const from = isValidYear ? `${year}-01-01T00:00:00Z` : undefined;
+    const to = isValidYear ? `${year}-12-31T23:59:59Z` : undefined;
 
     const githubUserResponse = await fetch(
       `${GITHUB_API_URL}/users/${GITHUB_USERNAME}`,
@@ -110,7 +117,7 @@ export async function GET(): Promise<NextResponse> {
     const contributionQuery = `
     {
       viewer {
-        contributionsCollection {
+        contributionsCollection${from && to ? `(from: "${from}", to: "${to}")` : ""} {
           contributionCalendar {
             colors
             totalContributions
