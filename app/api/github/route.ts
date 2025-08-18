@@ -34,6 +34,7 @@ interface GitHubStats {
   followers: number;
   stars: number;
   contributions: ContributionCalendar;
+  contributionYears: number[];
 }
 
 const getEnv = (key: string): string | undefined => {
@@ -117,6 +118,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const contributionQuery = `
     {
       viewer {
+        contributionYears: contributionsCollection { contributionYears }
         contributionsCollection${from && to ? `(from: "${from}", to: "${to}")` : ""} {
           contributionCalendar {
             colors
@@ -164,6 +166,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
           contributionsCollection: {
             contributionCalendar: ContributionCalendar;
           };
+          contributionYears: { contributionYears: number[] };
         };
       };
     } = await githubContributionsResponse.json();
@@ -171,6 +174,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const contributions =
       contributionsData?.data?.viewer?.contributionsCollection
         .contributionCalendar;
+    const contributionYears =
+      contributionsData?.data?.viewer?.contributionYears?.contributionYears || [];
 
     if (!contributions) {
       throw new Error("Failed to fetch GitHub contributions.");
@@ -180,6 +185,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       followers: user.followers,
       stars,
       contributions,
+      contributionYears,
     };
 
     return response<APISingleResponse<GitHubStats>>({ data: githubStats });
