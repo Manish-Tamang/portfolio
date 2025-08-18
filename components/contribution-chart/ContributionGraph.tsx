@@ -4,6 +4,8 @@ import { ContributionGrid } from './ContributionGrid';
 import { Info } from './Info';
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Months } from './Months';
+import { Weekdays } from './Weekdays';
 
 interface ContributionData {
     data?: {
@@ -131,10 +133,10 @@ const ContributionGraph = () => {
                     <div className="flex items-center gap-2">
                         <span className="text-sm text-gray-700 dark:text-gray-300">Year</span>
                         <Select value={String(year)} onValueChange={(v) => setYear(Number(v))}>
-                            <SelectTrigger className="w-[120px]">
+                            <SelectTrigger className="w-[140px] text-gray-900 dark:text-white data-[placeholder]:text-gray-500 dark:data-[placeholder]:text-gray-400">
                                 <SelectValue placeholder="Select year" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="text-gray-900 dark:text-white">
                                 {availableYears.map((y) => (
                                     <SelectItem key={y} value={String(y)}>{y}</SelectItem>
                                 ))}
@@ -147,10 +149,18 @@ const ContributionGraph = () => {
             <div className="w-full flex flex-col items-center mt-2 overflow-x-auto md:overflow-x-visible">
                 <div className="flex justify-center items-start p-1 w-full">
                     <div className="w-full max-w-none">
-                        <ContributionGrid
-                            weeks={contributions.weeks}
-                            colors={contributions.colors || githubColors}
-                        />
+                        <div className="flex items-start">
+                            <div className="mr-2">
+                                <Weekdays />
+                            </div>
+                            <div className="flex-1 w-full">
+                                <Months months={contributions.months} />
+                                <ContributionGrid
+                                    weeks={contributions.weeks}
+                                    colors={contributions.colors || githubColors}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <Info colors={githubColors} />
