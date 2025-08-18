@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ContributionGrid } from './ContributionGrid';
 import { Info } from './Info';
 import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface ContributionData {
     data?: {
@@ -35,6 +36,7 @@ const ContributionGraph = () => {
     const [totalContributions, setTotalContributions] = useState<number>(0);
     const currentYear = new Date().getFullYear();
     const [year, setYear] = useState<number>(currentYear);
+    const [availableYears, setAvailableYears] = useState<number[]>([currentYear]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,6 +48,17 @@ const ContributionGraph = () => {
                 }
                 const data = await response.json();
                 setContributionData(data);
+                // Update available years from API if present
+                const yearsFromApi: number[] | undefined = data?.data?.contributionYears;
+                if (yearsFromApi && Array.isArray(yearsFromApi) && yearsFromApi.length > 0) {
+                    // Sort desc
+                    const sorted = [...yearsFromApi].sort((a, b) => b - a);
+                    setAvailableYears(sorted);
+                    // If current selected year isn't in list, switch to latest
+                    if (!sorted.includes(year)) {
+                        setYear(sorted[0]);
+                    }
+                }
 
                 if (data.data?.contributions?.weeks) {
                     const total = data.data.contributions.weeks.reduce((acc: any, week: { contributionDays: any[]; }) => {
@@ -110,26 +123,26 @@ const ContributionGraph = () => {
         '#216E39'
     ];
 
-    // Build a small list of years, e.g., current year and past 5 years
-    const years: number[] = Array.from({ length: 6 }, (_, i) => currentYear - i);
-
     return (
         <div className="w-full p-4">
-            <div className="flex flex-col items-center gap-2">
-                <h2 className="text-xl text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
-                <div className="flex items-center gap-3">
-                    <label className="text-sm text-gray-700 dark:text-gray-300">Year:</label>
-                    <select
-                        className="text-sm border rounded px-2 py-1 dark:bg-neutral-800 dark:border-neutral-700"
-                        value={year}
-                        onChange={(e) => setYear(Number(e.target.value))}
-                    >
-                        {years.map((y) => (
-                            <option key={y} value={y}>{y}</option>
-                        ))}
-                    </select>
+            <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                    <h2 className="text-xl text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
+                    <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-700 dark:text-gray-300">Year</span>
+                        <Select value={String(year)} onValueChange={(v) => setYear(Number(v))}>
+                            <SelectTrigger className="w-[120px]">
+                                <SelectValue placeholder="Select year" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {availableYears.map((y) => (
+                                    <SelectItem key={y} value={String(y)}>{y}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
-                <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
+                <div className="text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
             </div>
             <div className="w-full flex flex-col items-center mt-2 overflow-x-auto md:overflow-x-visible">
                 <div className="flex justify-center items-start p-1 w-full">
