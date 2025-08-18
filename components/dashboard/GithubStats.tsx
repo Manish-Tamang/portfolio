@@ -36,14 +36,35 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
                 setFollowers(userData.followers);
                 setAvatarUrl(userData.avatar_url);
 
-                // Fetch repository data to calculate total stars
-                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
-                if (!reposResponse.ok) {
-                    throw new Error(`Failed to fetch GitHub repositories for ${username}`);
+                // Fetch repository data across ALL pages to calculate total stars (ignore forks)
+                let page = 1;
+                const perPage = 100;
+                let totalStarsAccumulator = 0;
+                // Safety cap to avoid infinite loops
+                const maxPages = 50;
+                // Paginate until fewer than perPage repos returned
+                // GitHub REST API v3 supports up to 100 per page
+                // Reference: https://docs.github.com/en/rest/repos/repos#list-repositories-for-a-user
+                // We stop when a page returns less than perPage repos
+                while (page <= maxPages) {
+                    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}`);
+                    if (!reposResponse.ok) {
+                        throw new Error(`Failed to fetch GitHub repositories for ${username} (page ${page})`);
+                    }
+                    const reposData: any[] = await reposResponse.json();
+                    if (!Array.isArray(reposData) || reposData.length === 0) {
+                        break;
+                    }
+                    for (const repo of reposData) {
+                        if (repo && repo.fork) continue;
+                        totalStarsAccumulator += Number(repo?.stargazers_count || 0);
+                    }
+                    if (reposData.length < perPage) {
+                        break;
+                    }
+                    page += 1;
                 }
-                const reposData = await reposResponse.json();
-                const totalStarsCount = reposData.reduce((sum: number, repo: any) => sum + repo.stargazers_count, 0);
-                setTotalStars(totalStarsCount);
+                setTotalStars(totalStarsAccumulator);
             } catch (error: any) {
                 console.error("Error fetching GitHub stats:", error.message);
                 setFollowers(null);
