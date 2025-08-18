@@ -33,12 +33,14 @@ const ContributionGraph = () => {
     const [contributionData, setContributionData] = useState<ContributionData>({});
     const [loading, setLoading] = useState(true);
     const [totalContributions, setTotalContributions] = useState<number>(0);
+    const currentYear = new Date().getFullYear();
+    const [year, setYear] = useState<number>(currentYear);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch('/api/github');
+                const response = await fetch(`/api/github${year ? `?year=${year}` : ''}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch data: ${response.status}`);
                 }
@@ -60,7 +62,7 @@ const ContributionGraph = () => {
         };
 
         fetchData();
-    }, []);
+    }, [year]);
 
     if (loading) {
         return (
@@ -108,10 +110,27 @@ const ContributionGraph = () => {
         '#216E39'
     ];
 
+    // Build a small list of years, e.g., current year and past 5 years
+    const years: number[] = Array.from({ length: 6 }, (_, i) => currentYear - i);
+
     return (
         <div className="w-full p-4">
-            <h2 className="text-xl text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph (Real Time)</h2>
-            <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
+            <div className="flex flex-col items-center gap-2">
+                <h2 className="text-xl text-center text-gray-900 dark:text-gray-100">My Github Contribution Graph</h2>
+                <div className="flex items-center gap-3">
+                    <label className="text-sm text-gray-700 dark:text-gray-300">Year:</label>
+                    <select
+                        className="text-sm border rounded px-2 py-1 dark:bg-neutral-800 dark:border-neutral-700"
+                        value={year}
+                        onChange={(e) => setYear(Number(e.target.value))}
+                    >
+                        {years.map((y) => (
+                            <option key={y} value={y}>{y}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="text-center text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
+            </div>
             <div className="w-full flex flex-col items-center mt-2 overflow-x-auto md:overflow-x-visible">
                 <div className="flex justify-center items-start p-1 w-full">
                     <div className="w-full max-w-none">
