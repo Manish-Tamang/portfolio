@@ -3,14 +3,21 @@
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
-    margin-right: 15px;
-    gap: 1px;
-    margin-top: 14px;
+    width: 24px; /* fixed label column width */
+    margin-right: 8px;
+    gap: 2px; /* match grid gap */
+    padding-top: 12px; /* offset one grid unit so Monday starts on second row */
 }
 
 .day {
-    font-size: 8px;
-    text-align: right;
-    margin-right: 3px;
-    margin-bottom: 2px;
+    font-size: 10px;
+    height: 10px; /* cell height only; gap is handled by container gap */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #6b7280; /* gray-500 */
+}
+
+:global(.dark) .day {
+    color: #9ca3af; /* gray-400 */
 }

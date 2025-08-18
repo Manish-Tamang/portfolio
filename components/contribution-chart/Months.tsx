@@ -19,11 +19,23 @@ export const Months: FC<MonthsProps> = ({ months }) => {
 
     return (
         <div className={styles.container}>
-            {months.map((month, index) => (
-                <div key={index} className={styles.month}>
-                    {month.name}
-                </div>
-            ))}
+            {months.map((month, index) => {
+                const CELL = 10; // must match grid cell size
+                const GAP = 2;   // must match grid gap
+                const widthPx = Math.max(0, (month.totalWeeks || 0) * (CELL + GAP));
+                const label = month?.name ? month.name.slice(0, 3) : '';
+                return (
+                    <div
+                        key={index}
+                        className={styles.month}
+                        style={{ width: `${widthPx}px` }}
+                    >
+                        <span className="text-[10px] text-gray-700 dark:text-gray-200">
+                            {label}
+                        </span>
+                    </div>
+                );
+            })}
         </div>
     );
 };

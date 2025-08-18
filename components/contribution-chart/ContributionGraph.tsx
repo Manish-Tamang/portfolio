@@ -5,7 +5,6 @@ import { Info } from './Info';
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Months } from './Months';
-import { Weekdays } from './Weekdays';
 
 interface ContributionData {
     data?: {
@@ -146,24 +145,19 @@ const ContributionGraph = () => {
                 </div>
                 <div className="text-gray-600 dark:text-gray-400">Total Contributions: {totalContributions}</div>
             </div>
-            <div className="w-full flex flex-col items-center mt-2 overflow-x-auto md:overflow-x-visible">
-                <div className="flex justify-center items-start p-1 w-full">
-                    <div className="w-full max-w-none">
-                        <div className="flex items-start">
-                            <div className="mr-2">
-                                <Weekdays />
-                            </div>
-                            <div className="flex-1 w-full">
-                                <Months months={contributions.months} />
-                                <ContributionGrid
-                                    weeks={contributions.weeks}
-                                    colors={contributions.colors || githubColors}
-                                />
-                            </div>
-                        </div>
+            <div className="w-full mt-2">
+                <div className="flex justify-center w-full overflow-x-auto md:overflow-x-visible">
+                    <div className="inline-block">
+                        <Months months={contributions.months} />
+                        <ContributionGrid
+                            weeks={contributions.weeks}
+                            colors={contributions.colors || githubColors}
+                        />
                     </div>
                 </div>
-                <Info colors={githubColors} />
+                <div className="flex justify-center mt-2">
+                    <Info colors={githubColors} />
+                </div>
             </div>
         </div>
     );
