@@ -36,7 +36,7 @@ export default function Home() {
                 <span
                   className={clsx(
                     redGradient,
-                    'absolute inset-0 block transform translate-y-full transition-transform duration-500 group-hover:translate-y-0'
+                    'absolute text-[#1D4ED8] inset-0 block transform translate-y-full transition-transform duration-500 group-hover:translate-y-0'
                   )}
                 >
                   Gole Tamang

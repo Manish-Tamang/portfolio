@@ -182,6 +182,14 @@ const images = [
     height: 600,
     gridArea: "span 1 / span 1",
   },
+  {
+    id: 23,
+    src: "/img/IMG_E1504.JPG",
+    alt: "Manish Tamang, Vishwa Adarsha",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
 ];
 
 interface ImageType {
