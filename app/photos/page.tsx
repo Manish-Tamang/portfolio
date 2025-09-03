@@ -190,6 +190,46 @@ const images = [
     height: 600,
     gridArea: "span 1 / span 1",
   },
+  {
+    id: 24,
+    src: "/img/hackathon/IMG_1473.JPG",
+    alt: "Imohang, Nawaraj bhai, Manish, Bipan",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 2",
+  },
+  {
+    id: 25,
+    src: "/img/hackathon/IMG-20250827-WA0058.jpg",
+    alt: "Planning during hackathon",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
+  {
+    id: 26,
+    src: "/img/hackathon/IMG-20250827-WA0077.jpg",
+    alt: "Sharing ideas",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
+  {
+    id: 27,
+    src: "/img/hackathon/IMG-20250829-WA0016.jpg",
+    alt: "Nux Bhai Showing Results to me",
+    width: 800,
+    height: 600,
+    gridArea: "span 2 / span 2",
+  },
+  {
+    id: 28,
+    src: "/img/noah-standing-in-front-of-the-house-in-the-notebook-1-1024x576.jpg",
+    alt: "Nux Bhai Showing Results to me",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 2",
+  },
 ];
 
 interface ImageType {
@@ -228,15 +268,14 @@ export default function PhotoGallery() {
         {images.map((image) => (
           <div
             key={image.id}
-            className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] cursor-pointer ${
-              image.gridArea === "span 2 / span 2"
+            className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] cursor-pointer ${image.gridArea === "span 2 / span 2"
                 ? "col-span-2 row-span-2"
                 : image.gridArea === "span 1 / span 2"
                   ? "col-span-2"
                   : image.gridArea === "span 2 / span 1"
                     ? "row-span-2"
                     : ""
-            }`}
+              }`}
             onClick={() => handleImageClick(image)}
           >
             <BlurImage
@@ -260,7 +299,7 @@ export default function PhotoGallery() {
         .
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: July 12 2025
+        Last Update: Sep 3 2025
       </p>
 
       {zoomedImage && (
