@@ -35,6 +35,7 @@ const About = () => {
     "/img/ashik.jpg",
     "/img/IMG-20250701-WA0009.jpg",
     "/img/IMG-20250712-WA0072.jpg",
+    "/img/team-godawari.JPG",
   ];
 
   return (
