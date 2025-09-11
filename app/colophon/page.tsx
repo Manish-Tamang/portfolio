@@ -15,6 +15,7 @@ import {
   SiPostgresql,
   SiUmami,
   SiNodedotjs,
+  SiNetlify
 } from "react-icons/si";
 import { Karla } from "next/font/google";
 import CarbonAds from "@/components/carbonAds";
@@ -45,9 +46,9 @@ const ColophonPage = () => {
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               This is the third version of my portfolio. My journey began in 2023
-              when I deployed my first portfolio, which I had copied from a <Link href="https://www.youtube.com/watch?v=ldwlOzRvYOU" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">YouTube </Link> 
+              when I deployed my first portfolio, which I had copied from a <Link href="https://www.youtube.com/watch?v=ldwlOzRvYOU" className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline" target="_blank" rel="noopener noreferrer">YouTube </Link>
               tutorial. Later, after passing my SEE examination, I built the second
-              version—this time inspired by and heavily influenced by <Link href="https://leerob.com/" className="font-medium text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Leerob</Link>&apos;s
+              version—this time inspired by and heavily influenced by <Link href="https://leerob.com/" className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline" target="_blank" rel="noopener noreferrer">Leerob</Link>&apos;s
               portfolio. Now, with everything I&apos;ve learned along the way, I&apos;ve
               crafted this version from the ground up, blending all my experiences
               into a site that truly represents me.
@@ -58,7 +59,7 @@ const ColophonPage = () => {
               maintainability.
             </p>
           </div>
-          
+
           <div className="flex flex-col items-center py-8 px-6 bg-neutral-50 dark:bg-neutral-900/50 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">Live Since</h3>
             <div className="flex items-baseline gap-3">
@@ -68,7 +69,7 @@ const ColophonPage = () => {
                 separator=","
                 direction="up"
                 duration={1}
-                className="text-5xl font-bold text-blue-600 dark:text-blue-400"
+                className="text-5xl font-bold text-[#38a662] dark:text-[#38a662]"
               />
               <span className="text-xl text-gray-600 dark:text-gray-400">days</span>
             </div>
@@ -101,9 +102,9 @@ const ColophonPage = () => {
               icon={<SiMdx size={32} className="text-[#FC427B]" />}
             />
             <IconItem
-              url="https://vercel.com/"
+              url="https://netlify.com/"
               icon={
-                <SiVercel size={32} className="text-black dark:text-white" />
+                <SiNetlify size={32} className="text-[#32E6E2]" />
               }
             />
             <IconItem
@@ -148,7 +149,7 @@ const ColophonPage = () => {
           from{" "}
           <Link
             href="https://www.bisup.com/"
-            className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -156,17 +157,17 @@ const ColophonPage = () => {
           </Link>
           , and the site is deployed on{" "}
           <Link
-            href="https://vercel.com/"
-            className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            href="https://netlify.com/"
+            className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Vercel
+            Netlify
           </Link>
           . The code for this site is open-source and available on{" "}
           <Link
             href="https://github.com/Manish-Tamang/portfolio"
-            className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -245,7 +246,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://web3forms.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -256,7 +257,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.weatherapi.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -267,7 +268,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://v2.jokeapi.dev/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -278,7 +279,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://developer.spotify.com/documentation/web-api/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -289,7 +290,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://wakatime.com/api"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -300,7 +301,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://timezonedb.com/api"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -311,7 +312,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://umami.is/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -322,7 +323,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://feedback.fish/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -352,7 +353,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://ui.shadcn.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -363,7 +364,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://authjs.dev/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -375,7 +376,7 @@ const ColophonPage = () => {
             Icons: Sourced from both{" "}
             <Link
               href="https://react-icons.github.io/react-icons/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -384,7 +385,7 @@ const ColophonPage = () => {
             and{" "}
             <Link
               href="https://feathericons.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -395,7 +396,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://recharts.org/en-US/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -406,7 +407,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://react-hot-toast.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -417,7 +418,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.npmjs.com/package/react-canvas-confetti"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -428,7 +429,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://custom-cursor.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -439,7 +440,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.npmjs.com/package/react-medium-image-zoom"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -450,7 +451,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.npmjs.com/package/react-cookie"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -469,10 +470,10 @@ const ColophonPage = () => {
           design and development of this portfolio:
         </p>
         <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-900/50 rounded-lg">
-          <Image 
-            src="/img/flowers.png" 
-            alt="Flowers decoration" 
-            width={730} 
+          <Image
+            src="/img/flowers.png"
+            alt="Flowers decoration"
+            width={730}
             height={100}
             style={{ userSelect: "none" }}
             draggable="false"
@@ -482,7 +483,7 @@ const ColophonPage = () => {
             Beautiful flowers decoration used in the footer by{" "}
             <Link
               href="https://www.instagram.com/uiuxsesh/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -491,7 +492,7 @@ const ColophonPage = () => {
             {" "}from{" "}
             <Link
               href="https://www.figma.com/design/uXZi2989oC14Z5EtNODWtJ/100-Day-Design-Challenge?t=PnkCBvQeWWRsgr5Q-0"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -503,7 +504,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://ouassim.tech/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -514,7 +515,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://jahir.dev/colophon"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -524,7 +525,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://theodorusclarence.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -534,7 +535,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://bonabrian.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -544,7 +545,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://leerob.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -554,7 +555,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://marcbouchenoire.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -564,7 +565,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://victoreke.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -574,7 +575,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://aulianza.id/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -584,7 +585,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://vjy.me/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -594,7 +595,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.raphaelchelly.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -604,7 +605,7 @@ const ColophonPage = () => {
           <li>
             <a
               href="https://danielwirtz.com/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -614,7 +615,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://darn.es/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -624,7 +625,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://sayandey.dev/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -634,7 +635,7 @@ const ColophonPage = () => {
           <li>
             <Link
               href="https://www.havardbrynjulfsen.design/"
-              className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -655,12 +656,13 @@ const ColophonPage = () => {
         </a>
         .
       </p>
-      <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: 18 July 2025
+      <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
+      >
+        Last Update: <span className="font-bold">11 September 2025</span>
       </p>
       <div className="mt-8 flex justify-center">
         <a href="//www.dmca.com/Protection/Status.aspx?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" title="DMCA.com Protection Status" className="dmca-badge">
-          <img src ="https://images.dmca.com/Badges/dmca_protected_24_120.png?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b"  alt="DMCA.com Protection Status" />
+          <img src="https://images.dmca.com/Badges/dmca_protected_24_120.png?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" alt="DMCA.com Protection Status" />
         </a>
       </div>
       <Script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" strategy="afterInteractive" />
