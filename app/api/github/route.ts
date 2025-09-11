@@ -96,7 +96,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         headers: {
           Authorization: `Bearer ${getEnv("GITHUB_READ_USER_TOKEN_PERSONAL")}`,
           "Content-Type": "application/json",
-          "User-Agent": "bonabrian.com",
+          "User-Agent": "manishtamang.com",
         },
       }
     );
@@ -149,7 +149,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         headers: {
           Authorization: `Bearer ${getEnv("GITHUB_READ_USER_TOKEN_PERSONAL")}`,
           "Content-Type": "application/json",
-          "User-Agent": "bonabrian.com",
+          "User-Agent": "manishtamang.com",
         },
         body: JSON.stringify({ query: contributionQuery }),
       }
