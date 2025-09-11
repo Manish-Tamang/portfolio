@@ -25,22 +25,17 @@ const ManifestPage = () => {
         { id: 3, title: "Buy a DJI Osmo Pocket 3", images: ["/img/bucketlist/dji.png"], completed: false },
         { id: 4, title: "Earn NPR 100k", completed: false },
         { id: 5, title: "Buy a MacBook Air M4", images: ["/img/bucketlist/macbook.jpg",], completed: false },
-        { id: 6, title: "Buy a Nothing Phone 3a", images: ["/img/bucketlist/Nothing-Phone-2a-White.jpg"], completed: false },
-        { id: 7, title: "Buy a Sony ZV E10 II", images: ["/img/bucketlist/sony-zv-e10-ii-mirrorless-camera.jpg"], completed: false },
+        { id: 6, title: "Buy a Sony A6700", images: ["/img/bucketlist/A6700.jpg"], completed: false },
+        { id: 7, title: "Buy a Jetson Orin Nano Super Developer Kit", images: ["/img/bucketlist/jetson-nano.jpg"], completed: false },
     ]);
 
     return (
         <div className="container mx-auto py-12 px-4">
-            <h1 className="text-4xl font-bold mb-8 font-peachi">My Bucket List & Wish List</h1>
+            <h1 className="text-4xl font-bold mb-8 font-peachi">Manifest List</h1>
 
             { }
             <section className="mb-8">
                 <Card className="bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
-                    <CardHeader>
-                        <CardTitle> <h2 className="font-bold text-3xl tracking-tight mb-6 text-black dark:text-white ">
-                            Bucket List
-                        </h2></CardTitle>
-                    </CardHeader>
                     <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} />
                     </CardContent>
                 </Card>
@@ -48,7 +43,7 @@ const ManifestPage = () => {
 
             { }
             <section>
-                <h2 className="text-2xl font-semibold mb-4">My Wish List</h2>
+                <h2 className="text-2xl font-semibold mb-4">My Learning Goals</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {WishListItems.map((item) => (
                         <Card key={item.id} className="bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
@@ -67,7 +62,7 @@ const ManifestPage = () => {
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
             >
-                Last Update: 26 April 2025
+                Last Update: <span className="font-bold">11 September 2025</span>
             </p>    
         </div>
     );
