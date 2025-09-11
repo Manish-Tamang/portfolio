@@ -149,8 +149,8 @@ export default function Navbar() {
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <BlurFadeImage
-                            src="/IMG-20250217-WA0011.jpg"
-                            alt="Manish Tamang in Sushma Godawari Collage"
+                            src="/img/nav-img.jpg"
+                            alt="Manish Tamang and Nawaraj bhai during hackathon (cyber utsav 2.0 itahari)"
                             delay={0.1}
                             className="object-cover w-full h-full"
                             width={800}
