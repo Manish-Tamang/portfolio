@@ -57,7 +57,7 @@ const socialLinks = [
     icon: <FaMastodon color="#6364FF" size={28} />,
   },
   {
-    href: "https://bsky.app/profile/manishtamang.bsky.social",
+    href: "https://bsky.app/profile/manishtamang.com",
     label: "Bluesky",
     icon: <SiBluesky color="#1185FF" size={28} />,
   },
