@@ -164,7 +164,7 @@ const About = () => {
                 knowledge and skills, as evident on{" "}
                 <a
                   href="https://manishtamang.com"
-                  className="text-blue-500 underline"
+                  className="text-[#38a662]"
                 >
                   my website
                 </a>
