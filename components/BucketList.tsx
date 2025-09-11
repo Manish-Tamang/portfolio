@@ -37,7 +37,7 @@ const BucketList: React.FC<BucketListProps> = ({ bucketList, setBucketList }) =>
 
     return (
         <div>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-6">
                 {bucketList.map((item, index) => (
                     <div key={item.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 dark:border-gray-700 pb-2 gap-4 sm:gap-0">
                         <div className="flex items-start sm:items-center">
