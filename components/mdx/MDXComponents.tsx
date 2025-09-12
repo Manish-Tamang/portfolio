@@ -233,10 +233,8 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
               <li className="mb-2">{children}</li>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="relative border-l-4 border-gray-400 dark:border-gray-600 pl-8 py-6 my-6 italic text-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
-                <span className="absolute -top-3 left-2 text-4xl text-gray-400 dark:text-gray-600">“</span>
+              <blockquote className="pl-3 my-4 text-xs text-gray-600 dark:text-gray-400 border-l-2 border-gray-300 dark:border-gray-600">
                 {children}
-                <span className="absolute -bottom-3 right-2 text-4xl text-gray-400 dark:text-gray-600">”</span>
               </blockquote>
             ),
             a: ({ href, children }) => (
@@ -255,8 +253,8 @@ export const MDXComponents: React.FC<MDXComponentsProps> = ({ content }) => {
                   src={src || ''}
                   alt={alt || ''}
                   className="object-cover w-full h-full my-6 rounded-md cursor-zoom-in transition-transform hover:scale-105"
-                  width={800}
-                  height={600}
+                  width={400}
+                  height={200}
                   onClick={() => src && setZoomedImg({ src, alt: alt || '' })}
                   style={{ background: '#fff' }}
                 />
