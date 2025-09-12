@@ -28,6 +28,11 @@ import { VscCopilot } from "react-icons/vsc";
 import { FaWindows } from "react-icons/fa";
 import { FaEdge } from "react-icons/fa";
 import { SiVlcmediaplayer } from "react-icons/si";
+import Cursor from "@/components/icons/Curser";
+import ClaudeAI from "@/components/icons/Claude";
+import OpenAI from "@/components/icons/Chatgpt";
+import v0 from "@/components/icons/v0";
+import Gemini from "@/components/icons/Gemini";
 
 export const gearItems = [
   {
@@ -81,12 +86,18 @@ export const systemItems = [
     icon: SiGooglechrome,
     link: "https://www.google.com/chrome/",
   },
-  {
-    name: "Visual Studio Code",
-    description: "Code Editor",
-    icon: BiLogoVisualStudio,
-    link: "https://code.visualstudio.com/",
-  },
+    {
+      name: "Visual Studio Code",
+      description: "Code Editor",
+      icon: BiLogoVisualStudio,
+      link: "https://code.visualstudio.com/",
+    },
+    {
+      name: "Cursor",
+      description: "AI-powered Code Editor",
+      icon: Cursor,
+      link: "https://cursor.sh/",
+    },
   {
     name: "Windows 11",
     description: "Operating System",
@@ -185,6 +196,30 @@ export const codingItems = [
     description: "AI-powered code completion tool",
     icon: VscCopilot,
     link: "https://copilot.github.com/",
+  },
+  {
+    name: "Claude AI",
+    description: "AI chatbot",
+    icon: ClaudeAI,
+    link: "https://claude.ai/",
+  },
+  {
+    name: "OpenAI ChatGPT",
+    description: "AI chatbot for coding",
+    icon: OpenAI,
+    link: "https://chatgpt.com/",
+  },
+  {
+    name: "v0",
+    description: "AI Tool for Front-end Development",
+    icon: v0,
+    link: "https://v0.dev/",
+  },
+  {
+    name: "Google AI Studio",
+    description: "AI Chatbot from Google",
+    icon: Gemini,
+    link: "https://aistudio.google.com/",
   },
 ];
 
