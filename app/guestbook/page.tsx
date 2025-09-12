@@ -53,6 +53,7 @@ interface GuestbookCardProps {
   timestamp: string;
   comment: string;
   id: string;
+  itemIndex?: number;
 }
 
 const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
@@ -61,6 +62,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
   timestamp,
   comment,
   id,
+  itemIndex,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const truncatedComment =
@@ -68,6 +70,39 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
   const { data: session } = useSession();
 
   const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+
+  // Decorative flower assets 
+  const flowerImages = [
+    "/img/guestbook-flowers/flower-one.png",
+    "/img/guestbook-flowers/flower-two.png",
+    "/img/guestbook-flowers/flower-three.png",
+    "/img/guestbook-flowers/flower-four.png",
+    "/img/guestbook-flowers/flower-five.png",
+    "/img/guestbook-flowers/flower-six.png",
+    "/img/guestbook-flowers/flower-seven.png",
+    "/img/guestbook-flowers/flower-eight.png",
+    "/img/guestbook-flowers/flower-nine.png",
+    "/img/guestbook-flowers/flower-ten.png",
+    "/img/guestbook-flowers/flower-eleven.png",
+    "/img/guestbook-flowers/flower-twelve.png",
+    "/img/guestbook-flowers/flower-thirteen.png",
+    "/img/guestbook-flowers/flower-fourteen.png",
+    "/img/guestbook-flowers/flower-fifteen.png",
+    "/img/guestbook-flowers/flower-sixteen.png",
+  ];
+
+  const hashString = (value: string): number => {
+    let hash = 0;
+    for (let i = 0; i < value.length; i++) {
+      hash = (hash << 5) - hash + value.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash);
+  };
+  // Prefer ordered sequence by list position when provided; fallback to deterministic hash
+  const flowerIndex = typeof itemIndex === 'number'
+    ? (itemIndex % flowerImages.length)
+    : (hashString(id || name || timestamp) % flowerImages.length);
 
   const getAvatarColor = (name: string) => {
     const colors = [
@@ -132,7 +167,17 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
   };
 
   return (
-    <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative">
+    <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative overflow-hidden">
+      <div className="absolute bottom-2 right-2">
+        <Image
+          src={flowerImages[flowerIndex]}
+          alt=""
+          width={32}
+          height={32}
+          className="pointer-events-none select-none"
+          priority={false}
+        />
+      </div>
       {isAdmin && (
         <button
           onClick={deleteGuestbookEntry}
@@ -329,7 +374,7 @@ export default function GuestbookPage() {
       </motion.h1>
       <p className="text-gray-500 dark:text-gray-400 mb-6">
         Leave a comment below. It could be anything – appreciation, information,
-        wisdom, anything good or bad about me or even humor. Surprise me!
+        wisdom, anything good or bad about me or even humor. Surprise me! and get a decorative flower with your message.
       </p>{" "}
       <div className="mb-4">
         {!session?.user ? (
@@ -400,7 +445,7 @@ export default function GuestbookPage() {
           No messages yet.
         </p>
       ) : (
-        sortedEntries.map((entry) => (
+        sortedEntries.map((entry, idx) => (
           <GuestbookCardComponent
             key={entry.id}
             id={entry.id}
@@ -408,6 +453,7 @@ export default function GuestbookPage() {
             avatar={entry.imageUrl}
             timestamp={new Date(entry.timestamp).toLocaleString()}
             comment={entry.message}
+            itemIndex={idx}
           />
         ))
       )}
