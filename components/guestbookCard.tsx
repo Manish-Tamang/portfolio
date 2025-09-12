@@ -42,6 +42,28 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
 
     const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
+    // Select one decorative flower per card deterministically
+    const flowerImages = [
+        "/img/guestbook-flowers/flower-one.png",
+        "/img/guestbook-flowers/flower-two.png",
+        "/img/guestbook-flowers/flower-three.png",
+        "/img/guestbook-flowers/flower-four.png",
+        "/img/guestbook-flowers/flower-five.png",
+        "/img/guestbook-flowers/flower-six.png",
+        "/img/guestbook-flowers/flower-seven.png",
+        "/img/guestbook-flowers/flower-eight.png",
+    ];
+
+    const hashString = (value: string): number => {
+        let hash = 0;
+        for (let i = 0; i < value.length; i++) {
+            hash = (hash << 5) - hash + value.charCodeAt(i);
+            hash |= 0;
+        }
+        return Math.abs(hash);
+    };
+    const flowerIndex = hashString(id || name || timestamp) % flowerImages.length;
+
     const deleteGuestbookEntry = async () => {
         try {
             const guestbookDoc = doc(db, "guestbook", id);
@@ -55,11 +77,23 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
     };
 
     return (
-        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative">
+        <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative overflow-hidden">
+            {/* Decorative flower - positioned in bottom right corner */}
+            <div className="absolute bottom-2 right-2 opacity-30 dark:opacity-20">
+                <Image
+                    src={flowerImages[flowerIndex]}
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="pointer-events-none select-none"
+                    priority={false}
+                />
+            </div>
+
             {isAdmin && (
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
-                        <button className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none">
+                        <button className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none z-10">
                             <Trash2 className="h-4 w-4" />
                         </button>
                     </AlertDialogTrigger>
@@ -80,7 +114,8 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
                     </AlertDialogContent>
                 </AlertDialog>
             )}
-            <div className="flex items-center gap-3 bg-white dark:bg-neutral-900">
+
+            <div className="flex items-center gap-3 relative z-10">
                 {avatar ? (
                     <Image
                         width={10}
@@ -123,7 +158,8 @@ const GuestbookCard: React.FC<GuestbookCardProps> = ({
                     <p className="text-[11px] text-gray-500 dark:text-gray-400">{timestamp}</p>
                 </div>
             </div>
-            <p className="mt-2 text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed">
+
+            <p className="mt-2 text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed relative z-10">
                 {isExpanded ? comment : truncatedComment}
                 {comment.length > MAX_LENGTH && (
                     <span
