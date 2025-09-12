@@ -315,7 +315,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/manish-tamang/"
               target="_blank"
               rel="noopener noreferrer"
-              className="dark:text-[#38A662] text-[#38A662] dark:hover:text-[#38A662] transition-colors duration-200 ml-1"
+              className="dark:text-[#38A662] text-[#38A662] dark:hover:text-[#38A662] transition-colors duration-200 mr-1 ml-1"
             >Manish Tamang </a>© {currentYear}
           </p>
           <div className="flex items-center space-x-4">
