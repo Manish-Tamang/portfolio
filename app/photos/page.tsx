@@ -298,8 +298,9 @@ export default function PhotoGallery() {
         </a>
         .
       </p>
-      <p className="text-xl text-gray-500 dark:text-gray-400 mt-8">
-        Last Update: Sep 3 2025
+      <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
+      >
+        Last Update: <span className="font-bold">3 September 2025</span>
       </p>
 
       {zoomedImage && (
