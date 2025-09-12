@@ -19,6 +19,7 @@
   /* Make Karla the default font for the entire project */
   html {
     font-family: var(--font-karla), system-ui, sans-serif;
+    scroll-behavior: smooth;
   }
 }
 
@@ -113,6 +114,20 @@ html {
   cursor:
     url("/tab-cursor.png") 10 10,
     pointer;
+}
+
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/noise.png");
+  background-size: 200px 200px;
+  background-position: 0 0;
+  z-index: 100;
+  pointer-events: none;
 }
 
 a,
