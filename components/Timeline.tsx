@@ -73,8 +73,9 @@ const Timeline = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-peachi font-medium mb-1">
+            <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">
                 Timeline
+                <img src="/img/guestbook-flowers/flower-fifteen.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" />
             </h2>
             <div className="relative mb-1 border-l border-gray-200 dark:border-gray-700">
                 {visibleItems.map(({ year, items }) => (
