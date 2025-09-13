@@ -107,7 +107,7 @@ export default function Home() {
         <TechStacks />
       </section>
       <section className="mb-16">
-        <h2 className="text-2xl font-peachi font-medium mb-1">Work</h2>
+        <h2 className="text-2xl font-peachi font-medium mb-1 flex items-center gap-2">Work <img src="/img/guestbook-flowers/flower-fourteen.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" /></h2>
         <p className=" text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
           I craft high-performance, future-ready solutions where speed meets precision. Every line of code I write is
           a blend of efficiency and structure, designed for scalability and long-term maintainability.
