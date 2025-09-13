@@ -73,9 +73,10 @@ export default function FeaturedPhotos() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-                <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100 font-bold text-xl mb-4 font-peachi">
+            <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">
                     Photos
-                </div>
+                    <img src="/img/flowers/3.png" alt="Flower 1" className="w-8 h-8 pointer-events-none select-none" />
+                </h2>
                 <p className="text-neutral-600 dark:text-neutral-300 mb-4">
                     If you&apos;re wondering what I look like in real life, here are some of my photos. I don&apos;t usually take pictures, but here are a few!
                 </p>
