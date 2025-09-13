@@ -79,7 +79,7 @@ export default function FeaturedProjects() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi">Featured Projects</h2>
+                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">Featured Projects <img src="/img/flowers/1.png" alt="Flower 1" className="w-6 h-8 pointer-events-none select-none" /></h2>
                 <div className="">
                     {projects.map((project) => (
                         <div key={project.slug} className="mb-6 last:mb-0">
