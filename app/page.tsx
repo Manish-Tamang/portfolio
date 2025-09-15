@@ -115,7 +115,7 @@ export default function Home() {
         </p>
         <div>
           <Link
-            href="https://staging.swikarcodes.com"
+            href="https://swikarcodes.com"
             className="group flex items-center gap-2 text-xl font-medium underline font-jetbrains mb-2"
             target="_blank"
             rel="noopener noreferrer"

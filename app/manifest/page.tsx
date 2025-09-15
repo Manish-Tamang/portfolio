@@ -36,6 +36,7 @@ const ManifestPage = () => {
             { }
             <section className="mb-8">
                 <Card className="bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-200">
+
                     <CardContent><BucketList bucketList={bucketList} setBucketList={setBucketList} />
                     </CardContent>
                 </Card>

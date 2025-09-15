@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     title: "Manish Tamang - A young developer",
     description:
       "Hi, I'm Manish Gole Tamang, a 17-year-old from Itahari, Nepal, with a fervent passion for web development.",
-    images: "/OG-Image.png",
+    images: "https://www.manishtamang.com/profile.png",
     type: "website",
   },
 };
