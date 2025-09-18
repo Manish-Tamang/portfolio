@@ -11,7 +11,7 @@ export const metadata: Metadata = {
             "Discover the story of Manish Tamang, a young and ambitious web developer from Nepal, striving to build impactful web applications.",
         url: "https://manishtamang.com/about",
         type: "website",
-        images: 'https://www.manishtamang.com/profile.png',
+        images: 'https://manishtamang.com/profile.png',
     },
     twitter: {
         card: "summary_large_image",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         title: "About - Manish Tamang",
         description:
             "Discover the journey and ambitions of Manish Tamang, a full-stack developer passionate about technology and innovation.",
-            images: 'https://www.manishtamang.com/profile.png',
+            images: 'https://manishtamang.com/profile.png',
     },
 };
 
