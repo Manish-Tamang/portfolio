@@ -191,7 +191,7 @@ function getWelcomeEmailTemplate(email: string, firstName?: string): string {
       </ul>
       
       <div style="text-align: center;">
-        <a href="https://www.manishtamang.com" class="button">Visit My Website</a>
+        <a href="https://manishtamang.com" class="button">Visit My Website</a>
       </div>
     </div>
     
@@ -205,8 +205,8 @@ function getWelcomeEmailTemplate(email: string, firstName?: string): string {
     <div class="footer">
       <p>This email was sent to ${email}</p>
       <p>
-        <a href="https://www.manishtamang.com/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a> | 
-        <a href="https://www.manishtamang.com">Visit Website</a>
+        <a href="https://manishtamang.com/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a> | 
+        <a href="https://manishtamang.com">Visit Website</a>
       </p>
       <p>&copy; 2025 Manish Tamang. All rights reserved.</p>
     </div>
