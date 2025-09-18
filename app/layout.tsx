@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     title: "Manish Tamang - A young developer",
     description:
       "Hi, I'm Manish Gole Tamang, a 17-year-old from Itahari, Nepal, with a fervent passion for web development.",
-    images: "https://www.manishtamang.com/profile.png",
+    images: "https://manishtamang.com/profile.png",
     type: "website",
   },
 };
@@ -106,6 +106,7 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <link rel="preload" href="/noise.png" as="image" />
         <Script
           src="https://manish-analytics.vercel.app/script.js"
           data-website-id="d5fd3d82-d867-4e3d-badb-837ad2ff7f7d"
