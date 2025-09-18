@@ -238,7 +238,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="https://manish-analytics.vercel.app/share/jFK5VpX2c6h2JgRg/www.manishtamang.com"
+                  href="https://manish-analytics.vercel.app/share/jFK5VpX2c6h2JgRg/manishtamang.com"
                   className="text-gray-600 dark:text-gray-400 hover:text-[#38A662] dark:hover:text-[#38A662] flex items-center transition-colors duration-200"
                   target="_blank"
                   rel="noopener noreferrer"
