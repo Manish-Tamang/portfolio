@@ -230,6 +230,38 @@ const images = [
     height: 600,
     gridArea: "span 1 / span 2",
   },
+  {
+    id: 29,
+    src: "/img/photos/IMG_20250913_155053.jpg",
+    alt: "Anish Bhai, Amit and Manish",
+    width: 800,
+    height: 600,
+    gridArea: "span 2 / span 2",
+  },
+  {
+    id: 30,
+    src: "/img/photos/IMG_20250714_130748.jpg",
+    alt: "Aaryan, Suman and Manish",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
+  {
+    id: 31,
+    src: "/img/photos/IMG_20250829_162530.jpg",
+    alt: "Imo, Bipan, Nux Bhai and Manish",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
+  {
+    id: 32,
+    src: "/img/photos/IMG_20250805_195407.jpg",
+    alt: "Manish, Suman, Aaryan",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 2",
+  },
 ];
 
 interface ImageType {
@@ -300,7 +332,7 @@ export default function PhotoGallery() {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">3 September 2025</span>
+        Last Update: <span className="font-bold">18 September 2025</span>
       </p>
 
       {zoomedImage && (
