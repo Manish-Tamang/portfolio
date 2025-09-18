@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 </head>
 <body>
     <div class="container">
-        <img src="https://www.manishtamang.com/img/twitter-banner.jpg" 
+        <img src="https://manishtamang.com/img/twitter-banner.jpg" 
              alt="Header Banner" 
              class="header-img">
 
