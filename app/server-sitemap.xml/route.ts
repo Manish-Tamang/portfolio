@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 
 const generateSitemap = async () => {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.manishtamang.com";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://manishtamang.com";
 
   const posts = await client.fetch(`
         *[_type == "post"] {
