@@ -49,6 +49,7 @@
     "@sanity/code-input": "^5.1.2",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.72.1",
+    "@supabase/supabase-js": "^2.58.0",
     "@tabler/icons-react": "^3.31.0",
     "@types/node": "20.6.2",
     "@types/react": "18.2.22",
