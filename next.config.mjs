@@ -20,12 +20,41 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/a/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        pathname: "/**",
+      },
+    ],
+  },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   experimental: { esmExternals: true },
   transpilePackages: ["codehike"],
   typescript: {
-    ignoreBuildErrors: true, 
+    ignoreBuildErrors: true,
   },
 };
 
