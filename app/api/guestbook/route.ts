@@ -11,10 +11,6 @@ export async function GET() {
       .select("id, name, email, image_url, message, timestamp")
       .order("timestamp", { ascending: false });
     if (error) throw error;
-    
-    console.log('Fetched entries from Supabase:', data);
-    console.log('First entry image_url:', data?.[0]?.image_url);
-    
     return NextResponse.json({ entries: data || [] });
   } catch (error: any) {
     return NextResponse.json({ error: error?.message || "Failed to fetch" }, { status: 500 });
@@ -28,15 +24,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     // Use admin client so RLS won't block server-side insertion
-    console.log('Inserting to Supabase:', {
-      id,
-      name,
-      email: email || null,
-      image_url: imageUrl || null,
-      message: message || null,
-      timestamp: new Date().toISOString(),
-    });
-    
     const { error } = await supabaseAdmin.from(TABLE).insert({
       id,
       name,
