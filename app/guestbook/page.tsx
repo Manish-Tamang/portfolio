@@ -10,14 +10,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db, auth } from "@/firebase/config";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
@@ -189,12 +182,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
       <div className="flex items-center gap-3">
         {avatar ? (
           <Avatar>
-            <AvatarImage src={avatar} alt={name} draggable={false} />
-            <AvatarFallback
-              className={`bg-gradient-to-br ${getAvatarColor(name)} text-white`}
-            >
-              {name.charAt(0)}
-            </AvatarFallback>
+            <Image src={avatar} alt={name} draggable={false} width={40} height={40} className="rounded-full" />
           </Avatar>
         ) : (
           <Avatar>
@@ -242,28 +230,28 @@ export default function GuestbookPage() {
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "guestbook"));
-      const data = querySnapshot.docs.map((doc) => {
-        const entry = doc.data();
+      const res = await fetch('/api/guestbook');
+      if (!res.ok) throw new Error('Failed to fetch guestbook entries');
+      const json = await res.json();
+      const data = (json.entries || []).map((e: any) => {
+        console.log('Raw entry from Supabase:', e);
+        console.log('imageUrl field:', e.image_url);
+        console.log('imageUrl value:', e.image_url);
+        
         return {
-          id: doc.id,
-          name: entry.name,
-          imageUrl: entry.imageUrl || "",
-          timestamp:
-            entry.timestamp instanceof Timestamp
-              ? entry.timestamp.toMillis()
-              : 0,
-          message: entry.message,
-          email: entry.email || "",
+          id: e.id,
+          name: e.name,
+          imageUrl: e.image_url || '',
+          timestamp: e.timestamp || 0,
+          message: e.message,
+          email: e.email || '',
         };
       });
-
       guestbookCache.data = data;
       guestbookCache.timestamp = Date.now();
-
       setEntries(data);
     } catch (error) {
-      console.error("Error fetching entries: ", error);
+      console.error('Error fetching entries: ', error);
     } finally {
       setIsLoading(false);
     }
@@ -299,13 +287,26 @@ export default function GuestbookPage() {
     }
 
     try {
-      await addDoc(collection(db, "guestbook"), {
+      const id = crypto.randomUUID();
+      const payload = {
+        id,
         name: session.user.name,
         imageUrl: session.user.image,
-        timestamp: Timestamp.now(),
-        message: message,
+        message,
         email: session.user.email,
+      };
+      
+      console.log('Submitting payload:', payload);
+      console.log('User image URL:', session.user.image);
+      const res = await fetch('/api/guestbook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t || 'Failed to save');
+      }
       try {
         const emailResponse = await fetch("/api/send-guestbook-email", {
           method: "POST",
