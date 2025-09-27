@@ -233,20 +233,14 @@ export default function GuestbookPage() {
       const res = await fetch('/api/guestbook');
       if (!res.ok) throw new Error('Failed to fetch guestbook entries');
       const json = await res.json();
-      const data = (json.entries || []).map((e: any) => {
-        console.log('Raw entry from Supabase:', e);
-        console.log('imageUrl field:', e.image_url);
-        console.log('imageUrl value:', e.image_url);
-        
-        return {
-          id: e.id,
-          name: e.name,
-          imageUrl: e.image_url || '',
-          timestamp: e.timestamp || 0,
-          message: e.message,
-          email: e.email || '',
-        };
-      });
+      const data = (json.entries || []).map((e: any) => ({
+        id: e.id,
+        name: e.name,
+        imageUrl: e.image_url || '',
+        timestamp: e.timestamp || 0,
+        message: e.message,
+        email: e.email || '',
+      }));
       guestbookCache.data = data;
       guestbookCache.timestamp = Date.now();
       setEntries(data);
@@ -295,9 +289,6 @@ export default function GuestbookPage() {
         message,
         email: session.user.email,
       };
-      
-      console.log('Submitting payload:', payload);
-      console.log('User image URL:', session.user.image);
       const res = await fetch('/api/guestbook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
