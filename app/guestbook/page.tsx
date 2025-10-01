@@ -2,14 +2,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import {
-  collection,
-  getDocs,
-  Timestamp,
-  addDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -24,6 +16,17 @@ import toast, { Toaster } from "react-hot-toast";
 import { Trash2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface GuestbookEntryData {
   id: string;
@@ -149,10 +152,19 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
 
   const deleteGuestbookEntry = async () => {
     try {
-      const guestbookDoc = doc(db, "guestbook", id);
-      await deleteDoc(guestbookDoc);
+      const res = await fetch(`/api/guestbook?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t || "Failed to delete entry");
+      }
       toast.success("Guestbook entry deleted successfully!");
-      window.location.reload();
+      // Optimistically remove from UI without full page reload
+      const card = document.getElementById(`gb-${id}`);
+      if (card) {
+        card.remove();
+      }
     } catch (error: any) {
       console.error("Error deleting guestbook entry:", error);
       toast.error("Error deleting guestbook entry:" + error.message);
@@ -160,7 +172,7 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
   };
 
   return (
-    <div className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative overflow-hidden">
+    <div id={`gb-${id}`} className="rounded-[4px] p-3 w-full border border-gray-200 dark:border-gray-700 shadow-sm mb-2 bg-white dark:bg-neutral-900 relative overflow-hidden">
       <div className="absolute bottom-2 right-2">
         <Image
           src={flowerImages[flowerIndex]}
@@ -172,12 +184,34 @@ const GuestbookCardComponent: React.FC<GuestbookCardProps> = ({
         />
       </div>
       {isAdmin && (
-        <button
-          onClick={deleteGuestbookEntry}
-          className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none"
-        >
-          <Trash2 className="h-4 w-4" />
-        </button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <button
+              className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none"
+              aria-label="Delete guestbook entry"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete this entry?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the message
+                from the guestbook.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={deleteGuestbookEntry}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
       <div className="flex items-center gap-3">
         {avatar ? (
