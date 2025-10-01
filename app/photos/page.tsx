@@ -262,6 +262,14 @@ const images = [
     height: 600,
     gridArea: "span 1 / span 2",
   },
+  {
+    id: 33,
+    src: "/img/photos/daydream-brt.jpg",
+    alt: "Nawaraj Bhai, Bipan, Manish",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 1",
+  },
 ];
 
 interface ImageType {
@@ -332,7 +340,7 @@ export default function PhotoGallery() {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">18 September 2025</span>
+        Last Update: <span className="font-bold">1 October 2025</span>
       </p>
 
       {zoomedImage && (
