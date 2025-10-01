@@ -101,12 +101,29 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preload" href="/noise.png" as="image" />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            html::before {
+              content: '';
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-image: url("/noise.png");
+              background-size: 200px 200px;
+              background-position: 0 0;
+              z-index: 100;
+              pointer-events: none;
+            }
+          `
+        }} />
         <meta name="description" content={metadata.description ?? ""} />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
-        <link rel="preload" href="/noise.png" as="image" />
         <Script
           src="https://manish-analytics.vercel.app/script.js"
           data-website-id="d5fd3d82-d867-4e3d-badb-837ad2ff7f7d"
