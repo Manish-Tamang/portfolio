@@ -115,8 +115,21 @@ export default function Home() {
         </p>
         <div>
           <Link
-            href="https://swikarcodes.com"
+            href="https://www.digitalpathshalanepal.com/"
             className="group flex items-center gap-2 text-xl font-medium underline font-jetbrains mb-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Digital Pathshala
+            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
+          <p className="text-gray-700 dark:text-gray-300">MERN Intern</p>
+          <p className="text-gray-600 dark:text-gray-400">Sep. 2025 - Present</p>
+        </div>
+        <div>
+          <Link
+            href="https://swikarcodes.com"
+            className="group flex items-center gap-2 mt-4 text-xl font-medium underline font-jetbrains mb-2"
             target="_blank"
             rel="noopener noreferrer"
           >
