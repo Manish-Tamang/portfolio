@@ -102,23 +102,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preload" href="/noise.png" as="image" />
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            html::before {
-              content: '';
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-image: url("/noise.png");
-              background-size: 200px 200px;
-              background-position: 0 0;
-              z-index: 100;
-              pointer-events: none;
-            }
-          `
-        }} />
+       
         <meta name="description" content={metadata.description ?? ""} />
         <meta
           name="viewport"
