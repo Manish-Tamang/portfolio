@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTheme } from 'next-themes';
-import { Clock, Activity, Trophy, FolderGit2, Music } from 'lucide-react';
+import { Music } from 'lucide-react';
 import WakaTimeCard from '@/components/WakaTimeCard';
 import ProjectsBarChart from '@/components/ProjectsBarChart';
 import PieChartComponent from '@/components/PieChartComponent';
@@ -23,6 +23,10 @@ import { getBlogPostStats } from "@/lib/BlogStats";
 import TotalBlogStats from '@/components/dashboard/TotalBlogStats';
 import Track from '@/components/Track';
 import { Song } from '@/lib/types';
+import { IoTrophySharp } from "react-icons/io5";
+import { RxActivityLog } from "react-icons/rx";
+import { GiSandsOfTime } from "react-icons/gi";
+import { IoMdGitBranch } from "react-icons/io";
 
 
 const fetcher = async (url: string) => {
@@ -255,7 +259,7 @@ export default function DashboardPage() {
                     description="All time coding duration since sep 2 2024"
                     isLoading={isLoading}
                     value={totalCodingTime}
-                    icon={<Clock className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                    icon={<GiSandsOfTime className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
                     motionDelay={0.1}
                 />
 
@@ -264,7 +268,7 @@ export default function DashboardPage() {
                     description="Average coding time per day"
                     isLoading={isLoading}
                     value={formattedDailyAverage}
-                    icon={<Activity className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                    icon={<RxActivityLog className="w-5 h-5 text-gray-500 dark:text-gray-400" />}
                     motionDelay={0.2}
                 />
 
@@ -280,7 +284,7 @@ export default function DashboardPage() {
                             </>
                         ) : 'N/A'
                     }
-                    icon={<Trophy className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                    icon={<IoTrophySharp className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
                     motionDelay={0.3}
                 />
 
@@ -294,7 +298,7 @@ export default function DashboardPage() {
                         <Card className="border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-900">
                             <CardHeader>
                                 <div className="flex items-center gap-2">
-                                    <FolderGit2 className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                    <IoMdGitBranch className="w-6 h-6 text-gray-500 dark:text-gray-400" />
                                     <CardTitle className="dark:text-white text-gray-800">Top 6 Projects Coded On Recently</CardTitle>
                                 </div>
                                 <CardDescription className="dark:text-gray-400 text-gray-600">Hours spent per project</CardDescription>
