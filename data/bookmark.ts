@@ -95,6 +95,18 @@ const bookmarks = [
     description:
       "Toolfolio is a curated collection of tools and resources for developers and designers to boost productivity and streamline workflows.",
   },
+  {
+    url: "https://bestfreefonts.com",
+    title: "Best Free Fonts",
+    description:
+      "Best Free Fonts is a curated selection of free fonts. Including serif, sans serif, script and monospace.",
+  },
+  {
+    url: "https://screenzy.io",
+    title: "Screenzy",
+    description:
+      "Screenzy is a platform that allows you to create and share beautiful screenshots of your web applications.",
+  },
 ];
 
 export default bookmarks;

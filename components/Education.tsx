@@ -9,7 +9,7 @@ interface EducationItemProps {
 }
 
 const EducationItem = ({ logo, institution, degree, dateRange, description }: EducationItemProps) => (
-    <div className="flex gap-4 mb-8">
+    <div className="flex gap-4 mb-2">
         <div className="flex-shrink-0">
             {logo}
         </div>
