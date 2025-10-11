@@ -12,6 +12,8 @@
 
 Welcome to my personal portfolio website, a showcase of my professional journey, technical skills, and creative endeavors. Built with cutting-edge web technologies, this site offers an immersive experience into my world of development and design.
 
+![Preview Image of my portfolio website](./public/preview.png)
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
