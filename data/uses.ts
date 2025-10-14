@@ -27,7 +27,7 @@ import { BiLogoVisualStudio } from "react-icons/bi";
 import { VscCopilot } from "react-icons/vsc";
 import { FaWindows } from "react-icons/fa";
 import { FaEdge } from "react-icons/fa";
-import { SiVlcmediaplayer } from "react-icons/si";
+import { SiVlcmediaplayer, SiClickup } from "react-icons/si";
 import Cursor from "@/components/icons/Curser";
 import ClaudeAI from "@/components/icons/Claude";
 import OpenAI from "@/components/icons/Chatgpt";
@@ -271,6 +271,12 @@ export const softwareItems = [
     description: "Project Management Tool",
     icon: SiTrello,
     link: "https://trello.com/",
+  },
+  {
+    name: "ClickUp",
+    description: "Project Management Tool",
+    icon: SiClickup,
+    link: "https://clickup.com/",
   },
   {
     name: "Discord",
