@@ -33,6 +33,7 @@ import ClaudeAI from "@/components/icons/Claude";
 import OpenAI from "@/components/icons/Chatgpt";
 import v0 from "@/components/icons/v0";
 import Gemini from "@/components/icons/Gemini";
+import { FiFigma } from "react-icons/fi";
 
 export const gearItems = [
   {
@@ -235,6 +236,12 @@ export const softwareItems = [
     description: "Raster Graphics Editor",
     icon: SiAdobephotoshop,
     link: "https://www.adobe.com/in/products/photoshop.html",
+  },
+  {
+    name: "Figma",
+    description: "UI/UX Design Tool",
+    icon: FiFigma,
+    link: "https://www.figma.com/",
   },
   {
     name: "After Effects",
