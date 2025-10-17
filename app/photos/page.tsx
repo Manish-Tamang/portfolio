@@ -74,7 +74,7 @@ export default function PhotoGallery() {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">11 October 2025</span>
+        Last Update: <span className="font-bold">17 October 2025</span>
       </p>
 
       {zoomedImage && (
