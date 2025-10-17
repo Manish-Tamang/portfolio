@@ -275,6 +275,14 @@ export const images: ImageType[] = [
   },
   {
     id: 35,
+    src: "/img/photos/IMG_20251016_132841.jpg",
+    alt: "Rupesh Dai, Manish (me) and Raghav Dai, Digital Pathshala Office",
+    width: 800,
+    height: 600,
+    gridArea: "span 1 / span 2",
+  },
+  {
+    id: 36,
     src: "/img/hackathon/IMG_20250928_171402.jpg",
     alt: "Nawaraj Bhai, Bipan, Manish",
     width: 800,
