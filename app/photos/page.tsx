@@ -42,7 +42,7 @@ export default function PhotoGallery() {
         {images.map((image: ImageType) => (
           <div
             key={image.id}
-            className={`relative overflow-hidden rounded-[4px] transition-transform duration-300 hover:scale-[1.02] cursor-pointer ${image.gridArea === "span 2 / span 2"
+            className={`relative overflow-hidden rounded-[4px] duration-300 cursor-pointer ${image.gridArea === "span 2 / span 2"
                 ? "col-span-2 row-span-2"
                 : image.gridArea === "span 1 / span 2"
                   ? "col-span-2"
@@ -74,7 +74,7 @@ export default function PhotoGallery() {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">17 October 2025</span>
+        Last Update: <span className="font-bold">30 October 2025</span>
       </p>
 
       {zoomedImage && (
