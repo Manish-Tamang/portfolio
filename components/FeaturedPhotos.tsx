@@ -16,8 +16,8 @@ interface Photo {
 const initialPhotos: Photo[] = [
     {
         id: 1,
-        src: "/img/IMG_E1504.JPG",
-        alt: "Manish Tamang in Vishwa Adarsha School",
+        src: "/img/tour/IMG_20251028_113115.jpg",
+        alt: "Manish Tamang at Mustang during snowmfall",
 
     },
     {
@@ -28,8 +28,8 @@ const initialPhotos: Photo[] = [
     },
     {
         id: 3,
-        src: "/img/Taltalaiya.jpg",
-        alt: "Manish Tamang at Taltalaiya",
+        src: "/img/tour/IMG_20251026_100857.jpg",
+        alt: "Manish Tamang at Pokhara",
 
     },
 ];
