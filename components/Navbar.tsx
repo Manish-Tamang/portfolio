@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { BlurFadeImage } from "./BlurFade";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const components = [
   {
@@ -294,18 +295,25 @@ export default function Navbar() {
                 transformOrigin: "center top",
               }}
             >
-              <motion.img
-                src="/prayers-flag.png"
-                alt="Prayer flags"
-                className="w-full h-auto object-cover object-top select-none cursor-pointer"
+              <motion.div
+                className="w-full"
                 animate={{ scaleY: [1, 0.98, 1.01, 0.99, 1] }}
                 transition={{
                   duration: 1.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                draggable={false}
-              />
+              >
+                <Image
+                  src="/prayers-flag.png"
+                  alt="Prayer flags"
+                  className="w-full h-auto object-cover object-top select-none cursor-pointer"
+                  width={1600}
+                  height={600}
+                  loading="lazy"
+                  draggable={false}
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
