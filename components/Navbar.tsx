@@ -17,8 +17,6 @@ import {
 import Link from "next/link";
 import { BlurFadeImage } from "./BlurFade";
 import { usePathname } from "next/navigation";
-import toast from "react-hot-toast";
-import confetti from "canvas-confetti";
 
 const components = [
   {
@@ -136,29 +134,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleFlagClick = () => {
-    setClickCount((prev) => {
-      const newCount = prev + 1;
-
-      if (newCount === 1) toast("Please don't touch it, it will get dirty 😤");
-      else if (newCount === 2)
-        toast("Seriously? I just told you not to touch 😠");
-      else if (newCount === 3)
-        toast("Bro... 😑 do you have something against flags?");
-      else if (newCount === 4)
-        toast("Alright, you win 😭 — go ahead, spin it if you can!");
-      else if (newCount >= 5) {
-        toast("🎉 You discovered the Easter egg! 🎉");
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-      }
-
-      return newCount;
-    });
-  };
 
   return (
     <>
@@ -322,7 +297,6 @@ export default function Navbar() {
               <motion.img
                 src="/prayers-flag.png"
                 alt="Prayer flags"
-                onClick={handleFlagClick}
                 className="w-full h-auto object-cover object-top select-none cursor-pointer"
                 animate={{ scaleY: [1, 0.98, 1.01, 0.99, 1] }}
                 transition={{
