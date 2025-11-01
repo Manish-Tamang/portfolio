@@ -307,7 +307,7 @@ export default function Navbar() {
                 <Image
                   src="/prayers-flag.png"
                   alt="Prayer flags"
-                  className="w-full h-auto object-cover object-top select-none cursor-pointer"
+                  className="w-full h-auto object-cover object-top select-none cursor-grab"
                   width={1600}
                   height={600}
                   loading="lazy"
