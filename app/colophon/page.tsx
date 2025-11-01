@@ -23,6 +23,12 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import CountUp from "@/components/CountUp";
 import Script from "next/script";
+import { Motion } from "@/components/icons/Motion";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const HomeScene = dynamic(() => import("@/components/3d-scene"), {
   ssr: false,
@@ -40,16 +46,32 @@ const ColophonPage = () => {
         <div className="space-y-8">
           <div>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              This website is my personal portfolio—my place on the internet. It&apos;s a
+              This website is my personal portfolio - my place on the internet. It&apos;s a
               digital canvas where I showcase my skills, projects, and everything
               I&apos;m passionate about.
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               This is the third version of my portfolio. My journey began in 2023
-              when I deployed my first portfolio, which I had copied from a <Link href="https://www.youtube.com/watch?v=ldwlOzRvYOU" className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline" target="_blank" rel="noopener noreferrer">YouTube </Link>
+              when I deployed my first portfolio, which I had copied from a{" "}
+              <Link
+              href="https://www.youtube.com/watch?v=ldwlOzRvYOU"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+              YouTube
+              </Link>{" "}
               tutorial. Later, after passing my SEE examination, I built the second
-              version—this time inspired by and heavily influenced by <Link href="https://leerob.com/" className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline" target="_blank" rel="noopener noreferrer">Leerob</Link>&apos;s
-              portfolio. Now, with everything I&apos;ve learned along the way, I&apos;ve
+              version - this time inspired by and heavily influenced by{" "}
+              <Link
+              href="https://leerob.com/"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              >
+              Leerob
+              </Link>
+              &apos;s portfolio. Now, with everything I&apos;ve learned along the way, I&apos;ve
               crafted this version from the ground up, blending all my experiences
               into a site that truly represents me.
             </p>
@@ -120,9 +142,9 @@ const ColophonPage = () => {
               icon={<SiPostgresql size={32} className="text-[#336791]" />}
             />
             <IconItem
-              url="https://github.com/"
+              url="https://motion.dev/"
               icon={
-                <SiGithub size={32} className="text-black dark:text-white" />
+                <Motion className="text-black h-12 w-12 dark:text-white" />
               }
             />
             <IconItem
@@ -459,9 +481,103 @@ const ColophonPage = () => {
             </Link>
             : For Storing Blog Views and Likes.
           </li>
+          <li>
+            <Link
+              href="https://www.npmjs.com/package/framer-motion/v/12.4.7"
+              className="font-medium text-[#38a662] dark:text-[#38a662] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              framer-motion
+            </Link>
+            : For smooth animations and transitions.
+          </li>
         </ul>
       </section>
-
+<section className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">About the Prayer Flags</h2>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          Being Buddhist myself, from the Tamang community, the prayer flags in my portfolio&apos;s navbar hold deep personal meaning. They&apos;re not just design elements; they represent a bridge between my cultural roots and my creative expression.
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          In Buddhism, prayer flags{" "}
+          <HoverCard>
+            <HoverCardTrigger className="font-bold text-[#38a662] cursor-pointer">
+              “Lung ta” (རླུང་རྟ་)
+            </HoverCardTrigger>
+            <HoverCardContent className="bg-white dark:bg-gray-700 w-80">
+              <p className="text-gray-800 dark:text-gray-200">
+                The Tibetan term 'Lung ta' (རླུང་རྟ་) translates to 'Wind
+                Horse.' This is the main symbol on prayer flags. The belief is
+                that the wind (Lung) carries the prayers and blessings (ta),
+                spreading peace, compassion, and good fortune to everyone.{" "}
+                <a
+                  href="https://www.rigpawiki.org/index.php?title=Lungta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#38a662] hover:underline"
+                >
+                  Source
+                </a>
+              </p>
+            </HoverCardContent>
+          </HoverCard>{" "}
+          symbolize peace, compassion, strength, and wisdom. Hung across
+          temples, mountains, and doorways, they are believed to spread
+          blessings and positive energy with every flutter of wind.
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          In my website, the soft Framer Motion animation recreates that sacred motion, a digital interpretation of the wind carrying prayers. It&apos;s my way of letting the design itself breathe, as if every frame carries good intent across the screen, just like the wind does in the Himalayas.
+        </p>
+        
+        <h3 className="text-xl font-semibold mb-3 mt-6">The Five Colors of the Flag</h3>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          Each color represents one of the five natural elements, harmonizing the inner and outer world:
+        </p>
+        
+        <div className="overflow-x-auto mb-6">
+          <table className="w-full border-collapse border border-gray-200 dark:border-gray-700">
+            <thead>
+              <tr className="bg-neutral-50 dark:bg-neutral-900/50">
+                <th className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-left">Color</th>
+                <th className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-left">Element</th>
+                <th className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-left">Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">🟦 Blue</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Sky / Space</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Peace</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">⚪ White</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Air / Wind</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Purity</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">🔴 Red</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Fire</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Energy</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">🟩 Green</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Water</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Compassion</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">🟨 Yellow</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Earth</td>
+                <td className="border border-gray-200 dark:border-gray-700 px-4 py-2">Grounding & Stability</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p className="text-gray-700 dark:text-gray-300">
+          Together, these colors embody balance and harmony, values I strive to reflect both in my life and in the way I write code. By blending this ancient symbol into a modern interface, I aim to show that design can carry spirit, connecting tradition and technology in one gentle motion.
+        </p>
+      </section>
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Acknowledgements</h2>
         <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -658,7 +774,7 @@ const ColophonPage = () => {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">11 September 2025</span>
+        Last Update: <span className="font-bold">1 November 2025</span>
       </p>
       <div className="mt-8 flex justify-center">
         <a href="//www.dmca.com/Protection/Status.aspx?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" title="DMCA.com Protection Status" className="dmca-badge">
