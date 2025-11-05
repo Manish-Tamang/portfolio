@@ -16,7 +16,6 @@
     text-decoration: underline dotted;
   }
 
-  /* Make Karla the default font for the entire project */
   html {
     font-family: var(--font-karla), system-ui, sans-serif;
     scroll-behavior: smooth;
