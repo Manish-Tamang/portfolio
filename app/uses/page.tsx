@@ -30,7 +30,7 @@ const UsesPage = () => {
       >
         A peek into the tools and technologies I use daily.
       </motion.p>
-<Image
+      <Image
         src="/img/uses/setup.jpg"
         alt="My Gear"
         width={600}
@@ -44,7 +44,7 @@ const UsesPage = () => {
       >
         <UsesGrid />
       </motion.div>
-      
+
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

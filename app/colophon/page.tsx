@@ -774,10 +774,10 @@ const ColophonPage = () => {
       </p>
       <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
       >
-        Last Update: <span className="font-bold">1 November 2025</span>
+        Last Update: <span className="font-bold">7 November 2025</span>
       </p>
       <div className="mt-8 flex justify-center">
-        <a href="//www.dmca.com/Protection/Status.aspx?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" title="DMCA.com Protection Status" className="dmca-badge">
+        <a href="https://www.dmca.com/Protection/Status.aspx?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b&refurl=https://www.manishtamang.com/" title="DMCA.com Protection Status" className="dmca-badge">
           <img src="https://images.dmca.com/Badges/dmca_protected_24_120.png?ID=c4b71fdb-965c-43a1-bdfc-734439b4056b" alt="DMCA.com Protection Status" />
         </a>
       </div>
