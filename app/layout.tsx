@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import CarbonAds from "@/components/carbonAds";
 import ScrollProgress from "@/components/ScrollProgress";
+import ScrollToTop from "@/components/ScrollToTop";
 
 
 const karla = Karla({
@@ -148,6 +149,7 @@ export default function RootLayout({
               <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
               {children}
               <Footer />
+              <ScrollToTop />
             </Container>
           </ThemeProvider>
         </SessionProvider>
