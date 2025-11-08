@@ -27,6 +27,7 @@ import { IoTrophySharp } from "react-icons/io5";
 import { RxActivityLog } from "react-icons/rx";
 import { GiSandsOfTime } from "react-icons/gi";
 import { IoMdGitBranch } from "react-icons/io";
+import { FaSpotify } from "react-icons/fa";
 
 
 const fetcher = async (url: string) => {
@@ -355,7 +356,7 @@ export default function DashboardPage() {
                 <Card className="bg-white dark:bg-neutral-900 border text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700">
                     <CardHeader>
                         <div className="flex items-center gap-2">
-                            <Music className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                            <FaSpotify className="w-6 h-6 text-gray-500 dark:text-gray-400" />
                             <CardTitle className="dark:text-white text-gray-800">My Top Songs on Spotify</CardTitle>
                         </div>
                         <CardDescription className="dark:text-gray-400 text-gray-600">
