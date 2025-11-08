@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import BucketList from '@/components/BucketList';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -23,7 +24,7 @@ const ManifestPage = () => {
         { id: 1, title: "Buy a Gaming PC", completed: false },
         { id: 2, title: "Buy a Insta360 GO 3", images: ["/img/bucketlist/insta-360-go-3.jpg"], completed: false },
         { id: 3, title: "Buy a DJI Osmo Pocket 3", images: ["/img/bucketlist/dji.png"], completed: false },
-        { id: 4, title: "Earn NPR 100k", completed: false },
+        { id: 4, title: "Earn NPR 100k", completed: true },
         { id: 5, title: "Buy a MacBook Air M4", images: ["/img/bucketlist/macbook.jpg",], completed: false },
         { id: 6, title: "Buy a Sony A6700", images: ["/img/bucketlist/A6700.jpg"], completed: false },
         { id: 7, title: "Buy a Jetson Orin Nano Super Developer Kit", images: ["/img/bucketlist/jetson-nano.jpg"], completed: false },
@@ -31,7 +32,15 @@ const ManifestPage = () => {
 
     return (
         <div className="container mx-auto py-12 px-4">
-            <h1 className="text-4xl font-bold mb-8 font-peachi">Manifest List</h1>
+            <h1 className="text-4xl font-bold mb-2 font-peachi">Manifest List</h1>
+            
+            <p className="text-gray-700 dark:text-gray-300 mb-8 text-lg leading-relaxed">
+                If you&apos;re interested in sponsoring any of the items listed below, please feel free to reach out through the{" "}
+                <Link href="/contact" className="text-[#38A662] hover:underline font-semibold">
+                    contact page
+                </Link>
+                . Your support is greatly appreciated and will be acknowledged with a special gratitude page dedicated to my sponsors.
+            </p>
 
             { }
             <section className="mb-8">
@@ -63,7 +72,7 @@ const ManifestPage = () => {
             </p>
             <p className="text-xl text-gray-500 dark:text-gray-400 mt-8"
             >
-                Last Update: <span className="font-bold">11 September 2025</span>
+                Last Update: <span className="font-bold">8 November 2025</span>
             </p>    
         </div>
     );
