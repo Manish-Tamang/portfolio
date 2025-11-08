@@ -12,6 +12,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ContributionGraph from "@/components/contribution-chart/ContributionGraph";
 import { Users, Star, User } from "lucide-react"; 
+import { FaUsers } from "react-icons/fa";
+import { IoStarSharp } from "react-icons/io5";
 
 interface GithubStatsProps {
     username: string;
@@ -85,7 +87,7 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
                     GitHub Stats
                 </CardTitle>
                 <CardDescription className="text-gray-500 dark:text-gray-400">
-                    Followers, stars, and contributions of mine (<a href="https://github.com/Manish-Tamang" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">{username}</a>)
+                    Followers, stars, and contributions of mine (<a href="https://github.com/Manish-Tamang" target="_blank" rel="noopener noreferrer" className="text-[#38a662] hover:underline">{username}</a>)
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
@@ -99,13 +101,13 @@ const GithubStats: React.FC<GithubStatsProps> = ({ username }) => {
                         ) : followers !== null && totalStars !== null ? (
                             <div className="flex flex-row items-center gap-6">
                                 <div className="flex items-center gap-2">
-                                    <Users className="text-gray-800 dark:text-white h-5 w-5" />
+                                    <FaUsers className="text-gray-800 dark:text-white h-5 w-5" />
                                     <span className="text-xl dark:text-white text-gray-800">
                                         {followers} Followers
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Star className="text-gray-800 dark:text-white h-5 w-5" />
+                                    <IoStarSharp className="text-gray-800 dark:text-white h-5 w-5" />
                                     <span className="text-xl dark:text-white text-gray-800">
                                         {totalStars} Stars
                                     </span>
