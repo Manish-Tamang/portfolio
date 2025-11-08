@@ -10,6 +10,8 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import CarbonAds from "@/components/carbonAds";
+import ScrollProgress from "@/components/ScrollProgress";
+
 
 const karla = Karla({
   subsets: ["latin"],
@@ -101,8 +103,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/noise.png" as="image" />
-       
         <meta name="description" content={metadata.description ?? ""} />
         <meta
           name="viewport"
@@ -143,6 +143,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Container>
               <Toaster position="top-center" reverseOrder={false} />
+              <ScrollProgress />
               <Navbar />
               <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
               {children}
