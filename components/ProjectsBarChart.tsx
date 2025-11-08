@@ -5,6 +5,7 @@ import { Bar, BarChart, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
+import { IoStatsChartSharp } from "react-icons/io5";
 
 interface Project {
     name: string;
@@ -56,7 +57,7 @@ const ProjectsBarChart = ({ data }: { data: WakaTimeData }) => {
         <Card className="w-full border dark:border-gray-700 bg-white dark:bg-neutral-900 rounded-[4px] p-4">
             <CardHeader>
                 <div className="flex items-center gap-2">
-                    <FolderGit2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                    <IoStatsChartSharp className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     <CardTitle className="text-gray-800 dark:text-white text-lg font-semibold">Top 6 Active Projects</CardTitle>
                 </div>
                 <CardDescription className="text-gray-500 dark:text-gray-400">Hours spent per project</CardDescription>
