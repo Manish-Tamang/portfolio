@@ -31,7 +31,7 @@ const workItems: WorkItem[] = [
     title: "Freelancing",
     href: "https://github.com/Manish-Tamang/opera-surgical-centre",
     role: "Full Stack Developer",
-    period: "Aug. 2024 - current",
+    period: "Aug. 2024 - Present",
     image: "/img/freelance.jpg",
   },
 ];
