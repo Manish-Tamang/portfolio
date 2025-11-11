@@ -30,7 +30,7 @@ async function fetchProjects(): Promise<Project[]> {
 }
 
 const ProjectSkeleton = () => (
-    <div className="mb-6">
+    <div className="mb-2">
         <div className="flex items-center justify-between">
             <Skeleton className="w-48 h-6 mb-2" />
             <Skeleton className="w-6 h-6 rounded-full" />
@@ -79,7 +79,7 @@ export default function FeaturedProjects() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">Featured Projects <img src="/img/flowers/1.png" alt="Flower 1" className="w-6 h-8 pointer-events-none select-none" /></h2>
+                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">Featured Projects <img src="/img/flowers/1.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" /></h2>
                 <div className="">
                     {projects.map((project) => (
                         <div key={project.slug} className="mb-6 last:mb-0">
@@ -93,7 +93,9 @@ export default function FeaturedProjects() {
                                     </svg>
                                 </Link>
                             </div>
-                            <p className="text-neutral-600 dark:text-neutral-300 mt-2">{project.excerpt}</p>
+                            <p className="text-neutral-600 dark:text-neutral-300 mt-2">
+                                {project.excerpt.length > 20 ? `${project.excerpt.slice(0, 200)}...` : project.excerpt}
+                            </p>
                             <div className="mt-4 flex flex-wrap gap-2">
                                 {project.techStack && project.techStack.map((tech, index) => (
                                     <span key={index} className="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 text-xs px-2 py-1 rounded-[4px]">{tech}</span>
