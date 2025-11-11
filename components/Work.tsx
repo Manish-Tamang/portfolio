@@ -9,6 +9,7 @@ interface WorkItem {
   href: string;
   role: string;
   period: string;
+  image: string;
 }
 
 const workItems: WorkItem[] = [
@@ -17,18 +18,21 @@ const workItems: WorkItem[] = [
     href: "https://www.digitalpathshalanepal.com/",
     role: "MERN Intern",
     period: "Sep. 2025 - Present",
+    image: "/img/digital-pathsala.png",
   },
   {
     title: "Swikar Codes",
     href: "https://swikarcodes.com",
     role: "Full Stack Developer",
     period: "Aug. 2024 - Feb. 2025",
+    image: "/img/swikar-codes.png",
   },
   {
     title: "Freelancing",
     href: "https://github.com/Manish-Tamang/opera-surgical-centre",
     role: "Full Stack Developer",
     period: "Aug. 2024 - current",
+    image: "/img/freelance.jpg",
   },
 ];
 
@@ -53,20 +57,31 @@ export default function Work() {
 
       <div className="space-y-4">
         {workItems.map((item, index) => (
-          <div key={index} className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 pb-4 border-b border-gray-200 dark:border-gray-800 last:border-0 last:pb-0">
-            <div className="flex-1">
-              <Link
-                href={item.href}
-                className="group inline-flex items-center gap-1 text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-[#38A662] dark:hover:text-[#7AC594] transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {item.title}
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
-              <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">{item.role}</p>
+          <div key={index} className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 pb-4 border-b border-gray-200 dark:border-gray-800 last:border-0 last:pb-0">
+            <div className="flex items-start gap-3 flex-1">
+              <div className="relative w-12 h-12 rounded-[4px] overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src={item.image}
+                  alt={`${item.title} logo`}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+              <div className="flex-1">
+                <Link
+                  href={item.href}
+                  className="group inline-flex items-center gap-1 text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-[#38A662] dark:hover:text-[#7AC594] transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.title}
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </Link>
+                <p className="text-gray-700 dark:text-gray-300 text-sm font-medium">{item.role}</p>
+              </div>
             </div>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 w-fit h-fit">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 w-fit h-fit">
               {item.period}
             </span>
           </div>
