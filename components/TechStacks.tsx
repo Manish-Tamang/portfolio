@@ -9,7 +9,9 @@ import {
     SiJavascript,
     SiFirebase,
     SiPostgresql,
-    SiSupabase
+    SiSupabase,
+    SiPrisma,
+    SiResend
 } from 'react-icons/si';
 import { FaGit } from "react-icons/fa";
 
@@ -39,7 +41,9 @@ const TechStacks = () => {
         { icon: <FaGit color="#f64d27" />, label: "Git", desc: "Version Control" },
         { icon: <SiFirebase color="#ffcb2d" />, label: "Firebase", desc: "Backend Services" },
         { icon: <SiSupabase color="#39ca94" />, label: "Supabase", desc: "Open-source DB" },
-        { icon: <SiPostgresql color="#336791" />, label: "PostgreSQL", desc: "Relational DB" }
+        { icon: <SiPostgresql color="#336791" />, label: "PostgreSQL", desc: "Relational DB" },
+        { icon: <SiPrisma color="#2D3748" />, label: "Prisma", desc: "ORM for DB" },
+        { icon: <SiResend color="#000000" />, label: "Resend", desc: "Email Service" }
     ];
 
     const firstRow = techStack.slice(0, 5);  
