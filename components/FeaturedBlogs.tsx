@@ -77,7 +77,7 @@ export default function FeaturedBlogs() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">Featured Blogs <img src="/img/guestbook-flowers/flower-seven.png" alt="Flower 1" className="w-8 h-8 pointer-events-none select-none" /></h2>
+                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">Featured Blogs <img src="/img/guestbook-flowers/flower-seven.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" /></h2>
                 <div className="grid md:grid-cols-3 gap-4">
                     {posts.map((post, index) => {
                         const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
