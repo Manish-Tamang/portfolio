@@ -34,7 +34,7 @@ const workItems: WorkItem[] = [
 
 export default function Work() {
   return (
-    <section className="mb-12">
+    <section className="mb-2">
       <h2 className="text-2xl font-peachi font-medium mb-2 flex items-center gap-2">
         Work{" "}
         <Image
