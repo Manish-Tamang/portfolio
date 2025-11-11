@@ -5,6 +5,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 
 interface Photo {
@@ -44,6 +49,8 @@ export default function FeaturedPhotos() {
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [loading, setLoading] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
+    const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
         setLoading(false);
@@ -73,9 +80,9 @@ export default function FeaturedPhotos() {
     return (
         <section className="py-8">
             <div className="container mx-auto max-w-7xl">
-            <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">
+                <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-peachi flex items-center gap-2">
                     Photos
-                    <img src="/img/flowers/3.png" alt="Flower 1" className="w-8 h-8 pointer-events-none select-none" />
+                    <img src="/img/flowers/3.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" />
                 </h2>
                 <p className="text-neutral-600 dark:text-neutral-300 mb-4">
                     If you&apos;re wondering what I look like in real life, here are some of my photos. I don&apos;t usually take pictures, but here are a few!
