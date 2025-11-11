@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import TechStacks from "@/components/TechStacks";
 import FeaturedProjects from "@/components/FeaturedProject";
 import FeaturedBlogs from "@/components/FeaturedBlogs";
@@ -12,6 +10,7 @@ import { Polaroid } from "@/components/Polaroid";
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import Timeline from "@/components/Timeline";
+import Work from "@/components/Work";
 
 export default function Home() {
   const redGradient =
@@ -106,57 +105,11 @@ export default function Home() {
 
         <TechStacks />
       </section>
-      <section className="mb-16">
-        <h2 className="text-2xl font-peachi font-medium mb-1 flex items-center gap-2">Work <img src="/img/guestbook-flowers/flower-fourteen.png" alt="Flower 1" className="w-8 h-10 pointer-events-none select-none" /></h2>
-        <p className=" text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-          I craft high-performance, future-ready solutions where speed meets precision. Every line of code I write is
-          a blend of efficiency and structure, designed for scalability and long-term maintainability.
-          For me, great development is about delivering fast without compromising on a solid, lasting foundation.
-        </p>
-        <div>
-          <Link
-            href="https://www.digitalpathshalanepal.com/"
-            className="group flex items-center gap-2 text-xl font-medium underline font-jetbrains mb-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Digital Pathshala
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-          <p className="text-gray-700 dark:text-gray-300">MERN Intern</p>
-          <p className="text-gray-600 dark:text-gray-400">Sep. 2025 - Present</p>
-        </div>
-        <div>
-          <Link
-            href="https://swikarcodes.com"
-            className="group flex items-center gap-2 mt-4 text-xl font-medium underline font-jetbrains mb-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Swikar Codes
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-          <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
-          <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - Feb. 2025</p>
-        </div>
-        <div className="mt-4">
-          <Link
-            href="https://github.com/Manish-Tamang/opera-surgical-centre"
-            className="group flex items-center gap-2 text-xl font-medium underline mb-2 font-jetbrains"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Freelancing
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-          <p className="text-gray-700 dark:text-gray-300">Full Stack Developer</p>
-          <p className="text-gray-600 dark:text-gray-400">Aug. 2024 - current</p>
-        </div>
-        <FeaturedProjects />
-        <FeaturedBlogs />
-        <FeaturedPhotos />
-        <Timeline />
-      </section>
+      <Work />
+      <FeaturedProjects />
+      <FeaturedBlogs />
+      <FeaturedPhotos />
+      <Timeline />
     </main>
   );
 }
