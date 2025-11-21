@@ -144,7 +144,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Container>
               <Toaster position="top-center" reverseOrder={false} />
-              <ScrollProgress />
+              {/* <ScrollProgress /> */}
               <Navbar />
               <CarbonAds className="fixed bottom-4 left-20 w-1/4 hidden md:block" />
               {children}
