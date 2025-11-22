@@ -140,7 +140,7 @@ export default function RootLayout({
           antialiased
         `}
       >
-        <SessionProvider>
+        <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Container>
               <Toaster position="top-center" reverseOrder={false} />
