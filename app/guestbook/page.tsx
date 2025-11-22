@@ -260,6 +260,8 @@ export default function GuestbookPage() {
   const [isLoading, setIsLoading] = useState(true);
   const { toast: useTheToast } = useToast();
   const { theme } = useTheme();
+  const [lastSubmissionTime, setLastSubmissionTime] = useState<number | null>(null);
+  const [cooldownSeconds, setCooldownSeconds] = useState<number>(0);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -289,6 +291,27 @@ export default function GuestbookPage() {
     fetchData();
   }, [fetchData]);
 
+  // Cooldown countdown effect
+  useEffect(() => {
+    if (lastSubmissionTime === null) return;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const timeSinceSubmission = now - lastSubmissionTime;
+      const remaining = Math.max(0, 60000 - timeSinceSubmission); // 60 seconds = 1 minute
+      const seconds = Math.ceil(remaining / 1000);
+
+      setCooldownSeconds(seconds);
+
+      if (seconds === 0) {
+        setLastSubmissionTime(null);
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [lastSubmissionTime]);
+
   const sortedEntries = [...entries].sort((a, b) =>
     sortOrder === "newest"
       ? b.timestamp - a.timestamp
@@ -309,6 +332,15 @@ export default function GuestbookPage() {
     if (!message.trim()) {
       useTheToast({
         title: "Message cannot be empty.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check cooldown
+    if (cooldownSeconds > 0) {
+      useTheToast({
+        title: `Please wait ${cooldownSeconds} second${cooldownSeconds !== 1 ? 's' : ''} before submitting another message.`,
         variant: "destructive",
       });
       return;
@@ -357,6 +389,7 @@ export default function GuestbookPage() {
       }
 
       setMessage("");
+      setLastSubmissionTime(Date.now()); // Set cooldown timer
       fetchData();
 
       toast.success("Message added successfully!");
@@ -442,9 +475,14 @@ export default function GuestbookPage() {
             />
             <button
               type="submit"
-              className="cursor-pointer transition-all bg-[#38A662] text-white px-6 py-2 rounded-[4px] border-[#2D8A4D] w-full border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+              disabled={cooldownSeconds > 0}
+              className={`transition-all px-6 py-2 rounded-[4px] w-full border-b-[4px] ${
+                cooldownSeconds > 0
+                  ? "bg-gray-400 dark:bg-gray-600 text-white cursor-not-allowed border-gray-500"
+                  : "bg-[#38A662] text-white border-[#2D8A4D] cursor-pointer hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+              }`}
             >
-              Post Message
+              {cooldownSeconds > 0 ? `Please wait ${cooldownSeconds}s...` : "Post Message"}
             </button>
           </form>
         )}
