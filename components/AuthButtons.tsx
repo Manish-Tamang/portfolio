@@ -9,13 +9,11 @@ interface AuthButtonsProps {
 const AuthButtons: React.FC<AuthButtonsProps> = ({ session }) => {
     const handleLogout = async () => {
         try {
-            // Sign out and redirect back to guestbook page
             await signOut({ 
                 callbackUrl: '/guestbook'
             });
         } catch (error) {
             console.error('Error during logout:', error);
-            // Fallback: force redirect if signOut fails
             window.location.href = '/guestbook';
         }
     };
