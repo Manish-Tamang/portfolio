@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -9,24 +9,6 @@ interface FormData {
   message: string;
   emotion: string;
   category: string;
-}
-
-interface Turnstile {
-  render: (
-    container: HTMLElement | null,
-    options: {
-      sitekey: string;
-      callback: (token: string) => void;
-      "error-callback": () => void;
-    }
-  ) => void;
-  reset: () => void;
-}
-
-declare global {
-  interface Window {
-    turnstile?: Turnstile;
-  }
 }
 
 const ContactPage: React.FC = () => {
@@ -38,8 +20,6 @@ const ContactPage: React.FC = () => {
     category: "general",
   });
   const [nepalTime, setNepalTime] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
 
   // Load Nepal time
   useEffect(() => {
@@ -72,45 +52,9 @@ const ContactPage: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Load Cloudflare Turnstile script and render widget
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      if (window.turnstile && turnstileRef.current) {
-        window.turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || "",
-          callback: (token: string) => {
-            setTurnstileToken(token);
-          },
-          "error-callback": () => {
-            toast.error("Turnstile verification failed. Please try again.");
-          },
-        });
-      }
-    };
-
-    return () => {
-      document.body.removeChild(script);
-      if (window.turnstile) {
-        window.turnstile.reset();
-      }
-    };
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    if (!turnstileToken) {
-      toast.error("Please complete the human verification.");
-      setIsSubmitting(false);
-      return;
-    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -121,22 +65,23 @@ const ContactPage: React.FC = () => {
         body: JSON.stringify({
           ...formData,
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
-          "cf-turnstile-response": turnstileToken,
+          botcheck: "", // Honeypot field for spam protection
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setFormData({
           email: "",
           message: "",
           emotion: "",
           category: "general",
         });
-        setTurnstileToken(null);
-        if (window.turnstile) window.turnstile.reset();
         toast.success("Message sent successfully!");
       } else {
-        throw new Error(`Failed to submit form: ${response.status}`);
+        console.error("Web3Forms error:", data);
+        throw new Error(data.message || `Failed to submit form: ${response.status}`);
       }
     } catch (error: unknown) {
       console.error("Form submission error:", error);
@@ -325,16 +270,17 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-gray-700 dark:text-white">
-              Verification
-            </label>
-            <div ref={turnstileRef} className="cf-turnstile"></div>
-          </div>
+          {/* Honeypot field for spam protection - hidden from users */}
+          <input
+            type="checkbox"
+            name="botcheck"
+            className="hidden"
+            style={{ display: "none" }}
+          />
 
           <button
             type="submit"
-            disabled={isSubmitting || !turnstileToken}
+            disabled={isSubmitting}
             className="cursor-pointer transition-all bg-[#38A662] text-white px-6 py-2 rounded-[4px] border-[#2D8A4D] w-full border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] disabled:bg-gray-400 disabled:border-gray-500 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (

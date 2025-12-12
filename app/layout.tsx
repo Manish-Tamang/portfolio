@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Karla, JetBrains_Mono } from "next/font/google";
+import { Funnel_Sans, Karla, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
